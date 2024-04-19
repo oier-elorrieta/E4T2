@@ -50,34 +50,7 @@ public abstract class Audio {
     public String getIzenburua() {
         return Izenburua;
     }
-
-    /**
-     * Audioaren iraupena lortze du
-     * 
-     * @return audioaren iraupena
-     */
-    public double getIraupena() {
-        return Iraupena;
-    }
-
-    /**
-     * Audioaren kolaboratzaileak lortzen du
-     * 
-     * @return audioaren kolaboratzaileak
-     */
-    public String getKolaboratzaileak() {
-        return Kolaboratzaileak;
-    }
-
-    /**
-     * Audioaren erreprodukzioak lortzen du
-     * 
-     * @return audioaren erreprodukzioak
-     */
-    public int getErreprodukzioak() {
-        return Erreprodukzioak;
-    }
-
+    
     /**
      * Audioaren izenburua ezartzen du
      * 
@@ -88,6 +61,15 @@ public abstract class Audio {
     }
 
     /**
+     * Audioaren iraupena lortze du
+     * 
+     * @return audioaren iraupena
+     */
+    public double getIraupena() {
+        return Iraupena;
+    }
+    
+    /**
      * Audioaren iraupena ezartzen du
      * 
      * @param iraupena audioaren iraupen berria
@@ -97,12 +79,30 @@ public abstract class Audio {
     }
 
     /**
+     * Audioaren kolaboratzaileak lortzen du
+     * 
+     * @return audioaren kolaboratzaileak
+     */
+    public String getKolaboratzaileak() {
+        return Kolaboratzaileak;
+    }
+    
+    /**
      * Audioaren kolaboratzaileak ezartzen ditu
      * 
      * @param kolaboratzaileak audioaren kolaboratzaile berriak
      */
     public void setKolaboratzaileak(String kolaboratzaileak) {
         Kolaboratzaileak = kolaboratzaileak;
+    }
+
+    /**
+     * Audioaren erreprodukzioak lortzen du
+     * 
+     * @return audioaren erreprodukzioak
+     */
+    public int getErreprodukzioak() {
+        return Erreprodukzioak;
     }
 
     /**
@@ -155,8 +155,5 @@ public abstract class Audio {
                 && Objects.equals(Izenburua, other.Izenburua)
                 && Objects.equals(Kolaboratzaileak, other.Kolaboratzaileak);
     }
-    
-    
-    
     
 }
