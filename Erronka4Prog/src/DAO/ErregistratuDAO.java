@@ -26,7 +26,7 @@ public class ErregistratuDAO {
         PreparedStatement stmt = null;
         
         try {
-            String sql = "INSERT INTO BEZEROA (izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO BEZEROA (izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data) VALUES (?, ?, ?, ?, ?, ?, CURRENT_DATE())";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, izena);
             stmt.setString(2, abizena);
@@ -34,9 +34,6 @@ public class ErregistratuDAO {
             stmt.setString(4, erabiltzailea);
             stmt.setString(5, pasahitza);
             stmt.setString(6, jaiotze_data);
-            stmt.setString(7, erregistro_data);
-            
-            System.out.println("[" + id_hizkuntza + "]");
            
             int lerroAfektatuak = stmt.executeUpdate();
             
