@@ -8,7 +8,6 @@ import java.util.Objects;
 
 import com.mysql.jdbc.Connection;
 
-
 /**
  * Bezero izeneko klase abstraktua
  */
@@ -91,59 +90,120 @@ public abstract class Bezeroa {
     /**
      * Bezeroaren abizena lortzen du
      * 
-     * @return
+     * @return bezeroaren abizena
      */
     public String getAbizena() {
         return abizena;
     }
     
+    /**
+     * Bezeroaren abizena ezartzen du
+     * 
+     * @param abizena bezeroaren abizen berria
+     */
     public void setAbizena(String abizena) {
         this.abizena = abizena;
     }
     
+    /**
+     * Bezeroaren jaiotze data lortzen du
+     * 
+     * @return bezeroaren jaiotze data
+     */
     public Date getJdata() {
         return Jdata;
     }
     
+    /**
+     * Bezeroaren jaiotze data ezartzen du
+     * 
+     * @param jdata bezeroaren jaiotze data berria
+     */
     public void setJdata(Date jdata) {
         Jdata = jdata;
     }
     
+    /**
+     * Bezeroaren pasahitza lortzen du
+     * 
+     * @return bezeroaren pasahitza
+     */
     public String getPasahitza() {
         return pasahitza;
     }
     
+    /**
+     * Bezeroaren pasahitza ezartzen du
+     * 
+     * @param pasahitza bezeroaren pasahitza berria
+     */
     public void setPasahitza(String pasahitza) {
         this.pasahitza = pasahitza;
     }
     
+    /**
+     * Bezeroaren hizkuntza lortzen du
+     * 
+     * @return bezeroaren hizkuntza
+     */
     public Hizkuntza getHizkuntza() {
         return hizkuntza;
     }
     
+    /**
+     * Bezeroaren hizkuntza ezartzen du
+     * 
+     * @param hizkuntza bezeroaren hizkuntza berria
+     */
     public void setHizkuntza(Hizkuntza hizkuntza) {
         this.hizkuntza = hizkuntza;
     }
     
+    /**
+     * Bezeroaren erabiltzailea lortzen du 
+     * 
+     * @return bezeroaren erabiltzailea
+     */
     public String getErabiltzailea() {
         return erabiltzailea;
     }
     
+    /**
+     * Bezeroaren hizkuntza ezartzen du
+     * 
+     * @param erabiltzailea bezeroaren erabiltzaile berria
+     */
     public void setErabiltzailea(String erabiltzailea) {
         this.erabiltzailea = erabiltzailea;
     }
     
+    /**
+     * Artistaren izenan abizena, jaiotze data, pasahitza, hizkuntza eta erabiltzailearekin testu batean bihurtzen du objetua
+     * 
+     * @return Artistaren izenan abizena, jaiotze data, pasahitza, hizkuntza eta erabiltzailearekin duen testu errepresentazioa
+     */
     @Override
     public String toString() {
         return "Bezeroa [izena=" + izena + ", abizena=" + abizena + ", Jdata=" + Jdata + ", pasahitza=" + pasahitza
                 + ", hizkuntza=" + hizkuntza + ", erabiltzailea=" + erabiltzailea + "]";
     }
 
+    /**
+     * Objetuaren hash kodea kalkulatzen du
+     * 
+     * @return objetuaren hash kodea
+     */
     @Override
     public int hashCode() {
         return Objects.hash(Jdata, abizena, erabiltzailea, hizkuntza, izena, pasahitza);
     }
 
+    /**
+     * Komparatzen du objetua beste objetu batekin jakiteko berdin direla ala ez
+     * 
+     * @param zein objetuarekin konparatuko den
+     * @return true objetuak berdin badira, false objetuak desberdinak badira
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj)

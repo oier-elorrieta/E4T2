@@ -39,21 +39,21 @@ public class PlayListak {
 	}
 	
 	/**
-     * PlayListaren playlistZerrenda lortzen du
-     * 
-     * @return Playlistaren PlayListZerrenda
-     */
-	public ArrayList<String> getPlayListZerrenda() {
-		return PlayListZerrenda;
-	}
-	
-	/**
      * PlayListaren izena ezartzen du
      * 
      * @param izena PlayListaren izena berria
      */
 	public void setIzena(String izena) {
 		Izena = izena;
+	}
+	
+	/**
+     * PlayListaren playlistZerrenda lortzen du
+     * 
+     * @return Playlistaren PlayListZerrenda
+     */
+	public ArrayList<String> getPlayListZerrenda() {
+		return PlayListZerrenda;
 	}
 	
 	/**
@@ -105,7 +105,5 @@ public class PlayListak {
 		PlayListak other = (PlayListak) obj;
 		return Objects.equals(Izena, other.Izena) && Objects.equals(PlayListZerrenda, other.PlayListZerrenda);
 	}
-	
-	
 	
 }

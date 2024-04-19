@@ -1,6 +1,7 @@
 package master;
 
 import java.util.ArrayList;
+import java.util.Objects;
 /**
  * Podcaster klasea Artistak klasearen luzapena da.
  */
@@ -52,6 +53,35 @@ public class Podcaster extends Artistak{
 				+ ", Izena=" + Izena + "]";
 	}
 
-    
+	/**
+     * Objetuaren hash kodea kalkulatzen du
+     * 
+     * @return objetuaren hash kodea
+     */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(PodcastZerrenda);
+		return result;
+	}
+
+	/**
+     * Komparatzen du objetua beste objetu batekin jakiteko berdin direla ala ez
+     * 
+     * @param zein objetuarekin konparatuko den
+     * @return true objetuak berdin badira, false objetuak desberdinak badira
+     */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Podcaster other = (Podcaster) obj;
+		return Objects.equals(PodcastZerrenda, other.PodcastZerrenda);
+	}
     
 }
