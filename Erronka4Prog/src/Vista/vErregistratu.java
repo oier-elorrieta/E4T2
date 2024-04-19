@@ -1,19 +1,21 @@
 package Vista;
 
-import javax.swing.JPanel;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.sql.Date;
-import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import DAO.ErregistratuDAO;
 
-import javax.swing.JTextArea;
-
-public class vErregistratu extends JPanel {
+public class vErregistratu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
@@ -23,21 +25,23 @@ public class vErregistratu extends JPanel {
 	private JTextField textField_4;
 	private JTextField textField_5;
 	private JTextField textField_6;
+	private JComboBox<String> comboBoxHizkuntza;
 
 	/**
 	 * Create the panel.
 	 */
-	/*public vErregistratu() {
+	public vErregistratu() {
 		setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 450, 305);
+		panel.setBounds(0, 0, 454, 600);
 		add(panel);
 		panel.setLayout(null);
 		
 		JButton btnNewButton = new JButton("Atzera");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				// Lógica para ir hacia atrás, por ejemplo cerrar esta ventana y abrir otra
 			}
 		});
 		btnNewButton.setBounds(10, 11, 93, 29);
@@ -83,61 +87,89 @@ public class vErregistratu extends JPanel {
 		panel.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Abizenak:");
-		lblNewLabel_1.setBounds(243, 56, 62, 14);
+		lblNewLabel_1.setBounds(243, 56, 76, 14);
 		panel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Erabiltzailea:");
-		lblNewLabel_2.setBounds(22, 87, 81, 14);
+		lblNewLabel_2.setBounds(22, 87, 99, 14);
 		panel.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Pasahitza:");
-		lblNewLabel_3.setBounds(20, 118, 69, 14);
+		lblNewLabel_3.setBounds(20, 118, 101, 14);
 		panel.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_4 = new JLabel("Jaiotze Data:");
-		lblNewLabel_4.setBounds(20, 149, 83, 14);
+		lblNewLabel_4.setBounds(20, 149, 101, 14);
 		panel.add(lblNewLabel_4);
 		
 		JLabel lblNewLabel_5 = new JLabel("Erregistro Data:");
-		lblNewLabel_5.setBounds(22, 178, 81, 14);
+		lblNewLabel_5.setBounds(22, 178, 109, 14);
 		panel.add(lblNewLabel_5);
 		
 		JLabel lblNewLabel_6 = new JLabel("Premium Muga:");
-		lblNewLabel_6.setBounds(20, 209, 83, 14);
+		lblNewLabel_6.setBounds(20, 209, 111, 14);
 		panel.add(lblNewLabel_6);
 		
+		comboBoxHizkuntza = new JComboBox();
+		comboBoxHizkuntza.setBounds(131, 235, 111, 25);
+		panel.add(comboBoxHizkuntza);
+		
+		
+		JLabel lblNewLabel_7 = new JLabel("Hizkuntza:");
+		lblNewLabel_7.setBounds(20, 234, 83, 14);
+		panel.add(lblNewLabel_7);
+		
 		JButton btnEditatu  = new JButton("Editatu");
-		 btnEditatu.addActionListener(new ActionListener() {
-	            public void actionPerformed(ActionEvent e) {
-	                // Obtener datos ingresados por el usuario
-	                String izena = textField.getText();
-	                String abizena = textField_1.getText();
-	                String id_hizkuntza = textField_1.getText();
-	                String erabiltzailea = textField_2.getText();
-	                String pasahitza = textField_3.getText();
-	                
-	                // Obtener jaiotze_data y erregistro_data, puedes usar fechas ficticias por ahora
-	                Date jaiotze_data = new Date(System.currentTimeMillis());
-	                Date erregistro_data = new Date(System.currentTimeMillis());
-
-	                // Llamar al método erregistroaEgin de ErregistratuDAO para registrar al usuario
-	                ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
-	                boolean registroExitoso = erregistratuDAO.erregistroaEgin(izena, abizena,id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data);
-
-	                // Mostrar mensaje de éxito o error
-	                if (registroExitoso) {
-	                    JOptionPane.showMessageDialog(vErregistratu.this, "Erabiltzailea ondo erregistratu da!");
-	                } else {
-	                    JOptionPane.showMessageDialog(vErregistratu.this, "Errorea erabiltzailea erregistratzerakoan.");
-	                }
-	            }
-	        });
-		 btnEditatu.setBounds(59, 260, 89, 23);
+		btnEditatu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String izena = textField.getText();
+				String abizena = textField_1.getText();
+				String id_hizkuntza = (String) comboBoxHizkuntza.getSelectedItem();
+				String erabiltzailea = textField_3.getText(); 
+				String pasahitza = textField_4.getText();
+				String jaiotze_data = textField_4.getText();
+				String erregistro_data = textField_4.getText();
+				
+				
+				
+				ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
+				boolean registroExitoso = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data);
+				
+				
+				if (registroExitoso) {
+					JOptionPane.showMessageDialog(vErregistratu.this, "Erabiltzailea ondo erregistratu da!");
+				} else {
+					JOptionPane.showMessageDialog(vErregistratu.this, "Errorea erabiltzailea erregistratzerakoan.");
+				}
+			}
+		});
+		btnEditatu.setBounds(59, 271, 89, 23);
 		panel.add(btnEditatu);
 		
 		JButton btnNewButton_2 = new JButton("Erosi Premium");
-		btnNewButton_2.setBounds(275, 260, 109, 23);
+		btnNewButton_2.setBounds(276, 271, 109, 23);
 		panel.add(btnNewButton_2);
+		
+		// Bete JComboBox hizkuntza datuekin
+		kargatuHizkuntza();
+    }
 
-	}*/
+   
+    private void kargatuHizkuntza() {
+        ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
+        try {
+            // Obtener los datos de la tabla hizkuntza desde la base de datos
+            String[] hizkuntzaData = erregistratuDAO.lortuHizkuntza();
+
+            // Agregar los datos al JComboBox
+            for (String hizkuntza : hizkuntzaData) {
+                comboBoxHizkuntza.addItem(hizkuntza);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar los datos de hizkuntza: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
+    }
 }
+

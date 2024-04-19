@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.mysql.jdbc.Connection;
 
@@ -33,6 +35,8 @@ public class ErregistratuDAO {
             stmt.setString(5, pasahitza);
             stmt.setString(6, jaiotze_data);
             stmt.setString(7, erregistro_data);
+            
+            System.out.println("[" + id_hizkuntza + "]");
            
             int lerroAfektatuak = stmt.executeUpdate();
             
@@ -51,5 +55,39 @@ public class ErregistratuDAO {
             }
         }
         return erregistro_ok;
+    }
+    
+ 
+    public String[] lortuHizkuntza() throws Exception {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        
+        List<String> hizkuntzaList = new ArrayList<>();
+
+        try {
+        	Connection con2 = (Connection) KonexioaDB.hasi();
+
+           
+            String sql = "SELECT id_hizkuntza FROM hizkuntza";
+            stmt = con2.prepareStatement(sql);
+            rs = stmt.executeQuery();
+
+            // Errekorritzen du eta jartze ditu
+            while (rs.next()) {
+                String id_hizkuntza = rs.getString("id_hizkuntza");
+                hizkuntzaList.add(id_hizkuntza);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Ezin da hizkuntza lortu " + e.getMessage());
+        } finally {
+           
+            if (rs != null) rs.close();
+            if (stmt != null) stmt.close();
+            if (con != null) con.close();
+        }
+
+        return hizkuntzaList.toArray(new String[0]);
     }
 }

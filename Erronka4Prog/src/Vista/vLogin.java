@@ -63,10 +63,22 @@ public class vLogin extends JFrame {
         
         btnErregistratu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Instantzia sortu
-                vErregistratu vErregistratu = new vErregistratu();
-                // Egiten dugu ikusgarria urrengo lehioa, erregistratzeko 
-                vErregistratu.setVisible(true);
+                // Crear una nueva ventana para mostrar el panel de registro
+                JFrame registroFrame = new JFrame("Erregistratu");
+                registroFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Cerrar solo esta ventana al cerrarla
+                registroFrame.setSize(450, 305);
+
+                // Crear una instancia del panel de registro
+                vErregistratu vErregistratuPanel = new vErregistratu();
+
+                // Agregar el panel de registro a la ventana de registro
+                registroFrame.getContentPane().add(vErregistratuPanel);
+
+                // Hacer visible la ventana de registro
+                registroFrame.setVisible(true);
+
+                // Cerrar la ventana actual
+                dispose();
             }
         });
    
