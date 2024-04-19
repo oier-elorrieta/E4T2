@@ -103,5 +103,4 @@ public class Album {
         return Objects.equals(ArgitaratzeUrtea, other.ArgitaratzeUrtea) && Objects.equals(Izenburua, other.Izenburua);
     }
     
-    
 }
