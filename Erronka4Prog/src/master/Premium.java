@@ -1,12 +1,13 @@
 package master;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Objects;
 /**
  * Premium izeneko klase publikoa
  */
 public class Premium extends Bezeroa{
-	
+
 	/**
 	 * Premium izango duen iraungitzeData
 	 */
@@ -22,10 +23,10 @@ public class Premium extends Bezeroa{
      * @param hizkuntza bezeroaren gustokoaren hizkuntza
      * @param erabiltzailea bezeroaren izenaren erabiltzailea 
      */
-    public Premium(String izena, String abizena, Date jdata, String pasahitza, Hizkuntza hizkuntza,
-            String erabiltzailea) {
-        super(izena, abizena, jdata, pasahitza, hizkuntza, erabiltzailea);
-    }
+    public Premium(String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza,
+			Hizkuntza hizkuntza, ArrayList<String> playListZerrenda) {
+		super(izena, abizena, jdata, erabiltzailea, pasahitza, hizkuntza, playListZerrenda);
+	}
 
     /**
      * Premiumen iraungitzeData lortzen du

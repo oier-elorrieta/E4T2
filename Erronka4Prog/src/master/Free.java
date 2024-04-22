@@ -1,6 +1,7 @@
 package master;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  * Free klasea Bezeroa klasearen luzapena da.
@@ -17,8 +18,8 @@ public class Free extends Bezeroa {
 	 * @param hizkuntza FreeBezeroaren gustokoaren hizkuntza
 	 * @param erabiltzailea FreeBezeroaren erabiltzailea
 	 */
-    public Free(String izena, String abizena, Date jdata, String pasahitza, Hizkuntza hizkuntza, String erabiltzailea) {
-        super(izena, abizena, jdata, pasahitza, hizkuntza, erabiltzailea);
-    }
-
+	public Free(String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza, Hizkuntza hizkuntza,
+			ArrayList<String> playListZerrenda) {
+		super(izena, abizena, jdata, erabiltzailea, pasahitza, hizkuntza, playListZerrenda);
+	}
 }

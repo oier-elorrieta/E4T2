@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import DAO.ErregistratuDAO;
+import javax.swing.JPasswordField;
+import java.awt.Font;
 
 public class vErregistratu extends JFrame {
 
@@ -21,11 +23,11 @@ public class vErregistratu extends JFrame {
     private JTextField lblizena;
     private JTextField lblabizena;
     private JTextField lblerabiltzailea;
-    private JTextField lblpasahitza;
     private JTextField lblj_data;
     private JTextField lblerregistro_data;
     private JTextField lblpremium_muga;
     private JComboBox<String> comboBoxHizkuntza;
+    private JPasswordField lblpasahitza;
 
     /**
      * Create the frame.
@@ -38,6 +40,7 @@ public class vErregistratu extends JFrame {
         getContentPane().setLayout(null);
 
         JButton btnAtzera = new JButton("Atzera");
+        btnAtzera.setFont(new Font("Tahoma", Font.BOLD, 11));
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	
@@ -63,12 +66,12 @@ public class vErregistratu extends JFrame {
         lblerabiltzailea.setBounds(131, 84, 211, 20);
         getContentPane().add(lblerabiltzailea);
         lblerabiltzailea.setColumns(10);
-
-        lblpasahitza = new JTextField();
+        
+        lblpasahitza = new JPasswordField();
         lblpasahitza.setBounds(131, 115, 211, 20);
         getContentPane().add(lblpasahitza);
         lblpasahitza.setColumns(10);
-
+        
         lblj_data = new JTextField();
         lblj_data.setBounds(131, 146, 211, 20);
         getContentPane().add(lblj_data);
@@ -140,8 +143,8 @@ public class vErregistratu extends JFrame {
         lblNewLabel_7.setBounds(20, 234, 83, 14);
         getContentPane().add(lblNewLabel_7);
 
-        JButton btnEditatu  = new JButton("Editatu");
-        btnEditatu.addActionListener(new ActionListener() {
+        JButton btnSortu  = new JButton("Sortu");
+        btnSortu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Obtener los datos del formulario
                 String izena = lblizena.getText();
@@ -166,8 +169,8 @@ public class vErregistratu extends JFrame {
                 }
             }
         });
-        btnEditatu.setBounds(59, 271, 101, 23);
-        getContentPane().add(btnEditatu);
+        btnSortu.setBounds(59, 271, 101, 23);
+        getContentPane().add(btnSortu);
 
         JButton btnPremiumErosi = new JButton("Erosi Premium");
         btnPremiumErosi.addActionListener(new ActionListener() {
@@ -200,6 +203,10 @@ public class vErregistratu extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(vErregistratu.this, "Errorea erabiltzailea erregistratzerakoan.");
                 }
+                        
+                vMenua vMenuaPanel = new vMenua();
+                vMenuaPanel.setVisible(true);
+                dispose();
             }
         });
         btnPremiumErosi.setBounds(276, 271, 131, 23);
