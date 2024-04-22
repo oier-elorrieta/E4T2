@@ -53,7 +53,10 @@ public class vLogin extends JFrame {
                 dispose();
             }
         });
+<<<<<<< HEAD
 
+=======
+>>>>>>> 23058092f9b4b3d34b1c96169681aad3c20bd2d3
         
         JPanel panel = new JPanel();
         panel.setLayout(null);

@@ -89,7 +89,7 @@ public class vNirePlayList extends JFrame {
 		contentPane.add(btnPlayListImportatu);
 		
 		JButton btnPlayListExportatu = new JButton("Exportatu");
-		btnPlayListExportatu.setBounds(456, 318, 118, 23);
+		btnPlayListExportatu.setBounds(456, 306, 118, 23);
 		contentPane.add(btnPlayListExportatu);
 	}
 
