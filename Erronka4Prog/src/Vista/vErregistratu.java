@@ -37,14 +37,17 @@ public class vErregistratu extends JFrame {
         setLocationRelativeTo(null);
         getContentPane().setLayout(null);
 
-        JButton btnNewButton = new JButton("Atzera");
-        btnNewButton.addActionListener(new ActionListener() {
+        JButton btnAtzera = new JButton("Atzera");
+        btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Lógica para ir hacia atrás, por ejemplo cerrar esta ventana y abrir otra
+            	
+            	vLogin loginFrame = new vLogin();
+            	loginFrame.setVisible(true);
+            	dispose();
             }
         });
-        btnNewButton.setBounds(10, 11, 93, 29);
-        getContentPane().add(btnNewButton);
+        btnAtzera.setBounds(10, 11, 93, 29);
+        getContentPane().add(btnAtzera);
 
         lblizena = new JTextField();
         lblizena.setBounds(131, 53, 93, 20);

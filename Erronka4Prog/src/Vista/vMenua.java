@@ -9,6 +9,9 @@ import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
 public class vMenua extends JFrame {
@@ -50,26 +53,36 @@ public class vMenua extends JFrame {
 		lblNewLabel.setBounds(170, 11, 98, 26);
 		contentPane.add(lblNewLabel);
 		
-		JButton btnNewButton = new JButton("Atzera");
-		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton.setBounds(10, 15, 107, 23);
-		contentPane.add(btnNewButton);
+		JButton btnAtzera = new JButton("Atzera");
+		btnAtzera.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnAtzera.setBounds(10, 15, 107, 23);
+		contentPane.add(btnAtzera);
 		
-		JButton btnNewButton_1 = new JButton("Nire Profila");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnNewButton_1.setBounds(317, 15, 107, 23);
-		contentPane.add(btnNewButton_1);
+		btnAtzera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				vLogin loginFrame = new vLogin();
+				loginFrame.setVisible(true);
+				dispose();
+			}	
+		});
 		
-		JButton btnNewButton_2 = new JButton("Musika deskubritu");
-		btnNewButton_2.setBounds(142, 72, 160, 23);
-		contentPane.add(btnNewButton_2);
 		
-		JButton btnNewButton_3 = new JButton("Podcast deskubritu");
-		btnNewButton_3.setBounds(142, 131, 160, 23);
-		contentPane.add(btnNewButton_3);
+		JButton btnProfila = new JButton("Nire Profila");
+		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnProfila.setBounds(317, 15, 107, 23);
+		contentPane.add(btnProfila);
 		
-		JButton btnNewButton_4 = new JButton("Nire PlayList-ak");
-		btnNewButton_4.setBounds(142, 183, 160, 23);
-		contentPane.add(btnNewButton_4);
+		JButton btnMusikaDeskubritu = new JButton("Musika deskubritu");
+		btnMusikaDeskubritu.setBounds(142, 72, 160, 23);
+		contentPane.add(btnMusikaDeskubritu);
+		
+		JButton btnPodcastDeskubritu = new JButton("Podcast deskubritu");
+		btnPodcastDeskubritu.setBounds(142, 131, 160, 23);
+		contentPane.add(btnPodcastDeskubritu);
+		
+		JButton btnPlayList = new JButton("Nire PlayList-ak");
+		btnPlayList.setBounds(142, 191, 160, 23);
+		contentPane.add(btnPlayList);
 	}
 }
