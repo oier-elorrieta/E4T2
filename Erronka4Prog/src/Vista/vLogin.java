@@ -44,7 +44,15 @@ public class vLogin extends JFrame {
         txtPasahitza.setBounds(146, 63, 160, 30);
         JButton btnHasiSaioa = new JButton("Login");
         btnHasiSaioa.setBounds(31, 143, 126, 30);
-
+        
+        btnHasiSaioa.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                
+                vMenua vMenuaPanel = new vMenua();
+                vMenuaPanel.setVisible(true);
+                dispose();
+            }
+        });
         
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -91,7 +99,6 @@ public class vLogin extends JFrame {
 
                 if (balidatuHasiSaioa) {
                     JOptionPane.showMessageDialog(vLogin.this, "Barruan zaude");
-                    vMenua vMenua = new vMenua();
                     //vMenua.setVisib(true);//Egiten dugu ikusgarria urrengo lehioa, ondo jarri badugu
                 } else {
                     JOptionPane.showMessageDialog(vLogin.this, "Erabiltzailea edo pasahitza txarto dago");

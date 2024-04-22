@@ -87,12 +87,40 @@ public class vMenua extends JFrame {
 		btnMusikaDeskubritu.setBounds(142, 72, 160, 23);
 		contentPane.add(btnMusikaDeskubritu);
 		
+		btnMusikaDeskubritu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				vArtistaLista vArtistaListaPanel = new vArtistaLista();
+				vArtistaListaPanel.setVisible(true);
+				dispose();
+			}
+		});
+		
 		JButton btnPodcastDeskubritu = new JButton("Podcast deskubritu");
 		btnPodcastDeskubritu.setBounds(142, 131, 160, 23);
 		contentPane.add(btnPodcastDeskubritu);
 		
+		btnPodcastDeskubritu.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				vPodcast vPodcastPanel = new vPodcast();
+				vPodcastPanel.setVisible(true);
+				dispose();
+			}
+		});
+		
 		JButton btnPlayList = new JButton("Nire PlayList-ak");
 		btnPlayList.setBounds(142, 191, 160, 23);
 		contentPane.add(btnPlayList);
+		
+		btnPlayList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				vNirePlayList vNirePlayListPanel = new vNirePlayList();
+				
+				vNirePlayListPanel.setVisible(true);
+				dispose();
+			}
+		});
 	}
 }
