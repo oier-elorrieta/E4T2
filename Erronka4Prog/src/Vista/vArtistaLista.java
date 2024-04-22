@@ -5,16 +5,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JToolBar;
+import javax.swing.JTextPane;
 
-public class vMenua extends JFrame {
+public class vArtistaLista extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -26,7 +29,7 @@ public class vMenua extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					vMenua frame = new vMenua();
+					vArtistaLista frame = new vArtistaLista();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,40 +41,33 @@ public class vMenua extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public vMenua() {
-		setTitle("Menu");
+	public vArtistaLista() {
+		setTitle("Artistak");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 416);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Aukeratu");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(170, 11, 98, 26);
-		contentPane.add(lblNewLabel);
-		
 		JButton btnAtzera = new JButton("Atzera");
+		btnAtzera.setBounds(10, 11, 104, 23);
 		btnAtzera.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnAtzera.setBounds(10, 15, 107, 23);
 		contentPane.add(btnAtzera);
 		
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				vLogin loginFrame = new vLogin();
-				loginFrame.setVisible(true);
+				vMenua menuaFrame = new vMenua();
+				menuaFrame.setVisible(true);
 				dispose();
-			}	
+			}
 		});
 		
-		
 		JButton btnProfila = new JButton("Nire Profila");
+		btnProfila.setBounds(462, 11, 111, 23);
 		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnProfila.setBounds(317, 15, 107, 23);
 		contentPane.add(btnProfila);
 		
 		btnProfila.addActionListener(new ActionListener() {
@@ -83,16 +79,9 @@ public class vMenua extends JFrame {
 			}
 		});
 		
-		JButton btnMusikaDeskubritu = new JButton("Musika deskubritu");
-		btnMusikaDeskubritu.setBounds(142, 72, 160, 23);
-		contentPane.add(btnMusikaDeskubritu);
-		
-		JButton btnPodcastDeskubritu = new JButton("Podcast deskubritu");
-		btnPodcastDeskubritu.setBounds(142, 131, 160, 23);
-		contentPane.add(btnPodcastDeskubritu);
-		
-		JButton btnPlayList = new JButton("Nire PlayList-ak");
-		btnPlayList.setBounds(142, 191, 160, 23);
-		contentPane.add(btnPlayList);
+		JLabel lblArtistaZerrendaIzena = new JLabel("Artisten zerrenda (Entzunaldi kopurua)");
+		lblArtistaZerrendaIzena.setHorizontalAlignment(SwingConstants.CENTER);
+		lblArtistaZerrendaIzena.setBounds(178, 15, 234, 19);
+		contentPane.add(lblArtistaZerrendaIzena);
 	}
 }
