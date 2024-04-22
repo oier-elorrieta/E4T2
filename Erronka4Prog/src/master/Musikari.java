@@ -1,64 +1,60 @@
 package master;
-
 import java.util.ArrayList;
 import java.util.Objects;
 /**
- * Musikari klase abstraktua Artistak klasearen luzapena da.
- */
-abstract class Musikari extends Artistak {
+* Musikari klase pribatua Artistak klasearen luzapena da.
+*/
+public class Musikari extends Artistak {
 	
 	 /**
-     * Musikari izango duen AlbumZerrenda
-     */
-    protected ArrayList <String> AlbumZerrenda;
-
-    /**
-     * Musikari berri bat sortzeko konstruktorea izena, albumZerrenda
-     * 
-     * @param izena musikarien izena
-     * @param albumZerrenda musikarien albumZerrenda
-     */
-    public Musikari(String izena, ArrayList<String> albumZerrenda) {
+    * Musikari izango duen AlbumZerrenda
+    */
+   private ArrayList <String> AlbumZerrenda;
+   /**
+    * Musikari berri bat sortzeko konstruktorea izena, albumZerrenda
+    *
+    * @param izena musikarien izena
+    * @param albumZerrenda musikarien albumZerrenda
+    */
+   public Musikari(String izena, ArrayList<String> albumZerrenda) {
 		super(izena);
 		AlbumZerrenda = albumZerrenda;
 	}
-    
+  
 	/**
-     * Musikariren albumZerrenda lortzen du
-     * 
-     * @return musikariaren albumZerrenda
-     */
-    public ArrayList<String> getAlbumZerrenda() {
-        return AlbumZerrenda;
-    }
-
+    * Musikariren albumZerrenda lortzen du
+    *
+    * @return musikariaren albumZerrenda
+    */
+   public ArrayList<String> getAlbumZerrenda() {
+       return AlbumZerrenda;
+   }
 	/**
-     * Musikariren albumZerrenda ezartzen du
-     * 
-     * @param albumZerrenda musikariren albumZerrenda berria
-     */
-    public void setAlbumZerrenda(ArrayList<String> albumZerrenda) {
-        AlbumZerrenda = albumZerrenda;
-    }
-    
-    /**
-     * Musikariaren albumZerrenda testu batean bihurtzen du objetua
-     * 
-     * @return Musikariaren izena eta albumZerrenda duen testu errepresentazioa
-     */
-    @Override
+    * Musikariren albumZerrenda ezartzen du
+    *
+    * @param albumZerrenda musikariren albumZerrenda berria
+    */
+   public void setAlbumZerrenda(ArrayList<String> albumZerrenda) {
+       AlbumZerrenda = albumZerrenda;
+   }
+  
+   /**
+    * Musikariaren albumZerrenda testu batean bihurtzen du objetua
+    *
+    * @return Musikariaren izena eta albumZerrenda duen testu errepresentazioa
+    */
+   @Override
 	public String toString() {
 		final int maxLen = 10;
 		return "Musikari [AlbumZerrenda="
 				+ (AlbumZerrenda != null ? AlbumZerrenda.subList(0, Math.min(AlbumZerrenda.size(), maxLen)) : null)
 				+ ", Izena=" + Izena + "]";
 	}
-
-    /**
-     * Objetuaren hash kodea kalkulatzen du
-     * 
-     * @return objetuaren hash kodea
-     */
+   /**
+    * Objetuaren hash kodea kalkulatzen du
+    *
+    * @return objetuaren hash kodea
+    */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -66,13 +62,12 @@ abstract class Musikari extends Artistak {
 		result = prime * result + Objects.hash(AlbumZerrenda);
 		return result;
 	}
-
 	/**
-     * Komparatzen du objetua beste objetu batekin jakiteko berdin direla ala ez
-     * 
-     * @param zein objetuarekin konparatuko den
-     * @return true objetuak berdin badira, false objetuak desberdinak badira
-     */
+    * Komparatzen du objetua beste objetu batekin jakiteko berdin direla ala ez
+    *
+    * @param zein objetuarekin konparatuko den
+    * @return true objetuak berdin badira, false objetuak desberdinak badira
+    */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -84,5 +79,5 @@ abstract class Musikari extends Artistak {
 		Musikari other = (Musikari) obj;
 		return Objects.equals(AlbumZerrenda, other.AlbumZerrenda);
 	}
-    
+  
 }
