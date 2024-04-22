@@ -74,7 +74,7 @@ public class vErregistratu extends JFrame {
         getContentPane().add(lblj_data);
         lblj_data.setColumns(10);
 
-        // Gaurko data artzea
+        // Gaurko data hartzea
         Date fechaActual = new Date();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("yyyy-MM-dd");
         String fechaFormateada = formatoFecha.format(fechaActual);
@@ -143,7 +143,7 @@ public class vErregistratu extends JFrame {
         JButton btnEditatu  = new JButton("Editatu");
         btnEditatu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                // Obtener los datos del formulario
                 String izena = lblizena.getText();
                 String abizena = lblabizena.getText();
                 String id_hizkuntza = (String) comboBoxHizkuntza.getSelectedItem();
@@ -152,10 +152,14 @@ public class vErregistratu extends JFrame {
                 String jaiotze_data = lblj_data.getText();
                 String erregistro_data = lblerregistro_data.getText();
 
+                // Crear una instancia del DAO
                 ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
-                boolean registroExitoso = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data);
+                
+                // Llamar al método erregistroaEgin del DAO para registrar al usuario como Free
+                boolean registroOna = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, ErregistratuDAO.Mota.FREE);
 
-                if (registroExitoso) {
+                // Mostrar un mensaje de éxito o error
+                if (registroOna) {
                     JOptionPane.showMessageDialog(vErregistratu.this, "Erabiltzailea ondo erregistratu da!");
                 } else {
                     JOptionPane.showMessageDialog(vErregistratu.this, "Errorea erabiltzailea erregistratzerakoan.");
@@ -166,6 +170,38 @@ public class vErregistratu extends JFrame {
         getContentPane().add(btnEditatu);
 
         JButton btnPremiumErosi = new JButton("Erosi Premium");
+        btnPremiumErosi.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Obtener los datos del formulario
+                String izena = lblizena.getText();
+                String abizena = lblabizena.getText();
+                String id_hizkuntza = (String) comboBoxHizkuntza.getSelectedItem();
+                String erabiltzailea = lblerabiltzailea.getText();
+                String pasahitza = lblpasahitza.getText();
+                String jaiotze_data = lblj_data.getText();
+                String erregistro_data = lblerregistro_data.getText(); // Obtener la fecha de registro
+
+                // Obtener la fecha de vencimiento para la suscripción premium
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.YEAR, 1); // Aumentar un año
+                Date fechaPremium = calendar.getTime();
+                SimpleDateFormat formatoFechaPremium = new SimpleDateFormat("yyyy-MM-dd");
+                String fechaPremiumFormateada = formatoFechaPremium.format(fechaPremium);
+
+                // Crear una instancia del DAO
+                ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
+                
+                // Llamar al método erregistroaEgin del DAO para registrar al usuario como Premium
+                boolean registroOna = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, ErregistratuDAO.Mota.PREMIUM);
+
+                // Mostrar un mensaje de éxito o error
+                if (registroOna) {
+                    JOptionPane.showMessageDialog(vErregistratu.this, "Erabiltzailea ondo erregistratu da!");
+                } else {
+                    JOptionPane.showMessageDialog(vErregistratu.this, "Errorea erabiltzailea erregistratzerakoan.");
+                }
+            }
+        });
         btnPremiumErosi.setBounds(276, 271, 131, 23);
         getContentPane().add(btnPremiumErosi);
 
