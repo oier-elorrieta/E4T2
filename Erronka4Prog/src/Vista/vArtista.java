@@ -10,7 +10,7 @@ import javax.swing.JComboBox;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import DAO.AlbumDAO;
+import DAO.ArtistaDAO;
 import javax.swing.JTextField;
 public class vArtista extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -83,7 +83,7 @@ public class vArtista extends JFrame {
    private void mostrarAlbumes() {
        try {
            // Crear una instancia del DAO de álbumes
-           AlbumDAO albumDAO = new AlbumDAO();
+           ArtistaDAO albumDAO = new ArtistaDAO();
           
            // Obtener los álbumes del artista seleccionado
            String[] albumes = albumDAO.obtenerAlbumesPorArtista(artistaSeleccionado);
