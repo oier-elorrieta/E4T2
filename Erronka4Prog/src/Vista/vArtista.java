@@ -9,6 +9,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import DAO.AlbumDAO;
+import javax.swing.JTextField;
 public class vArtista extends JFrame {
    private static final long serialVersionUID = 1L;
    private JPanel contentPane;
@@ -23,23 +24,38 @@ public class vArtista extends JFrame {
        setContentPane(contentPane);
        contentPane.setLayout(null);
       
-       JLabel lblArtista = new JLabel("Álbumes de " + artistaSeleccionado);
+       JLabel lblArtista = new JLabel("<dynamic>");
        lblArtista.setHorizontalAlignment(SwingConstants.CENTER);
-       lblArtista.setBounds(100, 11, 250, 14);
+       lblArtista.setBounds(133, 11, 159, 14);
        contentPane.add(lblArtista);
       
-       // Botón para volver atrás
-       JButton btnVolver = new JButton("Volver");
-       btnVolver.setFont(new Font("Tahoma", Font.BOLD, 11));
-       btnVolver.setBounds(169, 227, 89, 23);
-       contentPane.add(btnVolver);
-      
-       // Acción del botón para volver atrás
-       btnVolver.addActionListener(new ActionListener() {
-           public void actionPerformed(ActionEvent e) {
-               volverAListaArtistas();
-           }
-       });
+       JButton btnAtzera = new JButton("Atzera");
+		btnAtzera.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnAtzera.setBounds(10, 7, 107, 23);
+		contentPane.add(btnAtzera);
+		
+		btnAtzera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				vMenua frame = new vMenua();
+				frame.setVisible(true);
+				dispose();
+			}	
+		});
+		
+		JButton btnProfila = new JButton("Nire Profila");
+		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnProfila.setBounds(317, 7, 107, 23);
+		contentPane.add(btnProfila);
+		
+		btnProfila.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				vErregistratu vErregistratuPanel = new vErregistratu();
+				vErregistratuPanel.setVisible(true);
+				dispose();
+			}
+		});
       
        // Mostrar los álbumes del artista seleccionado
        mostrarAlbumes();

@@ -38,7 +38,7 @@ public class vArtistaLista extends JFrame {
        setContentPane(contentPane);
        contentPane.setLayout(null);
       
-       JLabel lblArtistas = new JLabel("Artista Zerrenda (Entzunaldi Kopurua)");
+       JLabel lblArtistas = new JLabel("Artista Zerrenda");
        lblArtistas.setHorizontalAlignment(SwingConstants.CENTER);
        lblArtistas.setBounds(127, 11, 185, 14);
        contentPane.add(lblArtistas);
@@ -53,7 +53,7 @@ public class vArtistaLista extends JFrame {
        comboBoxArtistas.setBounds(89, 153, 249, 23);
        contentPane.add(comboBoxArtistas);
       
-       JButton btnVerArtista = new JButton("Ver Artista");
+       JButton btnVerArtista = new JButton("Ikusi Artista");
        btnVerArtista.setFont(new Font("Tahoma", Font.BOLD, 11));
        btnVerArtista.setBounds(149, 206, 129, 23);
        contentPane.add(btnVerArtista);
