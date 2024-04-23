@@ -24,8 +24,9 @@ public class Premium extends Bezeroa{
      * @param erabiltzailea bezeroaren izenaren erabiltzailea 
      */
     public Premium(String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza,
-			Hizkuntza hizkuntza, ArrayList<String> playListZerrenda) {
+			Hizkuntza hizkuntza, ArrayList<String> playListZerrenda, Date iraungitzeData) {
 		super(izena, abizena, jdata, erabiltzailea, pasahitza, hizkuntza, playListZerrenda);
+		this.iraungitzeData = iraungitzeData;
 	}
 
     /**

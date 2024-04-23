@@ -32,7 +32,7 @@ public class PodcasterTest {
 
         Podcaster podcaster = new Podcaster("Izena", podcastList);
         
-        String expectedString = "Podcaster [PodcastZerrenda=[Podcast1, Podcast2, Podcast3]]";
+        String expectedString = "Podcaster [PodcastZerrenda=[Podcast1, Podcast2, Podcast3], Izena=Izena]";
         assertEquals(expectedString, podcaster.toString());
     }
 

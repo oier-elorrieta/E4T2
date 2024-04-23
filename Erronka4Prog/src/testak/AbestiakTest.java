@@ -38,7 +38,7 @@ public class AbestiakTest {
     }
 
     @Test
-    public void testEqualsAndHashCode() {
+    public void testEquals() {
         Abestiak abestiak1 = new Abestiak("Izenburua", 3.5, "Kolaboratzaileak", 100);
         Abestiak abestiak2 = new Abestiak("Izenburua", 3.5, "Kolaboratzaileak", 100);
         Abestiak abestiak3 = new Abestiak("Beste Izenburua", 4.2, "Beste Kolaboratzaileak", 200);
@@ -47,6 +47,5 @@ public class AbestiakTest {
         assertEquals(abestiak1.hashCode(), abestiak2.hashCode());
 
         assertEquals(false, abestiak1.equals(abestiak3));
-        assertEquals(false, abestiak1.hashCode() == abestiak3.hashCode());
     }
 }

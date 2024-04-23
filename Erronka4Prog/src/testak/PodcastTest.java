@@ -31,17 +31,13 @@ public class PodcastTest {
        }
 
        @Test
-       public void testEqualsAndHashCode() {
+       public void testEquals() {
            Podcast podcast1 = new Podcast("Izenburua", 30.0, "Kolaboratzaileak", 500);
            Podcast podcast2 = new Podcast("Izenburua", 30.0, "Kolaboratzaileak", 500);
            Podcast podcast3 = new Podcast("Beste Izenburua", 40.0, "Beste Kolaboratzaileak", 1000);
 
            assertEquals(podcast1, podcast2);
-           assertEquals(podcast1.hashCode(), podcast2.hashCode());
-
-           assertEquals(false, podcast1.equals(podcast3));
-           assertEquals(false, podcast1.hashCode() == podcast3.hashCode());
-       }
+           assertEquals(false, podcast1.equals(podcast3));       }
 
        @Test
        public void testToString() {

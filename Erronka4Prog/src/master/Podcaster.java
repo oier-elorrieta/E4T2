@@ -67,8 +67,6 @@ public class Podcaster extends Artistak{
 	}
 
 	/**
-     * Komparatzen du objetua beste objetu batekin jakiteko berdin direla ala ez
-     * 
      * @param zein objetuarekin konparatuko den
      * @return true objetuak berdin badira, false objetuak desberdinak badira
      */
