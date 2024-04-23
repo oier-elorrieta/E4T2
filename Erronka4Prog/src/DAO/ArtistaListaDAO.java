@@ -4,7 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import master.KonexioaDB;
-public class ArtistaDAO {
+public class ArtistaListaDAO {
   
    public String obtenerListaArtistas() {
        StringBuilder listaArtistas = new StringBuilder();

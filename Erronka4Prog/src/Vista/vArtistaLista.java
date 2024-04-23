@@ -11,7 +11,7 @@ import javax.swing.JComboBox;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import DAO.ArtistaDAO;
+import DAO.ArtistaListaDAO;
 public class vArtistaLista extends JFrame {
    private static final long serialVersionUID = 1L;
    private JPanel contentPane;
@@ -101,7 +101,7 @@ public class vArtistaLista extends JFrame {
    private void cargarListaArtistas() {
        try {
            // Crear una instancia del DAO del artista
-           ArtistaDAO artistaDAO = new ArtistaDAO();
+           ArtistaListaDAO artistaDAO = new ArtistaListaDAO();
           
            // Obtener la lista de artistas como una cadena
            String listaArtistas = artistaDAO.obtenerListaArtistas();
