@@ -48,6 +48,47 @@ public class ArtistaDAO {
        // Convertir la lista de álbumes a un array de Strings
        return albumes.toArray(new String[0]);
    }
+   public String obtenerInformacionArtista(String artista) {
+       String informacionArtista = "";
+       Connection con = KonexioaDB.hasi();
+
+       if (con == null) {
+           System.out.println("Ezin da konexioa egin.");
+           return informacionArtista;
+       }
+
+       PreparedStatement stmt = null;
+       ResultSet rs = null;
+
+       try {
+           // Consulta SQL para obtener la información del artista
+           String sql = "SELECT izenArtistikoa, deskribapena FROM MUSIKARIA WHERE izenArtistikoa = ?";
+           stmt = con.prepareStatement(sql);
+           stmt.setString(1, artista);
+           rs = stmt.executeQuery();
+
+           // Construir la información del artista
+           if (rs.next()) {
+               String nombreArtistico = rs.getString("izenArtistikoa");
+               String descripcion = rs.getString("deskribapena");
+               informacionArtista = "Izen artistikoa: " + nombreArtistico + "\nDeskribapena: " + descripcion;
+           }
+       } catch (SQLException e) {
+           e.printStackTrace();
+       } finally {
+           // Cerrar la conexión y liberar recursos
+           try {
+               if (rs != null) rs.close();
+               if (stmt != null) stmt.close();
+               KonexioaDB.itxi(con);
+           } catch (SQLException e) {
+               e.printStackTrace();
+           }
+       }
+
+       return informacionArtista;
+   }
+   
 }
 
 
