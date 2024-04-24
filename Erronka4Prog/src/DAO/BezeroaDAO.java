@@ -8,12 +8,22 @@ import com.mysql.jdbc.Connection;
 
 import master.KonexioaDB;
 
+/**
+ * Bezeroen autentifikazioa egiaztatzeko klasea
+ */
 public class BezeroaDAO {
 	
-	public boolean baieztatuAdmin(String erabiltzailea, String pasahitza) {
+    /**
+     * Erabiltzailea eta pasahitza baieztatu egiaztatzen du
+     * 
+     * @param erabiltzailea Erabiltzailearen erabiltzaile-izena
+     * @param pasahitza Erabiltzailearen pasahitza
+     * @return True baieztatu egin bada, False bestela
+     */
+    public boolean baieztatuAdmin(String erabiltzailea, String pasahitza) {
     	
         boolean login_ok = false;
-        Connection con = (Connection) KonexioaDB.hasi(); 
+        Connection con = (Connection) KonexioaDB.hasi(); // Konexioa lortu
         
         if (con == null) {
             System.out.println("Ezin da konexioa egin.");
@@ -44,7 +54,7 @@ public class BezeroaDAO {
             try {
                 if (rs != null) rs.close();
                 if (stmt != null) stmt.close();
-                KonexioaDB.itxi(con); 
+                KonexioaDB.itxi(con); // Konexioa itxi
             } catch (SQLException e) {
                 e.printStackTrace();
             }
