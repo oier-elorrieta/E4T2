@@ -1,16 +1,28 @@
 package DAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import master.KonexioaDB;
+
+/**
+ * Artista baten albumak eta informazioa lortzeko datu-basearekin interakzioak egiteko klasea
+ */
 public class ArtistaDAO {
   
+   /**
+    * Artista baten albumak lortzen ditu
+    * 
+    * @param artista Albumak lortu nahi den artista
+    * @return Artista horren albumen zerrenda
+    */
    public String[] obtenerAlbumesPorArtista(String artista) {
        List<String> albumes = new ArrayList<>();
-       Connection con = KonexioaDB.hasi();
+       Connection con = KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
       
        if (con == null) {
            System.out.println("Ezin da konexioa egin.");
@@ -21,13 +33,13 @@ public class ArtistaDAO {
        ResultSet rs = null;
       
        try {
-           // Consulta SQL para obtener los álbumes del artista
+           // Artista baten albumak lortzeko SQL kontsulta
            String sql = "SELECT izenburua FROM ALBUM WHERE id_musikaria IN (SELECT id_musikaria FROM MUSIKARIA WHERE izenArtistikoa = ?)";
            stmt = con.prepareStatement(sql);
            stmt.setString(1, artista);
            rs = stmt.executeQuery();
           
-           // Construir la lista de álbumes
+           // Albumen zerrenda eraikitzeko
            while (rs.next()) {
                String album = rs.getString("izenburua");
                albumes.add(album);
@@ -35,7 +47,7 @@ public class ArtistaDAO {
        } catch (SQLException e) {
            e.printStackTrace();
        } finally {
-           // Cerrar la conexión y liberar recursos
+           // Konexioa itxi eta baliabideak askatu
            try {
                if (rs != null) rs.close();
                if (stmt != null) stmt.close();
@@ -45,12 +57,19 @@ public class ArtistaDAO {
            }
        }
       
-       // Convertir la lista de álbumes a un array de Strings
+       // Albumen zerrenda String-en array bihurtu
        return albumes.toArray(new String[0]);
    }
+   
+   /**
+    * Artista baten informazioa lortzen du
+    * 
+    * @param artista Informazioa lortu nahi den artista
+    * @return Artista horren informazioa
+    */
    public String obtenerInformacionArtista(String artista) {
        String informacionArtista = "";
-       Connection con = KonexioaDB.hasi();
+       Connection con = KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
 
        if (con == null) {
            System.out.println("Ezin da konexioa egin.");
@@ -61,13 +80,13 @@ public class ArtistaDAO {
        ResultSet rs = null;
 
        try {
-           // Consulta SQL para obtener la información del artista
+           // Artista baten informazioa lortzeko SQL kontsulta
            String sql = "SELECT izenArtistikoa, deskribapena FROM MUSIKARIA WHERE izenArtistikoa = ?";
            stmt = con.prepareStatement(sql);
            stmt.setString(1, artista);
            rs = stmt.executeQuery();
 
-           // Construir la información del artista
+           // Artista baten informazioa eraikitzeko
            if (rs.next()) {
                String nombreArtistico = rs.getString("izenArtistikoa");
                String descripcion = rs.getString("deskribapena");
@@ -76,7 +95,7 @@ public class ArtistaDAO {
        } catch (SQLException e) {
            e.printStackTrace();
        } finally {
-           // Cerrar la conexión y liberar recursos
+           // Konexioa itxi eta baliabideak askatu
            try {
                if (rs != null) rs.close();
                if (stmt != null) stmt.close();
@@ -87,11 +106,5 @@ public class ArtistaDAO {
        }
 
        return informacionArtista;
-   }
-   
+   }  
 }
-
-
-
-
-

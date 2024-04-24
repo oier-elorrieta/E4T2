@@ -1,14 +1,25 @@
 package DAO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import master.KonexioaDB;
+
+/**
+ * Musika artisten zerrenda lortzeko datu-basearekin interakzioak egiteko klasea
+ */
 public class ArtistaListaDAO {
   
+   /**
+    * Zerrenda bat sortzen du, datu-basean dauden musika artisten izenak erabiliz
+    * 
+    * @return Musika artisten zerrenda String moduan itzuli
+    */
    public String obtenerListaArtistas() {
        StringBuilder listaArtistas = new StringBuilder();
-       Connection con = (Connection) KonexioaDB.hasi(); // Obtener la conexión a la base de datos
+       Connection con = (Connection) KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
       
        if (con == null) {
            System.out.println("Ezin da konexioa egin.");
@@ -19,12 +30,12 @@ public class ArtistaListaDAO {
        ResultSet rs = null;
       
        try {
-           // Consulta SQL para obtener la lista de artistas
+           // Musika artisten zerrenda lortzeko SQL kontsulta
            String sql = "SELECT izenArtistikoa FROM MUSIKARIA";
            stmt = con.prepareStatement(sql);
            rs = stmt.executeQuery();
           
-           // Construir la lista de artistas como una cadena
+           // Musika artisten zerrenda sortu kate moduan
            while (rs.next()) {
                String artista = rs.getString("izenArtistikoa");
                listaArtistas.append(artista).append("\n");
@@ -32,7 +43,7 @@ public class ArtistaListaDAO {
        } catch (SQLException e) {
            e.printStackTrace();
        } finally {
-           // Cerrar la conexión y liberar recursos
+           // Konexioa itxi eta baliabideak askatu
            try {
                if (rs != null) rs.close();
                if (stmt != null) stmt.close();
@@ -43,7 +54,4 @@ public class ArtistaListaDAO {
        }
        return listaArtistas.toString();
    }
-  
-  
 }
-

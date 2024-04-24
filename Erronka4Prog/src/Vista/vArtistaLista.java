@@ -93,17 +93,14 @@ public class vArtistaLista extends JFrame {
 			}
 		});
       
-       // Cargar la lista de artistas al abrir la ventana
        cargarListaArtistas();
    }
   
    /// Método para cargar la lista de artistas y mostrarla en el campo de texto
    private void cargarListaArtistas() {
        try {
-           // Crear una instancia del DAO del artista
            ArtistaListaDAO artistaDAO = new ArtistaListaDAO();
           
-           // Obtener la lista de artistas como una cadena
            String listaArtistas = artistaDAO.obtenerListaArtistas();
           
            // Mostrar la lista de artistas en el campo de texto
