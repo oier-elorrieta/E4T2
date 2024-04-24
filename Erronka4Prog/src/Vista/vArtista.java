@@ -1,5 +1,4 @@
 package Vista;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -7,7 +6,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JTextField;
+import javax.swing.JTextArea; // Importar JTextArea en lugar de JTextField
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -52,15 +51,15 @@ public class vArtista extends JFrame {
         btnProfila.setBounds(317, 7, 107, 23);
         contentPane.add(btnProfila);
         
-        JLabel lblNewLabel = new JLabel("Diska Zerrenda");
-        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel.setBounds(25, 41, 98, 14);
-        contentPane.add(lblNewLabel);
+        JLabel lblDiskaZ = new JLabel("Diska Zerrenda");
+        lblDiskaZ.setHorizontalAlignment(SwingConstants.CENTER);
+        lblDiskaZ.setBounds(25, 41, 98, 14);
+        contentPane.add(lblDiskaZ);
         
-        JLabel lblNewLabel_1 = new JLabel("Informazioa");
-        lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel_1.setBounds(291, 41, 68, 14);
-        contentPane.add(lblNewLabel_1);
+        JLabel lblInfo = new JLabel("Informazioa");
+        lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
+        lblInfo.setBounds(291, 41, 68, 14);
+        contentPane.add(lblInfo);
         
         btnProfila.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -70,15 +69,26 @@ public class vArtista extends JFrame {
             }
         });
         
+     // Después del JComboBox de los álbumes
+        JButton btnVerAlbum = new JButton("Ver Album");
+        btnVerAlbum.setBounds(257, 162, 128, 23); // Ajusta la posición según sea necesario
+        contentPane.add(btnVerAlbum);
+
+       
+
+        
         // Después de la etiqueta "Informazioa"
-        JTextField textFieldInformazioa = new JTextField();
-        textFieldInformazioa.setBounds(247, 61, 159, 122); // Ajusta la posición según sea necesario
-        contentPane.add(textFieldInformazioa);
+        JTextArea textAreaInformazioa = new JTextArea(); // Cambiar a JTextArea
+        textAreaInformazioa.setEditable(false); // Para que no se pueda editar
+        textAreaInformazioa.setLineWrap(true); // Para que el texto se envuelva en líneas
+        textAreaInformazioa.setWrapStyleWord(true); // Para que el texto se envuelva en palabras
+        textAreaInformazioa.setBounds(247, 61, 159, 90); // Ajusta la posición según sea necesario
+        contentPane.add(textAreaInformazioa);
         
-        // Mostrar la información del artista seleccionado en el JTextField
-        mostrarInformacionArtista(textFieldInformazioa);
+        // Mostrar la información del artista seleccionado en el JTextArea
+        mostrarInformacionArtista(textAreaInformazioa);
         
-        // Después del JTextField
+        // Después del JTextArea
         JComboBox<String> comboBoxAlbumes = new JComboBox<>();
         comboBoxAlbumes.setBounds(10, 61, 128, 20); // Ajusta la posición según sea necesario
         contentPane.add(comboBoxAlbumes);
@@ -87,8 +97,8 @@ public class vArtista extends JFrame {
         mostrarAlbumes(comboBoxAlbumes);
     }
   
-    // Método para mostrar la información del artista seleccionado en el JTextField
-    private void mostrarInformacionArtista(JTextField textFieldInformazioa) {
+    // Método para mostrar la información del artista seleccionado en el JTextArea
+    private void mostrarInformacionArtista(JTextArea textAreaInformazioa) {
         try {
             // Crear una instancia del DAO de artistas
             ArtistaDAO artistaDAO = new ArtistaDAO();
@@ -96,8 +106,8 @@ public class vArtista extends JFrame {
             // Obtener la información del artista seleccionado
             String informacionArtista = artistaDAO.obtenerInformacionArtista(artistaSeleccionado);
             
-            // Mostrar la información en el JTextField
-            textFieldInformazioa.setText(informacionArtista);
+            // Mostrar la información en el JTextArea
+            textAreaInformazioa.setText(informacionArtista);
         } catch (Exception ex) {
             ex.printStackTrace();
             // Aquí puedes mostrar un mensaje de error en un JOptionPane o en la consola
