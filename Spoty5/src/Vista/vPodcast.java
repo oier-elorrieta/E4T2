@@ -75,7 +75,7 @@ public class vPodcast extends JFrame {
 			}
 		});
 		
-		JLabel lblPodcasterZerrendaIzena = new JLabel("Artisten zerrenda (Entzunaldi kopurua)");
+		JLabel lblPodcasterZerrendaIzena = new JLabel("Podcasterren zerrenda (Entzunaldi kopurua)");
 		lblPodcasterZerrendaIzena.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPodcasterZerrendaIzena.setBounds(178, 15, 227, 19);
 		contentPane.add(lblPodcasterZerrendaIzena);
