@@ -39,20 +39,11 @@ public class vLogin extends JFrame {
         lblPasahitza.setBounds(10, 63, 126, 30);
         lblPasahitza.setHorizontalAlignment(SwingConstants.CENTER);
         txtErabiltzailea = new JTextField(20);
-        txtErabiltzailea.setBounds(149, 22, 157, 30);
+        txtErabiltzailea.setBounds(146, 22, 160, 30);
         txtPasahitza = new JPasswordField(20);
         txtPasahitza.setBounds(146, 63, 160, 30);
         JButton btnHasiSaioa = new JButton("Login");
         btnHasiSaioa.setBounds(31, 143, 126, 30);
-        
-        btnHasiSaioa.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                
-                vMenua vMenuaPanel = new vMenua();
-                vMenuaPanel.setVisible(true);
-                dispose();
-            }
-        });
         
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -82,9 +73,7 @@ public class vLogin extends JFrame {
             }
         });
 
-   
 
-        
         btnHasiSaioa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -94,12 +83,14 @@ public class vLogin extends JFrame {
                
                 BezeroaDAO bezero = new BezeroaDAO();
                 
-                
                 boolean balidatuHasiSaioa = bezero.baieztatuAdmin(erabiltzailea, pasahitza);
 
                 if (balidatuHasiSaioa) {
                     JOptionPane.showMessageDialog(vLogin.this, "Barruan zaude");
-                    //vMenua.setVisib(true);//Egiten dugu ikusgarria urrengo lehioa, ondo jarri badugu
+                    
+                    vMenua vMenuaPanel = new vMenua();
+                    vMenuaPanel.setVisible(true);
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(vLogin.this, "Erabiltzailea edo pasahitza txarto dago");
                 }
