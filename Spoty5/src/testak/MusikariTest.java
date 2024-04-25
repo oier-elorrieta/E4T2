@@ -2,7 +2,8 @@ package testak;
 import static org.junit.Assert.*;
 import java.util.ArrayList;
 import org.junit.Test;
-import master.Musikari;
+
+import Artistak.Musikari;
 public class MusikariTest {
 	 @Test
 	    public void testConstructorAndGetters() {

@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import master.Bezeroa.Hizkuntza;
-import master.Free;
+import Bezeroak.Free;
+import Bezeroak.Bezeroa.Hizkuntza;
 
 
 public class FreeTest {

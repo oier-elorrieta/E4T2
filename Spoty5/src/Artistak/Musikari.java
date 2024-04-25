@@ -1,4 +1,4 @@
-package master;
+package Artistak;
 import java.util.ArrayList;
 import java.util.Objects;
 /**

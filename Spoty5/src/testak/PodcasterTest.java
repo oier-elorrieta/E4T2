@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import master.Podcaster;
+import Artistak.Podcaster;
 
 public class PodcasterTest {
 

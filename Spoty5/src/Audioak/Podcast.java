@@ -1,4 +1,4 @@
-package master;
+package Audioak;
 
 /**
  * Podcast klasea Audio klasearen luzapena da.

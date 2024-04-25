@@ -13,8 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import Bezeroak.Mota;
 import DAO.ErregistratuDAO;
-import master.Mota;
 
 import javax.swing.JPasswordField;
 import java.awt.Font;

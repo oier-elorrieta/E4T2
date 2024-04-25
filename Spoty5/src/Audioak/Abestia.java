@@ -1,4 +1,4 @@
-package master;
+package Audioak;
 
 /**
  * Abestia klasea Audio klasearen luzapena da.

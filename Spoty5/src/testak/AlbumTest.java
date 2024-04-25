@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import master.Album;
+import Audioak.Album;
 
 public class AlbumTest {
 

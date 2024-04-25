@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import master.Bezeroa.Hizkuntza;
-import master.Free;
-import master.Premium;
+import Bezeroak.Free;
+import Bezeroak.Premium;
+import Bezeroak.Bezeroa.Hizkuntza;
 
 public class PremiumTest {
 

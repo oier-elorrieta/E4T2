@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import master.Abestia;
+import Audioak.Abestia;
 
 public class AbestiaTest {
 

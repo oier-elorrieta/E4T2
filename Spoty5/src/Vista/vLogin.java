@@ -14,8 +14,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 
+import Bezeroak.Bezeroa;
 import DAO.BezeroaDAO;
-import master.Bezeroa;
 
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
@@ -44,6 +44,14 @@ public class vLogin extends JFrame {
         txtPasahitza.setBounds(146, 63, 160, 30);
         JButton btnHasiSaioa = new JButton("Login");
         btnHasiSaioa.setBounds(31, 143, 126, 30);
+        
+        btnHasiSaioa.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		vMenua vMenuaPanel = new vMenua();
+        		vMenuaPanel.setVisible(true);
+        		dispose();
+        	}
+        });
         
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -88,9 +96,9 @@ public class vLogin extends JFrame {
                 if (balidatuHasiSaioa) {
                     JOptionPane.showMessageDialog(vLogin.this, "Barruan zaude");
                     
-                    vMenua vMenuaPanel = new vMenua();
-                    vMenuaPanel.setVisible(true);
-                    dispose();
+//                    vMenua vMenuaPanel = new vMenua();
+//                    vMenuaPanel.setVisible(true);
+//                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(vLogin.this, "Erabiltzailea edo pasahitza txarto dago");
                 }
