@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import DAO.ErregistratuDAO;
+import master.Mota;
+
 import javax.swing.JPasswordField;
 import java.awt.Font;
 
@@ -159,7 +161,7 @@ public class vErregistratu extends JFrame {
                 ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
                 
                 // Llamar al método erregistroaEgin del DAO para registrar al usuario como Free
-                boolean registroOna = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, ErregistratuDAO.Mota.FREE);
+                boolean registroOna = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, Mota.FREE);
 
                 // Mostrar un mensaje de éxito o error
                 if (registroOna) {
@@ -195,7 +197,7 @@ public class vErregistratu extends JFrame {
                 ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
                 
                 // Llamar al método erregistroaEgin del DAO para registrar al usuario como Premium
-                boolean registroOna = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, ErregistratuDAO.Mota.PREMIUM);
+                boolean registroOna = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, Mota.PREMIUM);
 
                 // Mostrar un mensaje de éxito o error
                 if (registroOna) {

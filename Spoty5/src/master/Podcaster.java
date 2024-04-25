@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * Podcaster klasea Artistak klasearen luzapena da.
  */
-public class Podcaster extends Artistak{
+public class Podcaster extends Artista{
 	/**
 	 * Podcasterra izango duen PodcastZerrenda
 	 */

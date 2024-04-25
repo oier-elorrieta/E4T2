@@ -4,7 +4,7 @@ import java.util.Objects;
 /**
 * Musikari klase pribatua Artistak klasearen luzapena da.
 */
-public class Musikari extends Artistak {
+public class Musikari extends Artista {
 	
 	 /**
     * Musikari izango duen AlbumZerrenda

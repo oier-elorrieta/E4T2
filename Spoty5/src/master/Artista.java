@@ -3,9 +3,9 @@ package master;
 import java.util.Objects;
 
 /**
- * Artistak izeneko klase abstraktua 
+ * Artista izeneko klase abstraktua 
 **/
-public abstract class Artistak {
+public abstract class Artista {
 	
 	/**
 	* Artista izango duen izena
@@ -17,7 +17,7 @@ public abstract class Artistak {
      * 
      * @param izena artistaren izena
      */
-    public Artistak(String izena) {
+    public Artista(String izena) {
         Izena = izena;
     }
 
@@ -73,7 +73,7 @@ public abstract class Artistak {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Artistak other = (Artistak) obj;
+        Artista other = (Artista) obj;
         return Objects.equals(Izena, other.Izena);
     }
     

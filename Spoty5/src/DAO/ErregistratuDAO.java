@@ -8,25 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import master.KonexioaDB;
+import master.Mota;
 
 /**
  * Bezeroen erregistroa datu-basearekin interakzioak egiteko klasea
  */
 public class ErregistratuDAO {
 
-    /** 
-     * Enum bat bere datu motekin
-     */
-    public enum Mota {
-        /**
-         * Datu mota free
-         */
-        FREE,
-        /**
-         * Datu mota premium
-         */
-        PREMIUM
-    }
 
     /**
      * Datu basean erabiltzaile berri baten erregistroa egiten du
@@ -124,4 +112,5 @@ public class ErregistratuDAO {
 
         return hizkuntzaList.toArray(new String[0]);
     }
+
 }

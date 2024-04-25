@@ -20,7 +20,7 @@ public class BezeroaDAO {
      * @param pasahitza Erabiltzailearen pasahitza
      * @return True baieztatu egin bada, False bestela
      */
-    public boolean baieztatuAdmin(String erabiltzailea, String pasahitza) {
+    public boolean baieztatuBezeroa(String erabiltzailea, String pasahitza) {
     	
         boolean login_ok = false;
         Connection con = (Connection) KonexioaDB.hasi(); // Konexioa lortu

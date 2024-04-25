@@ -13,15 +13,15 @@ public class BezeroDAOTest {
         BezeroaDAO bezeroaDAO = new BezeroaDAO();
         
         // Erabiltzaile eta pasahitza ONAK
-        boolean emaitzaOndo = bezeroaDAO.baieztatuAdmin("icas", "haia");
+        boolean emaitzaOndo = bezeroaDAO.baieztatuBezeroa("icas", "haia");
         assertTrue(emaitzaOndo);
         
         // Erabiltzaile ONDO, pasahitza TXARTO
-        boolean emaitza1 = bezeroaDAO.baieztatuAdmin("icas", "1234");
+        boolean emaitza1 = bezeroaDAO.baieztatuBezeroa("icas", "1234");
         assertFalse(emaitza1);
         
         // Erabiltzaile eta pasahitza TXARTO
-        boolean emaitzaTxarto = bezeroaDAO.baieztatuAdmin("kkk", "1111");
+        boolean emaitzaTxarto = bezeroaDAO.baieztatuBezeroa("kkk", "1111");
         assertFalse(emaitzaTxarto);
 	}
 }

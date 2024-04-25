@@ -83,7 +83,7 @@ public class vLogin extends JFrame {
                
                 BezeroaDAO bezero = new BezeroaDAO();
                 
-                boolean balidatuHasiSaioa = bezero.baieztatuAdmin(erabiltzailea, pasahitza);
+                boolean balidatuHasiSaioa = bezero.baieztatuBezeroa(erabiltzailea, pasahitza);
 
                 if (balidatuHasiSaioa) {
                     JOptionPane.showMessageDialog(vLogin.this, "Barruan zaude");
