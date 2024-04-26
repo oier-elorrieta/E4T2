@@ -18,11 +18,11 @@ public class vNirePlayList extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args, String erabiltzaileIzena) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					vNirePlayList frame = new vNirePlayList();
+					vNirePlayList frame = new vNirePlayList(erabiltzaileIzena);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,7 +34,7 @@ public class vNirePlayList extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public vNirePlayList() {
+	public vNirePlayList(String erabiltzaileIzena) {
 		setTitle("Nire PlayList zerrenda");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 414);
@@ -52,13 +52,13 @@ public class vNirePlayList extends JFrame {
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				vMenua menuaFrame = new vMenua();
+				vMenua menuaFrame = new vMenua(erabiltzaileIzena);
 				menuaFrame.setVisible(true);
 				dispose();
 			}
 		});
 		
-		JButton btnProfila = new JButton("Nire Profila");
+		JButton btnProfila = new JButton(erabiltzaileIzena);
 		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnProfila.setBounds(456, 11, 118, 23);
 		contentPane.add(btnProfila);
@@ -66,7 +66,7 @@ public class vNirePlayList extends JFrame {
 		btnProfila.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				vErregistratu vErregistratuPanel = new vErregistratu();
+				vErregistratu vErregistratuPanel = new vErregistratu(erabiltzaileIzena);
 				vErregistratuPanel.setVisible(true);
 				dispose();
 			}

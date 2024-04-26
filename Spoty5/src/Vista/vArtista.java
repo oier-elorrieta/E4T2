@@ -18,7 +18,7 @@ public class vArtista extends JFrame {
     private JPanel contentPane;
     private String artistaSeleccionado;
 
-    public vArtista(String artistaSeleccionado) {
+    public vArtista(String artistaSeleccionado, String erabiltzaileIzena) {
         this.artistaSeleccionado = artistaSeleccionado;
         setTitle("Álbumes de " + artistaSeleccionado);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,13 +40,13 @@ public class vArtista extends JFrame {
         
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                vArtistaLista frame = new vArtistaLista();
+                vArtistaLista frame = new vArtistaLista(erabiltzaileIzena);
                 frame.setVisible(true);
                 dispose();
             }   
         });
         
-        JButton btnProfila = new JButton("Nire Profila");
+        JButton btnProfila = new JButton(erabiltzaileIzena);
         btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
         btnProfila.setBounds(317, 7, 107, 23);
         contentPane.add(btnProfila);
@@ -63,7 +63,7 @@ public class vArtista extends JFrame {
         
         btnProfila.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                vErregistratu vErregistratuPanel = new vErregistratu();
+                vErregistratu vErregistratuPanel = new vErregistratu(erabiltzaileIzena);
                 vErregistratuPanel.setVisible(true);
                 dispose();
             }

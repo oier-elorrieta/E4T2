@@ -21,10 +21,11 @@ import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 
 public class vLogin extends JFrame {
+	protected static final String erabiltzaileIzena = null;
 	private JTextField txtErabiltzailea;
     private JPasswordField txtPasahitza;
 
-    public vLogin() {
+    public vLogin(String erabiltzaileIzena) {
         
         setTitle("Saio Hasiera");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,13 +46,13 @@ public class vLogin extends JFrame {
         JButton btnHasiSaioa = new JButton("Login");
         btnHasiSaioa.setBounds(31, 143, 126, 30);
         
-        btnHasiSaioa.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		vMenua vMenuaPanel = new vMenua();
-        		vMenuaPanel.setVisible(true);
-        		dispose();
-        	}
-        });
+//        btnHasiSaioa.addActionListener(new ActionListener() {
+//        	public void actionPerformed(ActionEvent e) {
+//        		vMenua vMenuaPanel = new vMenua();
+//        		vMenuaPanel.setVisible(true);
+//        		dispose();
+//        	}
+//        });
         
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -70,13 +71,9 @@ public class vLogin extends JFrame {
         
         btnErregistratu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Crear una instancia del panel de registro (vErregistratu)
-                vErregistratu vErregistratuPanel = new vErregistratu();
-
-                // Hacer visible el panel de registro
+            	
+                vErregistratu vErregistratuPanel = new vErregistratu(erabiltzaileIzena);
                 vErregistratuPanel.setVisible(true);
-
-                // Cerrar la ventana actual
                 dispose();
             }
         });
@@ -96,9 +93,9 @@ public class vLogin extends JFrame {
                 if (balidatuHasiSaioa) {
                     JOptionPane.showMessageDialog(vLogin.this, "Barruan zaude");
                     
-//                    vMenua vMenuaPanel = new vMenua();
-//                    vMenuaPanel.setVisible(true);
-//                    dispose();
+                    vMenua vMenuaPanel = new vMenua(erabiltzailea);
+                    vMenuaPanel.setVisible(true);
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(vLogin.this, "Erabiltzailea edo pasahitza txarto dago");
                 }
@@ -106,11 +103,11 @@ public class vLogin extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-            	vLogin frame = new vLogin();
+				vLogin frame = new vLogin(erabiltzaileIzena);
                 frame.setVisible(true);
             }
         });

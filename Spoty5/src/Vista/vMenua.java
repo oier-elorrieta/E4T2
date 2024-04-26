@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Bezeroak.Mota;
+import DAO.ErregistratuDAO;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -26,7 +30,17 @@ public class vMenua extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					vMenua frame = new vMenua();
+					ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
+					String izena = "Hegoi";
+                    String abizena = "Vazauez";
+                    String id_hizkuntza = "eu";
+                    String erabiltzailea = "Vhegoi";
+                    String pasahitza = "12345";
+                    String jaiotze_data = "2005-11-17";
+                    String erregistro_data = "2024-04-26";
+                    Mota mota = Mota.FREE;
+					String erabiltzaileIzena = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, mota);
+					vMenua frame = new vMenua(erabiltzaileIzena);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +52,7 @@ public class vMenua extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public vMenua() {
+	public vMenua(String erabiltzaileIzena) {
 		setTitle("Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -62,14 +76,14 @@ public class vMenua extends JFrame {
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				vLogin loginFrame = new vLogin();
+				vLogin loginFrame = new vLogin(erabiltzaileIzena);
 				loginFrame.setVisible(true);
 				dispose();
 			}	
 		});
 		
 		
-		JButton btnProfila = new JButton("Nire Profila");
+		JButton btnProfila = new JButton(erabiltzaileIzena);
 		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnProfila.setBounds(317, 15, 107, 23);
 		contentPane.add(btnProfila);
@@ -77,7 +91,7 @@ public class vMenua extends JFrame {
 		btnProfila.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				vErregistratu vErregistratuPanel = new vErregistratu();
+				vErregistratu vErregistratuPanel = new vErregistratu(erabiltzaileIzena);
 				vErregistratuPanel.setVisible(true);
 				dispose();
 			}
@@ -90,7 +104,7 @@ public class vMenua extends JFrame {
 		btnMusikaDeskubritu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				vArtistaLista vArtistaListaPanel = new vArtistaLista();
+				vArtistaLista vArtistaListaPanel = new vArtistaLista(erabiltzaileIzena);
 				vArtistaListaPanel.setVisible(true);
 				dispose();
 			}
@@ -103,7 +117,7 @@ public class vMenua extends JFrame {
 		btnPodcastDeskubritu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				vPodcast vPodcastPanel = new vPodcast();
+				vPodcast vPodcastPanel = new vPodcast(erabiltzaileIzena);
 				vPodcastPanel.setVisible(true);
 				dispose();
 			}
@@ -116,7 +130,7 @@ public class vMenua extends JFrame {
 		btnPlayList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				vNirePlayList vNirePlayListPanel = new vNirePlayList();
+				vNirePlayList vNirePlayListPanel = new vNirePlayList(erabiltzaileIzena);
 				
 				vNirePlayListPanel.setVisible(true);
 				dispose();

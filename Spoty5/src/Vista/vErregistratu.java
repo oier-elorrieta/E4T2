@@ -34,7 +34,7 @@ public class vErregistratu extends JFrame {
     /**
      * Create the frame.
      */
-    public vErregistratu() {
+    public vErregistratu(String erabiltzaileIzena) {
         setTitle("Erregistratu");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(500, 400);
@@ -46,7 +46,7 @@ public class vErregistratu extends JFrame {
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             	
-            	vLogin loginFrame = new vLogin();
+            	vLogin loginFrame = new vLogin(erabiltzaileIzena);
             	loginFrame.setVisible(true);
             	dispose();
             }
@@ -161,10 +161,10 @@ public class vErregistratu extends JFrame {
                 ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
                 
                 // Llamar al método erregistroaEgin del DAO para registrar al usuario como Free
-                boolean registroOna = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, Mota.FREE);
+                String registroOna = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, Mota.FREE);
 
                 // Mostrar un mensaje de éxito o error
-                if (registroOna) {
+                if (registroOna != null) {
                     JOptionPane.showMessageDialog(vErregistratu.this, "Erabiltzailea ondo erregistratu da!");
                 } else {
                     JOptionPane.showMessageDialog(vErregistratu.this, "Errorea erabiltzailea erregistratzerakoan.");
@@ -197,16 +197,16 @@ public class vErregistratu extends JFrame {
                 ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
                 
                 // Llamar al método erregistroaEgin del DAO para registrar al usuario como Premium
-                boolean registroOna = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, Mota.PREMIUM);
+                String registroOna = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, Mota.PREMIUM);
 
                 // Mostrar un mensaje de éxito o error
-                if (registroOna) {
+                if (registroOna != null) {
                     JOptionPane.showMessageDialog(vErregistratu.this, "Erabiltzailea ondo erregistratu da!");
                 } else {
                     JOptionPane.showMessageDialog(vErregistratu.this, "Errorea erabiltzailea erregistratzerakoan.");
                 }
                         
-                vMenua vMenuaPanel = new vMenua();
+                vMenua vMenuaPanel = new vMenua(erabiltzaileIzena);
                 vMenuaPanel.setVisible(true);
                 dispose();
             }

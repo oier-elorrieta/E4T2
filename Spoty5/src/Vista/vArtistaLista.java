@@ -1,4 +1,5 @@
 package Vista;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,16 +13,19 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import DAO.ArtistaListaDAO;
+
 public class vArtistaLista extends JFrame {
+	
    private static final long serialVersionUID = 1L;
    private JPanel contentPane;
    private JTextField textFieldArtistas;
    private JComboBox<String> comboBoxArtistas;
-   public static void main(String[] args) {
+   
+   public static void main(String[] args,String erabiltzaileIzena) {
        EventQueue.invokeLater(new Runnable() {
            public void run() {
                try {
-                   vArtistaLista frame = new vArtistaLista();
+                   vArtistaLista frame = new vArtistaLista(erabiltzaileIzena);
                    frame.setVisible(true);
                } catch (Exception e) {
                    e.printStackTrace();
@@ -29,8 +33,9 @@ public class vArtistaLista extends JFrame {
            }
        });
    }
-   public vArtistaLista() {
-       setTitle("Lista de Artistas");
+   
+   public vArtistaLista(String erabiltzaileIzena) {
+       setTitle("Artista lista");
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        setBounds(100, 100, 450, 300);
        contentPane = new JPanel();
@@ -61,7 +66,7 @@ public class vArtistaLista extends JFrame {
        // Acción del botón para ver el artista seleccionado
        btnVerArtista.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               verArtista();
+               verArtista(erabiltzaileIzena);
            }
        });
       
@@ -73,13 +78,13 @@ public class vArtistaLista extends JFrame {
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				vMenua frame = new vMenua();
-				frame.setVisible(true);
+				vMenua vMenuaPanel  = new vMenua(erabiltzaileIzena);
+				vMenuaPanel .setVisible(true);
 				dispose();
 			}	
 		});
 		
-		JButton btnProfila = new JButton("Nire Profila");
+		JButton btnProfila = new JButton(erabiltzaileIzena);
 		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnProfila.setBounds(317, 7, 107, 23);
 		contentPane.add(btnProfila);
@@ -87,7 +92,7 @@ public class vArtistaLista extends JFrame {
 		btnProfila.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				vErregistratu vErregistratuPanel = new vErregistratu();
+				vErregistratu vErregistratuPanel = new vErregistratu(erabiltzaileIzena);
 				vErregistratuPanel.setVisible(true);
 				dispose();
 			}
@@ -119,10 +124,10 @@ public class vArtistaLista extends JFrame {
    }
   
    // Método para abrir la vista de vArtista con el artista seleccionado
-   private void verArtista() {
+   private void verArtista(String erabiltzaileIzena) {
        try {
            String artistaSeleccionado = comboBoxArtistas.getSelectedItem().toString();
-           vArtista vArtistaFrame = new vArtista(artistaSeleccionado);
+           vArtista vArtistaFrame = new vArtista(artistaSeleccionado, erabiltzaileIzena);
            vArtistaFrame.setVisible(true);
            dispose();
        } catch (Exception ex) {

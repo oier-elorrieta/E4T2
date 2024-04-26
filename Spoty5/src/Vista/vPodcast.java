@@ -21,11 +21,11 @@ public class vPodcast extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args, String erabiltzaileIzena) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					vPodcast frame = new vPodcast();
+					vPodcast frame = new vPodcast(erabiltzaileIzena);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +37,7 @@ public class vPodcast extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public vPodcast() {
+	public vPodcast(String erabiltzaileIzena) {
 		setTitle("Podcaster");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 417);
@@ -55,13 +55,13 @@ public class vPodcast extends JFrame {
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				vMenua menuaFrame = new vMenua();
+				vMenua menuaFrame = new vMenua(erabiltzaileIzena);
 				menuaFrame.setVisible(true);
 				dispose();
 			}
 		});
 		
-		JButton btnProfila = new JButton("Nire Profila");
+		JButton btnProfila = new JButton(erabiltzaileIzena);
 		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnProfila.setBounds(461, 11, 113, 23);
 		contentPane.add(btnProfila);
@@ -69,7 +69,7 @@ public class vPodcast extends JFrame {
 		btnProfila.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				vErregistratu vErregistratuPanel = new vErregistratu();
+				vErregistratu vErregistratuPanel = new vErregistratu(erabiltzaileIzena);
 				vErregistratuPanel.setVisible(true);
 				dispose();
 			}

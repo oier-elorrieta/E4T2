@@ -29,14 +29,17 @@ public class ErregistratuDAO {
      * @param mota Erabiltzailearen datu mota (FREE, PREMIUM)
      * @return True baieztatu egin bada, False bestela
      */
-    public boolean erregistroaEgin(String izena, String abizena, String id_hizkuntza, String erabiltzailea,
+		   //boolean
+    public String erregistroaEgin(String izena, String abizena, String id_hizkuntza, String erabiltzailea,
             String pasahitza, String jaiotze_data, String erregistro_data, Mota mota) {
-        boolean erregistro_ok = false;
+        //boolean erregistro_ok = false;
+        String erabiltzaileIzena = null;
         Connection con = KonexioaDB.hasi();
 
         if (con == null) {
             System.out.println("Ezin da konexioa egin.");
-            return false;
+            return null;
+            	   //false
         }
 
         PreparedStatement stmt = null;
@@ -57,7 +60,8 @@ public class ErregistratuDAO {
 
             if (lerroAfektatuak > 0) {
                 System.out.println("Erregistratu zara!");
-                erregistro_ok = true;
+                //erregistro_ok = true;
+                erabiltzaileIzena = erabiltzailea;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,7 +74,8 @@ public class ErregistratuDAO {
                 e.printStackTrace();
             }
         }
-        return erregistro_ok;
+        //return erregistro_ok;
+        return erabiltzaileIzena;
     }
 
     /**
