@@ -202,13 +202,14 @@ public class vErregistratu extends JFrame {
                 // Mostrar un mensaje de éxito o error
                 if (registroOna != null) {
                     JOptionPane.showMessageDialog(vErregistratu.this, "Erabiltzailea ondo erregistratu da!");
+                    
+                    vMenua vMenuaPanel = new vMenua(erabiltzaileIzena);
+                    vMenuaPanel.setVisible(true);
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(vErregistratu.this, "Errorea erabiltzailea erregistratzerakoan.");
                 }
                         
-                vMenua vMenuaPanel = new vMenua(erabiltzaileIzena);
-                vMenuaPanel.setVisible(true);
-                dispose();
             }
         });
         btnPremiumErosi.setBounds(276, 271, 131, 23);
