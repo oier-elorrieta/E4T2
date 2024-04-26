@@ -11,7 +11,7 @@ public class MusikariTest {
 	        albumList.add("Album1");
 	        albumList.add("Album2");
 	        albumList.add("Album3");
-	        Musikari musikari = new Musikari("Izena", albumList);
+	        Musikari musikari = new Musikari("Izena", null, albumList);
 	       
 	        assertEquals("Izena", musikari.getIzena());
 	        assertEquals(albumList, musikari.getAlbumZerrenda());
@@ -22,7 +22,7 @@ public class MusikariTest {
 	        albumList.add("Album1");
 	        albumList.add("Album2");
 	        albumList.add("Album3");
-	        Musikari musikari = new Musikari("Izena", albumList);
+	        Musikari musikari = new Musikari("Izena", null, albumList);
 	       
 	        String expectedString = "Musikari [AlbumZerrenda=[Album1, Album2, Album3], Izena=Izena]";
 	        assertEquals(expectedString, musikari.toString());
@@ -32,7 +32,7 @@ public class MusikariTest {
 	        ArrayList<String> albumList = new ArrayList<>();
 	        albumList.add("Album1");
 	        albumList.add("Album2");
-	        Musikari musikari = new Musikari("Izena", albumList);
+	        Musikari musikari = new Musikari("Izena", null, albumList);
 	        ArrayList<String> newAlbumList = new ArrayList<>();
 	        newAlbumList.add("New Album1");
 	        newAlbumList.add("New Album2");

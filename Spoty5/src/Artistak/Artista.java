@@ -1,5 +1,6 @@
 package Artistak;
 
+import java.sql.Blob;
 import java.util.Objects;
 
 /**
@@ -11,17 +12,30 @@ public abstract class Artista {
 	* Artista izango duen izena
 	*/
     protected String Izena;
+    protected static Blob irudia;
 
     /**
      * Artista sortzeko konstruktorea izenarekin
      * 
      * @param izena artistaren izena
      */
-    public Artista(String izena) {
-        Izena = izena;
+    public Artista(String izena, Blob irudia) {
+        this.Izena = izena;
+        this.irudia = irudia;
     }
+    
+    
+    public static Blob getIrudia() {
+		return irudia;
+	}
 
-    /**
+
+	public void setIrudia(Blob irudia) {
+		this.irudia = irudia;
+	}
+
+
+	/**
      * Artistaren izena lortzen du
      * 
      * @return artistaren izena

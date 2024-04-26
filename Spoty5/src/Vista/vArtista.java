@@ -2,6 +2,10 @@ package Vista;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Artistak.Artista;
+import Artistak.Musikari;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -11,7 +15,11 @@ import javax.swing.JTextArea; // Importar JTextArea en lugar de JTextField
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Blob;
+import java.sql.SQLException;
+
 import DAO.ArtistaDAO;
+import javax.swing.ImageIcon;
 
 public class vArtista extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -22,7 +30,7 @@ public class vArtista extends JFrame {
         this.artistaSeleccionado = artistaSeleccionado;
         setTitle("Álbumes de " + artistaSeleccionado);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
+        setBounds(100, 100, 451, 418);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -71,7 +79,7 @@ public class vArtista extends JFrame {
         
      // Después del JComboBox de los álbumes
         JButton btnVerAlbum = new JButton("Ver Album");
-        btnVerAlbum.setBounds(257, 162, 128, 23); // Ajusta la posición según sea necesario
+        btnVerAlbum.setBounds(278, 323, 128, 23); // Ajusta la posición según sea necesario
         contentPane.add(btnVerAlbum);
 
        
@@ -82,7 +90,7 @@ public class vArtista extends JFrame {
         textAreaInformazioa.setEditable(false); // Para que no se pueda editar
         textAreaInformazioa.setLineWrap(true); // Para que el texto se envuelva en líneas
         textAreaInformazioa.setWrapStyleWord(true); // Para que el texto se envuelva en palabras
-        textAreaInformazioa.setBounds(247, 61, 159, 90); // Ajusta la posición según sea necesario
+        textAreaInformazioa.setBounds(247, 81, 159, 90); // Ajusta la posición según sea necesario
         contentPane.add(textAreaInformazioa);
         
         // Mostrar la información del artista seleccionado en el JTextArea
@@ -95,6 +103,27 @@ public class vArtista extends JFrame {
         
         // Mostrar los álbumes del artista seleccionado
         mostrarAlbumes(comboBoxAlbumes);
+        
+       
+        
+        
+        try {
+            // Obtener la imagen del objeto Musikari
+            Blob imagenBlob = Artistak.Musikari.getIrudia();
+            
+            // Convertir el Blob en un ImageIcon
+            if (imagenBlob != null) {
+                ImageIcon icon = new ImageIcon(imagenBlob.getBytes(1, (int) imagenBlob.length()));
+                
+                JLabel lblAlbumIMG = new JLabel("New label");
+                lblAlbumIMG.setBounds(10, 175, 164, 135);
+                contentPane.add(lblAlbumIMG);
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            // Manejar la excepción adecuadamente
+        }
     }
   
     // Método para mostrar la información del artista seleccionado en el JTextArea

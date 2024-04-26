@@ -18,7 +18,6 @@ public class vArtistaLista extends JFrame {
 	
    private static final long serialVersionUID = 1L;
    private JPanel contentPane;
-   private JTextField textFieldArtistas;
    private JComboBox<String> comboBoxArtistas;
    
    public static void main(String[] args,String erabiltzaileIzena) {
@@ -47,15 +46,9 @@ public class vArtistaLista extends JFrame {
        lblArtistas.setHorizontalAlignment(SwingConstants.CENTER);
        lblArtistas.setBounds(127, 11, 185, 14);
        contentPane.add(lblArtistas);
-      
-       textFieldArtistas = new JTextField();
-       textFieldArtistas.setEditable(false);
-       textFieldArtistas.setBounds(89, 36, 249, 106);
-       contentPane.add(textFieldArtistas);
-       textFieldArtistas.setColumns(10);
        // Combo box para seleccionar el artista
        comboBoxArtistas = new JComboBox<String>();
-       comboBoxArtistas.setBounds(89, 153, 249, 23);
+       comboBoxArtistas.setBounds(92, 90, 249, 23);
        contentPane.add(comboBoxArtistas);
       
        JButton btnVerArtista = new JButton("Ikusi Artista");
@@ -107,9 +100,6 @@ public class vArtistaLista extends JFrame {
            ArtistaListaDAO artistaDAO = new ArtistaListaDAO();
           
            String listaArtistas = artistaDAO.obtenerListaArtistas();
-          
-           // Mostrar la lista de artistas en el campo de texto
-           textFieldArtistas.setText(listaArtistas);
           
            // Agregar los artistas al ComboBox
            String[] arrayArtistas = listaArtistas.split("\n");

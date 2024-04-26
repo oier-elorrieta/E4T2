@@ -17,7 +17,7 @@ public class PodcasterTest {
         podcastList.add("Podcast2");
         podcastList.add("Podcast3");
 
-        Podcaster podcaster = new Podcaster("Izena", podcastList);
+        Podcaster podcaster = new Podcaster("Izena", null, podcastList);
         
         assertEquals("Izena", podcaster.getIzena());
         assertEquals(podcastList, podcaster.getPodcastZerrenda());
@@ -30,7 +30,7 @@ public class PodcasterTest {
         podcastList.add("Podcast2");
         podcastList.add("Podcast3");
 
-        Podcaster podcaster = new Podcaster("Izena", podcastList);
+        Podcaster podcaster = new Podcaster("Izena", null, podcastList);
         
         String expectedString = "Podcaster [PodcastZerrenda=[Podcast1, Podcast2, Podcast3], Izena=Izena]";
         assertEquals(expectedString, podcaster.toString());
@@ -42,7 +42,7 @@ public class PodcasterTest {
         podcastList.add("Podcast1");
         podcastList.add("Podcast2");
 
-        Podcaster podcaster = new Podcaster("Izena", podcastList);
+        Podcaster podcaster = new Podcaster("Izena", null, podcastList);
 
         ArrayList<String> newPodcastList = new ArrayList<>();
         newPodcastList.add("New Podcast1");
