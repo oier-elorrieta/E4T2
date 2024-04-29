@@ -90,7 +90,7 @@ public class vArtista extends JFrame {
         textAreaInformazioa.setEditable(false); // Para que no se pueda editar
         textAreaInformazioa.setLineWrap(true); // Para que el texto se envuelva en líneas
         textAreaInformazioa.setWrapStyleWord(true); // Para que el texto se envuelva en palabras
-        textAreaInformazioa.setBounds(247, 81, 159, 90); // Ajusta la posición según sea necesario
+        textAreaInformazioa.setBounds(249, 59, 159, 90); // Ajusta la posición según sea necesario
         contentPane.add(textAreaInformazioa);
        
         // Mostrar la información del artista seleccionado en el JTextArea
