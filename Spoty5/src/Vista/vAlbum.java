@@ -7,6 +7,9 @@ import javax.swing.JButton;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JLabel;
 
 public class vAlbum extends JFrame {
@@ -18,7 +21,7 @@ public class vAlbum extends JFrame {
     /**
      * Create the frame.
      */
-    public vAlbum() {
+    public vAlbum(String artistaSeleccionado, String erabiltzaileIzena) {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 646, 413);
         contentPane = new JPanel();
@@ -30,6 +33,14 @@ public class vAlbum extends JFrame {
         btnAtzera.setFont(new Font("Tahoma", Font.BOLD, 10));
         btnAtzera.setBounds(10, 10, 85, 21);
         contentPane.add(btnAtzera);
+        
+        btnAtzera.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                vArtista vArtistaPanel = new vArtista(artistaSeleccionado, erabiltzaileIzena);
+                vArtistaPanel.setVisible(true);
+                dispose();
+            }
+        });
         
         JLabel lblAlbum = new JLabel("Album:");
         lblAlbum.setBounds(105, 14, 182, 13);
@@ -43,21 +54,5 @@ public class vAlbum extends JFrame {
         lblAlbumZ.setBounds(334, 60, 125, 13);
         contentPane.add(lblAlbumZ);
     }
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					vAlbum frame = new vAlbum();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 }

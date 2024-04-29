@@ -82,7 +82,13 @@ public class vArtista extends JFrame {
         btnIkusiAlbuma.setBounds(278, 323, 128, 23); // Ajusta la posición según sea necesario
         contentPane.add(btnIkusiAlbuma);
 
-       
+        btnIkusiAlbuma.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                vAlbum vAlbumPanel = new vAlbum(erabiltzaileIzena, erabiltzaileIzena);
+                vAlbumPanel.setVisible(true);
+                dispose();
+            }
+        });
 
        
         // Después de la etiqueta "Informazioa"
