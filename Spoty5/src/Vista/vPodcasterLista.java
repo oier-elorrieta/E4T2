@@ -13,12 +13,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import DAO.PodcasterListaDAO;
 
+/**
+ * Klase hau "vPodcasterLista" klasea da, podcast-ak zerrendatzeko eta hautatzeko interfaze grafikoa eskaintzen duena.
+ */
 public class vPodcasterLista extends JFrame {
    
    private static final long serialVersionUID = 1L;
    private JPanel contentPane;
    private JComboBox<String> comboBoxPodcasters;
    
+   /**
+    * Aplikazioa abiarazi.
+    * @param args Komando lerroko argumentuak.
+    * @param erabiltzaileIzena Erabiltzailearen izena.
+    */
    public static void main(String[] args, String erabiltzaileIzena) {
        EventQueue.invokeLater(new Runnable() {
            public void run() {
@@ -32,8 +40,12 @@ public class vPodcasterLista extends JFrame {
        });
    }
    
+   /**
+    * Klasearen eraikitzailea. Podcast-ak zerrendatzeko eta hautatzeko interfaze grafikoa sortzen du.
+    * @param erabiltzaileIzena Erabiltzailearen izena.
+    */
    public vPodcasterLista(String erabiltzaileIzena) {
-       setTitle("Podcaster lista");
+       setTitle("Podcaster zerrenda");
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        setBounds(100, 100, 450, 300);
        contentPane = new JPanel();
@@ -55,7 +67,7 @@ public class vPodcasterLista extends JFrame {
        btnVerPodcaster.setBounds(149, 206, 129, 23);
        contentPane.add(btnVerPodcaster);
       
-       // Acción del botón para ver el podcaster seleccionado
+       // Ikusi Podcaster botoiaren ekintza
        btnVerPodcaster.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                verPodcaster(erabiltzaileIzena);
@@ -69,6 +81,7 @@ public class vPodcasterLista extends JFrame {
        
        btnAtzera.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
+               // Itzuli menu nagusira
                vMenua vMenuaPanel  = new vMenua(erabiltzaileIzena);
                vMenuaPanel .setVisible(true);
                dispose();
@@ -82,22 +95,27 @@ public class vPodcasterLista extends JFrame {
        
        btnProfila.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
+               // Erregistratzeko interfazera joan
                vErregistratu vErregistratuPanel = new vErregistratu(erabiltzaileIzena);
                vErregistratuPanel.setVisible(true);
                dispose();
            }
        });
       
+       // Zerrenda kargatu
        cargarListaPodcasters();
    }
   
+   /**
+    * Podcast-ak zerrendatu eta ComboBox-en gehitu.
+    */
    private void cargarListaPodcasters() {
        try {
            PodcasterListaDAO podcasterDAO = new PodcasterListaDAO();
           
            String listaPodcasters = podcasterDAO.obtenerListaPodcasters();
           
-           // Agregar los podcasters al ComboBox
+           // Podcast-ak ComboBox-en gehitu
            String[] arrayPodcasters = listaPodcasters.split("\n");
            comboBoxPodcasters.removeAllItems();
            for (String podcaster : arrayPodcasters) {
@@ -105,21 +123,24 @@ public class vPodcasterLista extends JFrame {
            }
        } catch (Exception ex) {
            ex.printStackTrace();
-           // Aquí puedes mostrar un mensaje de error en un JOptionPane o en la consola
+           // Hemen errore mezu bat bistaratu dezakezu JOptionPane batean edo pantailako errorean
        }
    }
   
+   /**
+    * Hautatutako podcastera bistaratu.
+    * @param erabiltzaileIzena Erabiltzailearen izena.
+    */
    private void verPodcaster(String erabiltzaileIzena) {
        try {
            String podcasterSeleccionado = comboBoxPodcasters.getSelectedItem().toString();
+           // Podcastera bistaratzen duen interfazera joan
            vPodcaster vPodcasterFrame = new vPodcaster(podcasterSeleccionado, erabiltzaileIzena);
            vPodcasterFrame.setVisible(true);
            dispose();
        } catch (Exception ex) {
            ex.printStackTrace();
-           // Aquí puedes mostrar un mensaje de error en un JOptionPane o en la consola
+           // Hemen errore mezu bat bistaratu dezakezu JOptionPane batean edo pantailako errorean
        }
    }
 }
-
-

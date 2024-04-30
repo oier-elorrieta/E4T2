@@ -19,6 +19,9 @@ import DAO.ErregistratuDAO;
 import javax.swing.JPasswordField;
 import java.awt.Font;
 
+/**
+ * Erabiltzailea erregistratzeko interfazea.
+ */
 public class vErregistratu extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -32,7 +35,9 @@ public class vErregistratu extends JFrame {
     private JPasswordField lblpasahitza;
 
     /**
-     * Create the frame.
+     * Frame-a sortzen du.
+     * 
+     * @param erabiltzaileIzena Erabiltzailearen izena
      */
     public vErregistratu(String erabiltzaileIzena) {
         setTitle("Erregistratu");
@@ -41,11 +46,12 @@ public class vErregistratu extends JFrame {
         setLocationRelativeTo(null);
         getContentPane().setLayout(null);
 
+        // Atzera botoia
         JButton btnAtzera = new JButton("Atzera");
         btnAtzera.setFont(new Font("Tahoma", Font.BOLD, 11));
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	
+                // Atzera botoiaren ekintza: vLogin-en frame-a ireki
             	vLogin loginFrame = new vLogin(erabiltzaileIzena);
             	loginFrame.setVisible(true);
             	dispose();
@@ -54,6 +60,7 @@ public class vErregistratu extends JFrame {
         btnAtzera.setBounds(10, 11, 93, 29);
         getContentPane().add(btnAtzera);
 
+        // Input-ak eta etiketak
         lblizena = new JTextField();
         lblizena.setBounds(131, 53, 93, 20);
         getContentPane().add(lblizena);
@@ -91,6 +98,7 @@ public class vErregistratu extends JFrame {
         getContentPane().add(lblerregistro_data);
         lblerregistro_data.setColumns(10);
         
+        // Premium muga hartzea
         Date PremiumData = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(PremiumData);
@@ -137,6 +145,7 @@ public class vErregistratu extends JFrame {
         lblNewLabel_6.setBounds(20, 209, 111, 14);
         getContentPane().add(lblNewLabel_6);
 
+        // Hizkuntza aukeratzeko ComboBox
         comboBoxHizkuntza = new JComboBox();
         comboBoxHizkuntza.setBounds(131, 235, 111, 25);
         getContentPane().add(comboBoxHizkuntza);
@@ -145,10 +154,11 @@ public class vErregistratu extends JFrame {
         lblNewLabel_7.setBounds(20, 234, 83, 14);
         getContentPane().add(lblNewLabel_7);
 
+        // Sortu botoia
         JButton btnSortu  = new JButton("Sortu");
         btnSortu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Obtener los datos del formulario
+                // Formularioaren datuak lortu
                 String izena = lblizena.getText();
                 String abizena = lblabizena.getText();
                 String id_hizkuntza = (String) comboBoxHizkuntza.getSelectedItem();
@@ -157,13 +167,13 @@ public class vErregistratu extends JFrame {
                 String jaiotze_data = lblj_data.getText();
                 String erregistro_data = lblerregistro_data.getText();
 
-                // Crear una instancia del DAO
+                // DAO instatziatzea
                 ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
                 
-                // Llamar al método erregistroaEgin del DAO para registrar al usuario como Free
+                // DAO-ren erregistroaEgin metodoa deitzea, erabiltzailea Free bezala erregistratzeko
                 String registroOna = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, Mota.FREE);
 
-                // Mostrar un mensaje de éxito o error
+             // Mezu bat erakutsi ondo eta gaizki
                 if (registroOna != null) {
                     JOptionPane.showMessageDialog(vErregistratu.this, "Erabiltzailea ondo erregistratu da!");
                 } else {
@@ -174,35 +184,37 @@ public class vErregistratu extends JFrame {
         btnSortu.setBounds(59, 271, 101, 23);
         getContentPane().add(btnSortu);
 
+        // Premium botoia
         JButton btnPremiumErosi = new JButton("Erosi Premium");
         btnPremiumErosi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Obtener los datos del formulario
+                // Formularioaren datuak lortu
                 String izena = lblizena.getText();
                 String abizena = lblabizena.getText();
                 String id_hizkuntza = (String) comboBoxHizkuntza.getSelectedItem();
                 String erabiltzailea = lblerabiltzailea.getText();
                 String pasahitza = lblpasahitza.getText();
                 String jaiotze_data = lblj_data.getText();
-                String erregistro_data = lblerregistro_data.getText(); // Obtener la fecha de registro
+                String erregistro_data = lblerregistro_data.getText(); // Erregistro data lortu
 
-                // Obtener la fecha de vencimiento para la suscripción premium
+                // Premium data kalkulatu
                 Calendar calendar = Calendar.getInstance();
-                calendar.add(Calendar.YEAR, 1); // Aumentar un año
+                calendar.add(Calendar.YEAR, 1); // Urte bat gehitu
                 Date fechaPremium = calendar.getTime();
                 SimpleDateFormat formatoFechaPremium = new SimpleDateFormat("yyyy-MM-dd");
                 String fechaPremiumFormateada = formatoFechaPremium.format(fechaPremium);
 
-                // Crear una instancia del DAO
+                // DAO instatziatzea
                 ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
                 
-                // Llamar al método erregistroaEgin del DAO para registrar al usuario como Premium
+                // DAO-ren erregistroaEgin metodoa deitzea, erabiltzailea Premium bezala erregistratzeko
                 String registroOna = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, Mota.PREMIUM);
 
-                // Mostrar un mensaje de éxito o error
+                // Mezu bat erakutsi ondo eta gaizki
                 if (registroOna != null) {
                     JOptionPane.showMessageDialog(vErregistratu.this, "Erabiltzailea ondo erregistratu da!");
                     
+                    // vMenua frame-a ireki
                     vMenua vMenuaPanel = new vMenua(erabiltzaileIzena);
                     vMenuaPanel.setVisible(true);
                     dispose();
@@ -215,17 +227,20 @@ public class vErregistratu extends JFrame {
         btnPremiumErosi.setBounds(276, 271, 131, 23);
         getContentPane().add(btnPremiumErosi);
 
-        // Bete JComboBox hizkuntza datuekin
+        // JComboBox hizkuntza datuekin bete
         kargatuHizkuntza();
     }
 
+    /**
+     * Hizkuntza datuak lortu eta JComboBox-ean sartu.
+     */
     private void kargatuHizkuntza() {
         ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
         try {
-            // Obtener los datos de la tabla hizkuntza desde la base de datos
+            // Hizkuntza datuak datu-basean lortu
             String[] hizkuntzaData = erregistratuDAO.lortuHizkuntza();
 
-            // Agregar los datos al JComboBox
+            // JComboBox-ean datuak gehitu
             for (String hizkuntza : hizkuntzaData) {
                 comboBoxHizkuntza.addItem(hizkuntza);
             }
