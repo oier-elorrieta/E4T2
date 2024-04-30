@@ -115,12 +115,11 @@ public class vMenua extends JFrame {
 		contentPane.add(btnPodcastDeskubritu);
 		
 		btnPodcastDeskubritu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				vPodcast vPodcastPanel = new vPodcast(erabiltzaileIzena);
-				vPodcastPanel.setVisible(true);
-				dispose();
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        vPodcasterLista vPodcasterListaPanel = new vPodcasterLista(erabiltzaileIzena);
+		        vPodcasterListaPanel.setVisible(true); // Cambiado de vPodcasterLista a vPodcasterListaPanel
+		        dispose();
+		    }
 		});
 		
 		JButton btnPlayList = new JButton("Nire PlayList-ak");

@@ -99,7 +99,7 @@ public class vArtista extends JFrame {
         textAreaInformazioa.setEditable(false); // Para que no se pueda editar
         textAreaInformazioa.setLineWrap(true); // Para que el texto se envuelva en líneas
         textAreaInformazioa.setWrapStyleWord(true); // Para que el texto se envuelva en palabras
-        textAreaInformazioa.setBounds(247, 81, 159, 90); // Ajusta la posición según sea necesario
+        textAreaInformazioa.setBounds(249, 59, 159, 90); // Ajusta la posición según sea necesario
         contentPane.add(textAreaInformazioa);
         
         comboBoxAlbumak = new JComboBox<>();
@@ -121,6 +121,7 @@ public class vArtista extends JFrame {
         mostrarAlbumes(comboBoxAlbumes);
        
         JLabel lblArtistaImg = new JLabel("");
+        lblArtistaImg.setHorizontalAlignment(SwingConstants.CENTER);
         lblArtistaImg.setBounds(10, 160, 223, 186);
         contentPane.add(lblArtistaImg);
        
