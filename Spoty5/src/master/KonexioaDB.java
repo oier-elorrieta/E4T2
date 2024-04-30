@@ -8,9 +8,10 @@ public class KonexioaDB {
 	public static Connection hasi() {//Konexioa Datu Basearekin// 
         Connection conexioa = null;
         try {
-            conexioa = DriverManager.getConnection("jdbc:mysql://10.5.6.219:3306/db_spoty5", "analista1", "haia");
-            // Ondo ba doa
-            System.out.println("Konexioa ondo dago!");
+        	 String url = "jdbc:mysql://10.5.6.219:3306/db_spoty5";
+        	 String usuario = "admin";
+        	 String contraseña = "1234";
+        	 conexioa = DriverManager.getConnection(url, usuario, contraseña);
         } catch (SQLException e) {
             e.printStackTrace();
         }

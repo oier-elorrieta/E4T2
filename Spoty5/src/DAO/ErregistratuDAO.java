@@ -45,7 +45,7 @@ public class ErregistratuDAO {
         PreparedStatement stmt = null;
 
         try {
-            String sql = "INSERT INTO BEZEROA (izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, mota) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO bezeroa (izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, mota) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, izena);
             stmt.setString(2, abizena);

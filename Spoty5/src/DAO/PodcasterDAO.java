@@ -31,7 +31,7 @@ public class PodcasterDAO {
 	       ResultSet rs = null;
 	      
 	       try {
-	           String sql = "SELECT id_audio FROM PODCAST WHERE id_podcaster IN (SELECT id_podcaster FROM PODCASTER WHERE izenArtistikoa = ?)";
+	           String sql = "SELECT id_audio FROM podcast WHERE id_podcaster IN (SELECT id_podcaster FROM podcaster WHERE izenArtistikoa = ?)";
 	           stmt = con.prepareStatement(sql);
 	           stmt.setString(1, podcaster);
 	           rs = stmt.executeQuery();
@@ -68,7 +68,7 @@ public class PodcasterDAO {
 	       ResultSet rs = null;
 
 	       try {
-	           String sql = "SELECT izenArtistikoa, deskribapena FROM PODCASTER WHERE izenArtistikoa = ?";
+	           String sql = "SELECT izenArtistikoa, deskribapena FROM podcaster WHERE izenArtistikoa = ?";
 	           stmt = con.prepareStatement(sql);
 	           stmt.setString(1, podcaster);
 	           rs = stmt.executeQuery();
@@ -109,7 +109,7 @@ public class PodcasterDAO {
 
 	           try {
 	               // Consulta SQL para obtener la imagen del podcaster
-	               String sql = "SELECT irudia FROM PODCASTER WHERE izenArtistikoa = ?";
+	               String sql = "SELECT irudia FROM podcaster WHERE izenArtistikoa = ?";
 	               stmt = con.prepareStatement(sql);
 	               stmt.setString(1, podcaster);
 	               rs = stmt.executeQuery();

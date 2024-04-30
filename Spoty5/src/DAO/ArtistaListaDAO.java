@@ -31,7 +31,7 @@ public class ArtistaListaDAO {
       
        try {
            // Musika artisten zerrenda lortzeko SQL kontsulta
-           String sql = "SELECT izenArtistikoa FROM MUSIKARIA";
+           String sql = "SELECT izenArtistikoa FROM musikaria";
            stmt = con.prepareStatement(sql);
            rs = stmt.executeQuery();
           

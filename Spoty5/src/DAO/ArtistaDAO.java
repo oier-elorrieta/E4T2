@@ -84,7 +84,7 @@ public class ArtistaDAO {
 
            // Artista baten albumak lortzeko SQL kontsulta
 
-           String sql = "SELECT izenburua FROM ALBUM WHERE id_musikaria IN (SELECT id_musikaria FROM MUSIKARIA WHERE izenArtistikoa = ?)";
+           String sql = "SELECT izenburua FROM album WHERE id_musikaria IN (SELECT id_musikaria FROM musikaria WHERE izenArtistikoa = ?)";
 
            stmt = con.prepareStatement(sql);
 
@@ -178,7 +178,7 @@ public class ArtistaDAO {
 
            // Artista baten informazioa lortzeko SQL kontsulta
 
-           String sql = "SELECT izenArtistikoa, deskribapena FROM MUSIKARIA WHERE izenArtistikoa = ?";
+           String sql = "SELECT izenArtistikoa, deskribapena FROM musikaria WHERE izenArtistikoa = ?";
 
            stmt = con.prepareStatement(sql);
 
@@ -260,7 +260,7 @@ public class ArtistaDAO {
 
            // Consulta SQL para obtener la imagen del artista
 
-           String sql = "SELECT irudia FROM MUSIKARIA WHERE izenArtistikoa = ?";
+           String sql = "SELECT irudia FROM musikaria WHERE izenArtistikoa = ?";
 
            stmt = con.prepareStatement(sql);
 
