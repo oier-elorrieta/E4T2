@@ -4,9 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-
-
 import master.KonexioaDB;
 
 /**
@@ -39,16 +36,12 @@ public class BezeroaDAO {
             stmt = con.prepareStatement(sql);
             stmt.setString(1, erabiltzailea);
             stmt.setString(2, pasahitza);
-
-           
             rs = stmt.executeQuery();
-
            
             if (rs.next()) {
                 login_ok = true;
             }
         } catch (SQLException e) {
-
             e.printStackTrace();
         } finally {
            
@@ -62,5 +55,4 @@ public class BezeroaDAO {
         }
         return login_ok;
     }
-
 }

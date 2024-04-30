@@ -2,25 +2,21 @@ package Vista;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import Artistak.Artista;
-import Artistak.Musikari;
-
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JTextArea; // Importar JTextArea en lugar de JTextField
-
+import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Blob;
-import java.sql.SQLException;
-
 import DAO.ArtistaDAO;
 import javax.swing.ImageIcon;
 
+/**
+ * vArtista klasea, artista baten diskoak eta informazioa erakusteko interfaze grafikoa.
+ * JFrame klasearen extensioa.
+ */
 public class vArtista extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
@@ -29,6 +25,12 @@ public class vArtista extends JFrame {
     private ImageIcon artistaIrudia;
     private JComboBox<String> comboBoxAlbumak;
 
+    /**
+     * Klaseko eraikitzailea.
+     * @param artistaIzena artistaren izena
+     * @param artistaSeleccionado Aukeratutako artista.
+     * @param erabiltzaileIzena Erabiltzaile izena.
+     */
     public vArtista(String artistaIzena, String erabiltzaileIzena) {
         this.artistaIzena = artistaIzena;
         setTitle("Álbumes de " + artistaIzena);
@@ -80,9 +82,9 @@ public class vArtista extends JFrame {
             }
         });
        
-     // Después del JComboBox de los álbumes
+     // Albumen JComboBox-en ondoren
         JButton btnIkusiAlbuma = new JButton("Ikusi Albuma");
-        btnIkusiAlbuma.setBounds(278, 323, 128, 23); // Ajusta la posición según sea necesario
+        btnIkusiAlbuma.setBounds(278, 323, 128, 23); // Behar bada posizioa egokitu
         contentPane.add(btnIkusiAlbuma);
 
         btnIkusiAlbuma.addActionListener(new ActionListener() {
@@ -94,13 +96,12 @@ public class vArtista extends JFrame {
             }
         });
        
-        // Después de la etiqueta "Informazioa"
-        JTextArea textAreaInformazioa = new JTextArea(); // Cambiar a JTextArea
-        textAreaInformazioa.setEditable(false); // Para que no se pueda editar
-        textAreaInformazioa.setLineWrap(true); // Para que el texto se envuelva en líneas
-        textAreaInformazioa.setWrapStyleWord(true); // Para que el texto se envuelva en palabras
-        textAreaInformazioa.setBounds(249, 59, 159, 90); // Ajusta la posición según sea necesario
-        contentPane.add(textAreaInformazioa);
+        // "Informazioa" etiketaren ondoren
+        JTextArea textAreaInformazioa = new JTextArea(); // JTextArea-ra aldatu
+        textAreaInformazioa.setEditable(false); // Ezinezkoa editatzea
+        textAreaInformazioa.setLineWrap(true); // Testua lerroetan zatitzea
+        textAreaInformazioa.setWrapStyleWord(true); // Testua hitzetan zatitzea
+        textAreaInformazioa.setBounds(249, 59, 159, 90); // Behar bada posizioa egokitu
         
         comboBoxAlbumak = new JComboBox<>();
         comboBoxAlbumak.setBounds(10, 61, 128, 20); // Ajusta la posición según sea necesario
@@ -109,15 +110,15 @@ public class vArtista extends JFrame {
         // Mostrar los álbumes del artista seleccionado
         mostrarAlbumes(comboBoxAlbumak);
        
-        // Mostrar la información del artista seleccionado en el JTextArea
+        // Aukeratutako artistaren informazioa JTextArean erakusteko
         mostrarInformacionArtista(textAreaInformazioa);
        
-        // Después del JTextArea
+        // JTextArearen ondoren
         JComboBox<String> comboBoxAlbumes = new JComboBox<>();
-        comboBoxAlbumes.setBounds(10, 61, 128, 20); // Ajusta la posición según sea necesario
+        comboBoxAlbumes.setBounds(10, 61, 128, 20); // Behar bada posizioa egokitu
         contentPane.add(comboBoxAlbumes);
        
-        // Mostrar los álbumes del artista seleccionado
+        // Aukeratutako artistaren albumak erakusteko
         mostrarAlbumes(comboBoxAlbumes);
        
         JLabel lblArtistaImg = new JLabel("");
@@ -129,55 +130,60 @@ public class vArtista extends JFrame {
              
     }
  
-    // Método para mostrar la información del artista seleccionado en el JTextArea
+ // Aukeratutako artistaren informazioa JTextArean erakusteko metodoa
     private void mostrarInformacionArtista(JTextArea textAreaInformazioa) {
         try {
-            // Crear una instancia del DAO de artistas
+        	// Artisten DAOren instantzia sortu
         	ArtistaDAO artistaDAO = new ArtistaDAO();
             
-            // Obtener la información del artista seleccionado
+        	// Aukeratutako artistaren informazioa lortu
             String informacionArtista = artistaDAO.obtenerInformacionArtista(artistaIzena);
             
-            // Mostrar la información en el JTextArea
+            // Informazioa JTextArean erakutsi
             textAreaInformazioa.setText(informacionArtista);
         } catch (Exception ex) {
             ex.printStackTrace();
-            // Aquí puedes mostrar un mensaje de error en un JOptionPane o en la consola
+         // Hemen errore mezua JOptionPanean edo konsolan erakutsi dezakezu
         }
     }
    
-    // Método para mostrar los álbumes del artista seleccionado
+    // Aukeratutako artistaren albumak erakusteko metodoa
     private void mostrarAlbumes(JComboBox<String> comboBoxAlbumes) {
         try {
-            // Crear una instancia del DAO de álbumes
+        	// Albumen DAOren instantzia sortu
             ArtistaDAO artistaDAO = new ArtistaDAO();
            
-            // Obtener los álbumes del artista seleccionado
+            // Aukeratutako artistaren albumak lortu
             String[] albumes = artistaDAO.obtenerAlbumesPorArtista(artistaIzena);
            
-            // Agregar los álbumes al JComboBox
+            // Albumak JComboBox-era gehitu
             for (String album : albumes) {
                 comboBoxAlbumes.addItem(album);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            // Aquí puedes mostrar un mensaje de error en un JOptionPane o en la consola
+         // Hemen errore mezua JOptionPanean edo konsolan erakutsi dezakezu
         }
     }
    
+    /**
+     * Metodoa erabiltzaileak aukeratutako artistaren irudia erakusteko.
+     * 
+     * @param lblArtistaImg JLabel elementua non artistaaren irudia erakusteko
+     */
     private void mostrarImagenArtista(JLabel lblArtistaImg) {
         try {
-            // Crear una instancia del DAO de artistas
+        	// Artistak-eko DAOaren instantzia sortu
             ArtistaDAO artistaDAO = new ArtistaDAO();
            
-            // Obtener la imagen del artista seleccionado
+            // Aukeratutako artistaren irudia lortu
             ImageIcon imagenArtista = artistaDAO.obtenerImagenArtista(artistaIzena);
            
-            // Mostrar la imagen en el JLabel
+            // Irudia JLabel elementuan erakutsi
             lblArtistaImg.setIcon(imagenArtista);  
         } catch (Exception ex) {
             ex.printStackTrace();
-            // Aquí puedes mostrar un mensaje de error en un JOptionPane o en la consola
+         // Hemen errore mezua JOptionPanean edo konsolan erakutsi dezakezu
         }
     }
 }

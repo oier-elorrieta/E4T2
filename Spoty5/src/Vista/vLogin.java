@@ -1,7 +1,5 @@
 package Vista;
 
-import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -12,19 +10,23 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
-
-import Bezeroak.Bezeroa;
 import DAO.BezeroaDAO;
-
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 
+/**
+ * Erabiltzailearen saio hasiera panela erakutsi eta saioa hasteko eta erregistratzeko aukerak eskaintzen duen klasea.
+ */
 public class vLogin extends JFrame {
 	protected static final String erabiltzaileIzena = null;
 	private JTextField txtErabiltzailea;
     private JPasswordField txtPasahitza;
     
+    /**
+     * Main metodoa.
+     * 
+     * @param args argumentuak
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -35,6 +37,11 @@ public class vLogin extends JFrame {
         });
     }
 
+    /**
+     * Sortu vLogin klasearen instanzia.
+     * 
+     * @param erabiltzaileIzena Erabiltzailearen izena
+     */
     public vLogin(String erabiltzaileIzena) {
         
         setTitle("Saio Hasiera");
@@ -42,7 +49,7 @@ public class vLogin extends JFrame {
         setSize(339, 236);
         setLocationRelativeTo(null);
 
-        
+        // Erabiltzailea eta pasahitza sartzeko eremuak
         JLabel lblErabiltzaile = new JLabel("Erabiltzailea:");
         lblErabiltzaile.setBounds(0, 22, 139, 30);
         lblErabiltzaile.setHorizontalAlignment(SwingConstants.CENTER);
@@ -74,30 +81,30 @@ public class vLogin extends JFrame {
 
        
         getContentPane().add(panel, BorderLayout.CENTER);
-        
+        // Erregistratu botoia
         JButton btnErregistratu = new JButton("Erregistratu");
         btnErregistratu.setBounds(167, 143, 127, 30);
         panel.add(btnErregistratu);
         
+        // Erregistratu botoiaren ekintza
         btnErregistratu.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	
+            public void actionPerformed(ActionEvent e) {    	
                 vErregistratu vErregistratuPanel = new vErregistratu(erabiltzaileIzena);
                 vErregistratuPanel.setVisible(true);
                 dispose();
             }
         });
 
-
+        // Login botoiaren ekintza
         btnHasiSaioa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String erabiltzailea = txtErabiltzailea.getText();
                 String pasahitza = new String(txtPasahitza.getPassword());
 
-               
                 BezeroaDAO bezero = new BezeroaDAO();
                 
+                // Bezeroa baieztatu
                 boolean balidatuHasiSaioa = bezero.baieztatuBezeroa(erabiltzailea, pasahitza);
 
                 if (balidatuHasiSaioa) {

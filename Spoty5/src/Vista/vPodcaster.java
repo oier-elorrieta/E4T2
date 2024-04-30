@@ -3,8 +3,6 @@ package Vista;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import DAO.ArtistaDAO;
 import DAO.PodcasterDAO;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -15,13 +13,20 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Component;
 
+/**
+ * Klase hau "vPodcaster" klasea da, entzuleak podcast-ak entzuteko interfaze grafikoa eskaintzen duena.
+ */
 public class vPodcaster extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private String podcasterSeleccionado;
 
+    /**
+     * Aplikazioa abiarazi.
+     * @param podcasterSeleccionado Hautatutako podcast-aren izena.
+     * @param usuario Erabiltzailearen izena.
+     */
     public vPodcaster(String podcasterSeleccionado, String usuario) {
         this.podcasterSeleccionado = podcasterSeleccionado;
         setTitle("<dynamic>");
@@ -44,6 +49,7 @@ public class vPodcaster extends JFrame {
        
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Menu nagusira itzuli
                 vPodcasterLista frame = new vPodcasterLista(usuario);
                 frame.setVisible(true);
                 dispose();
@@ -76,32 +82,39 @@ public class vPodcaster extends JFrame {
         textAreaInformacion.setBounds(246, 59, 159, 130);
         contentPane.add(textAreaInformacion);
         
+        // Hautatutako podcast-aren informazioa bistaratu
         mostrarInformacionPodcaster(textAreaInformacion);
+        
+        // Hautatutako podcast-aren zerrenda bistaratu
         mostrarPodcasts(comboBoxPodcasts);
         
-     // Crea el JLabel para mostrar la imagen del podcaster
+        // Podcasterren irudia bistaratu
         JLabel lblPodcasterImg = new JLabel("");
         lblPodcasterImg.setHorizontalAlignment(SwingConstants.CENTER);
         lblPodcasterImg.setBounds(10, 160, 223, 186);
         contentPane.add(lblPodcasterImg);
-
-        // Llama al método para mostrar la imagen del podcaster
         mostrarImagenPodcaster(lblPodcasterImg);
         
-        // Aquí puedes agregar más componentes según sea necesario
-    
-        // Después del JComboBox de los álbumes
+        // Botoia Erreproduzitu Podcast
         JButton btnErrePodcast = new JButton("Erreproduzitu Podcast");
-        btnErrePodcast.setBounds(246, 222, 164, 23); // Ajusta la posición según sea necesario
+        btnErrePodcast.setBounds(246, 222, 164, 23);
         contentPane.add(btnErrePodcast);
     }
     
+    /**
+     * Hautatutako podcast-aren informazioa bistaratu.
+     * @param textAreaInformacion TextArea bat, podcast-aren informazioa bistaratzeko erabiliko dena.
+     */
     private void mostrarInformacionPodcaster(JTextArea textAreaInformacion) {
         PodcasterDAO podcasterDAO = new PodcasterDAO();
         String informacionPodcaster = podcasterDAO.obtenerInformacionPodcaster(podcasterSeleccionado);
         textAreaInformacion.setText(informacionPodcaster);
     }
     
+    /**
+     * Hautatutako podcast-aren zerrenda bistaratu.
+     * @param comboBoxPodcasts JComboBox bat, podcast-aren zerrenda bistaratzeko erabiliko dena.
+     */
     private void mostrarPodcasts(JComboBox<String> comboBoxPodcasts) {
         PodcasterDAO podcasterDAO = new PodcasterDAO();
         String[] podcasts = podcasterDAO.obtenerPodcastsPorPodcaster(podcasterSeleccionado);
@@ -110,20 +123,23 @@ public class vPodcaster extends JFrame {
         }
     }
     
+    /**
+     * Hautatutako podcast-aren irudia bistaratu.
+     * @param lblPodcasterImg JLabel bat, podcast-aren irudia bistaratzeko erabiliko dena.
+     */
     private void mostrarImagenPodcaster(JLabel lblPodcasterImg) {
         try {
-            // Crear una instancia del DAO de podcaster
+            // Podcaster DAOaren instantzia sortu
             PodcasterDAO podcasterDAO = new PodcasterDAO();
            
-            // Obtener la imagen del podcaster seleccionado
+            // Hautatutako podcast-aren irudia eskuratu
             ImageIcon imagenPodcaster = podcasterDAO.obtenerImagenPodcaster(podcasterSeleccionado);
            
-            // Mostrar la imagen en el JLabel
+            // Irudia JLabel-en bistaratzea
             lblPodcasterImg.setIcon(imagenPodcaster);  
         } catch (Exception ex) {
             ex.printStackTrace();
-            // Aquí puedes mostrar un mensaje de error en un JOptionPane o en la consola
+            // Hemen errore mezu bat bistaratu dezakezu JOptionPane batean edo pantailako errorean
         }
     }
 }
-

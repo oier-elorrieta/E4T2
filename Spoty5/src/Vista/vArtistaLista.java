@@ -6,7 +6,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.Font;
@@ -14,12 +13,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import DAO.ArtistaListaDAO;
 
+/**
+ * 'vArtistaLista' klaseak artisten zerrenda erakusteko eta artistaren informazioa ikusteko interfazea ematen du.
+ */
 public class vArtistaLista extends JFrame {
 	
    private static final long serialVersionUID = 1L;
    private JPanel contentPane;
    private JComboBox<String> comboBoxArtistas;
    
+   /**
+    * Programaren exekuzioaren hasieran 'vArtistaLista' klasearen instantzia bat sortzeko metodo estatikoa.
+    * 
+    * @param args Komando lerro argumentuak
+    * @param erabiltzaileIzena Erabiltzailearen izena
+    */
    public static void main(String[] args,String erabiltzaileIzena) {
        EventQueue.invokeLater(new Runnable() {
            public void run() {
@@ -33,6 +41,11 @@ public class vArtistaLista extends JFrame {
        });
    }
    
+   /**
+    * 'vArtistaLista' klasearen eraikitzailea, non erabiltzaileak artisten zerrenda ikusi dezakeen.
+    * 
+    * @param erabiltzaileIzena Erabiltzailearen izena
+    */
    public vArtistaLista(String erabiltzaileIzena) {
        setTitle("Artista lista");
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,7 +59,7 @@ public class vArtistaLista extends JFrame {
        lblArtistas.setHorizontalAlignment(SwingConstants.CENTER);
        lblArtistas.setBounds(127, 11, 185, 14);
        contentPane.add(lblArtistas);
-       // Combo box para seleccionar el artista
+       // Artisten aukeratzeko combo boxa
        comboBoxArtistas = new JComboBox<String>();
        comboBoxArtistas.setBounds(92, 90, 249, 23);
        contentPane.add(comboBoxArtistas);
@@ -56,7 +69,7 @@ public class vArtistaLista extends JFrame {
        btnVerArtista.setBounds(149, 206, 129, 23);
        contentPane.add(btnVerArtista);
       
-       // Acción del botón para ver el artista seleccionado
+       // Artista aukeratze botoiaren ekintza
        btnVerArtista.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                verArtista(erabiltzaileIzena);
@@ -94,14 +107,17 @@ public class vArtistaLista extends JFrame {
        cargarListaArtistas();
    }
   
-   /// Método para cargar la lista de artistas y mostrarla en el campo de texto
+   /**
+    * Artisten zerrenda kargatzeko eta ComboBox-en erakusteko metodoa.
+    */
    private void cargarListaArtistas() {
        try {
            ArtistaListaDAO artistaDAO = new ArtistaListaDAO();
-          
+           
+           // Artisten zerrenda lortu
            String listaArtistas = artistaDAO.obtenerListaArtistas();
-          
-           // Agregar los artistas al ComboBox
+           
+           // Artistak ComboBox-era gehitu
            String[] arrayArtistas = listaArtistas.split("\n");
            comboBoxArtistas.removeAllItems();
            for (String artista : arrayArtistas) {
@@ -109,11 +125,15 @@ public class vArtistaLista extends JFrame {
            }
        } catch (Exception ex) {
            ex.printStackTrace();
-           // Aquí puedes mostrar un mensaje de error en un JOptionPane o en la consola
+           // Hemen errore mezua JOptionPanean edo konsolan erakutsi dezakezu
        }
    }
-  
-   // Método para abrir la vista de vArtista con el artista seleccionado
+
+   /**
+    * 'vArtista' interfazea irekitzeko metodoa, aukeratutako artista batekin.
+    * 
+    * @param erabiltzaileIzena Erabiltzailearen izena
+    */
    private void verArtista(String erabiltzaileIzena) {
        try {
            String artistaSeleccionado = comboBoxArtistas.getSelectedItem().toString();
@@ -122,7 +142,7 @@ public class vArtistaLista extends JFrame {
            dispose();
        } catch (Exception ex) {
            ex.printStackTrace();
-           // Aquí puedes mostrar un mensaje de error en un JOptionPane o en la consola
+           // Hemen errore mezua JOptionPanean edo konsolan erakutsi dezakezu
        }
    }
 }

@@ -8,14 +8,14 @@ import java.sql.SQLException;
 import master.KonexioaDB;
 
 /**
- * Musika artisten zerrenda lortzeko datu-basearekin interakzioak egiteko klasea
+ * Musika artisten zerrenda lortzeko datu-basearekin interakzioak egiteko klasea.
  */
 public class ArtistaListaDAO {
   
    /**
-    * Zerrenda bat sortzen du, datu-basean dauden musika artisten izenak erabiliz
+    * Zerrenda bat sortzen du, datu-basean dauden musika artisten izenak erabiliz.
     * 
-    * @return Musika artisten zerrenda String moduan itzuli
+    * @return Musika artisten zerrenda String moduan itzuli.
     */
    public String obtenerListaArtistas() {
        StringBuilder listaArtistas = new StringBuilder();
