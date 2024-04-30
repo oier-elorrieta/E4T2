@@ -15,7 +15,6 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
 import java.awt.Component;
 
 public class vPodcaster extends JFrame {
