@@ -105,6 +105,7 @@ public class vArtista extends JFrame {
         mostrarAlbumes(comboBoxAlbumes);
        
         JLabel lblArtistaImg = new JLabel("");
+        lblArtistaImg.setHorizontalAlignment(SwingConstants.CENTER);
         lblArtistaImg.setBounds(10, 160, 223, 186);
         contentPane.add(lblArtistaImg);
        

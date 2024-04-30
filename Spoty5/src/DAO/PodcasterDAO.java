@@ -1,11 +1,18 @@
 package DAO;
 
+import java.awt.Image;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import master.KonexioaDB;
 
@@ -85,4 +92,58 @@ public class PodcasterDAO {
 
 	       return informacionPodcaster;
 	   }  
-	}
+
+	       public ImageIcon obtenerImagenPodcaster(String podcaster) {
+
+	           ImageIcon imagenPodcaster = null;
+
+	           Connection con = KonexioaDB.hasi(); // Obtener conexión con la base de datos
+
+	           if (con == null) {
+	               System.out.println("Ezin da konexioa egin.");
+	               return imagenPodcaster;
+	           }
+
+	           PreparedStatement stmt = null;
+	           ResultSet rs = null;
+
+	           try {
+	               // Consulta SQL para obtener la imagen del podcaster
+	               String sql = "SELECT irudia FROM PODCASTER WHERE izenArtistikoa = ?";
+	               stmt = con.prepareStatement(sql);
+	               stmt.setString(1, podcaster);
+	               rs = stmt.executeQuery();
+
+	               // Si se encuentra la imagen, convertirla a ImageIcon
+	               if (rs.next()) {
+	                   Blob blob = rs.getBlob("irudia");
+	                   if (blob != null) {
+	                       try (ResultSet tempRS = stmt.executeQuery()) {
+	                           if (tempRS.next()) {
+	                               blob = tempRS.getBlob("irudia");
+	                               if (blob != null) {
+	                                   try (ByteArrayInputStream is = new ByteArrayInputStream(blob.getBytes(1, (int) blob.length()))) {
+	                                       Image image = ImageIO.read(is);
+	                                       imagenPodcaster = new ImageIcon(image);
+	                                   }
+	                               }
+	                           }
+	                       }
+	                   }
+	               }
+	           } catch (SQLException | IOException e) {
+	               e.printStackTrace();
+	           } finally {
+	               // Cerrar recursos
+	               try {
+	                   if (rs != null) rs.close();
+	                   if (stmt != null) stmt.close();
+	                   KonexioaDB.itxi(con);
+	               } catch (SQLException e) {
+	                   e.printStackTrace();
+	               }
+	           }
+
+	           return imagenPodcaster;
+	       }
+}

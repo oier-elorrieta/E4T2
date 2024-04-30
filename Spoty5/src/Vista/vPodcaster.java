@@ -4,15 +4,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import DAO.ArtistaDAO;
 import DAO.PodcasterDAO;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
 
 public class vPodcaster extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -76,7 +80,21 @@ public class vPodcaster extends JFrame {
         mostrarInformacionPodcaster(textAreaInformacion);
         mostrarPodcasts(comboBoxPodcasts);
         
+     // Crea el JLabel para mostrar la imagen del podcaster
+        JLabel lblPodcasterImg = new JLabel("");
+        lblPodcasterImg.setHorizontalAlignment(SwingConstants.CENTER);
+        lblPodcasterImg.setBounds(10, 160, 223, 186);
+        contentPane.add(lblPodcasterImg);
+
+        // Llama al método para mostrar la imagen del podcaster
+        mostrarImagenPodcaster(lblPodcasterImg);
+        
         // Aquí puedes agregar más componentes según sea necesario
+    
+        // Después del JComboBox de los álbumes
+        JButton btnErrePodcast = new JButton("Erreproduzitu Podcast");
+        btnErrePodcast.setBounds(246, 222, 164, 23); // Ajusta la posición según sea necesario
+        contentPane.add(btnErrePodcast);
     }
     
     private void mostrarInformacionPodcaster(JTextArea textAreaInformacion) {
@@ -90,6 +108,22 @@ public class vPodcaster extends JFrame {
         String[] podcasts = podcasterDAO.obtenerPodcastsPorPodcaster(podcasterSeleccionado);
         for (String podcast : podcasts) {
             comboBoxPodcasts.addItem(podcast);
+        }
+    }
+    
+    private void mostrarImagenPodcaster(JLabel lblPodcasterImg) {
+        try {
+            // Crear una instancia del DAO de podcaster
+            PodcasterDAO podcasterDAO = new PodcasterDAO();
+           
+            // Obtener la imagen del podcaster seleccionado
+            ImageIcon imagenPodcaster = podcasterDAO.obtenerImagenPodcaster(podcasterSeleccionado);
+           
+            // Mostrar la imagen en el JLabel
+            lblPodcasterImg.setIcon(imagenPodcaster);  
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            // Aquí puedes mostrar un mensaje de error en un JOptionPane o en la consola
         }
     }
 }
