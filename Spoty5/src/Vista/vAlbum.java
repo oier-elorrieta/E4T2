@@ -3,7 +3,10 @@ package Vista;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -16,12 +19,13 @@ public class vAlbum extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-
+    private JComboBox<String> comboBoxKantak;
 
     /**
      * Create the frame.
      */
-    public vAlbum(String artistaSeleccionado, String erabiltzaileIzena) {
+    public vAlbum(String artistaIzena, String erabiltzaileIzena, String nombreAlbum, String artistaDeskribapena, ImageIcon artistaIrudia) {
+    	setTitle("Album: " + nombreAlbum );
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 646, 413);
         contentPane = new JPanel();
@@ -36,13 +40,13 @@ public class vAlbum extends JFrame {
         
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                vArtista vArtistaPanel = new vArtista(artistaSeleccionado, erabiltzaileIzena);
+                vArtista vArtistaPanel = new vArtista(artistaIzena, erabiltzaileIzena);
                 vArtistaPanel.setVisible(true);
                 dispose();
             }
         });
         
-        JLabel lblAlbum = new JLabel("Album:");
+        JLabel lblAlbum = new JLabel("Album: " + nombreAlbum );
         lblAlbum.setBounds(105, 14, 182, 13);
         contentPane.add(lblAlbum);
         
@@ -51,7 +55,7 @@ public class vAlbum extends JFrame {
         contentPane.add(lblKantaZ);
         
         JLabel lblAlbumZ = new JLabel("Albumaren informazioa");
-        lblAlbumZ.setBounds(334, 60, 125, 13);
+        lblAlbumZ.setBounds(334, 60, 176, 13);
         contentPane.add(lblAlbumZ);
     }
 

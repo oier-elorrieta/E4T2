@@ -24,11 +24,14 @@ import javax.swing.ImageIcon;
 public class vArtista extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private String artistaSeleccionado;
+    private String artistaIzena;
+    private String artistaDeskribapena;
+    private ImageIcon artistaIrudia;
+    private JComboBox<String> comboBoxAlbumak;
 
-    public vArtista(String artistaSeleccionado, String erabiltzaileIzena) {
-        this.artistaSeleccionado = artistaSeleccionado;
-        setTitle("Álbumes de " + artistaSeleccionado);
+    public vArtista(String artistaIzena, String erabiltzaileIzena) {
+        this.artistaIzena = artistaIzena;
+        setTitle("Álbumes de " + artistaIzena);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 451, 418);
         contentPane = new JPanel();
@@ -36,7 +39,7 @@ public class vArtista extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
      
-        JLabel lblArtista = new JLabel(artistaSeleccionado); // Mostrar solo el nombre del artista
+        JLabel lblArtista = new JLabel(artistaIzena); // Mostrar solo el nombre del artista
         lblArtista.setHorizontalAlignment(SwingConstants.CENTER);
         lblArtista.setBounds(133, 11, 159, 14);
         contentPane.add(lblArtista);
@@ -84,12 +87,12 @@ public class vArtista extends JFrame {
 
         btnIkusiAlbuma.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                vAlbum vAlbumPanel = new vAlbum(erabiltzaileIzena, erabiltzaileIzena);
+            	String nombreAlbum  = comboBoxAlbumak.getSelectedItem().toString();
+				vAlbum vAlbumPanel = new vAlbum(artistaIzena, erabiltzaileIzena, nombreAlbum, artistaDeskribapena, artistaIrudia);
                 vAlbumPanel.setVisible(true);
                 dispose();
             }
         });
-
        
         // Después de la etiqueta "Informazioa"
         JTextArea textAreaInformazioa = new JTextArea(); // Cambiar a JTextArea
@@ -98,6 +101,13 @@ public class vArtista extends JFrame {
         textAreaInformazioa.setWrapStyleWord(true); // Para que el texto se envuelva en palabras
         textAreaInformazioa.setBounds(247, 81, 159, 90); // Ajusta la posición según sea necesario
         contentPane.add(textAreaInformazioa);
+        
+        comboBoxAlbumak = new JComboBox<>();
+        comboBoxAlbumak.setBounds(10, 61, 128, 20); // Ajusta la posición según sea necesario
+        contentPane.add(comboBoxAlbumak);
+
+        // Mostrar los álbumes del artista seleccionado
+        mostrarAlbumes(comboBoxAlbumak);
        
         // Mostrar la información del artista seleccionado en el JTextArea
         mostrarInformacionArtista(textAreaInformazioa);
@@ -122,11 +132,11 @@ public class vArtista extends JFrame {
     private void mostrarInformacionArtista(JTextArea textAreaInformazioa) {
         try {
             // Crear una instancia del DAO de artistas
-            ArtistaDAO artistaDAO = new ArtistaDAO();
-           
+        	ArtistaDAO artistaDAO = new ArtistaDAO();
+            
             // Obtener la información del artista seleccionado
-            String informacionArtista = artistaDAO.obtenerInformacionArtista(artistaSeleccionado);
-           
+            String informacionArtista = artistaDAO.obtenerInformacionArtista(artistaIzena);
+            
             // Mostrar la información en el JTextArea
             textAreaInformazioa.setText(informacionArtista);
         } catch (Exception ex) {
@@ -142,7 +152,7 @@ public class vArtista extends JFrame {
             ArtistaDAO artistaDAO = new ArtistaDAO();
            
             // Obtener los álbumes del artista seleccionado
-            String[] albumes = artistaDAO.obtenerAlbumesPorArtista(artistaSeleccionado);
+            String[] albumes = artistaDAO.obtenerAlbumesPorArtista(artistaIzena);
            
             // Agregar los álbumes al JComboBox
             for (String album : albumes) {
@@ -160,7 +170,7 @@ public class vArtista extends JFrame {
             ArtistaDAO artistaDAO = new ArtistaDAO();
            
             // Obtener la imagen del artista seleccionado
-            ImageIcon imagenArtista = artistaDAO.obtenerImagenArtista(artistaSeleccionado);
+            ImageIcon imagenArtista = artistaDAO.obtenerImagenArtista(artistaIzena);
            
             // Mostrar la imagen en el JLabel
             lblArtistaImg.setIcon(imagenArtista);  
