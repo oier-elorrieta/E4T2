@@ -67,10 +67,9 @@ public class vPodcasterLista extends JFrame {
        btnVerPodcaster.setBounds(149, 206, 129, 23);
        contentPane.add(btnVerPodcaster);
       
-       // Ikusi Podcaster botoiaren ekintza
        btnVerPodcaster.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               verPodcaster(erabiltzaileIzena);
+               PodcasterIkusi(erabiltzaileIzena);
            }
        });
       
@@ -103,13 +102,13 @@ public class vPodcasterLista extends JFrame {
        });
       
        // Zerrenda kargatu
-       cargarListaPodcasters();
+       PodcasterListaKargatu();
    }
   
    /**
     * Podcast-ak zerrendatu eta ComboBox-en gehitu.
     */
-   private void cargarListaPodcasters() {
+   private void PodcasterListaKargatu() {
        try {
            PodcasterListaDAO podcasterDAO = new PodcasterListaDAO();
           
@@ -131,7 +130,7 @@ public class vPodcasterLista extends JFrame {
     * Hautatutako podcastera bistaratu.
     * @param erabiltzaileIzena Erabiltzailearen izena.
     */
-   private void verPodcaster(String erabiltzaileIzena) {
+   private void PodcasterIkusi(String erabiltzaileIzena) {
        try {
            String podcasterSeleccionado = comboBoxPodcasters.getSelectedItem().toString();
            // Podcastera bistaratzen duen interfazera joan

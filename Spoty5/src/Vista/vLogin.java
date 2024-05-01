@@ -78,8 +78,7 @@ public class vLogin extends JFrame {
         panel.add(lblPasahitza);
         panel.add(txtPasahitza);
         panel.add(btnHasiSaioa);
-
-       
+      
         getContentPane().add(panel, BorderLayout.CENTER);
         // Erregistratu botoia
         JButton btnErregistratu = new JButton("Erregistratu");

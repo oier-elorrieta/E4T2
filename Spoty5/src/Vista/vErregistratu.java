@@ -103,12 +103,10 @@ public class vErregistratu extends JFrame {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(PremiumData);
         calendar.add(Calendar.YEAR, 1); // Urte bat gehitu
-
-       
+ 
         Date fechaPremium = calendar.getTime();
         SimpleDateFormat formatoFechaPremium = new SimpleDateFormat("yyyy-MM-dd");
         String fechaPremiumFormateada = formatoFechaPremium.format(fechaPremium);
-
        
         lblpremium_muga = new JTextField(fechaPremiumFormateada);
         lblpremium_muga.setBounds(131, 206, 211, 20);
@@ -116,12 +114,11 @@ public class vErregistratu extends JFrame {
         getContentPane().add(lblpremium_muga);
         lblpremium_muga.setColumns(10);
 
-
         JLabel lblNewLabel = new JLabel("Izena:");
         lblNewLabel.setBounds(20, 56, 46, 14);
         getContentPane().add(lblNewLabel);
 
-        JLabel lblNewLabel_1 = new JLabel("Abizenak:");
+        JLabel lblNewLabel_1 = new JLabel("Abizena:");
         lblNewLabel_1.setBounds(243, 56, 76, 14);
         getContentPane().add(lblNewLabel_1);
 
@@ -151,7 +148,7 @@ public class vErregistratu extends JFrame {
         getContentPane().add(comboBoxHizkuntza);
 
         JLabel lblNewLabel_7 = new JLabel("Hizkuntza:");
-        lblNewLabel_7.setBounds(20, 234, 83, 14);
+        lblNewLabel_7.setBounds(22, 240, 83, 14);
         getContentPane().add(lblNewLabel_7);
 
         // Sortu botoia

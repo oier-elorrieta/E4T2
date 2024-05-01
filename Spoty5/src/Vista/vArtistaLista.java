@@ -20,7 +20,7 @@ public class vArtistaLista extends JFrame {
 	
    private static final long serialVersionUID = 1L;
    private JPanel contentPane;
-   private JComboBox<String> comboBoxArtistas;
+   private JComboBox<String> comboBoxArtistak;
    
    /**
     * Programaren exekuzioaren hasieran 'vArtistaLista' klasearen instantzia bat sortzeko metodo estatikoa.
@@ -60,9 +60,9 @@ public class vArtistaLista extends JFrame {
        lblArtistas.setBounds(127, 11, 185, 14);
        contentPane.add(lblArtistas);
        // Artisten aukeratzeko combo boxa
-       comboBoxArtistas = new JComboBox<String>();
-       comboBoxArtistas.setBounds(92, 90, 249, 23);
-       contentPane.add(comboBoxArtistas);
+       comboBoxArtistak = new JComboBox<String>();
+       comboBoxArtistak.setBounds(92, 90, 249, 23);
+       contentPane.add(comboBoxArtistak);
       
        JButton btnVerArtista = new JButton("Ikusi Artista");
        btnVerArtista.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -72,7 +72,7 @@ public class vArtistaLista extends JFrame {
        // Artista aukeratze botoiaren ekintza
        btnVerArtista.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
-               verArtista(erabiltzaileIzena);
+               ArtistakIkusi(erabiltzaileIzena);
            }
        });
       
@@ -104,13 +104,13 @@ public class vArtistaLista extends JFrame {
 			}
 		});
       
-       cargarListaArtistas();
+       ArtistaListaKargatu();
    }
   
    /**
     * Artisten zerrenda kargatzeko eta ComboBox-en erakusteko metodoa.
     */
-   private void cargarListaArtistas() {
+   private void ArtistaListaKargatu() {
        try {
            ArtistaListaDAO artistaDAO = new ArtistaListaDAO();
            
@@ -119,9 +119,9 @@ public class vArtistaLista extends JFrame {
            
            // Artistak ComboBox-era gehitu
            String[] arrayArtistas = listaArtistas.split("\n");
-           comboBoxArtistas.removeAllItems();
+           comboBoxArtistak.removeAllItems();
            for (String artista : arrayArtistas) {
-               comboBoxArtistas.addItem(artista);
+               comboBoxArtistak.addItem(artista);
            }
        } catch (Exception ex) {
            ex.printStackTrace();
@@ -134,9 +134,9 @@ public class vArtistaLista extends JFrame {
     * 
     * @param erabiltzaileIzena Erabiltzailearen izena
     */
-   private void verArtista(String erabiltzaileIzena) {
+   private void ArtistakIkusi(String erabiltzaileIzena) {
        try {
-           String artistaSeleccionado = comboBoxArtistas.getSelectedItem().toString();
+           String artistaSeleccionado = comboBoxArtistak.getSelectedItem().toString();
            vArtista vArtistaFrame = new vArtista(artistaSeleccionado, erabiltzaileIzena);
            vArtistaFrame.setVisible(true);
            dispose();

@@ -1,35 +1,17 @@
 package DAO;
 
-
-
 import java.awt.Image;
-
 import java.io.ByteArrayInputStream;
-
 import java.io.IOException;
-
 import java.sql.Blob;
-
 import java.sql.Connection;
-
 import java.sql.PreparedStatement;
-
 import java.sql.ResultSet;
-
 import java.sql.SQLException;
-
 import java.util.ArrayList;
-
 import java.util.List;
-
-
-
 import javax.imageio.ImageIO;
-
 import javax.swing.ImageIcon;
-
-
-
 import master.KonexioaDB;
 /**
  * Artista baten albumak eta informazioa lortzeko datu-basearekin interakzioak egiteko klasea.
@@ -58,13 +40,7 @@ public class ArtistaDAO {
   
        try {
            // Artista baten albumak lortzeko SQL kontsulta
-<<<<<<< HEAD
-
            String sql = "SELECT izenburua FROM album WHERE id_musikaria IN (SELECT id_musikaria FROM musikaria WHERE izenArtistikoa = ?)";
-
-=======
-           String sql = "SELECT izenburua FROM ALBUM WHERE id_musikaria IN (SELECT id_musikaria FROM MUSIKARIA WHERE izenArtistikoa = ?)";
->>>>>>> 36c919595f233880040881da2ca92100d1ee5ee2
            stmt = con.prepareStatement(sql);
            stmt.setString(1, artista);
            rs = stmt.executeQuery();
@@ -111,13 +87,7 @@ public class ArtistaDAO {
 
        try {
            // Artista baten informazioa lortzeko SQL kontsulta
-<<<<<<< HEAD
-
            String sql = "SELECT izenArtistikoa, deskribapena FROM musikaria WHERE izenArtistikoa = ?";
-
-=======
-           String sql = "SELECT izenArtistikoa, deskribapena FROM MUSIKARIA WHERE izenArtistikoa = ?";
->>>>>>> 36c919595f233880040881da2ca92100d1ee5ee2
            stmt = con.prepareStatement(sql);
            stmt.setString(1, artista);
            rs = stmt.executeQuery();
@@ -160,16 +130,10 @@ public class ArtistaDAO {
        ResultSet rs = null;
 
        try {
-<<<<<<< HEAD
 
            // Consulta SQL para obtener la imagen del artista
-
-           String sql = "SELECT irudia FROM musikaria WHERE izenArtistikoa = ?";
-
-=======
            // Artista irudia lortzeko SQL kontsulta
            String sql = "SELECT irudia FROM MUSIKARIA WHERE izenArtistikoa = ?";
->>>>>>> 36c919595f233880040881da2ca92100d1ee5ee2
            stmt = con.prepareStatement(sql);
            stmt.setString(1, artista);
            rs = stmt.executeQuery();

@@ -20,83 +20,25 @@ import master.KonexioaDB;
  * Podcaster baten informazioa eta bere podcasten zerrenda lortzeko datu-basearekin interakzioak egiteko klasea.
  */
 public class PodcasterDAO {
-<<<<<<< HEAD
 	  
-	   public String[] obtenerPodcastsPorPodcaster(String podcaster) {
-	       List<String> podcasts = new ArrayList<>();
-	       Connection con = KonexioaDB.hasi();
-	      
-	       if (con == null) {
-	           System.out.println("Ezin da konexioa egin.");
-	           return new String[0];
-	       }
-	      
-	       PreparedStatement stmt = null;
-	       ResultSet rs = null;
-	      
-	       try {
-	           String sql = "SELECT id_audio FROM podcast WHERE id_podcaster IN (SELECT id_podcaster FROM podcaster WHERE izenArtistikoa = ?)";
-	           stmt = con.prepareStatement(sql);
-	           stmt.setString(1, podcaster);
-	           rs = stmt.executeQuery();
-	          
-	           while (rs.next()) {
-	               int id_audio = rs.getInt("id_audio");
-	               podcasts.add(String.valueOf(id_audio));
-	           }
-	       } catch (SQLException e) {
-	           e.printStackTrace();
-	       } finally {
-	           try {
-	               if (rs != null) rs.close();
-	               if (stmt != null) stmt.close();
-	               KonexioaDB.itxi(con);
-	           } catch (SQLException e) {
-	               e.printStackTrace();
-	           }
-	       }
-	      
-	       return podcasts.toArray(new String[0]);
-	   }
-	   
-	   public String obtenerInformacionPodcaster(String podcaster) {
-	       String informacionPodcaster = "";
-	       Connection con = KonexioaDB.hasi();
-=======
->>>>>>> 36c919595f233880040881da2ca92100d1ee5ee2
-
-    /**
-     * Podcaster baten podcasten ID-ak lortzen ditu.
-     * 
-     * @param podcaster Podcastak lortu nahi den podcasterren izena.
-     * @return Podcaster horren podcasten ID-en zerrenda.
-     */
     public String[] obtenerPodcastsPorPodcaster(String podcaster) {
         List<String> podcasts = new ArrayList<>();
         Connection con = KonexioaDB.hasi();
-
+      
         if (con == null) {
             System.out.println("Ezin da konexioa egin.");
             return new String[0];
         }
-
-<<<<<<< HEAD
-	       try {
-	           String sql = "SELECT izenArtistikoa, deskribapena FROM podcaster WHERE izenArtistikoa = ?";
-	           stmt = con.prepareStatement(sql);
-	           stmt.setString(1, podcaster);
-	           rs = stmt.executeQuery();
-=======
+      
         PreparedStatement stmt = null;
         ResultSet rs = null;
->>>>>>> 36c919595f233880040881da2ca92100d1ee5ee2
-
+      
         try {
-            String sql = "SELECT id_audio FROM PODCAST WHERE id_podcaster IN (SELECT id_podcaster FROM PODCASTER WHERE izenArtistikoa = ?)";
+            String sql = "SELECT id_audio FROM podcast WHERE id_podcaster IN (SELECT id_podcaster FROM podcaster WHERE izenArtistikoa = ?)";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, podcaster);
             rs = stmt.executeQuery();
-
+          
             while (rs.next()) {
                 int id_audio = rs.getInt("id_audio");
                 podcasts.add(String.valueOf(id_audio));
@@ -112,9 +54,10 @@ public class PodcasterDAO {
                 e.printStackTrace();
             }
         }
+      
         return podcasts.toArray(new String[0]);
     }
-    
+
     /**
      * Podcaster baten informazioa lortzen du.
      *
@@ -156,7 +99,7 @@ public class PodcasterDAO {
             }
         }
         return informacionPodcaster;
-    }  
+    }
 
     /**
      * Podcaster baten irudia lortzen du.
@@ -168,19 +111,10 @@ public class PodcasterDAO {
         ImageIcon imagenPodcaster = null;
         Connection con = KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
 
-<<<<<<< HEAD
-	           try {
-	               // Consulta SQL para obtener la imagen del podcaster
-	               String sql = "SELECT irudia FROM podcaster WHERE izenArtistikoa = ?";
-	               stmt = con.prepareStatement(sql);
-	               stmt.setString(1, podcaster);
-	               rs = stmt.executeQuery();
-=======
         if (con == null) {
             System.out.println("Ezin da konexioa egin.");
             return imagenPodcaster;
         }
->>>>>>> 36c919595f233880040881da2ca92100d1ee5ee2
 
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -196,16 +130,9 @@ public class PodcasterDAO {
             if (rs.next()) {
                 Blob blob = rs.getBlob("irudia");
                 if (blob != null) {
-                    try (ResultSet tempRS = stmt.executeQuery()) {
-                        if (tempRS.next()) {
-                            blob = tempRS.getBlob("irudia");
-                            if (blob != null) {
-                                try (ByteArrayInputStream is = new ByteArrayInputStream(blob.getBytes(1, (int) blob.length()))) {
-                                    Image image = ImageIO.read(is);
-                                    imagenPodcaster = new ImageIcon(image);
-                                }
-                            }
-                        }
+                    try (ByteArrayInputStream is = new ByteArrayInputStream(blob.getBytes(1, (int) blob.length()))) {
+                        Image image = ImageIO.read(is);
+                        imagenPodcaster = new ImageIcon(image);
                     }
                 }
             }

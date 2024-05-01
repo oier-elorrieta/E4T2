@@ -84,8 +84,7 @@ public class vMenua extends JFrame {
 				dispose();
 			}	
 		});
-		
-		
+			
 		JButton btnProfila = new JButton(erabiltzaileIzena);
 		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnProfila.setBounds(317, 15, 107, 23);

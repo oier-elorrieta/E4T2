@@ -82,18 +82,15 @@ public class vPodcaster extends JFrame {
         textAreaInformacion.setBounds(246, 59, 159, 130);
         contentPane.add(textAreaInformacion);
         
-        // Hautatutako podcast-aren informazioa bistaratu
-        mostrarInformacionPodcaster(textAreaInformacion);
+        PodcasterInformazioaErakutsi(textAreaInformacion);
         
-        // Hautatutako podcast-aren zerrenda bistaratu
-        mostrarPodcasts(comboBoxPodcasts);
+        PodcastErakutsi(comboBoxPodcasts);
         
-        // Podcasterren irudia bistaratu
         JLabel lblPodcasterImg = new JLabel("");
         lblPodcasterImg.setHorizontalAlignment(SwingConstants.CENTER);
         lblPodcasterImg.setBounds(10, 160, 223, 186);
         contentPane.add(lblPodcasterImg);
-        mostrarImagenPodcaster(lblPodcasterImg);
+        PodcasterIrudiaErakutsi(lblPodcasterImg);
         
         // Botoia Erreproduzitu Podcast
         JButton btnErrePodcast = new JButton("Erreproduzitu Podcast");
@@ -105,7 +102,7 @@ public class vPodcaster extends JFrame {
      * Hautatutako podcast-aren informazioa bistaratu.
      * @param textAreaInformacion TextArea bat, podcast-aren informazioa bistaratzeko erabiliko dena.
      */
-    private void mostrarInformacionPodcaster(JTextArea textAreaInformacion) {
+    private void PodcasterInformazioaErakutsi(JTextArea textAreaInformacion) {
         PodcasterDAO podcasterDAO = new PodcasterDAO();
         String informacionPodcaster = podcasterDAO.obtenerInformacionPodcaster(podcasterSeleccionado);
         textAreaInformacion.setText(informacionPodcaster);
@@ -115,7 +112,7 @@ public class vPodcaster extends JFrame {
      * Hautatutako podcast-aren zerrenda bistaratu.
      * @param comboBoxPodcasts JComboBox bat, podcast-aren zerrenda bistaratzeko erabiliko dena.
      */
-    private void mostrarPodcasts(JComboBox<String> comboBoxPodcasts) {
+    private void PodcastErakutsi(JComboBox<String> comboBoxPodcasts) {
         PodcasterDAO podcasterDAO = new PodcasterDAO();
         String[] podcasts = podcasterDAO.obtenerPodcastsPorPodcaster(podcasterSeleccionado);
         for (String podcast : podcasts) {
@@ -127,15 +124,10 @@ public class vPodcaster extends JFrame {
      * Hautatutako podcast-aren irudia bistaratu.
      * @param lblPodcasterImg JLabel bat, podcast-aren irudia bistaratzeko erabiliko dena.
      */
-    private void mostrarImagenPodcaster(JLabel lblPodcasterImg) {
+    private void PodcasterIrudiaErakutsi(JLabel lblPodcasterImg) {
         try {
-            // Podcaster DAOaren instantzia sortu
             PodcasterDAO podcasterDAO = new PodcasterDAO();
-           
-            // Hautatutako podcast-aren irudia eskuratu
             ImageIcon imagenPodcaster = podcasterDAO.obtenerImagenPodcaster(podcasterSeleccionado);
-           
-            // Irudia JLabel-en bistaratzea
             lblPodcasterImg.setIcon(imagenPodcaster);  
         } catch (Exception ex) {
             ex.printStackTrace();
