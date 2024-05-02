@@ -104,12 +104,13 @@ public class vArtista extends JFrame {
         
         ArtistaInformazioaErakutsi(textAreaInformacion);
        
-        // JTextArearen ondoren
-        JComboBox<String> comboBoxAlbumes = new JComboBox<>();
-        comboBoxAlbumes.setBounds(10, 61, 128, 20);
-        contentPane.add(comboBoxAlbumes);
+      
+     // JTextArearen ondoren
+        comboBoxAlbumak = new JComboBox<>(); // comboBoxAlbumak atributua inizializatu
+        comboBoxAlbumak.setBounds(10, 61, 128, 20);
+        contentPane.add(comboBoxAlbumak);
        
-        AlbumakErakutsi(comboBoxAlbumes);
+        AlbumakErakutsi(comboBoxAlbumak);
        
         JLabel lblArtistaImg = new JLabel("");
         lblArtistaImg.setHorizontalAlignment(SwingConstants.CENTER);
@@ -138,7 +139,7 @@ public class vArtista extends JFrame {
             String[] albumes = artistaDAO.AlbumakLortuArtistetatik(artistaIzena);
            
             for (String album : albumes) {
-                comboBoxAlbumes.addItem(album);
+                comboBoxAlbumak.addItem(album);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
