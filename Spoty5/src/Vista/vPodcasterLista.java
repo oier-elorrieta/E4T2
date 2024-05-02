@@ -112,7 +112,7 @@ public class vPodcasterLista extends JFrame {
        try {
            PodcasterListaDAO podcasterDAO = new PodcasterListaDAO();
           
-           String listaPodcasters = podcasterDAO.obtenerListaPodcasters();
+           String listaPodcasters = podcasterDAO.PodcasterListaLortu();
           
            // Podcast-ak ComboBox-en gehitu
            String[] arrayPodcasters = listaPodcasters.split("\n");

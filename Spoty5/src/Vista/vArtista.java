@@ -105,31 +105,31 @@ public class vArtista extends JFrame {
         comboBoxAlbumak.setBounds(10, 61, 128, 20);
         contentPane.add(comboBoxAlbumak);
 
-        mostrarAlbumes(comboBoxAlbumak);
+        AlbumakErakutsi(comboBoxAlbumak);
        
-        mostrarInformacionArtista(textAreaInformazioa);
+        ArtistaInformazioaErakutsi(textAreaInformazioa);
        
         // JTextArearen ondoren
         JComboBox<String> comboBoxAlbumes = new JComboBox<>();
         comboBoxAlbumes.setBounds(10, 61, 128, 20);
         contentPane.add(comboBoxAlbumes);
        
-        mostrarAlbumes(comboBoxAlbumes);
+        AlbumakErakutsi(comboBoxAlbumes);
        
         JLabel lblArtistaImg = new JLabel("");
         lblArtistaImg.setHorizontalAlignment(SwingConstants.CENTER);
         lblArtistaImg.setBounds(10, 160, 223, 186);
         contentPane.add(lblArtistaImg);
        
-        mostrarImagenArtista(lblArtistaImg);
+        ArtistaIrudiaErakutsi(lblArtistaImg);
              
     }
  
  // Aukeratutako artistaren informazioa JTextArean erakusteko metodoa
-    private void mostrarInformacionArtista(JTextArea textAreaInformazioa) {
+    private void ArtistaInformazioaErakutsi(JTextArea textAreaInformazioa) {
         try {
         	ArtistaDAO artistaDAO = new ArtistaDAO();
-            String informacionArtista = artistaDAO.obtenerInformacionArtista(artistaIzena);
+            String informacionArtista = artistaDAO.ArtistaInformazioaLortu(artistaIzena);
             textAreaInformazioa.setText(informacionArtista);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -138,10 +138,10 @@ public class vArtista extends JFrame {
     }
    
     // Aukeratutako artistaren albumak erakusteko metodoa
-    private void mostrarAlbumes(JComboBox<String> comboBoxAlbumes) {
+    private void AlbumakErakutsi(JComboBox<String> comboBoxAlbumes) {
         try {
             ArtistaDAO artistaDAO = new ArtistaDAO();
-            String[] albumes = artistaDAO.obtenerAlbumesPorArtista(artistaIzena);
+            String[] albumes = artistaDAO.AlbumakLortuArtistetatik(artistaIzena);
            
             for (String album : albumes) {
                 comboBoxAlbumes.addItem(album);
@@ -157,10 +157,10 @@ public class vArtista extends JFrame {
      * 
      * @param lblArtistaImg JLabel elementua non artistaaren irudia erakusteko
      */
-    private void mostrarImagenArtista(JLabel lblArtistaImg) {
+    private void ArtistaIrudiaErakutsi(JLabel lblArtistaImg) {
         try {
             ArtistaDAO artistaDAO = new ArtistaDAO();           
-            ImageIcon imagenArtista = artistaDAO.obtenerImagenArtista(artistaIzena);
+            ImageIcon imagenArtista = artistaDAO.ArtistaIrudiaLortu(artistaIzena);
             lblArtistaImg.setIcon(imagenArtista);  
         } catch (Exception ex) {
             ex.printStackTrace();

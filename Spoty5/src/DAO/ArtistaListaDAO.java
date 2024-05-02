@@ -17,7 +17,7 @@ public class ArtistaListaDAO {
     * 
     * @return Musika artisten zerrenda String moduan itzuli.
     */
-   public String obtenerListaArtistas() {
+   public String ArtistaListaLortu() {
        StringBuilder listaArtistas = new StringBuilder();
        Connection con = (Connection) KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
       

@@ -21,7 +21,7 @@ import master.KonexioaDB;
  */
 public class PodcasterDAO {
 	  
-    public String[] obtenerPodcastsPorPodcaster(String podcaster) {
+    public String[] PodcastPodcastertatikLortu(String podcaster) {
         List<String> podcasts = new ArrayList<>();
         Connection con = KonexioaDB.hasi();
       
@@ -64,7 +64,7 @@ public class PodcasterDAO {
      * @param podcaster Informazioa lortu nahi den podcasterren izena.
      * @return Podcaster horren informazioa.
      */
-    public String obtenerInformacionPodcaster(String podcaster) {
+    public String PodcasterInformazioaLortu(String podcaster) {
         String informacionPodcaster = "";
         Connection con = KonexioaDB.hasi();
 
@@ -107,7 +107,7 @@ public class PodcasterDAO {
      * @param podcaster Irudia lortu nahi den podcasterren izena.
      * @return Podcasterren irudia ImageIcon gisa.
      */
-    public ImageIcon obtenerImagenPodcaster(String podcaster) {
+    public ImageIcon PodcasterIrudiaLortu(String podcaster) {
         ImageIcon imagenPodcaster = null;
         Connection con = KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
 

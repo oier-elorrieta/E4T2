@@ -20,15 +20,15 @@ import java.awt.event.ActionListener;
 public class vPodcaster extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private String podcasterSeleccionado;
+    private String PodcasterHautatua;
 
     /**
      * Aplikazioa abiarazi.
-     * @param podcasterSeleccionado Hautatutako podcast-aren izena.
+     * @param PodcasterHautatua Hautatutako podcast-aren izena.
      * @param usuario Erabiltzailearen izena.
      */
-    public vPodcaster(String podcasterSeleccionado, String usuario) {
-        this.podcasterSeleccionado = podcasterSeleccionado;
+    public vPodcaster(String PodcasterHautatua, String usuario) {
+        this.PodcasterHautatua = PodcasterHautatua;
         setTitle("<dynamic>");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 451, 418);
@@ -37,7 +37,7 @@ public class vPodcaster extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
       
-        JLabel lblPodcaster = new JLabel(podcasterSeleccionado);
+        JLabel lblPodcaster = new JLabel(PodcasterHautatua);
         lblPodcaster.setHorizontalAlignment(SwingConstants.CENTER);
         lblPodcaster.setBounds(133, 11, 159, 14);
         contentPane.add(lblPodcaster);
@@ -104,7 +104,7 @@ public class vPodcaster extends JFrame {
      */
     private void PodcasterInformazioaErakutsi(JTextArea textAreaInformacion) {
         PodcasterDAO podcasterDAO = new PodcasterDAO();
-        String informacionPodcaster = podcasterDAO.obtenerInformacionPodcaster(podcasterSeleccionado);
+        String informacionPodcaster = podcasterDAO.PodcasterInformazioaLortu(PodcasterHautatua);
         textAreaInformacion.setText(informacionPodcaster);
     }
     
@@ -114,7 +114,7 @@ public class vPodcaster extends JFrame {
      */
     private void PodcastErakutsi(JComboBox<String> comboBoxPodcasts) {
         PodcasterDAO podcasterDAO = new PodcasterDAO();
-        String[] podcasts = podcasterDAO.obtenerPodcastsPorPodcaster(podcasterSeleccionado);
+        String[] podcasts = podcasterDAO.PodcastPodcastertatikLortu(PodcasterHautatua);
         for (String podcast : podcasts) {
             comboBoxPodcasts.addItem(podcast);
         }
@@ -127,7 +127,7 @@ public class vPodcaster extends JFrame {
     private void PodcasterIrudiaErakutsi(JLabel lblPodcasterImg) {
         try {
             PodcasterDAO podcasterDAO = new PodcasterDAO();
-            ImageIcon imagenPodcaster = podcasterDAO.obtenerImagenPodcaster(podcasterSeleccionado);
+            ImageIcon imagenPodcaster = podcasterDAO.PodcasterIrudiaLortu(PodcasterHautatua);
             lblPodcasterImg.setIcon(imagenPodcaster);  
         } catch (Exception ex) {
             ex.printStackTrace();

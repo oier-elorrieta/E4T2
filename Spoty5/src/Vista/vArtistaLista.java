@@ -115,7 +115,7 @@ public class vArtistaLista extends JFrame {
            ArtistaListaDAO artistaDAO = new ArtistaListaDAO();
            
            // Artisten zerrenda lortu
-           String listaArtistas = artistaDAO.obtenerListaArtistas();
+           String listaArtistas = artistaDAO.ArtistaListaLortu();
            
            // Artistak ComboBox-era gehitu
            String[] arrayArtistas = listaArtistas.split("\n");

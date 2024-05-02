@@ -24,7 +24,7 @@ public class ArtistaDAO {
     * @param artista Albumak lortu nahi den artista.
     * @return Artista horren albumen zerrenda.
     */
-   public String[] obtenerAlbumesPorArtista(String artista) {
+   public String[] AlbumakLortuArtistetatik(String artista) {
 	   
        List<String> albumes = new ArrayList<>();
        Connection con = KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
@@ -73,7 +73,7 @@ public class ArtistaDAO {
     * @param artista Informazioa lortu nahi den artista.
     * @return Artista horren informazioa.
     */
-   public String obtenerInformacionArtista(String artista) {
+   public String ArtistaInformazioaLortu(String artista) {
 
        String informacionArtista = "";
        Connection con = KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
@@ -119,7 +119,7 @@ public class ArtistaDAO {
     * @param artista Irudia lortu nahi den artista.
     * @return Artista horren irudia.
     */
-   public ImageIcon obtenerImagenArtista(String artista) {
+   public ImageIcon ArtistaIrudiaLortu(String artista) {
        ImageIcon imagenArtista = null;
        Connection con = KonexioaDB.hasi(); // Konexioa lortu datu-basearekin
        if (con == null) {

@@ -16,7 +16,7 @@ public class PodcasterListaDAO {
     * 
     * @return Podcasteren zerrenda String moduan itzuli
     */
-   public String obtenerListaPodcasters() {
+   public String PodcasterListaLortu() {
        StringBuilder listaPodcasters = new StringBuilder();
        Connection con = KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
       
