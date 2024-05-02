@@ -95,19 +95,14 @@ public class vArtista extends JFrame {
             }
         });
        
-        JTextArea textAreaInformazioa = new JTextArea();
-        textAreaInformazioa.setEditable(false);
-        textAreaInformazioa.setLineWrap(true);
-        textAreaInformazioa.setWrapStyleWord(true);
-        textAreaInformazioa.setBounds(249, 59, 159, 90);
+        JTextArea textAreaInformacion = new JTextArea();
+        textAreaInformacion.setEditable(false);
+        textAreaInformacion.setLineWrap(true);
+        textAreaInformacion.setWrapStyleWord(true);
+        textAreaInformacion.setBounds(246, 59, 159, 130);
+        contentPane.add(textAreaInformacion);
         
-        comboBoxAlbumak = new JComboBox<>();
-        comboBoxAlbumak.setBounds(10, 61, 128, 20);
-        contentPane.add(comboBoxAlbumak);
-
-        AlbumakErakutsi(comboBoxAlbumak);
-       
-        ArtistaInformazioaErakutsi(textAreaInformazioa);
+        ArtistaInformazioaErakutsi(textAreaInformacion);
        
         // JTextArearen ondoren
         JComboBox<String> comboBoxAlbumes = new JComboBox<>();
@@ -122,7 +117,6 @@ public class vArtista extends JFrame {
         contentPane.add(lblArtistaImg);
        
         ArtistaIrudiaErakutsi(lblArtistaImg);
-             
     }
  
  // Aukeratutako artistaren informazioa JTextArean erakusteko metodoa
