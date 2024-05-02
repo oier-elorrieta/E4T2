@@ -133,7 +133,7 @@ public class ArtistaDAO {
 
            // Consulta SQL para obtener la imagen del artista
            // Artista irudia lortzeko SQL kontsulta
-           String sql = "SELECT irudia FROM MUSIKARIA WHERE izenArtistikoa = ?";
+           String sql = "SELECT irudia FROM musikaria WHERE izenArtistikoa = ?";
            stmt = con.prepareStatement(sql);
            stmt.setString(1, artista);
            rs = stmt.executeQuery();
