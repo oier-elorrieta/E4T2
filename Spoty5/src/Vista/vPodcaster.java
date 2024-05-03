@@ -27,7 +27,7 @@ public class vPodcaster extends JFrame {
      * @param PodcasterHautatua Hautatutako podcast-aren izena.
      * @param usuario Erabiltzailearen izena.
      */
-    public vPodcaster(String PodcasterHautatua, String usuario) {
+    public vPodcaster(String PodcasterHautatua, String erabiltzaileIzena) {
         this.PodcasterHautatua = PodcasterHautatua;
         setTitle(PodcasterHautatua);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,13 +50,13 @@ public class vPodcaster extends JFrame {
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Menu nagusira itzuli
-                vPodcasterLista frame = new vPodcasterLista(usuario);
+                vPodcasterLista frame = new vPodcasterLista(erabiltzaileIzena);
                 frame.setVisible(true);
                 dispose();
             }  
         });
         
-        JButton btnPerfil = new JButton(usuario);
+        JButton btnPerfil = new JButton(erabiltzaileIzena);
         btnPerfil.setFont(new Font("Tahoma", Font.BOLD, 11));
         btnPerfil.setBounds(317, 7, 107, 23);
         contentPane.add(btnPerfil);
@@ -64,7 +64,7 @@ public class vPodcaster extends JFrame {
         btnPerfil.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // Crear e instanciar vErregistratu cuando se hace clic en el botón
-                vErregistratu erregistratuFrame = new vErregistratu(usuario);
+                vErregistratu erregistratuFrame = new vErregistratu(erabiltzaileIzena);
                 erregistratuFrame.setVisible(true);
                 dispose();
             }

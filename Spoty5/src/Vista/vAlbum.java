@@ -20,7 +20,7 @@ public class vAlbum extends JFrame {
      * Create the frame.
      */
     public vAlbum(String artistaIzena, String erabiltzaileIzena, String albumIzena, String artistaDeskribapena, ImageIcon artistaIrudia) {
-    	setTitle("Album: " + albumIzena );
+    	setTitle(albumIzena);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 646, 413);
         contentPane = new JPanel();

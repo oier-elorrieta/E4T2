@@ -32,7 +32,7 @@ public class vArtista extends JFrame {
      */
     public vArtista(String artistaIzena, String erabiltzaileIzena) {
         this.artistaIzena = artistaIzena;
-        setTitle("Álbumes de " + artistaIzena);
+        setTitle(artistaIzena);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 451, 418);
         contentPane = new JPanel();

@@ -32,7 +32,7 @@ public class vMenua extends JFrame {
 					// Erregistratu DAOa sortu eta bezero bat erregistratu
 					ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
 					String izena = "Hegoi";
-                    String abizena = "Vazauez";
+                    String abizena = "Vazquez";
                     String id_hizkuntza = "eu";
                     String erabiltzailea = "Vhegoi";
                     String pasahitza = "12345";
