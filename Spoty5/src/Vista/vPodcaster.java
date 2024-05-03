@@ -29,7 +29,7 @@ public class vPodcaster extends JFrame {
      */
     public vPodcaster(String PodcasterHautatua, String usuario) {
         this.PodcasterHautatua = PodcasterHautatua;
-        setTitle("<dynamic>");
+        setTitle(PodcasterHautatua);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 451, 418);
         contentPane = new JPanel();
@@ -60,6 +60,15 @@ public class vPodcaster extends JFrame {
         btnPerfil.setFont(new Font("Tahoma", Font.BOLD, 11));
         btnPerfil.setBounds(317, 7, 107, 23);
         contentPane.add(btnPerfil);
+        
+        btnPerfil.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Crear e instanciar vErregistratu cuando se hace clic en el botón
+                vErregistratu erregistratuFrame = new vErregistratu(usuario);
+                erregistratuFrame.setVisible(true);
+                dispose();
+            }
+        });
         
         JLabel lblPodcasts = new JLabel("Podcasts Zerrenda");
         lblPodcasts.setHorizontalAlignment(SwingConstants.CENTER);
@@ -96,6 +105,14 @@ public class vPodcaster extends JFrame {
         JButton btnErrePodcast = new JButton("Erreproduzitu Podcast");
         btnErrePodcast.setBounds(246, 222, 164, 23);
         contentPane.add(btnErrePodcast);
+        
+        btnErrePodcast.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		vPodcast podcastFrame = new vPodcast();
+        		podcastFrame.setVisible(true);
+        		dispose();
+        	}
+        });
     }
     
     /**
