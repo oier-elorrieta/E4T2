@@ -25,7 +25,7 @@ public class ArtistaDAO {
     * @return Artista horren albumen zerrenda.
     */
    public String[] AlbumakLortuArtistetatik(String artista) {
-	   
+ 
        List<String> albumes = new ArrayList<>();
        Connection con = KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
 
@@ -37,7 +37,7 @@ public class ArtistaDAO {
        PreparedStatement stmt = null;
        ResultSet rs = null;
 
-  
+ 
        try {
            // Artista baten albumak lortzeko SQL kontsulta
            String sql = "SELECT izenburua FROM album WHERE id_musikaria IN (SELECT id_musikaria FROM musikaria WHERE izenArtistikoa = ?)";
@@ -159,7 +159,7 @@ public class ArtistaDAO {
            e.printStackTrace();
        } finally {
            // Baliabideak askatu
-    	   
+     
            try {
                if (rs != null) rs.close();
                if (stmt != null) stmt.close();

@@ -10,6 +10,9 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
+import DAO.AlbumDAO;
 import DAO.ArtistaDAO;
 import javax.swing.ImageIcon;
 
@@ -32,7 +35,7 @@ public class vArtista extends JFrame {
      */
     public vArtista(String artistaIzena, String erabiltzaileIzena) {
         this.artistaIzena = artistaIzena;
-        setTitle(artistaIzena);
+        setTitle("Álbumes de " + artistaIzena);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 451, 418);
         contentPane = new JPanel();
@@ -88,23 +91,23 @@ public class vArtista extends JFrame {
 
         btnIkusiAlbuma.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	String nombreAlbum  = comboBoxAlbumak.getSelectedItem().toString();
-				vAlbum vAlbumPanel = new vAlbum(artistaIzena, erabiltzaileIzena, nombreAlbum, artistaDeskribapena, artistaIrudia);
+                String nombreAlbum  = comboBoxAlbumak.getSelectedItem().toString();
+                vAlbum vAlbumPanel = new vAlbum(artistaIzena, erabiltzaileIzena, nombreAlbum, artistaDeskribapena, artistaIrudia);
                 vAlbumPanel.setVisible(true);
                 dispose();
             }
         });
        
-        JTextArea textAreaInformacion = new JTextArea();
-        textAreaInformacion.setEditable(false);
-        textAreaInformacion.setLineWrap(true);
-        textAreaInformacion.setWrapStyleWord(true);
-        textAreaInformacion.setBounds(246, 59, 159, 130);
-        contentPane.add(textAreaInformacion);
-        
-        ArtistaInformazioaErakutsi(textAreaInformacion);
+        JTextArea textAreaInformazioa = new JTextArea();
+        textAreaInformazioa.setEditable(false);
+        textAreaInformazioa.setLineWrap(true);
+        textAreaInformazioa.setWrapStyleWord(true);
+        textAreaInformazioa.setBounds(246, 59, 159, 130);
+        contentPane.add(textAreaInformazioa);
        
-      
+        ArtistaInformazioaErakutsi(textAreaInformazioa);
+       
+     
      // JTextArearen ondoren
         comboBoxAlbumak = new JComboBox<>(); // comboBoxAlbumak atributua inizializatu
         comboBoxAlbumak.setBounds(10, 61, 128, 20);
@@ -118,12 +121,28 @@ public class vArtista extends JFrame {
         contentPane.add(lblArtistaImg);
        
         ArtistaIrudiaErakutsi(lblArtistaImg);
+       
+       
+        btnIkusiAlbuma.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String albumIzena = comboBoxAlbumak.getSelectedItem().toString();
+                AlbumDAO albumDAO = new AlbumDAO();
+                List<String> a1 = albumDAO.albumAbestiakHartu(albumIzena);
+               
+
+               
+             
+            }
+        });
+       
+
+       
     }
  
  // Aukeratutako artistaren informazioa JTextArean erakusteko metodoa
     private void ArtistaInformazioaErakutsi(JTextArea textAreaInformazioa) {
         try {
-        	ArtistaDAO artistaDAO = new ArtistaDAO();
+            ArtistaDAO artistaDAO = new ArtistaDAO();
             String informacionArtista = artistaDAO.ArtistaInformazioaLortu(artistaIzena);
             textAreaInformazioa.setText(informacionArtista);
         } catch (Exception ex) {
@@ -149,12 +168,12 @@ public class vArtista extends JFrame {
    
     /**
      * Metodoa erabiltzaileak aukeratutako artistaren irudia erakusteko.
-     * 
+     *
      * @param lblArtistaImg JLabel elementua non artistaaren irudia erakusteko
      */
     private void ArtistaIrudiaErakutsi(JLabel lblArtistaImg) {
         try {
-            ArtistaDAO artistaDAO = new ArtistaDAO();           
+            ArtistaDAO artistaDAO = new ArtistaDAO();          
             ImageIcon imagenArtista = artistaDAO.ArtistaIrudiaLortu(artistaIzena);
             lblArtistaImg.setIcon(imagenArtista);  
         } catch (Exception ex) {
