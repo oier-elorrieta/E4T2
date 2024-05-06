@@ -37,9 +37,6 @@ public class AlbumDAO {
     }
     
     
-    //
-    //jarraitu astelehenean 06/05/2024
-    //
     public String AlbumInformazioaLortu(String albumIzena) {
 
         String Albuminformazioa = "";

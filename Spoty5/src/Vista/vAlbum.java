@@ -91,6 +91,14 @@ public class vAlbum extends JFrame {
         contentPane.add(textAreaAlbumInf);
         
         AlbumInformazioaErakutsi(textAreaAlbumInf);
+        
+        btnAbestiAukera.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                vErreprodukzio vErreprodukzioFrame = new vErreprodukzio(artistaDeskribapena, artistaDeskribapena, artistaDeskribapena, artistaDeskribapena, artistaIrudia);
+                vErreprodukzioFrame.setVisible(true);
+                dispose();
+            }
+        });
        
    
         AlbumDAO albumDAO = new AlbumDAO();
