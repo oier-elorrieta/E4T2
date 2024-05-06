@@ -25,7 +25,7 @@ public class vPodcaster extends JFrame {
     /**
      * Aplikazioa abiarazi.
      * @param PodcasterHautatua Hautatutako podcast-aren izena.
-     * @param usuario Erabiltzailearen izena.
+     * @param erabiltzaileIzena Erabiltzailearen izena.
      */
     public vPodcaster(String PodcasterHautatua, String erabiltzaileIzena) {
         this.PodcasterHautatua = PodcasterHautatua;

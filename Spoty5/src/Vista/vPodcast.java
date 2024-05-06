@@ -1,23 +1,33 @@
 package Vista;
 
 import javax.swing.*;
+import Audioak.Podcast;
+import DAO.PodcastDAO;
 import java.awt.*;
 import java.awt.event.*;
+import javax.sound.sampled.*;
+import java.util.List;
 
+/**
+ * vPodcast klasea, JFrame klasearen luzapena da, podcast-en erreprodukzio-interfazea diseinatzeko.
+ */
 public class vPodcast extends JFrame {
     private static final long serialVersionUID = 1L;
+    private Clip clip;
+    private float speed = 1.0f; // Berezko erreprodukzio abiadura
 
+    /**
+     * Klaseko eraikitzailea. JFrame-aren konfigurazioa burutzen du.
+     */
     public vPodcast() {
         setTitle("Podcast-reprodukzioa");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(400, 200);
-        setLocationRelativeTo(null); // Pantailan erdian kokatu
+        setLocationRelativeTo(null);
 
-        // Nagusiko panela
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
 
-        // Kontrol botoiak
         JButton btnPlay = new JButton("▶️");
         JButton btnPause = new JButton("⏸️");
         JButton btnStop = new JButton("⏹️");
@@ -25,83 +35,111 @@ public class vPodcast extends JFrame {
         JButton btnSpeed1x = new JButton("1x");
         JButton btnSpeed15x = new JButton("1.5x");
 
-        // Azeleratze maila erakusteko etiketa
-        JLabel lblSpeed = new JLabel("Abiadura: 1x");
+        JLabel lblSpeed = new JLabel("Abiadura: " + speed + "x");
 
-        // Botoiaren ekintza: Play
         btnPlay.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Reprodukzio logikoa gehitu
+                if (clip != null && clip.isRunning()) {
+                    clip.stop();
+                }
+                reproducirPodcast();
             }
         });
 
-        // Botoiaren ekintza: Pause
         btnPause.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Erreprodukzioa pausatzearen logika gehitu
+                if (clip != null && clip.isRunning()) {
+                    clip.stop();
+                }
             }
         });
 
-        // Botoiaren ekintza: Stop
         btnStop.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Erreprodukzioa gelditzeko logika gehitu
+                if (clip != null) {
+                    clip.stop();
+                    clip.setFramePosition(0);
+                }
             }
         });
 
-        // Botoiaren ekintza: Abiadura 0.5x
         btnSpeed05x.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Abiadura 0.5x-ra aldatzeko logika gehitu
-                lblSpeed.setText("Abiadura: 0.5x");
+                speed = 0.5f;
+                lblSpeed.setText("Abiadura: " + speed + "x");
+                if (clip != null && clip.isOpen()) {
+                    cambiarVelocidadReproduccion(speed);
+                }
             }
         });
 
-        // Botoiaren ekintza: Abiadura 1x
         btnSpeed1x.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Abiadura 1x-ra aldatzeko logika gehitu
-                lblSpeed.setText("Abiadura: 1x");
+                speed = 1.0f;
+                lblSpeed.setText("Abiadura: " + speed + "x");
+                if (clip != null && clip.isOpen()) {
+                    cambiarVelocidadReproduccion(speed);
+                }
             }
         });
 
-        // Botoiaren ekintza: Abiadura 1.5x
         btnSpeed15x.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Abiadura 1.5x-ra aldatzeko logika gehitu
-                lblSpeed.setText("Abiadura: 1.5x");
+                speed = 1.5f;
+                lblSpeed.setText("Abiadura: " + speed + "x");
+                if (clip != null && clip.isOpen()) {
+                    cambiarVelocidadReproduccion(speed);
+                }
             }
         });
 
-        // Botoi panela
         JPanel panelBotoiak = new JPanel();
         panelBotoiak.add(btnPlay);
         panelBotoiak.add(btnPause);
         panelBotoiak.add(btnStop);
 
-        // Abiadura panela
         JPanel panelAbiadura = new JPanel();
         panelAbiadura.add(btnSpeed05x);
         panelAbiadura.add(btnSpeed1x);
         panelAbiadura.add(btnSpeed15x);
         panelAbiadura.add(lblSpeed);
 
-        // Nagusiko panelaren elementuak gehitu
         panel.add(panelBotoiak, BorderLayout.CENTER);
         panel.add(panelAbiadura, BorderLayout.SOUTH);
 
-        // Nagusiko panela bira gehitu
         add(panel);
 
-        // Bistaratu
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new vPodcast();
+    /**
+     * Metodoa podcast-a erreproduzitzeko.
+     */
+    private void reproducirPodcast() {
+        PodcastDAO podcastDAO = new PodcastDAO();
+        List<String> podcasts = podcastDAO.obtenerAudiosPorPodcaster("Lola Indigo");
+        if (!podcasts.isEmpty()) {
+            try {
+                int idPodcast = Integer.parseInt(podcasts.get(0));
+                Podcast podcast = podcastDAO.obtenerPodcastPorId(idPodcast);
+                if (podcast != null) {
+                    // Podcast-a erreproduzitzeko logika inplementatu
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
             }
-        });
+        }
+    }
+
+    /**
+     * Metodoa erreprodukzio abiadura aldatzeko.
+     * 
+     * @param speed Erreprodukzio abiadura berria.
+     */
+    private void cambiarVelocidadReproduccion(float speed) {
+        if (clip != null && clip.isOpen()) {
+            FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            control.setValue(speed);
+        }
     }
 }
