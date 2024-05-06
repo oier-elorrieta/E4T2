@@ -7,25 +7,33 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+
+import DAO.NirePlayListDAO;
+
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.JTextArea;
+import javax.swing.JComboBox;
 
 /**
  * Erabiltzailearen PlayList-ak kudeatzeko interfaze grafikoa eskaintzen duen klasea.
  */
 public class vNirePlayList extends JFrame {
-
+	protected static final String erabiltzaileIzena = null;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-
+	private DefaultListModel<String> listPlayListakModel = new   DefaultListModel<String>() ;
 	/**
 	 * Aplikazioa abiarazi.
 	 * @param args Komando lerroko agumentuak.
@@ -95,6 +103,26 @@ public class vNirePlayList extends JFrame {
 		btnPlayListBerria.setBounds(456, 94, 118, 23);
 		contentPane.add(btnPlayListBerria);
 		
+		btnPlayListBerria.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        // deitu funtzioa eta erabiltzailea jarrio dion izena itzuli
+		        String izenaPlayList = eskatuPlayListIzena(erabiltzaileIzena);
+		        
+		        // izena ez egotea utzik
+		        if (izenaPlayList != null && !izenaPlayList.isEmpty()) {
+		            //Playlist berria metodoa
+		            NirePlayListDAO.playListBerriaSortu(izenaPlayList, izenaPlayList);
+		            
+		            // aktualiztu playlista lehioan
+		            listPlayListakModel.clear(); 
+		            BezeroPlayListZerrenda(listPlayListakModel, erabiltzaileIzena); 
+		        }
+		    }
+		});
+		
+		
+
+		
 		// PlayList bat ezabatzeko botoia
 		JButton btnPlayListEzabatu = new JButton("Ezabatu");
 		btnPlayListEzabatu.setBounds(456, 168, 118, 23);
@@ -116,36 +144,39 @@ public class vNirePlayList extends JFrame {
 		btnPlayListExportatu.setBounds(456, 306, 118, 23);
 		contentPane.add(btnPlayListExportatu);
 		
-		JScrollPane PlayListPanel = new JScrollPane();
-		PlayListPanel.setBounds(10, 73, 375, 256);
-		PlayListPanel.setToolTipText("PlayList Zerrenda");
-		contentPane.add(PlayListPanel);
+		JScrollPane scrollPanePlayList = new JScrollPane();
+		scrollPanePlayList.setBounds(30, 73, 180, 222);
+		contentPane.add(scrollPanePlayList);
 		
-		DefaultListModel<String> listModel = new DefaultListModel<>();
-
-		listModel.addElement("Gustoko kantak");
-		listModel.addElement("PlayList 1");
-		listModel.addElement("PlayList 2");
-
-		JList<String> PlayListZerrenda = new JList<>(listModel);
-
-		PlayListPanel.setViewportView(PlayListZerrenda);
+		listPlayListakModel  =  BezeroPlayListZerrenda(listPlayListakModel,erabiltzaileIzena );
 		
-		PlayListZerrenda.addListSelectionListener(new ListSelectionListener() {
-		    public void valueChanged(ListSelectionEvent e) {
-		        int index = PlayListZerrenda.getSelectedIndex();
-		        dispose();
-		        
-		        if (index != -1 && index != 3) {
-		            String selectedItem = PlayListZerrenda.getSelectedValue();
-		            dispose();
-		            
-		            vPlayList vPlayListPanel = new vPlayList(selectedItem, erabiltzaileIzena);
-		            vPlayListPanel.setVisible(true);
-		            dispose();
-		        }
-		    }
-		});
+		JList listPlayListak = new JList(listPlayListakModel);
+		scrollPanePlayList.setViewportView(listPlayListak);
+		
+		listPlayListak.addListSelectionListener(new ListSelectionListener() {
+	            public void valueChanged(ListSelectionEvent e) {
+	            	//aqui para que me lleve a la pagina de esa playlist
+	            }
+	        });
+		
+		
 
 	}
+	
+	private DefaultListModel<String> BezeroPlayListZerrenda(DefaultListModel<String>  listPlayListakModel, String erab) {
+			
+            List<String> listaplaylist = DAO.NirePlayListDAO.BezeroPlayListZerrenda(erab);
+            for (String i : listaplaylist) {
+            	listPlayListakModel.addElement(i);
+            	}
+            return  listPlayListakModel;
+            }
+	
+	private String eskatuPlayListIzena(String erabiltzaileIzena) {
+	  
+	    String izenaPlayList = JOptionPane.showInputDialog(this, "PlayList berriaren izena:");
+	    
+	    return izenaPlayList;
+	}
+ 
 }
