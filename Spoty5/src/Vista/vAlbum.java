@@ -2,6 +2,7 @@ package Vista;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
 import DAO.AlbumDAO;
@@ -23,13 +24,14 @@ public class vAlbum extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField textField;
     private String albumIzena;
+    
 
     /**
      * Create the frame.
      */
     public vAlbum(String artistaIzena, String erabiltzaileIzena, String albumIzena, String artistaDeskribapena, ImageIcon artistaIrudia) {
+        this.albumIzena = albumIzena;
     setTitle("Album: " + albumIzena );
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 646, 413);
@@ -72,15 +74,7 @@ public class vAlbum extends JFrame {
         contentPane.add(lblAlbumArgazkia);
        
         AlbumIrudiaErakutsi(lblAlbumArgazkia);
-       
-       
-        textField = new JTextField();
-        textField.setEnabled(false);
-        textField.setEditable(false);
-        textField.setBounds(415, 97, 185, 158);
-        contentPane.add(textField);
-        textField.setColumns(10);
-       
+        
         JButton btnAbestiAukera = new JButton("Aukeratu");
         btnAbestiAukera.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
@@ -88,6 +82,15 @@ public class vAlbum extends JFrame {
         });
         btnAbestiAukera.setBounds(170, 83, 89, 23);
         contentPane.add(btnAbestiAukera);
+        
+        JTextArea textAreaAlbumInf = new JTextArea();
+        textAreaAlbumInf.setEditable(false);
+        textAreaAlbumInf.setLineWrap(true);
+        textAreaAlbumInf.setWrapStyleWord(true);
+        textAreaAlbumInf.setBounds(411, 102, 189, 87);
+        contentPane.add(textAreaAlbumInf);
+        
+        AlbumInformazioaErakutsi(textAreaAlbumInf);
        
    
         AlbumDAO albumDAO = new AlbumDAO();
@@ -116,5 +119,16 @@ public class vAlbum extends JFrame {
             ex.printStackTrace();
         }
     }
-   
+    
+ // Aukeratutako albumaren informazioa JTextArean erakusteko metodoa
+    private void AlbumInformazioaErakutsi(JTextArea textAreaAlbumInf) {
+        try {
+            AlbumDAO albumDAO = new AlbumDAO();
+            String albumInf = albumDAO.AlbumInformazioaLortu(albumIzena);
+            textAreaAlbumInf.setText(albumInf);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+         // Hemen errore mezua JOptionPanean edo konsolan erakutsi dezakezu
+        }
+    }
  }

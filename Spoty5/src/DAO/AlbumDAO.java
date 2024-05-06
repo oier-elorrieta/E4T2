@@ -35,6 +35,50 @@ public class AlbumDAO {
        
         return abestiak;
     }
+    
+    
+    //
+    //jarraitu astelehenean 06/05/2024
+    //
+    public String AlbumInformazioaLortu(String albumIzena) {
+
+        String Albuminformazioa = "";
+        Connection con = KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
+        if (con == null) {
+            System.out.println("Ezin da konexioa egin.");
+            return Albuminformazioa;
+        }
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Artista baten informazioa lortzeko SQL kontsulta
+            String sql = "SELECT urtea, generoa FROM album WHERE izenburua = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, albumIzena);
+            rs = stmt.executeQuery();
+            
+            // Artista baten informazioa eraikitzeko
+            if (rs.next()) {
+                String Data = rs.getString("urtea");
+                String Generoa = rs.getString("generoa");
+                Albuminformazioa = "Albumaren irteera data: " + Data + "\nGeneroa: " + Generoa;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Konexioa itxi eta baliabideak askatu
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                KonexioaDB.itxi(con);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return Albuminformazioa;
+    }
 
        
         public ImageIcon AlbumIrudiaLortu(String albumIzena) {
