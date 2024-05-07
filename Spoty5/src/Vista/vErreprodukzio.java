@@ -3,11 +3,6 @@ package Vista;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-<<<<<<< HEAD
-
-=======
-import Audioak.AudioEntzun;
->>>>>>> 11d38799fd7dce89ffaaddcd61e1ac8827bcb4cb
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
