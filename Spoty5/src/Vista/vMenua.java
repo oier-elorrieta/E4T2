@@ -25,29 +25,7 @@ public class vMenua extends JFrame {
 	 * Aplikazioa abiarazi.
 	 * @param args Komando lerroko agumentuak.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					// Erregistratu DAOa sortu eta bezero bat erregistratu
-					ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
-					String izena = "Hegoi";
-                    String abizena = "Vazquez";
-                    String id_hizkuntza = "eu";
-                    String erabiltzailea = "Vhegoi";
-                    String pasahitza = "12345";
-                    String jaiotze_data = "2005-11-17";
-                    String erregistro_data = "2024-04-26";
-                    Mota mota = Mota.FREE;
-					String erabiltzaileIzena = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, mota);
-					vMenua frame = new vMenua(erabiltzaileIzena);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Menua sortu.

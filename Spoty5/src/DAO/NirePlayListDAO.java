@@ -21,66 +21,25 @@ public class NirePlayListDAO {
 
         PreparedStatement stmt = null;
         ResultSet rs = null;
-
-        try {
-            // Artista baten informazioa lortzeko SQL kontsulta
-            String sql = "SELECT izenburua FROM playlist JOIN bezeroa using (id_bezeroa) WHERE erabiltzailea = ?";
-            stmt = con.prepareStatement(sql);
-            stmt.setString(1, erabiltzaileIzena);
-            rs = stmt.executeQuery();
-            
-            
-            while (rs.next()) {
-            	playListZerrenda.add(rs.getString("izenburua"));
-                
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            // Konexioa itxi eta baliabideak askatu
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                KonexioaDB.itxi(con);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        
+        
         return playListZerrenda;
     }
 	
-	public static void playListBerriaSortu(String playListIzena, String erabiltzaileIzena) {
+	
+	// bihar begiratu
+	public static void playListBerriaSortu(String playListIzena) {
 	    Connection con = KonexioaDB.hasi(); 
 	    PreparedStatement stmt = null;
-	    ResultSet rs = null;
-	    
 	    try {
-	        // Obtener el id_bezeroa basado en el nombre de usuario
-	        String getUserIdQuery = "SELECT id_bezeroa FROM bezeroa WHERE izena = ?";
-	        stmt = con.prepareStatement(getUserIdQuery);
-	        stmt.setString(1, erabiltzaileIzena);
-	        rs = stmt.executeQuery();
-	        
-	        // Si se encuentra el usuario, obtener su id_bezeroa
-	        if (rs.next()) {
-	            int id_bezeroa = rs.getInt("id_bezeroa");
-	            
-	            // Insertar la nueva playlist utilizando el id_bezeroa obtenido
-	            String insertPlaylistQuery = "INSERT INTO playlist (izenburua, sorrera_data, id_bezeroa) VALUES (?, CURRENT_DATE(), ?)";
-	            stmt = con.prepareStatement(insertPlaylistQuery);
-	            stmt.setString(1, playListIzena);
-	            stmt.setInt(2, id_bezeroa);
-	            stmt.executeUpdate();
-	        } else {
-	            // Manejar el caso donde el usuario no se encuentra
-	            System.out.println("Usuario no encontrado: " + erabiltzaileIzena);
-	        }
+	    	String sql = "INSERT INTO playlist (id_bezeroa, izenburua, sorrera_data) VALUES (DEFAULT, ?, CURRENT_DATE())";
+	        stmt = con.prepareStatement(sql);
+	        stmt.setString(1, playListIzena);
+	        stmt.executeUpdate();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } finally {
-	        // Cerrar recursos
 	        try {
-	            if (rs != null) rs.close();
 	            if (stmt != null) stmt.close();
 	            KonexioaDB.itxi(con);
 	        } catch (SQLException e) {

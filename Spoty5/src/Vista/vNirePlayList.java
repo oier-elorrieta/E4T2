@@ -111,7 +111,7 @@ public class vNirePlayList extends JFrame {
 		        // izena ez egotea utzik
 		        if (izenaPlayList != null && !izenaPlayList.isEmpty()) {
 		            //Playlist berria metodoa
-		            NirePlayListDAO.playListBerriaSortu(izenaPlayList, izenaPlayList);
+		            NirePlayListDAO.playListBerriaSortu(izenaPlayList);
 		            
 		            // aktualiztu playlista lehioan
 		            listPlayListakModel.clear(); 
