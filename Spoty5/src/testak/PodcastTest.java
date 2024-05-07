@@ -61,8 +61,7 @@ public class PodcastTest {
 	@Test
     public void TestSetIraupena() {
     	p1.setIraupena(5);
-    	assertEquals(5, p1.getIraupena());
-    }
+    	assertEquals(5.0, p1.getIraupena(), 0.001);    }
     
     @Test
     public void TestSetIraupenaTxarto() {

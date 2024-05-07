@@ -64,7 +64,7 @@ public class AbestiaTest {
 	@Test
     public void TestSetIraupena() {
     	a1.setIraupena(5);
-    	assertEquals(5, a1.getIraupena());
+    	assertEquals(5.0, a1.getIraupena(), 0.001);    
     }
     
     @Test
