@@ -1,145 +1,85 @@
 package Vista;
 
-import javax.swing.*;
-import Audioak.Podcast;
-import DAO.PodcastDAO;
-import java.awt.*;
-import java.awt.event.*;
-import javax.sound.sampled.*;
-import java.util.List;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import DAO.PodcasterDAO;
 
-/**
- * vPodcast klasea, JFrame klasearen luzapena da, podcast-en erreprodukzio-interfazea diseinatzeko.
- */
 public class vPodcast extends JFrame {
+
     private static final long serialVersionUID = 1L;
-    private Clip clip;
-    private float speed = 1.0f; // Berezko erreprodukzio abiadura
+    private JPanel contentPane;
+    private JTextField textFieldPodcastInfo;
+    private String podcaster;
 
-    /**
-     * Klaseko eraikitzailea. JFrame-aren konfigurazioa burutzen du.
-     */
-    public vPodcast() {
-        setTitle("Podcast-reprodukzioa");
+    public vPodcast(String podcaster) {
+        this.podcaster = podcaster;
+        setTitle("Podcast");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 200);
-        setLocationRelativeTo(null);
+        setBounds(100, 100, 601, 415);
+        contentPane = new JPanel();
+        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(contentPane);
+        contentPane.setLayout(null);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BorderLayout());
-
-        JButton btnPlay = new JButton("▶️");
-        JButton btnPause = new JButton("⏸️");
-        JButton btnStop = new JButton("⏹️");
-        JButton btnSpeed05x = new JButton("0.5x");
-        JButton btnSpeed1x = new JButton("1x");
-        JButton btnSpeed15x = new JButton("1.5x");
-
-        JLabel lblSpeed = new JLabel("Abiadura: " + speed + "x");
-
-        btnPlay.addActionListener(new ActionListener() {
+        JButton btnBack = new JButton("Atzera");
+        btnBack.setBounds(10, 11, 89, 23);
+        btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (clip != null && clip.isRunning()) {
-                    clip.stop();
-                }
-                reproducirPodcast();
+                // Add your action here
             }
         });
+        contentPane.add(btnBack);
 
-        btnPause.addActionListener(new ActionListener() {
+        JLabel lblPodcasterImage = new JLabel("");
+        lblPodcasterImage.setBounds(164, 21, 239, 205);
+        ImageIcon podcasterImage = new PodcasterDAO().PodcasterIrudiaLortu(podcaster);
+        lblPodcasterImage.setIcon(podcasterImage);
+        contentPane.add(lblPodcasterImage);
+
+        JButton btnMenu = new JButton("Menua");
+        btnMenu.setBounds(90, 238, 89, 23);
+        contentPane.add(btnMenu);
+
+        JButton btnPreviousPodcast = new JButton("<");
+        btnPreviousPodcast.setBounds(189, 238, 41, 23);
+        contentPane.add(btnPreviousPodcast);
+
+        JButton btnPlayPodcast = new JButton("Play");
+        btnPlayPodcast.setBounds(240, 238, 89, 23);
+        btnPlayPodcast.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if (clip != null && clip.isRunning()) {
-                    clip.stop();
-                }
+                // Add your action here
             }
         });
+        contentPane.add(btnPlayPodcast);
 
-        btnStop.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if (clip != null) {
-                    clip.stop();
-                    clip.setFramePosition(0);
-                }
-            }
-        });
+        JButton btnNextPodcast = new JButton(">");
+        btnNextPodcast.setBounds(339, 238, 41, 23);
+        contentPane.add(btnNextPodcast);
 
-        btnSpeed05x.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                speed = 0.5f;
-                lblSpeed.setText("Abiadura: " + speed + "x");
-                if (clip != null && clip.isOpen()) {
-                    cambiarVelocidadReproduccion(speed);
-                }
-            }
-        });
+        JButton btnFavorite = new JButton("Gustokoa");
+        btnFavorite.setBounds(390, 238, 89, 23);
+        contentPane.add(btnFavorite);
 
-        btnSpeed1x.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                speed = 1.0f;
-                lblSpeed.setText("Abiadura: " + speed + "x");
-                if (clip != null && clip.isOpen()) {
-                    cambiarVelocidadReproduccion(speed);
-                }
-            }
-        });
+        JLabel lblPodcastInfo = new JLabel("Informazioa");
+        lblPodcastInfo.setBounds(43, 288, 78, 14);
+        contentPane.add(lblPodcastInfo);
 
-        btnSpeed15x.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                speed = 1.5f;
-                lblSpeed.setText("Abiadura: " + speed + "x");
-                if (clip != null && clip.isOpen()) {
-                    cambiarVelocidadReproduccion(speed);
-                }
-            }
-        });
-
-        JPanel panelBotoiak = new JPanel();
-        panelBotoiak.add(btnPlay);
-        panelBotoiak.add(btnPause);
-        panelBotoiak.add(btnStop);
-
-        JPanel panelAbiadura = new JPanel();
-        panelAbiadura.add(btnSpeed05x);
-        panelAbiadura.add(btnSpeed1x);
-        panelAbiadura.add(btnSpeed15x);
-        panelAbiadura.add(lblSpeed);
-
-        panel.add(panelBotoiak, BorderLayout.CENTER);
-        panel.add(panelAbiadura, BorderLayout.SOUTH);
-
-        add(panel);
-
-        setVisible(true);
-    }
-
-    /**
-     * Metodoa podcast-a erreproduzitzeko.
-     */
-    private void reproducirPodcast() {
-        PodcastDAO podcastDAO = new PodcastDAO();
-        List<String> podcasts = podcastDAO.obtenerAudiosPorPodcaster("Lola Indigo");
-        if (!podcasts.isEmpty()) {
-            try {
-                int idPodcast = Integer.parseInt(podcasts.get(0));
-                Podcast podcast = podcastDAO.obtenerPodcastPorId(idPodcast);
-                if (podcast != null) {
-                    // Podcast-a erreproduzitzeko logika inplementatu
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Metodoa erreprodukzio abiadura aldatzeko.
-     * 
-     * @param speed Erreprodukzio abiadura berria.
-     */
-    private void cambiarVelocidadReproduccion(float speed) {
-        if (clip != null && clip.isOpen()) {
-            FloatControl control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            control.setValue(speed);
-        }
+        String podcasterInfo = new PodcasterDAO().PodcasterInformazioaLortu(podcaster);
+        textFieldPodcastInfo = new JTextField();
+        textFieldPodcastInfo.setText(podcasterInfo);
+        textFieldPodcastInfo.setEditable(false);
+        textFieldPodcastInfo.setBounds(43, 313, 436, 52);
+        contentPane.add(textFieldPodcastInfo);
+        textFieldPodcastInfo.setColumns(10);
     }
 }
