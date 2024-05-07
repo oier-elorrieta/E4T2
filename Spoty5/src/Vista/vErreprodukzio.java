@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Audioak.AudioEntzun;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -46,8 +47,6 @@ public class vErreprodukzio extends JFrame {
         lblAlbumArgazkia.setBounds(164, 21, 239, 205);
         contentPane.add(lblAlbumArgazkia);
 
-        
-
 
         JButton btnMenua = new JButton("Menua");
         btnMenua.setBounds(90, 238, 89, 23);
@@ -59,6 +58,12 @@ public class vErreprodukzio extends JFrame {
 
         JButton btnHasiAbestia = new JButton("Play");
         btnHasiAbestia.setBounds(240, 238, 89, 23);
+        btnHasiAbestia.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                
+                AudioEntzun.reproducir("badbunny.mp3");
+            }
+        });
         contentPane.add(btnHasiAbestia);
 
         JButton btnAurrekoAbesti = new JButton(">");
