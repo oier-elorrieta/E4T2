@@ -1,27 +1,26 @@
 package DAO;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 import Audioak.Podcast;
 import master.KonexioaDB;
 
-/**
- * PodcastDAO klasea datu-basearekin erabilera komunikatzeko balio duen klasea da.
- */
 public class PodcastDAO {
   
-    /**
-     * Podcaster baten audioak lortzen ditu datu-basean.
-     *
-     * @param podcaster Podcasterren izena.
-     * @return Podcaster baten audioen identifikadoreak.
-     */
-    public List<String> obtenerAudiosPorPodcaster(String podcaster) {
-        List<String> idsAudio = new ArrayList<>();
+    public List<Integer> obtenerAudiosPorPodcaster(String podcaster) {
+        List<Integer> idsAudio = new ArrayList<>();
         Connection con = KonexioaDB.hasi();
       
         if (con == null) {
@@ -40,7 +39,7 @@ public class PodcastDAO {
           
             while (rs.next()) {
                 int id_audio = rs.getInt("id_audio");
-                idsAudio.add(String.valueOf(id_audio));
+                idsAudio.add(id_audio);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -57,12 +56,6 @@ public class PodcastDAO {
         return idsAudio;
     }
 
-    /**
-     * Identifikadorearen arabera podcast bat lortzen du datu-basean.
-     *
-     * @param idPodcast Podcast identifikadorea.
-     * @return Podcast objektua.
-     */
     public Podcast obtenerPodcastPorId(int idPodcast) {
         Podcast podcast = null;
         Connection con = KonexioaDB.hasi();
@@ -76,7 +69,7 @@ public class PodcastDAO {
         ResultSet rs = null;
       
         try {
-            String sql = "SELECT * FROM audio WHERE id_audio = ?";
+            String sql = "SELECT * FROM podcast WHERE id_audio = ?";
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, idPodcast);
             rs = stmt.executeQuery();
@@ -105,4 +98,53 @@ public class PodcastDAO {
       
         return podcast;
     }
+    
+    /**
+     * Podcast-aren irudia lortzen du.
+     *
+     * @param izena Irudia lortu nahi den podcastaren izena.
+     * @return Podcast-aren irudia ImageIcon gisa.
+     */
+    public ImageIcon obtenerPodcastIrudia(String izena) {
+        ImageIcon irudia = null;
+        Connection con = KonexioaDB.hasi();
+      
+        if (con == null) {
+            System.out.println("Ezin da konexioa egin.");
+            return null;
+        }
+      
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+      
+        try {
+            String sql = "SELECT irudia FROM podcast WHERE izena = ?";
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, izena);
+            rs = stmt.executeQuery();
+          
+            if (rs.next()) {
+                Blob blob = rs.getBlob("irudia");
+                if (blob != null) {
+                    try (ByteArrayInputStream is = new ByteArrayInputStream(blob.getBytes(1, (int) blob.length()))) {
+                        BufferedImage image = ImageIO.read(is);
+                        irudia = new ImageIcon(image);
+                    }
+                }
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                KonexioaDB.itxi(con);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+      
+        return irudia;
+    }
 }
+
