@@ -1,12 +1,8 @@
 package Vista;
 
-
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import Audioak.AudioEntzun;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -61,7 +57,6 @@ public class vErreprodukzio extends JFrame {
         btnHasiAbestia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 
-                AudioEntzun.reproducir("badbunny.mp3");
             }
         });
         contentPane.add(btnHasiAbestia);
