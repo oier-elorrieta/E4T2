@@ -46,7 +46,7 @@ public class PodcastDAOTest {
         }
 
         // Llamar al método a testear
-        List<String> audioIds = podcastDAO.obtenerAudiosPorPodcaster(podcaster);
+        List<Integer> audioIds = podcastDAO.obtenerAudiosPorPodcaster(podcaster);
 
         // Verificar que los IDs de audio obtenidos coinciden con los esperados
         assertEquals(expectedAudioIds, audioIds);
