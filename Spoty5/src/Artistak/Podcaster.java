@@ -1,5 +1,6 @@
 package Artistak;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Objects;
 /**
@@ -16,8 +17,8 @@ public class Podcaster extends Artista{
      * @param izena playlistaren izena
      * @param podcastZerrenda musikarien PodcastZerrenda
      */
-    public Podcaster(String izena, ArrayList<String> podcastZerrenda) {
-        super(izena);
+    public Podcaster(String izena, Blob irudia, ArrayList<String> podcastZerrenda) {
+        super(izena, irudia);
         PodcastZerrenda = podcastZerrenda;
     }
 
@@ -44,13 +45,9 @@ public class Podcaster extends Artista{
      * 
      * @return Podcasterren izena eta podcastZerrenda duen testu errepresentazioa
      */
-	@Override
+    @Override
 	public String toString() {
-		final int maxLen = 10;
-		return "Podcaster [PodcastZerrenda="
-				+ (PodcastZerrenda != null ? PodcastZerrenda.subList(0, Math.min(PodcastZerrenda.size(), maxLen))
-						: null)
-				+ ", Izena=" + Izena + "]";
+		return "Podcaster [PodcastZerrenda=" + PodcastZerrenda + ", Izena=" + Izena + ", irudia=" + irudia + "]";
 	}
 
 	/**
@@ -65,6 +62,7 @@ public class Podcaster extends Artista{
 		result = prime * result + Objects.hash(PodcastZerrenda);
 		return result;
 	}
+
 
 	/**
      * @param zein objetuarekin konparatuko den

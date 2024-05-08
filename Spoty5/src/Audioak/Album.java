@@ -1,5 +1,6 @@
 package Audioak;
 
+import java.sql.Blob;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -9,15 +10,16 @@ import java.util.Objects;
  */
 public class Album {
     private ArrayList<String> Izenburua;
-    
+    protected static Blob irudia;
+   
     /**
-     * Albuma izango duen argitaratze urtea 
+     * Albuma izango duen argitaratze urtea
      */
     private Date ArgitaratzeUrtea;
-    
+   
     /**
      * Albuma sortzeko konstruktorea izenburua eta argitaratze urtearekin
-     * 
+     *
      * @param izenburua albumaren izenburua
      * @param argitaratzeUrtea albumaren argitaratze urtea
      */
@@ -25,19 +27,27 @@ public class Album {
         Izenburua = izenburua;
         ArgitaratzeUrtea = argitaratzeUrtea;
     }
-    
+   
+    public static Blob getIrudia() {
+return irudia;
+}
+
+
+public void setIrudia(Blob irudia) {
+this.irudia = irudia;
+}
     /**
      * Albumaren izenburua lortzen du
-     * 
+     *
      * @return albumaren izenburua
      */
     public ArrayList<String> getIzenburua() {
         return Izenburua;
     }
-    
+   
     /**
      * Albumaren izenburua ezartzen du
-     * 
+     *
      * @param izenburua albumaren izenburu berria
      */
     public void setIzenburua(ArrayList<String> izenburua) {
@@ -46,7 +56,7 @@ public class Album {
 
     /**
      * Albumaren argitaratze urtea lortzen du
-     * 
+     *
      * @return albumaren argitaratze urtea
      */
     public Date getArgitaratzeUrtea() {
@@ -55,7 +65,7 @@ public class Album {
 
     /**
      * Albumaren argitaratze urtea ezartzen du
-     * 
+     *
      * @param argitaratzeUrtea albumaren argitaratze urte berria
      */
     public void setArgitaratzeUrtea(Date argitaratzeUrtea) {
@@ -64,20 +74,14 @@ public class Album {
 
     /**
      * Albumaren izenburua eta argitaratzeurtearekin testu batean bihurtzen du objetua
-     * 
+     *
      * @returnf Albumaren izenburua eta argitaratze urtea duen testu errepresentazioa
      */
-    @Override
-    public String toString() {
-        final int maxLen = 10;
-        return "Album [Izenburua="
-                + (Izenburua != null ? Izenburua.subList(0, Math.min(Izenburua.size(), maxLen)) : null)
-                + ", ArgitaratzeUrtea=" + ArgitaratzeUrtea + "]";
-    }
+   
 
     /**
      * Objetuaren hash kodea kalkulatzen du
-     * 
+     *
      * @return objetuaren hash kodea
      */
     @Override
@@ -85,7 +89,12 @@ public class Album {
         return Objects.hash(ArgitaratzeUrtea, Izenburua);
     }
 
-    /**
+    @Override
+public String toString() {
+return "Album [Izenburua=" + Izenburua + ", ArgitaratzeUrtea=" + ArgitaratzeUrtea + "]";
+}
+
+/**
      * @param zein objetuarekin konparatuko den
      * @return true objetuak berdin badira, false objetuak desberdinak badira
      */
@@ -100,5 +109,5 @@ public class Album {
         Album other = (Album) obj;
         return Objects.equals(ArgitaratzeUrtea, other.ArgitaratzeUrtea) && Objects.equals(Izenburua, other.Izenburua);
     }
-    
+   
 }

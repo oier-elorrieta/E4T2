@@ -1,44 +1,37 @@
 package Vista;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
+import Bezeroak.Mota;
+import DAO.ErregistratuDAO;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 
+/**
+ * Erabiltzailearen menu nagusia erakutsi eta aukera ezberdinak eskaintzen dituen klasea.
+ */
 public class vMenua extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	/**
-	 * Launch the application.
+	 * Aplikazioa abiarazi.
+	 * @param args Komando lerroko agumentuak.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					vMenua frame = new vMenua();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
-	 * Create the frame.
+	 * Menua sortu.
+	 * @param erabiltzaileIzena Erabiltzailearen izena.
 	 */
-	public vMenua() {
+	public vMenua(String erabiltzaileIzena) {
 		setTitle("Menu");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -48,12 +41,14 @@ public class vMenua extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		// Menuaren goiburua
 		JLabel lblNewLabel = new JLabel("Aukeratu");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(170, 11, 98, 26);
 		contentPane.add(lblNewLabel);
 		
+		// Atzera botoia
 		JButton btnAtzera = new JButton("Atzera");
 		btnAtzera.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnAtzera.setBounds(10, 15, 107, 23);
@@ -61,23 +56,22 @@ public class vMenua extends JFrame {
 		
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				vLogin loginFrame = new vLogin();
+				// Saioa hasieratzeko
+				vLogin loginFrame = new vLogin(erabiltzaileIzena);
 				loginFrame.setVisible(true);
 				dispose();
 			}	
 		});
-		
-		
-		JButton btnProfila = new JButton("Nire Profila");
+			
+		JButton btnProfila = new JButton(erabiltzaileIzena);
 		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnProfila.setBounds(317, 15, 107, 23);
 		contentPane.add(btnProfila);
 		
 		btnProfila.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				vErregistratu vErregistratuPanel = new vErregistratu();
+				// Profila ikusteko
+				vErregistratu vErregistratuPanel = new vErregistratu(erabiltzaileIzena);
 				vErregistratuPanel.setVisible(true);
 				dispose();
 			}
@@ -89,8 +83,8 @@ public class vMenua extends JFrame {
 		
 		btnMusikaDeskubritu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				vArtistaLista vArtistaListaPanel = new vArtistaLista();
+				// Artista zerrenda ikusteko
+				vArtistaLista vArtistaListaPanel = new vArtistaLista(erabiltzaileIzena);
 				vArtistaListaPanel.setVisible(true);
 				dispose();
 			}
@@ -101,12 +95,12 @@ public class vMenua extends JFrame {
 		contentPane.add(btnPodcastDeskubritu);
 		
 		btnPodcastDeskubritu.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-				vPodcast vPodcastPanel = new vPodcast();
-				vPodcastPanel.setVisible(true);
-				dispose();
-			}
+		    public void actionPerformed(ActionEvent e) {
+		        // Podcaster zerrenda ikusteko
+		        vPodcasterLista vPodcasterListaPanel = new vPodcasterLista(erabiltzaileIzena);
+		        vPodcasterListaPanel.setVisible(true);
+		        dispose();
+		    }
 		});
 		
 		JButton btnPlayList = new JButton("Nire PlayList-ak");
@@ -115,9 +109,8 @@ public class vMenua extends JFrame {
 		
 		btnPlayList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				vNirePlayList vNirePlayListPanel = new vNirePlayList();
-				
+				// Nire PlayList-ak ikusteko
+				vNirePlayList vNirePlayListPanel = new vNirePlayList(erabiltzaileIzena);
 				vNirePlayListPanel.setVisible(true);
 				dispose();
 			}

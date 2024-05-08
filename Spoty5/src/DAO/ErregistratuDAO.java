@@ -11,38 +11,37 @@ import Bezeroak.Mota;
 import master.KonexioaDB;
 
 /**
- * Bezeroen erregistroa datu-basearekin interakzioak egiteko klasea
+ * Bezeroen erregistroa datu-basearekin interakzioak egiteko klasea.
  */
 public class ErregistratuDAO {
 
-
     /**
-     * Datu basean erabiltzaile berri baten erregistroa egiten du
+     * Datu basean erabiltzaile berri baten erregistroa egiten du.
      * 
-     * @param izena Erabiltzailearen izena
-     * @param abizena Erabiltzailearen abizena
-     * @param id_hizkuntza Gustokoaren hizkuntzaren ID-a
-     * @param erabiltzailea Erabiltzailearen erabiltzaile-izena
-     * @param pasahitza Erabiltzailearen pasahitza
-     * @param jaiotze_data Erabiltzailearen jaiotze data "YYYY-MM-DD" formatuan
-     * @param erregistro_data Erabiltzailearen erregistro data "YYYY-MM-DD" formatuan
-     * @param mota Erabiltzailearen datu mota (FREE, PREMIUM)
-     * @return True baieztatu egin bada, False bestela
+     * @param izena Erabiltzailearen izena.
+     * @param abizena Erabiltzailearen abizena.
+     * @param id_hizkuntza Gustokoaren hizkuntzaren ID-a.
+     * @param erabiltzailea Erabiltzailearen erabiltzaile-izena.
+     * @param pasahitza Erabiltzailearen pasahitza.
+     * @param jaiotze_data Erabiltzailearen jaiotze data "YYYY-MM-DD" formatuan.
+     * @param erregistro_data Erabiltzailearen erregistro data "YYYY-MM-DD" formatuan.
+     * @param mota Erabiltzailearen datu mota (FREE, PREMIUM).
+     * @return Erabiltzaile izena, erregistroa egiten den bitartean.
      */
-    public boolean erregistroaEgin(String izena, String abizena, String id_hizkuntza, String erabiltzailea,
+    public String erregistroaEgin(String izena, String abizena, String id_hizkuntza, String erabiltzailea,
             String pasahitza, String jaiotze_data, String erregistro_data, Mota mota) {
-        boolean erregistro_ok = false;
+        String erabiltzaileIzena = null;
         Connection con = KonexioaDB.hasi();
 
         if (con == null) {
             System.out.println("Ezin da konexioa egin.");
-            return false;
+            return null;
         }
 
         PreparedStatement stmt = null;
 
         try {
-            String sql = "INSERT INTO BEZEROA (izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, mota) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO bezeroa (izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, mota) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, izena);
             stmt.setString(2, abizena);
@@ -57,7 +56,7 @@ public class ErregistratuDAO {
 
             if (lerroAfektatuak > 0) {
                 System.out.println("Erregistratu zara!");
-                erregistro_ok = true;
+                erabiltzaileIzena = erabiltzailea;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -70,14 +69,14 @@ public class ErregistratuDAO {
                 e.printStackTrace();
             }
         }
-        return erregistro_ok;
+        return erabiltzaileIzena;
     }
 
     /**
-     * Hizkuntzen ID zerrenda bat lortzen du datu baseatik
+     * Hizkuntzen ID zerrenda bat lortzen du datu baseatik.
      * 
-     * @return String-eko ArrayList bat hizkuntzen ID duena
-     * @throws Exception Akats bat badago datu basean sartzean
+     * @return Hizkuntzen ID zerrenda String-eko array moduan.
+     * @throws Exception Datu basean errore bat gertatu bada.
      */
     public String[] lortuHizkuntza() throws Exception {
         Connection con = null;
@@ -109,8 +108,6 @@ public class ErregistratuDAO {
             if (con != null)
                 con.close();
         }
-
         return hizkuntzaList.toArray(new String[0]);
     }
-
 }

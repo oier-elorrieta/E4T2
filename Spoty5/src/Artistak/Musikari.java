@@ -1,4 +1,5 @@
 package Artistak;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Objects;
 /**
@@ -16,8 +17,8 @@ public class Musikari extends Artista {
     * @param izena musikarien izena
     * @param albumZerrenda musikarien albumZerrenda
     */
-   public Musikari(String izena, ArrayList<String> albumZerrenda) {
-		super(izena);
+   public Musikari(String izena, Blob irudia, ArrayList<String> albumZerrenda) {
+		super(izena, irudia);
 		AlbumZerrenda = albumZerrenda;
 	}
   
@@ -38,18 +39,10 @@ public class Musikari extends Artista {
        AlbumZerrenda = albumZerrenda;
    }
   
-   /**
-    * Musikariaren albumZerrenda testu batean bihurtzen du objetua
-    *
-    * @return Musikariaren izena eta albumZerrenda duen testu errepresentazioa
-    */
    @Override
-	public String toString() {
-		final int maxLen = 10;
-		return "Musikari [AlbumZerrenda="
-				+ (AlbumZerrenda != null ? AlbumZerrenda.subList(0, Math.min(AlbumZerrenda.size(), maxLen)) : null)
-				+ ", Izena=" + Izena + "]";
-	}
+public String toString() {
+	return "Musikari [AlbumZerrenda=" + AlbumZerrenda + "]";
+}
    /**
     * Objetuaren hash kodea kalkulatzen du
     *

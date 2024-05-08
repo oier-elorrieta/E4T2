@@ -1,7 +1,5 @@
 package Vista;
 
-import java.awt.Color;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -12,26 +10,46 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
-
-import Bezeroak.Bezeroa;
 import DAO.BezeroaDAO;
-
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 
+/**
+ * Erabiltzailearen saio hasiera panela erakutsi eta saioa hasteko eta erregistratzeko aukerak eskaintzen duen klasea.
+ */
 public class vLogin extends JFrame {
+	protected static final String erabiltzaileIzena = null;
 	private JTextField txtErabiltzailea;
     private JPasswordField txtPasahitza;
+    
+    /**
+     * Main metodoa.
+     * 
+     * @param args argumentuak
+     */
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+				vLogin frame = new vLogin(erabiltzaileIzena);
+                frame.setVisible(true);
+            }
+        });
+    }
 
-    public vLogin() {
+    /**
+     * Sortu vLogin klasearen instanzia.
+     * 
+     * @param erabiltzaileIzena Erabiltzailearen izena
+     */
+    public vLogin(String erabiltzaileIzena) {
         
         setTitle("Saio Hasiera");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(339, 236);
         setLocationRelativeTo(null);
 
-        
+        // Erabiltzailea eta pasahitza sartzeko eremuak
         JLabel lblErabiltzaile = new JLabel("Erabiltzailea:");
         lblErabiltzaile.setBounds(0, 22, 139, 30);
         lblErabiltzaile.setHorizontalAlignment(SwingConstants.CENTER);
@@ -45,13 +63,13 @@ public class vLogin extends JFrame {
         JButton btnHasiSaioa = new JButton("Login");
         btnHasiSaioa.setBounds(31, 143, 126, 30);
         
-        btnHasiSaioa.addActionListener(new ActionListener() {
-        	public void actionPerformed(ActionEvent e) {
-        		vMenua vMenuaPanel = new vMenua();
-        		vMenuaPanel.setVisible(true);
-        		dispose();
-        	}
-        });
+//        btnHasiSaioa.addActionListener(new ActionListener() {
+//        	public void actionPerformed(ActionEvent e) {
+//        		vMenua vMenuaPanel = new vMenua(erabiltzaileIzena);
+//        		vMenuaPanel.setVisible(true);
+//        		dispose();
+//        	}
+//        });
         
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -60,58 +78,43 @@ public class vLogin extends JFrame {
         panel.add(lblPasahitza);
         panel.add(txtPasahitza);
         panel.add(btnHasiSaioa);
-
-       
+      
         getContentPane().add(panel, BorderLayout.CENTER);
-        
+        // Erregistratu botoia
         JButton btnErregistratu = new JButton("Erregistratu");
         btnErregistratu.setBounds(167, 143, 127, 30);
         panel.add(btnErregistratu);
         
+        // Erregistratu botoiaren ekintza
         btnErregistratu.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Crear una instancia del panel de registro (vErregistratu)
-                vErregistratu vErregistratuPanel = new vErregistratu();
-
-                // Hacer visible el panel de registro
+            public void actionPerformed(ActionEvent e) {    	
+                vErregistratu vErregistratuPanel = new vErregistratu(erabiltzaileIzena);
                 vErregistratuPanel.setVisible(true);
-
-                // Cerrar la ventana actual
                 dispose();
             }
         });
 
-
+        // Login botoiaren ekintza
         btnHasiSaioa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String erabiltzailea = txtErabiltzailea.getText();
                 String pasahitza = new String(txtPasahitza.getPassword());
 
-               
                 BezeroaDAO bezero = new BezeroaDAO();
                 
+                // Bezeroa baieztatu
                 boolean balidatuHasiSaioa = bezero.baieztatuBezeroa(erabiltzailea, pasahitza);
 
                 if (balidatuHasiSaioa) {
                     JOptionPane.showMessageDialog(vLogin.this, "Barruan zaude");
                     
-//                    vMenua vMenuaPanel = new vMenua();
-//                    vMenuaPanel.setVisible(true);
-//                    dispose();
+                    vMenua vMenuaPanel = new vMenua(erabiltzailea);
+                    vMenuaPanel.setVisible(true);
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(vLogin.this, "Erabiltzailea edo pasahitza txarto dago");
                 }
-            }
-        });
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-            	vLogin frame = new vLogin();
-                frame.setVisible(true);
             }
         });
     }
