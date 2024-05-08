@@ -28,23 +28,23 @@ public class PodcasterTest {
   //----------------------------------------- Izena --------------------------------------
 
   	@Test
-      public void TestGetIzena() {
+      public void testGetIzena() {
       	assertEquals("La Script", pd1.getIzena());
       }
       
       @Test
-      public void TestGetIzenaTxarto() {
+      public void testGetIzenaTxarto() {
       	assertNotEquals("La Scriptt", pd1.getIzena());
       }
 
       @Test
-      public void TestSetIzena() {
+      public void testSetIzena() {
     	  pd1.setIzena("The Wild Proyect");
           assertEquals("The Wild Proyect", pd1.getIzena());
       }
       
       @Test
-  	public void TestSetIzenaTxarto() {
+  	public void testSetIzenaTxarto() {
     	pd1.setIzena("The Wild Proyect");
   		assertNotEquals("La Script", pd1.getIzena());
   	}
@@ -60,15 +60,15 @@ public class PodcasterTest {
   //----------------------------------------- AlbumZerrenda --------------------------------------
 
   	@Test
-      public void TestGetPlayListZerrenda() {
+      public void testGetPlayListZerrenda() {
           assertEquals(new ArrayList<>(), pd1.getPodcastZerrenda());
       }
 
   	@Test
-  	public void TestGetPlaylistZerrendaTxarto() {
+  	public void testGetPlaylistZerrendaTxarto() {
   	    ArrayList<String> BesteAlbum = new ArrayList<>();
-  	    BesteAlbum.add("cancion3");
-  	    BesteAlbum.add("cancion4");
+  	    BesteAlbum.add("abestia1");
+  	    BesteAlbum.add("abestia2");
 
   	    assertNotEquals(BesteAlbum, pd1.getPodcastZerrenda());
   	}
@@ -92,7 +92,7 @@ public class PodcasterTest {
    //----------------------------------------- ToString --------------------------------------
 
       @Test
-      public void TestToString() {
+      public void testToString() {
       	String txt = pd1.toString();
       	
       	String esperotakoa = "Artista [izena=" + pd1.getIzena() + ", irudia=" + pd1.getIrudia()
@@ -102,23 +102,23 @@ public class PodcasterTest {
    //----------------------------------------- Equals --------------------------------------
 
       @Test
-      public void TestEqualsObjetuBerdina() {
+      public void testEqualsObjetuBerdina() {
       assertTrue(pd1.equals(pd1));
       }
 
       @Test
-      public void TestEqualsNull() {
+      public void testEqualsNull() {
       assertFalse(pd1.equals(null));
       }
 
       @Test
-      public void TestEqualsClaseEzberdinak() {
+      public void testEqualsClaseEzberdinak() {
       String txarra = "";
       assertFalse(pd1.equals(txarra));
       }
 
       @Test
-      public void TestEqualsClaseAtrBerdinak() {
+      public void testEqualsClaseAtrBerdinak() {
       Podcaster pd2 = new Podcaster("La Script", irudia, new ArrayList<>());
       assertTrue(pd1.equals(pd2));
       }

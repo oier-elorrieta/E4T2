@@ -24,23 +24,23 @@ public class PodcastTest {
 //----------------------------------------- Izenburua --------------------------------------
 
     @Test
-    public void TestGetIzenburua() {
+    public void testGetIzenburua() {
     	assertEquals("blink", p1.getIzenburua());
     }
     
     @Test
-    public void TestGetIzenburuaTxarto() {
+    public void testGetIzenburuaTxarto() {
     	assertNotEquals("blinkk", p1.getIzenburua());
     }
 
     @Test
-    public void TestSetIzenburua() {
+    public void testSetIzenburua() {
     	p1.setIzenburua("neverita");
         assertEquals("neverita", p1.getIzenburua());
     }
     
     @Test
-	public void TestSetIzenburuaTxarto() {
+	public void testSetIzenburuaTxarto() {
     	p1.setIzenburua("neverita");
 		assertNotEquals("blink", p1.getIzenburua());
 	}
@@ -48,23 +48,23 @@ public class PodcastTest {
   //----------------------------------------- Iraupena --------------------------------------
 
     @Test
-    public void TestGetIraupena() {
+    public void testGetIraupena() {
         assertEquals(3.5, p1.getIraupena(), 0.01);
     }
     
     @Test
-    public void TestGetIraupenaTxarto() {
+    public void testGetIraupenaTxarto() {
         assertNotEquals(4.0, p1.getIraupena(), 0.01);
     }
     
     @SuppressWarnings("deprecation")
 	@Test
-    public void TestSetIraupena() {
+    public void testSetIraupena() {
     	p1.setIraupena(5);
     	assertEquals(5.0, p1.getIraupena(), 0.001);    }
     
     @Test
-    public void TestSetIraupenaTxarto() {
+    public void testSetIraupenaTxarto() {
     	p1.setIraupena(5);
     	assertNotEquals(3, p1.getIraupena());
     }
@@ -72,23 +72,23 @@ public class PodcastTest {
   //----------------------------------------- Kolaboratzaileak --------------------------------------
 
     @Test
-    public void TestGetKolaboratzaileak() {
+    public void testGetKolaboratzaileak() {
     	assertEquals("blink", p1.getIzenburua());
     }
     
     @Test
-    public void TestGetKolaboratzaileakTxarto() {
+    public void testGetKolaboratzaileakTxarto() {
     	assertNotEquals("andoni", p1.getIzenburua());
     }
 
     @Test
-    public void TestSetKolaboratzaileak() {
+    public void testSetKolaboratzaileak() {
     	p1.setIzenburua("alaitz");
         assertEquals("alaitz", p1.getIzenburua());
     }
     
     @Test
-	public void TestSetKolaboratzaileakTxarto() {
+	public void testSetKolaboratzaileakTxarto() {
     	p1.setIzenburua("alaitz");
 		assertNotEquals("andoni", p1.getIzenburua());
 	}
@@ -96,23 +96,23 @@ public class PodcastTest {
     //----------------------------------------- Erreprodukzioak --------------------------------------
 
     @Test
-    public void TestGetErreprodukzioak() {
+    public void testGetErreprodukzioak() {
         assertEquals(5, p1.getErreprodukzioak(), 0.01);
     }
     
     @Test
-    public void TestGetErreprodukzioakTxarto() {
+    public void testGetErreprodukzioakTxarto() {
         assertNotEquals(4.0, p1.getErreprodukzioak(), 0.01);
     }
     
     @Test
-    public void TestSetErreprodukzioak() {
+    public void testSetErreprodukzioak() {
     	p1.setErreprodukzioak(5);
     	assertEquals(5, p1.getErreprodukzioak());
     }
     
     @Test
-    public void TestSetErreprodukzioakTxarto() {
+    public void testSetErreprodukzioakTxarto() {
     	p1.setErreprodukzioak(5);
     	assertNotEquals(3, p1.getErreprodukzioak());
     }
@@ -120,7 +120,7 @@ public class PodcastTest {
 	//----------------------------------------- To String --------------------------------------
 
     @Test
-    public void TestToString() {
+    public void testToString() {
     	String txt = p1.toString();
     	
     	String esperotakoa = "Audio [izenburua=" + p1.getIzenburua() + ", iraupena=" + p1.getIraupena()
@@ -130,23 +130,23 @@ public class PodcastTest {
 	//----------------------------------------- Equals --------------------------------------
 
     @Test
-    public void TestEqualsObjetuBerdina() {
+    public void testEqualsObjetuBerdina() {
     assertTrue(p1.equals(p1));
     }
 
     @Test
-    public void TestEqualsNull() {
+    public void testEqualsNull() {
     assertFalse(p1.equals(null));
     }
 
     @Test
-    public void TestEqualsClaseEzberdinak() {
+    public void testEqualsClaseEzberdinak() {
     String txarra = "";
     assertFalse(p1.equals(txarra));
     }
 
     @Test
-    public void TestEqualsClaseAtrBerdinak() {
+    public void testEqualsClaseAtrBerdinak() {
     Podcast p2 = new Podcast("blink", 3.5, "andoni", 5);
     assertTrue(p1.equals(p2));
     }

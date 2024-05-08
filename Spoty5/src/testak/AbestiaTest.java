@@ -27,23 +27,23 @@ public class AbestiaTest {
 //----------------------------------------- Izenburua --------------------------------------
 
     @Test
-    public void TestGetIzena() {
+    public void testGetIzena() {
     	assertEquals("blink", a1.getIzenburua());
     }
     
     @Test
-    public void TestGetIzenaTxarto() {
+    public void testGetIzenaTxarto() {
     	assertNotEquals("blinkk", a1.getIzenburua());
     }
 
     @Test
-    public void TestSetIzena() {
+    public void testSetIzena() {
         a1.setIzenburua("neverita");
         assertEquals("neverita", a1.getIzenburua());
     }
     
     @Test
-	public void TestSetIzenaTxarto() {
+	public void testSetIzenaTxarto() {
 		a1.setIzenburua("neverita");
 		assertNotEquals("blink", a1.getIzenburua());
 	}
@@ -51,24 +51,24 @@ public class AbestiaTest {
   //----------------------------------------- Iraupena --------------------------------------
 
     @Test
-    public void TestGetIraupena() {
+    public void testGetIraupena() {
         assertEquals(3.5, a1.getIraupena(), 0.01);
     }
     
     @Test
-    public void TestGetIraupenaTxarto() {
+    public void testGetIraupenaTxarto() {
         assertNotEquals(4.0, a1.getIraupena(), 0.01);
     }
     
     @SuppressWarnings("deprecation")
 	@Test
-    public void TestSetIraupena() {
+    public void testSetIraupena() {
     	a1.setIraupena(5);
     	assertEquals(5.0, a1.getIraupena(), 0.001);    
     }
     
     @Test
-    public void TestSetIraupenaTxarto() {
+    public void testSetIraupenaTxarto() {
     	a1.setIraupena(5);
     	assertNotEquals(3, a1.getIraupena());
     }
@@ -76,23 +76,23 @@ public class AbestiaTest {
   //----------------------------------------- Kolaboratzaileak --------------------------------------
 
     @Test
-    public void TestGetKolaboratzaileak() {
+    public void testGetKolaboratzaileak() {
     	assertEquals("blink", a1.getIzenburua());
     }
     
     @Test
-    public void TestGetKolaboratzaileakTxarto() {
+    public void testGetKolaboratzaileakTxarto() {
     	assertNotEquals("andoni", a1.getIzenburua());
     }
 
     @Test
-    public void TestSetKolaboratzaileak() {
+    public void testSetKolaboratzaileak() {
         a1.setIzenburua("alaitz");
         assertEquals("alaitz", a1.getIzenburua());
     }
     
     @Test
-	public void TestSetKolaboratzaileakTxarto() {
+	public void testSetKolaboratzaileakTxarto() {
 		a1.setIzenburua("alaitz");
 		assertNotEquals("andoni", a1.getIzenburua());
 	}
@@ -100,23 +100,23 @@ public class AbestiaTest {
     //----------------------------------------- Erreprodukzioak --------------------------------------
 
     @Test
-    public void TestGetErreprodukzioak() {
+    public void testGetErreprodukzioak() {
         assertEquals(5, a1.getErreprodukzioak(), 0.01);
     }
     
     @Test
-    public void TestGetErreprodukzioakTxarto() {
+    public void testGetErreprodukzioakTxarto() {
         assertNotEquals(4.0, a1.getErreprodukzioak(), 0.01);
     }
     
     @Test
-    public void TestSetErreprodukzioak() {
+    public void testSetErreprodukzioak() {
     	a1.setErreprodukzioak(5);
     	assertEquals(5, a1.getErreprodukzioak());
     }
     
     @Test
-    public void TestSetErreprodukzioakTxarto() {
+    public void testSetErreprodukzioakTxarto() {
     	a1.setErreprodukzioak(5);
     	assertNotEquals(3, a1.getErreprodukzioak());
     }
@@ -124,7 +124,7 @@ public class AbestiaTest {
 //----------------------------------------- To String --------------------------------------
 
     @Test
-    public void TestToString() {
+    public void testToString() {
     	String txt = a1.toString();
     	
     	String esperotakoa = "Audio [izenburua=" + a1.getIzenburua() + ", iraupena=" + a1.getIraupena()
@@ -134,23 +134,23 @@ public class AbestiaTest {
 //----------------------------------------- Equals --------------------------------------
 
     @Test
-    public void TestEqualsObjetuBerdina() {
+    public void testEqualsObjetuBerdina() {
     assertTrue(a1.equals(a1));
     }
 
     @Test
-    public void TestEqualsNull() {
+    public void testEqualsNull() {
     assertFalse(a1.equals(null));
     }
 
     @Test
-    public void TestEqualsClaseEzberdinak() {
+    public void testEqualsClaseEzberdinak() {
     String txarra = "";
     assertFalse(a1.equals(txarra));
     }
 
     @Test
-    public void TestEqualsClaseAtrBerdinak() {
+    public void testEqualsClaseAtrBerdinak() {
     Abestia p2 = new Abestia("blink", 3.5, "andoni", 5);
     assertTrue(a1.equals(p2));
     }

@@ -24,23 +24,23 @@ public class FreeTest {
 //----------------------------------------- Izena --------------------------------------
 	
 	@Test
-	public void TestGetIzena() {
+	public void testGetIzena() {
 		assertEquals("hegoi", f1.getIzena());
 	}
 	
 	@Test
-	public void TestGetIzenaTxarto() {
+	public void testGetIzenaTxarto() {
 		assertNotEquals("hegoii", f1.getIzena());
 	}
 	
 	@Test
-	public void TestSetIzena() {
+	public void testSetIzena() {
 		f1.setIzena("irune");
 		assertEquals("irune", f1.getIzena());
 	}
 	
 	@Test
-	public void TestSetIzenaTxarto() {
+	public void testSetIzenaTxarto() {
 		f1.setIzena("irune");
 		assertNotEquals("hegoi", f1.getIzena());
 	}
@@ -48,23 +48,23 @@ public class FreeTest {
 //----------------------------------------- Abizena --------------------------------------
 
 	@Test
-	public void TestGetAbizena() {
+	public void testGetAbizena() {
 		assertEquals("vazquez", f1.getAbizena());
 	}
 	
 	@Test
-	public void TestGetAbizenaTxarto() {
+	public void testGetAbizenaTxarto() {
 		assertNotEquals("vazuez", f1.getAbizena());
 	}
 	
 	@Test
-	public void TestSetAbizena() {
+	public void testSetAbizena() {
 		f1.setAbizena("casquet");
 		assertEquals("casquet", f1.getAbizena());
 	}
 	
 	@Test
-	public void TestSetAbizenaTxarto() {
+	public void testSetAbizenaTxarto() {
 		f1.setAbizena("casquet");
 		assertNotEquals("vazquez", f1.getAbizena());
 	}
@@ -72,19 +72,19 @@ public class FreeTest {
 //----------------------------------------- Data --------------------------------------
 
 	@Test
-	public void TestGetJdata() {
+	public void testGetJdata() {
 		assertEquals(eguna, f1.getJdata());
 	}
 	
 	@Test
-	public void TestGetJdataTxarto() {
+	public void testGetJdataTxarto() {
 		@SuppressWarnings("deprecation")
 		Date jdata2 = new Date(2024, 11, 18);
 		assertNotEquals(jdata2, f1.getJdata());
 	}
 	
 	@Test
-	public void TestSetJdata() {
+	public void testSetJdata() {
 		@SuppressWarnings("deprecation")
 		Date jdata2 = new Date(2024, 11, 18);
 		f1.setJdata(jdata2);
@@ -92,7 +92,7 @@ public class FreeTest {
 	}
 	
 	@Test
-	public void TestSetJdataTxarto() {
+	public void testSetJdataTxarto() {
 		@SuppressWarnings("deprecation")
 		Date jdata2 = new Date(2024, 11, 18);
 		f1.setJdata(jdata2);
@@ -102,23 +102,23 @@ public class FreeTest {
 //----------------------------------------- Erabiltzailea --------------------------------------
 
 	@Test
-	public void TestGetErabiltzailea() {
+	public void testGetErabiltzailea() {
 		assertEquals("vhegoi", f1.getErabiltzailea());
 	}
 	
 	@Test
-	public void TestGetErabiltzaileaTxarto() {
+	public void testGetErabiltzaileaTxarto() {
 		assertNotEquals("vhegoiss", f1.getErabiltzailea());
 	}
 	
 	@Test
-	public void TestSetErabiltzailea() {
+	public void testSetErabiltzailea() {
 		f1.setErabiltzailea("cirune");
 		assertEquals("cirune", f1.getErabiltzailea());
 	}
 	
 	@Test
-	public void TestSetErabiltzaileaTxarto() {
+	public void testSetErabiltzaileaTxarto() {
 		f1.setErabiltzailea("cirune");
 		assertNotEquals("vhegoi", f1.getErabiltzailea());
 	}
@@ -126,23 +126,23 @@ public class FreeTest {
 //----------------------------------------- Pasahitza --------------------------------------
 
 	@Test
-	public void TestGetPasahitza() {
+	public void testGetPasahitza() {
 		assertEquals("12345", f1.getPasahitza());
 	}
 	
 	@Test
-	public void TestGetPasahitzaTxarto() {
+	public void testGetPasahitzaTxarto() {
 		assertNotEquals("1234@", f1.getPasahitza());
 	}
 	
 	@Test
-	public void TestSetPasahitza() {
+	public void testSetPasahitza() {
 		f1.setPasahitza("1234");
 		assertEquals("1234", f1.getPasahitza());
 	}
 	
 	@Test
-	public void TestSetPasahitzaTxarto() {
+	public void testSetPasahitzaTxarto() {
 		f1.setPasahitza("1234");
 		assertNotEquals("12345", f1.getPasahitza());
 	}
@@ -150,23 +150,23 @@ public class FreeTest {
 //----------------------------------------- Hizkuntza --------------------------------------
 
 	@Test
-	public void TestGetHizkuntza() {
+	public void testGetHizkuntza() {
 		assertEquals(Hizkuntza.EU, f1.getHizkuntza());
 	}
 	
 	@Test
-	public void TestGetHizkuntzaTxarto() {
+	public void testGetHizkuntzaTxarto() {
 		assertNotEquals(Hizkuntza.AR, f1.getHizkuntza());
 	}
 	
 	@Test
-	public void TestSetHizkuntza() {
+	public void testSetHizkuntza() {
 		f1.setHizkuntza(Hizkuntza.EN);
 		assertEquals(Hizkuntza.EN, f1.getHizkuntza());
 	}
 	
 	@Test
-	public void TestSetHizkuntzaTxarto() {
+	public void testSetHizkuntzaTxarto() {
 		f1.setHizkuntza(Hizkuntza.EU);
 		assertNotEquals(Hizkuntza.EN, f1.getHizkuntza());
 	}
@@ -174,12 +174,12 @@ public class FreeTest {
 //----------------------------------------- PlayListZerrenda --------------------------------------
 
 	@Test
-    public void TestGetPlayListZerrenda() {
+    public void testGetPlayListZerrenda() {
         assertEquals(new ArrayList<>(), f1.getPlayListZerrenda());
     }
 
 	@Test
-	public void TestGetPlaylistZerrendaTxarto() {
+	public void testGetPlaylistZerrendaTxarto() {
 	    ArrayList<String> BestePlayList = new ArrayList<>();
 	    BestePlayList.add("cancion3");
 	    BestePlayList.add("cancion4");
@@ -206,7 +206,7 @@ public class FreeTest {
 //----------------------------------------- To String --------------------------------------
 
     @Test
-    public void TestToString() {
+    public void testToString() {
     	String txt = f1.toString();
     	
     	String esperotakoa = "Bezeroa [izena=" + f1.getIzena() + ", abizena=" + f1.getAbizena() 
@@ -217,23 +217,23 @@ public class FreeTest {
 //----------------------------------------- Equals --------------------------------------
 
     @Test
-    public void TestEqualsObjetuBerdina() {
+    public void testEqualsObjetuBerdina() {
     assertTrue(f1.equals(f1));
     }
 
     @Test
-    public void TestEqualsNull() {
+    public void testEqualsNull() {
     assertFalse(f1.equals(null));
     }
 
     @Test
-    public void TestEqualsClaseEzberdinak() {
+    public void testEqualsClaseEzberdinak() {
     String txarra = "";
     assertFalse(f1.equals(txarra));
     }
 
     @Test
-    public void TestEqualsClaseAtrBerdinak() {
+    public void testEqualsClaseAtrBerdinak() {
     Free f2 = new Free("hegoi", "vazquez", eguna, "vhegoi", "12345", Hizkuntza.EU, new ArrayList());
     assertTrue(f1.equals(f2));
     }

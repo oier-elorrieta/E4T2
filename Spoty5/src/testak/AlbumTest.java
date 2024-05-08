@@ -31,12 +31,12 @@ public class AlbumTest {
 //----------------------------------------- Izenburua --------------------------------------
 
 	@Test
-    public void TestGetPlayListZerrenda() {
+    public void testGetPlayListZerrenda() {
         assertEquals(new ArrayList<>(), al1.getIzenburua());
     }
 
 	@Test
-	public void TestGetPlaylistZerrendaTxarto() {
+	public void testGetPlaylistZerrendaTxarto() {
 	    ArrayList<String> BesteAlbum = new ArrayList<>();
 	    BesteAlbum.add("cancion3");
 	    BesteAlbum.add("cancion4");
@@ -63,19 +63,19 @@ public class AlbumTest {
   //----------------------------------------- ArgitaratzeUrtea --------------------------------------
     
 	@Test
-	public void TestGetJdata() {
+	public void testGetJdata() {
 		assertEquals(argitaratzeUrtea, al1.getArgitaratzeUrtea());
 	}
 	
 	@Test
-	public void TestGetJdataTxarto() {
+	public void testGetJdataTxarto() {
 		@SuppressWarnings("deprecation")
 		Date jdata2 = new Date(2024, 11, 18);
 		assertNotEquals(jdata2, al1.getArgitaratzeUrtea());
 	}
 	
 	@Test
-	public void TestSetJdata() {
+	public void testSetJdata() {
 		@SuppressWarnings("deprecation")
 		Date jdata2 = new Date(2024, 11, 18);
 		al1.setArgitaratzeUrtea(jdata2);
@@ -83,7 +83,7 @@ public class AlbumTest {
 	}
 	
 	@Test
-	public void TestSetJdataTxarto() {
+	public void testSetJdataTxarto() {
 		@SuppressWarnings("deprecation")
 		Date jdata2 = new Date(2024, 11, 18);
 		al1.setArgitaratzeUrtea(jdata2);
@@ -93,7 +93,7 @@ public class AlbumTest {
 	//----------------------------------------- To String --------------------------------------
 
 	@Test
-	public void TestToString() {
+	public void testToString() {
 		String txt = al1.toString();
 		
 		String esperotakoa = "Album [izenburua=" + al1.getIzenburua() + ", argitaratzeUrtea="
@@ -103,23 +103,23 @@ public class AlbumTest {
 	//----------------------------------------- Equals --------------------------------------
 
     @Test
-    public void TestEqualsObjetuBerdina() {
+    public void testEqualsObjetuBerdina() {
     assertTrue(al1.equals(al1));
     }
 
     @Test
-    public void TestEqualsNull() {
+    public void testEqualsNull() {
     assertFalse(al1.equals(null));
     }
 
     @Test
-    public void TestEqualsClaseEzberdinak() {
+    public void testEqualsClaseEzberdinak() {
     String txarra = "";
     assertFalse(al1.equals(txarra));
     }
 
     @Test
-    public void TestEqualsClaseAtrBerdinak() {
+    public void testEqualsClaseAtrBerdinak() {
     Album al2 = new Album(new ArrayList<>(), argitaratzeUrtea);
     assertTrue(al1.equals(al2));
     }

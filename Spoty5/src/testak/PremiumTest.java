@@ -30,23 +30,23 @@ public class PremiumTest {
 //----------------------------------------- Izena --------------------------------------
     
     @Test
-    public void TestGetIzena() {
+    public void testGetIzena() {
     	assertEquals("hegoi", p1.getIzena());
     }
     
     @Test
-    public void TestGetIzenaTxarto() {
+    public void testGetIzenaTxarto() {
     	assertNotEquals("hegoii", p1.getIzena());
     }
 
     @Test
-    public void TestSetIzena() {
+    public void testSetIzena() {
         p1.setIzena("irune");
         assertEquals("irune", p1.getIzena());
     }
     
     @Test
-	public void TestSetIzenaTxarto() {
+	public void testSetIzenaTxarto() {
 		p1.setIzena("irune");
 		assertNotEquals("hegoi", p1.getIzena());
 	}
@@ -54,23 +54,23 @@ public class PremiumTest {
 //----------------------------------------- Abizena --------------------------------------
 
     @Test
-    public void TestGetAbizena() {
+    public void testGetAbizena() {
         assertEquals("vazquez", p1.getAbizena());
     }
     
     @Test
-	public void TestGetAbizenaTxarto() {
+	public void testGetAbizenaTxarto() {
 		assertNotEquals("vazuez", p1.getAbizena());
 	}
 
     @Test
-    public void TestSetAbizena() {
+    public void testSetAbizena() {
         p1.setAbizena("casquet");
         assertEquals("casquet", p1.getAbizena());
     }
     
     @Test
-	public void TestSetAbizenaTxarto() {
+	public void testSetAbizenaTxarto() {
 		p1.setAbizena("casquet");
 		assertNotEquals("vazquez", p1.getAbizena());
 	}
@@ -78,19 +78,19 @@ public class PremiumTest {
 //----------------------------------------- Data --------------------------------------
    
     @Test
-	public void TestGetJdata() {
+	public void testGetJdata() {
 		assertEquals(eguna, p1.getJdata());
 	}
 	
 	@Test
-	public void TestGetJdataTxarto() {
+	public void testGetJdataTxarto() {
 		@SuppressWarnings("deprecation")
 		Date jdata2 = new Date(2024, 11, 18);
 		assertNotEquals(jdata2, p1.getJdata());
 	}
 	
 	@Test
-	public void TestSetJdata() {
+	public void testSetJdata() {
 		@SuppressWarnings("deprecation")
 		Date jdata2 = new Date(2024, 11, 18);
 		p1.setJdata(jdata2);
@@ -98,7 +98,7 @@ public class PremiumTest {
 	}
 	
 	@Test
-	public void TestSetJdataTxarto() {
+	public void testSetJdataTxarto() {
 		@SuppressWarnings("deprecation")
 		Date jdata2 = new Date(2024, 11, 18);
 		p1.setJdata(jdata2);
@@ -108,23 +108,23 @@ public class PremiumTest {
 //----------------------------------------- Erabiltzailea --------------------------------------
 
 	@Test
-	public void TestGetErabiltzailea() {
+	public void testGetErabiltzailea() {
 		assertEquals("vhegoi", p1.getErabiltzailea());
 	}
 		
 	@Test
-	public void TestGetErabiltzaileaTxarto() {
+	public void testGetErabiltzaileaTxarto() {
 		assertNotEquals("vhegoiss", p1.getErabiltzailea());
 	}
 	
 	@Test
-	public void TestSetErabiltzailea() {
+	public void testSetErabiltzailea() {
 		p1.setErabiltzailea("cirune");
 		assertEquals("cirune", p1.getErabiltzailea());
 	}
 		
 	@Test
-	public void TestSetErabiltzaileaTxarto() {
+	public void testSetErabiltzaileaTxarto() {
 		p1.setErabiltzailea("cirune");
 		assertNotEquals("vhegoi", p1.getErabiltzailea());
 	}
@@ -132,23 +132,23 @@ public class PremiumTest {
 //----------------------------------------- Pasahitza --------------------------------------
 
 	@Test
-	public void TestGetPasahitza() {
+	public void testGetPasahitza() {
 		assertEquals("12345", p1.getPasahitza());
 	}
 	
 	@Test
-	public void TestGetPasahitzaTxarto() {
+	public void testGetPasahitzaTxarto() {
 		assertNotEquals("1234@", p1.getPasahitza());
 	}
 	
 	@Test
-	public void TestSetPasahitza() {
+	public void testSetPasahitza() {
 		p1.setPasahitza("1234");
 		assertEquals("1234", p1.getPasahitza());
 	}
 	
 	@Test
-	public void TestSetPasahitzaTxarto() {
+	public void testSetPasahitzaTxarto() {
 		p1.setPasahitza("1234");
 		assertNotEquals("12345", p1.getPasahitza());
 	}
@@ -156,23 +156,23 @@ public class PremiumTest {
 //----------------------------------------- Hizkuntza --------------------------------------
 
 	@Test
-	public void TestGetHizkuntza() {
+	public void testGetHizkuntza() {
 		assertEquals(Hizkuntza.EN, p1.getHizkuntza());
 	}
 	
 	@Test
-	public void TestGetHizkuntzaTxarto() {
+	public void testGetHizkuntzaTxarto() {
 		assertNotEquals(Hizkuntza.AR, p1.getHizkuntza());
 	}
 	
 	@Test
-	public void TestSetHizkuntza() {
+	public void testSetHizkuntza() {
 		p1.setHizkuntza(Hizkuntza.EN);
 		assertEquals(Hizkuntza.EN, p1.getHizkuntza());
 	}
 	
 	@Test
-	public void TestSetHizkuntzaTxarto() {
+	public void testSetHizkuntzaTxarto() {
 		p1.setHizkuntza(Hizkuntza.EU);
 		assertNotEquals(Hizkuntza.EN, p1.getHizkuntza());
 	}
@@ -180,19 +180,19 @@ public class PremiumTest {
 //----------------------------------------- IraungitzeD --------------------------------------
     
 	@Test
-	public void TestGetIraungitzeD() {
+	public void testGetIraungitzeD() {
 		assertEquals(iraungitzeD, p1.getJdata());
 	}
 	
 	@Test
-	public void TestGetIraungitzeDTxarto() {
+	public void testGetIraungitzeDTxarto() {
 		@SuppressWarnings("deprecation")
 		Date jdata2 = new Date(2024, 11, 18);
 		assertNotEquals(jdata2, p1.getJdata());
 	}
 	
 	@Test
-	public void TestSetIraungitzeD() {
+	public void testSetIraungitzeD() {
 		@SuppressWarnings("deprecation")
 		Date jdata2 = new Date(2024, 11, 18);
 		p1.setJdata(jdata2);
@@ -200,7 +200,7 @@ public class PremiumTest {
 	}
 	
 	@Test
-	public void TestSetIraungitzeDTxarto() {
+	public void testSetIraungitzeDTxarto() {
 		@SuppressWarnings("deprecation")
 		Date jdata2 = new Date(2024, 11, 18);
 		p1.setJdata(jdata2);
@@ -210,7 +210,7 @@ public class PremiumTest {
 //----------------------------------------- To String --------------------------------------
 	
 	@Test
-	public void TestToString() {
+	public void testToString() {
 		String txt = p1.toString();
 		
 		String esperotakoa = "Bezeroa [izena=" + p1.getIzena() + ", abizena=" + p1.getAbizena()
@@ -223,23 +223,23 @@ public class PremiumTest {
 
 
     @Test
-    public void TestEqualsObjetuBerdina() {
+    public void testEqualsObjetuBerdina() {
     assertTrue(p1.equals(p1));
     }
 
     @Test
-    public void TestEqualsNull() {
+    public void testEqualsNull() {
     assertFalse(p1.equals(null));
     }
 
     @Test
-    public void TestEqualsClaseEzberdinak() {
+    public void testEqualsClaseEzberdinak() {
     String txarra = "";
     assertFalse(p1.equals(txarra));
     }
 
     @Test
-    public void TestEqualsClaseAtrBerdinak() {
+    public void testEqualsClaseAtrBerdinak() {
     Premium p2 = new Premium("hegoi", "vazquez", eguna, "vhegoi", "12345", Hizkuntza.EN, new ArrayList<>(), iraungitzeD);
     assertTrue(p1.equals(p2));
     }

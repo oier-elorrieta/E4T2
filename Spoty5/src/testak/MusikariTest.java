@@ -25,23 +25,23 @@ public class MusikariTest {
 //----------------------------------------- Izena --------------------------------------
 
 	@Test
-    public void TestGetIzena() {
+    public void testGetIzena() {
     	assertEquals("Bad Bunny", m1.getIzena());
     }
     
     @Test
-    public void TestGetIzenaTxarto() {
+    public void testGetIzenaTxarto() {
     	assertNotEquals("Bad Bunnyy", m1.getIzena());
     }
 
     @Test
-    public void TestSetIzena() {
+    public void testSetIzena() {
     	m1.setIzena("Bad Gyal");
         assertEquals("Bad Gyal", m1.getIzena());
     }
     
     @Test
-	public void TestSetIzenaTxarto() {
+	public void testSetIzenaTxarto() {
     	m1.setIzena("Bad Gyal");
 		assertNotEquals("Bad Bunny", m1.getIzena());
 	}
@@ -57,12 +57,12 @@ public class MusikariTest {
 //----------------------------------------- AlbumZerrenda --------------------------------------
 
 	@Test
-    public void TestGetPlayListZerrenda() {
+    public void testGetPlayListZerrenda() {
         assertEquals(new ArrayList<>(), m1.getAlbumZerrenda());
     }
 
 	@Test
-	public void TestGetPlaylistZerrendaTxarto() {
+	public void testGetPlaylistZerrendaTxarto() {
 	    ArrayList<String> BesteAlbum = new ArrayList<>();
 	    BesteAlbum.add("cancion3");
 	    BesteAlbum.add("cancion4");
@@ -89,7 +89,7 @@ public class MusikariTest {
  //----------------------------------------- ToString --------------------------------------
 
     @Test
-    public void TestToString() {
+    public void testToString() {
     	String txt = m1.toString();
     	
     	String esperotakoa = "Artista [izena=" + m1.getIzena() + ", irudia=" + m1.getIrudia()
@@ -99,23 +99,23 @@ public class MusikariTest {
  //----------------------------------------- Equals --------------------------------------
 
     @Test
-    public void TestEqualsObjetuBerdina() {
+    public void testEqualsObjetuBerdina() {
     assertTrue(m1.equals(m1));
     }
 
     @Test
-    public void TestEqualsNull() {
+    public void testEqualsNull() {
     assertFalse(m1.equals(null));
     }
 
     @Test
-    public void TestEqualsClaseEzberdinak() {
+    public void testEqualsClaseEzberdinak() {
     String txarra = "";
     assertFalse(m1.equals(txarra));
     }
 
     @Test
-    public void TestEqualsClaseAtrBerdinak() {
+    public void testEqualsClaseAtrBerdinak() {
     Musikari m2 = new Musikari("Bad Bunny", irudia, new ArrayList<>());
     assertTrue(m1.equals(m2));
     }
