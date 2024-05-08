@@ -19,6 +19,7 @@ public class ErreproduzioaDAO {
     public static String lortuAudioarenURLa() {
     	String audioarenURLa = SERVER_URL ;
     	try {
+    		System.out.println("ayyy");
             URL url = new URL(audioarenURLa);
             HttpURLConnection konexioa = (HttpURLConnection) url.openConnection();
             konexioa.setRequestMethod("GET");
