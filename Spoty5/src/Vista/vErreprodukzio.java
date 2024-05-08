@@ -3,12 +3,6 @@ package Vista;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-<<<<<<< HEAD
-
-import DAO.ErreproduzioaDAO;
-
-=======
->>>>>>> f4fb89272c216f32a357ca4e354fba6cc08e5d7a
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -17,6 +11,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
+
+import DAO.ErreproduzioaDAO;
 
 public class vErreprodukzio extends JFrame {
 
@@ -59,11 +55,7 @@ public class vErreprodukzio extends JFrame {
         btnHasiAbestia.setBounds(240, 238, 89, 23);
         btnHasiAbestia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
             	abestiaErreproduzitu();
-=======
-                
->>>>>>> f4fb89272c216f32a357ca4e354fba6cc08e5d7a
             }
         });
         contentPane.add(btnHasiAbestia);
