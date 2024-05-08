@@ -108,7 +108,7 @@ public class vPodcaster extends JFrame {
         
         btnErrePodcast.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		vPodcast podcastFrame = new vPodcast();
+        		vPodcast podcastFrame = new vPodcast(erabiltzaileIzena);
         		podcastFrame.setVisible(true);
         		dispose();
         	}

@@ -28,4 +28,5 @@ public class KonexioaDB {
             e.printStackTrace();
         }
     }
+
 }

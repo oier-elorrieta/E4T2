@@ -34,14 +34,14 @@ public class PodcasterDAO {
         ResultSet rs = null;
       
         try {
-            String sql = "SELECT id_audio FROM podcast WHERE id_podcaster IN (SELECT id_podcaster FROM podcaster WHERE izenArtistikoa = ?)";
+            String sql = "SELECT izena FROM podcast WHERE id_podcaster IN (SELECT id_podcaster FROM podcaster WHERE izenArtistikoa = ?)";
             stmt = con.prepareStatement(sql);
             stmt.setString(1, podcaster);
             rs = stmt.executeQuery();
           
             while (rs.next()) {
-                int id_audio = rs.getInt("id_audio");
-                podcasts.add(String.valueOf(id_audio));
+                String izena = rs.getString("izena");
+                podcasts.add(String.valueOf(izena));
             }
         } catch (SQLException e) {
             e.printStackTrace();
