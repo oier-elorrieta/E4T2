@@ -104,18 +104,24 @@ public class vNirePlayList extends JFrame {
 		contentPane.add(btnPlayListBerria);
 		
 		btnPlayListBerria.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-		        // deitu funtzioa eta erabiltzailea jarrio dion izena itzuli
+		    public void actionPerformed(ActionEvent e) {
+		        // Solicitar al usuario el nombre de la lista de reproducción
 		        String izenaPlayList = eskatuPlayListIzena(erabiltzaileIzena);
 		        
-		        // izena ez egotea utzik
+		        // Si el nombre de la lista de reproducción no está vacío
 		        if (izenaPlayList != null && !izenaPlayList.isEmpty()) {
-		            //Playlist berria metodoa
-		            NirePlayListDAO.playListBerriaSortu(izenaPlayList);
-		            
-		            // aktualiztu playlista lehioan
-		            listPlayListakModel.clear(); 
-		            BezeroPlayListZerrenda(listPlayListakModel, erabiltzaileIzena); 
+		            // Llamar al método playListBerriaSortu para crear la nueva lista de reproducción
+		        	
+		        	
+		        	//
+		        	//
+		            //NirePlayListDAO.playListBerriaSortu(izenaPlayList, obtenerIdUsuario(erabiltzaileIzena));
+		            //
+		        	//
+		        	
+		            // Actualizar la lista de reproducción en la interfaz
+		            listPlayListakModel.clear(); // Limpiar la lista actual
+		            BezeroPlayListZerrenda(listPlayListakModel, erabiltzaileIzena); // Volver a cargar la lista actualizada
 		        }
 		    }
 		});

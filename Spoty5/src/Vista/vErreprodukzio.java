@@ -1,17 +1,16 @@
 package Vista;
 
-
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Audioak.AudioEntzun;
+import DAO.ErreproduzioaDAO;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -22,12 +21,10 @@ public class vErreprodukzio extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JTextField textFieldAbestia;
-    private  String albumIzena;
-
-    
+    private String albumIzena;
 
     public vErreprodukzio(String artistaIzena, String erabiltzaileIzena, String albumIzena, String artistaDeskribapena, ImageIcon artistaIrudia) {
-    	setTitle("Erreprodukzioa");
+        setTitle("Erreprodukzioa");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 601, 415);
         contentPane = new JPanel();
@@ -39,6 +36,7 @@ public class vErreprodukzio extends JFrame {
         btnAtzera.setBounds(10, 11, 89, 23);
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Agrega aquí la lógica para retroceder
             }
         });
         contentPane.add(btnAtzera);
@@ -46,7 +44,6 @@ public class vErreprodukzio extends JFrame {
         JLabel lblAlbumArgazkia = new JLabel("");
         lblAlbumArgazkia.setBounds(164, 21, 239, 205);
         contentPane.add(lblAlbumArgazkia);
-
 
         JButton btnMenua = new JButton("Menua");
         btnMenua.setBounds(90, 238, 89, 23);
@@ -60,8 +57,7 @@ public class vErreprodukzio extends JFrame {
         btnHasiAbestia.setBounds(240, 238, 89, 23);
         btnHasiAbestia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
-                AudioEntzun.reproducir("badbunny.mp3");
+            	abestiaErreproduzitu();
             }
         });
         contentPane.add(btnHasiAbestia);
@@ -82,13 +78,17 @@ public class vErreprodukzio extends JFrame {
         textFieldAbestia.setBounds(43, 313, 436, 52);
         contentPane.add(textFieldAbestia);
         textFieldAbestia.setColumns(10);
-        
+
         JButton btnPerfil = new JButton(erabiltzaileIzena);
         btnPerfil.setFont(new Font("Tahoma", Font.BOLD, 11));
         btnPerfil.setBounds(468, 11, 107, 23);
         contentPane.add(btnPerfil);
-        
-        
-        
+    }
+
+    private void abestiaErreproduzitu() {
+        String urlAbestia = ErreproduzioaDAO.lortuAudioarenURLa();
+        if (urlAbestia != null) {
+            ErreproduzioaDAO.erreproduzituAudioa(urlAbestia);
+        }
     }
 }

@@ -27,14 +27,15 @@ public class NirePlayListDAO {
     }
 	
 	
-	// bihar begiratu
-	public static void playListBerriaSortu(String playListIzena) {
+//NO FUNCIONA!
+	/*public static void playListBerriaSortu(String playListIzena, int userId) {
 	    Connection con = KonexioaDB.hasi(); 
 	    PreparedStatement stmt = null;
 	    try {
-	    	String sql = "INSERT INTO playlist (id_bezeroa, izenburua, sorrera_data) VALUES (DEFAULT, ?, CURRENT_DATE())";
+	        String sql = "INSERT INTO playlist (izenburua, sorrera_data, id_bezeroa) VALUES (?, CURRENT_DATE(), ?)";
 	        stmt = con.prepareStatement(sql);
 	        stmt.setString(1, playListIzena);
+	        stmt.setInt(2, userId);
 	        stmt.executeUpdate();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -46,7 +47,7 @@ public class NirePlayListDAO {
 	            e.printStackTrace();
 	        }
 	    }
-	}
+	}*/
 }
 
 
