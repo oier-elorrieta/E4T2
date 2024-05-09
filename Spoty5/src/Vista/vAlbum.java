@@ -27,6 +27,7 @@ public class vAlbum extends JFrame {
     private String albumIzena;
     
 
+
     /**
      * Create the frame.
      */
@@ -76,12 +77,26 @@ public class vAlbum extends JFrame {
         AlbumIrudiaErakutsi(lblAlbumArgazkia);
         
         JButton btnAbestiAukera = new JButton("Aukeratu");
+
+        btnAbestiAukera.setBounds(170, 83, 89, 23);
+        contentPane.add(btnAbestiAukera);
+        btnAbestiAukera.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String audioIzena = (String) comboBoxAbestiAukeratu.getSelectedItem();
+                vErreprodukzio vErreprodukzioFrame = new vErreprodukzio(artistaIzena, erabiltzaileIzena, albumIzena, artistaDeskribapena, artistaIrudia,audioIzena);
+                vErreprodukzioFrame.setVisible(true);
+                dispose();
+            }
+        });
+        
+
         btnAbestiAukera.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
         }
         });
         btnAbestiAukera.setBounds(170, 83, 89, 23);
         contentPane.add(btnAbestiAukera);
+
         
         JTextArea textAreaAlbumInf = new JTextArea();
         textAreaAlbumInf.setEditable(false);
@@ -90,15 +105,17 @@ public class vAlbum extends JFrame {
         textAreaAlbumInf.setBounds(411, 102, 189, 87);
         contentPane.add(textAreaAlbumInf);
         
-        AlbumInformazioaErakutsi(textAreaAlbumInf);
+ AlbumInformazioaErakutsi(textAreaAlbumInf);
         
+
         btnAbestiAukera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                vErreprodukzio vErreprodukzioFrame = new vErreprodukzio(artistaDeskribapena, artistaDeskribapena, artistaDeskribapena, artistaDeskribapena, artistaIrudia);
+                vErreprodukzio vErreprodukzioFrame = new vErreprodukzio(artistaIzena, erabiltzaileIzena, albumIzena, artistaDeskribapena, artistaIrudia, artistaDeskribapena);
                 vErreprodukzioFrame.setVisible(true);
                 dispose();
             }
         });
+
        
    
         AlbumDAO albumDAO = new AlbumDAO();

@@ -3,6 +3,7 @@ package Vista;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -20,8 +21,9 @@ public class vErreprodukzio extends JFrame {
     private JPanel contentPane;
     private JTextField textFieldAbestia;
     private String albumIzena;
+    private String audioIzena;
 
-    public vErreprodukzio(String artistaIzena, String erabiltzaileIzena, String albumIzena, String artistaDeskribapena, ImageIcon artistaIrudia) {
+    public vErreprodukzio(String artistaIzena, String erabiltzaileIzena, String albumIzena, String artistaDeskribapena, ImageIcon artistaIrudia, String audioIzena) {
         setTitle("Erreprodukzioa");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 601, 415);
@@ -55,9 +57,18 @@ public class vErreprodukzio extends JFrame {
         btnHasiAbestia.setBounds(240, 238, 89, 23);
         btnHasiAbestia.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	abestiaErreproduzitu();
+
+                ErreproduzioaDAO dao = new ErreproduzioaDAO();
+                Clip clip = dao.audioErreproduzitu(audioIzena + ".wav");
+                if (clip != null) {
+                    System.out.println("Clip creado correctamente");
+                    clip.start();
+                } else {
+                    System.out.println("No se pudo crear el clip");
+                }
             }
         });
+            	abestiaErreproduzitu();
         contentPane.add(btnHasiAbestia);
 
         JButton btnAurrekoAbesti = new JButton(">");
