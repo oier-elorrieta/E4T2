@@ -78,7 +78,7 @@ public class AlbumDAO {
     }
 
        
-        public ImageIcon AlbumIrudiaLortu(String albumIzena) {
+      public ImageIcon AlbumIrudiaLortu(String albumIzena) {
             ImageIcon imagenAlbum = null;
             Connection con = KonexioaDB.hasi(); // Obtener conexión con la base de datos
             if (con == null) {

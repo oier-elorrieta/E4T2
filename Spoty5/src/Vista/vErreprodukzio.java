@@ -2,6 +2,7 @@ package Vista;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
@@ -13,13 +14,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
 
+import DAO.AlbumDAO;
 import DAO.ErreproduzioaDAO;
 
 public class vErreprodukzio extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField textFieldAbestia;
     private String albumIzena;
     private String audioIzena;
 
@@ -34,16 +35,20 @@ public class vErreprodukzio extends JFrame {
 
         JButton btnAtzera = new JButton("Atzera");
         btnAtzera.setBounds(10, 11, 89, 23);
+        contentPane.add(btnAtzera);
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Agrega aquí la lógica para retroceder
+                vAlbum vAlbumPanel = new vAlbum(artistaIzena, erabiltzaileIzena, albumIzena, artistaDeskribapena, artistaIrudia);
+                vAlbumPanel.setVisible(true);
+                dispose();
             }
         });
-        contentPane.add(btnAtzera);
 
-        JLabel lblAlbumArgazkia = new JLabel("");
-        lblAlbumArgazkia.setBounds(164, 21, 239, 205);
-        contentPane.add(lblAlbumArgazkia);
+        JLabel lblAbestiArgazkia = new JLabel("");
+        lblAbestiArgazkia.setBounds(164, 21, 239, 205);
+        contentPane.add(lblAbestiArgazkia);
+        
+        AbestiIrudiaErakutsi(lblAbestiArgazkia, audioIzena);
 
         JButton btnMenua = new JButton("Menua");
         btnMenua.setBounds(90, 238, 89, 23);
@@ -59,16 +64,9 @@ public class vErreprodukzio extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 ErreproduzioaDAO dao = new ErreproduzioaDAO();
-                Clip clip = dao.audioErreproduzitu(audioIzena + ".wav");
-                if (clip != null) {
-                    System.out.println("Clip creado correctamente");
-                    clip.start();
-                } else {
-                    System.out.println("No se pudo crear el clip");
-                }
+                dao.audioErreproduzitu(audioIzena + ".wav");
             }
         });
-            	abestiaErreproduzitu();
         contentPane.add(btnHasiAbestia);
 
         JButton btnAurrekoAbesti = new JButton(">");
@@ -80,24 +78,35 @@ public class vErreprodukzio extends JFrame {
         contentPane.add(btnGustokoa);
 
         JLabel lblKantaInfo = new JLabel("Informazioa");
-        lblKantaInfo.setBounds(43, 288, 78, 14);
+        lblKantaInfo.setBounds(43, 288, 473, 65);
         contentPane.add(lblKantaInfo);
-
-        textFieldAbestia = new JTextField();
-        textFieldAbestia.setBounds(43, 313, 436, 52);
-        contentPane.add(textFieldAbestia);
-        textFieldAbestia.setColumns(10);
+        
+        AbestiInformazioaErakutsi(lblKantaInfo,audioIzena);
 
         JButton btnPerfil = new JButton(erabiltzaileIzena);
         btnPerfil.setFont(new Font("Tahoma", Font.BOLD, 11));
         btnPerfil.setBounds(468, 11, 107, 23);
         contentPane.add(btnPerfil);
     }
-
-    private void abestiaErreproduzitu() {
-        String urlAbestia = ErreproduzioaDAO.lortuAudioarenURLa();
-        if (urlAbestia != null) {
-            ErreproduzioaDAO.erreproduzituAudioa(urlAbestia);
+    
+    private void AbestiIrudiaErakutsi(JLabel lblAbestiArgazkia, String audioIzena) {
+        try {
+            ErreproduzioaDAO erreproduzioaDAO = new ErreproduzioaDAO();          
+            ImageIcon abestiArgazki = erreproduzioaDAO.AbestiIrudiaLortu(audioIzena);
+            lblAbestiArgazkia.setIcon(abestiArgazki);  
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    private void AbestiInformazioaErakutsi(JLabel lblKantaInfo, String audioIzena) {
+        try {
+        	ErreproduzioaDAO erreproduzioaDAO = new ErreproduzioaDAO();
+            String albumInf = erreproduzioaDAO.AbestiInformazioaLortu(audioIzena);
+            lblKantaInfo.setText(albumInf);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+         // Hemen errore mezua JOptionPanean edo konsolan erakutsi dezakezu
         }
     }
 }
