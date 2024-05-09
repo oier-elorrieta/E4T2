@@ -25,8 +25,8 @@ public class vErreprodukzio extends JFrame {
     private JPanel contentPane;
     private String albumIzena;
     private String audioIzena;
-    private List<String> abestiak; // Lista de canciones del álbum
-    private int currentIndex; // Índice de la canción actual
+    private List<String> abestiak; 
+    private int currentIndex; 
 
     public vErreprodukzio(String artistaIzena, String erabiltzaileIzena, String albumIzena, String artistaDeskribapena, ImageIcon artistaIrudia, String audioIzena) {
         setTitle("Erreprodukzioa");
@@ -123,4 +123,7 @@ public class vErreprodukzio extends JFrame {
          // Hemen errore mezua JOptionPanean edo konsolan erakutsi dezakezu
         }
     }
+    
+    
+    
 }
