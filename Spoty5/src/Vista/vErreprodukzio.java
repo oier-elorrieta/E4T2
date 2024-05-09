@@ -57,6 +57,14 @@ public class vErreprodukzio extends JFrame {
         JButton btnMenua = new JButton("Menua");
         btnMenua.setBounds(90, 238, 89, 23);
         contentPane.add(btnMenua);
+        
+        btnMenua.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                vMenua menuaPanel = new vMenua(audioIzena);
+                menuaPanel.setVisible(true);
+                dispose();
+            }
+        });
 
         JButton btnAurrekoAbesti = new JButton("<");
         btnAurrekoAbesti.setBounds(189, 238, 41, 23);
