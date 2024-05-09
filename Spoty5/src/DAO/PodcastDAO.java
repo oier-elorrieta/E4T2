@@ -10,10 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-
 import Audioak.Podcast;
 import master.KonexioaDB;
 
@@ -52,7 +50,6 @@ public class PodcastDAO {
                 e.printStackTrace();
             }
         }
-      
         return idsAudio;
     }
 
@@ -95,7 +92,6 @@ public class PodcastDAO {
                 e.printStackTrace();
             }
         }
-      
         return podcast;
     }
     
@@ -143,8 +139,6 @@ public class PodcastDAO {
                 e.printStackTrace();
             }
         }
-      
         return irudia;
     }
 }
-
