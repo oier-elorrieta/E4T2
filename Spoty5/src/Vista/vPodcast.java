@@ -20,8 +20,8 @@ public class vPodcast extends JFrame {
     private JTextField textFieldPodcastInfo;
     private String podcaster;
 
-    public vPodcast(String podcaster) {
-        this.podcaster = podcaster;
+    public vPodcast(String podcaster, String erabiltzaileIzena) {
+        this.podcaster = podcaster; // Asignar el valor del parámetro al campo podcaster
         setTitle("Podcast");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 601, 415);
@@ -29,15 +29,34 @@ public class vPodcast extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-
-        JButton btnBack = new JButton("Atzera");
-        btnBack.setBounds(10, 11, 89, 23);
-        btnBack.addActionListener(new ActionListener() {
+        
+        JButton btnPerfil = new JButton(erabiltzaileIzena);
+        btnPerfil.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnPerfil.setBounds(468, 7, 107, 23);
+        contentPane.add(btnPerfil);
+        
+        btnPerfil.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Add your action here
+                // Crear e instanciar vErregistratu cuando se hace clic en el botón
+                vErregistratu erregistratuFrame = new vErregistratu(erabiltzaileIzena);
+                erregistratuFrame.setVisible(true);
+                dispose();
             }
         });
-        contentPane.add(btnBack);
+
+        JButton btnAtzera = new JButton("Atzera");
+        btnAtzera.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnAtzera.setBounds(10, 7, 107, 23);
+        contentPane.add(btnAtzera);
+       
+        btnAtzera.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // Menu nagusira itzuli
+                vPodcasterLista frame = new vPodcasterLista(erabiltzaileIzena);
+                frame.setVisible(true);
+                dispose();
+            }  
+        });
 
         JLabel lblPodcasterImage = new JLabel("");
         lblPodcasterImage.setBounds(164, 21, 239, 205);
@@ -78,7 +97,7 @@ public class vPodcast extends JFrame {
         textFieldPodcastInfo = new JTextField();
         textFieldPodcastInfo.setText(podcasterInfo);
         textFieldPodcastInfo.setEditable(false);
-        textFieldPodcastInfo.setBounds(43, 313, 436, 52);
+        textFieldPodcastInfo.setBounds(71, 313, 436, 52);
         contentPane.add(textFieldPodcastInfo);
         textFieldPodcastInfo.setColumns(10);
     }
