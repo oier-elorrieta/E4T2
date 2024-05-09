@@ -9,8 +9,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.Font;
 
@@ -23,6 +25,8 @@ public class vErreprodukzio extends JFrame {
     private JPanel contentPane;
     private String albumIzena;
     private String audioIzena;
+    private List<String> abestiak; // Lista de canciones del álbum
+    private int currentIndex; // Índice de la canción actual
 
     public vErreprodukzio(String artistaIzena, String erabiltzaileIzena, String albumIzena, String artistaDeskribapena, ImageIcon artistaIrudia, String audioIzena) {
         setTitle("Erreprodukzioa");
@@ -54,9 +58,9 @@ public class vErreprodukzio extends JFrame {
         btnMenua.setBounds(90, 238, 89, 23);
         contentPane.add(btnMenua);
 
-        JButton btnHurrengoAbesti = new JButton("<");
-        btnHurrengoAbesti.setBounds(189, 238, 41, 23);
-        contentPane.add(btnHurrengoAbesti);
+        JButton btnAurrekoAbesti = new JButton("<");
+        btnAurrekoAbesti.setBounds(189, 238, 41, 23);
+        contentPane.add(btnAurrekoAbesti);
 
         JButton btnHasiAbestia = new JButton("Play");
         btnHasiAbestia.setBounds(240, 238, 89, 23);
@@ -69,9 +73,11 @@ public class vErreprodukzio extends JFrame {
         });
         contentPane.add(btnHasiAbestia);
 
-        JButton btnAurrekoAbesti = new JButton(">");
-        btnAurrekoAbesti.setBounds(339, 238, 41, 23);
-        contentPane.add(btnAurrekoAbesti);
+        JButton btnHurrengoAbesti = new JButton(">");
+        btnHurrengoAbesti.setBounds(339, 238, 41, 23);
+        contentPane.add(btnHurrengoAbesti);
+
+          
 
         JButton btnGustokoa = new JButton("Gustokoa");
         btnGustokoa.setBounds(390, 238, 89, 23);
