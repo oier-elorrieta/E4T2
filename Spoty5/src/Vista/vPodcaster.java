@@ -14,12 +14,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import DAO.PodcasterDAO;
 
+/**
+ * Podcast-egilea aukeratzeko eta informazioa erakusteko interfaze grafikoa eskaintzen duen klasea.
+ */
 public class vPodcaster extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private String PodcasterHautatua;
     private JComboBox<String> comboBoxPodcasts;
 
+    /**
+     * Klasearen konstruktorea. Podcast-egilearen interfazea sortzen du.
+     * @param PodcasterHautatua Hautatutako podcast-egilearen izena.
+     * @param erabiltzaileIzena Erabiltzailearen izena.
+     */
     public vPodcaster(String PodcasterHautatua, String erabiltzaileIzena) {
         this.PodcasterHautatua = PodcasterHautatua;
         setTitle(PodcasterHautatua);
@@ -42,7 +50,7 @@ public class vPodcaster extends JFrame {
 
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Menu nagusira itzuli
+                // Menura itzuli
                 vPodcasterLista frame = new vPodcasterLista(erabiltzaileIzena);
                 frame.setVisible(true);
                 dispose();
@@ -56,7 +64,7 @@ public class vPodcaster extends JFrame {
 
         btnPerfil.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Crear e instanciar vErregistratu cuando se hace clic en el botón
+                // Profila editatzeko pantailara joan
                 vErregistratu erregistratuFrame = new vErregistratu(erabiltzaileIzena);
                 erregistratuFrame.setVisible(true);
                 dispose();
@@ -68,7 +76,7 @@ public class vPodcaster extends JFrame {
         lblPodcasts.setBounds(25, 41, 98, 14);
         contentPane.add(lblPodcasts);
 
-        JLabel lblInfo = new JLabel("Información");
+        JLabel lblInfo = new JLabel("Informazioa");
         lblInfo.setHorizontalAlignment(SwingConstants.CENTER);
         lblInfo.setBounds(291, 41, 68, 14);
         contentPane.add(lblInfo);
@@ -84,34 +92,44 @@ public class vPodcaster extends JFrame {
         textAreaInformacion.setBounds(246, 59, 159, 130);
         contentPane.add(textAreaInformacion);
 
+        // Podcast-egilearen informazioa erakutsi
         PodcasterInformazioaErakutsi(textAreaInformacion);
 
+        // Podcast-ak erakutsi
         PodcastErakutsi(comboBoxPodcasts);
 
         JLabel lblPodcasterImg = new JLabel("");
         lblPodcasterImg.setHorizontalAlignment(SwingConstants.CENTER);
         lblPodcasterImg.setBounds(10, 160, 223, 186);
         contentPane.add(lblPodcasterImg);
-        PodcasterIrudiaErakutsi(lblPodcasterImg);
 
-        // Botoia Erreproduzitu Podcast
+        // Botoia Podcast erreproduzitzeko
         JButton btnErrePodcast = new JButton("Erreproduzitu Podcast");
         btnErrePodcast.setBounds(246, 222, 164, 23);
         contentPane.add(btnErrePodcast);
 
         btnErrePodcast.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                // Podcast-a erreproduzitu
                 PodcastIkusi(erabiltzaileIzena);
             }
         });
     }
 
+    /**
+     * Metodo honek JTextArea baten bidez podcast-egilearen informazioa erakusten du.
+     * @param textAreaInformacion JTextArea elementua podcast-egilearen informazioa bistaratzeko.
+     */
     private void PodcasterInformazioaErakutsi(JTextArea textAreaInformacion) {
         PodcasterDAO podcasterDAO = new PodcasterDAO();
         String informacionPodcaster = podcasterDAO.PodcasterInformazioaLortu(PodcasterHautatua);
         textAreaInformacion.setText(informacionPodcaster);
     }
 
+    /**
+     * Metodo honek JComboBox baten bidez podcast-egilearen podcast-ak sartzen ditu.
+     * @param comboBoxPodcasts JComboBox elementua podcast-ak bistaratzeko.
+     */
     private void PodcastErakutsi(JComboBox<String> comboBoxPodcasts) {
         PodcasterDAO podcasterDAO = new PodcasterDAO();
         String[] podcasts = podcasterDAO.PodcastPodcastertatikLortu(PodcasterHautatua);
@@ -120,18 +138,27 @@ public class vPodcaster extends JFrame {
         }
     }
 
+    /**
+     * Metodo honek erabilitako JComboBox-ean hautatutako podcast-a erreproduzitzen du.
+     * @param erabiltzaileIzena Erabiltzailearen izena.
+     */
     private void PodcastIkusi(String erabiltzaileIzena) {
         try {
             String podcastHautatua = comboBoxPodcasts.getSelectedItem().toString();
+            // Podcast-a erreproduzitu interfazea sortu eta bistaratu
             vPodcast vPodcastFrame = new vPodcast(podcastHautatua, erabiltzaileIzena);
             vPodcastFrame.setVisible(true);
             dispose();
         } catch (Exception ex) {
             ex.printStackTrace();
-            // Manejar el error aquí
+            // Errorea kudeatu hemen
         }
     }
 
+    /**
+     * Metodo honek podcast-egilearen irudia erakusten du JLabel elementuan.
+     * @param lblPodcasterImg JLabel elementua podcast-egilearen irudia bistaratzeko.
+     */
     private void PodcasterIrudiaErakutsi(JLabel lblPodcasterImg) {
         try {
             PodcasterDAO podcasterDAO = new PodcasterDAO();
@@ -139,7 +166,7 @@ public class vPodcaster extends JFrame {
             lblPodcasterImg.setIcon(imagenPodcaster);  
         } catch (Exception ex) {
             ex.printStackTrace();
-            // Manejar el error aquí
+            // Errorea kudeatu hemen
         }
     }
 }

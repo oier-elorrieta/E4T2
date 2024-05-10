@@ -4,22 +4,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-
 import DAO.AlbumDAO;
-import DAO.ArtistaDAO;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import javax.swing.JComboBox;
-import javax.swing.JTextField;
 
+/**
+ * {@code vAlbum} klaseak JFrame-aren birtuala da eta musika albumen informazioa erakusteko erabiltzen da.
+ * Klase honek musika albumaren argazkia, abestiak, eta informazioa erakusten ditu.
+ */
 public class vAlbum extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -27,12 +25,19 @@ public class vAlbum extends JFrame {
 	private String albumIzena;
 
 	/**
-	 * Create the frame.
+	 * {@code vAlbum} klasearen eraikitzailea. Eraikitzaile honek albumaren izena ematen du 
+	 * eta albumaren leihoa hasieratzen du.
+	 *
+	 * @param artistaIzena        Albumaren artista izena
+	 * @param erabiltzaileIzena   Erabiltzailearen izena
+	 * @param albumIzena          Albumaren izena
+	 * @param artistaDeskribapena Albumaren artistaaren deskribapena
+	 * @param artistaIrudia       Albumaren artistaaren irudia
 	 */
 	public vAlbum(String artistaIzena, String erabiltzaileIzena, String albumIzena, String artistaDeskribapena,
 			ImageIcon artistaIrudia) {
 		this.albumIzena = albumIzena;
-		setTitle("Album: " + albumIzena);
+		setTitle("Albuma: " + albumIzena);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 413);
 		contentPane = new JPanel();
@@ -53,17 +58,17 @@ public class vAlbum extends JFrame {
 			}
 		});
 
-		JLabel lblAlbum = new JLabel("Album: " + albumIzena);
+		JLabel lblAlbum = new JLabel("Albuma: " + albumIzena);
 		lblAlbum.setBounds(172, 14, 182, 13);
 		contentPane.add(lblAlbum);
 
-		JLabel lblKantaZ = new JLabel("Kanta Zerrenda: ");
-		lblKantaZ.setBounds(10, 60, 100, 13);
-		contentPane.add(lblKantaZ);
+		JLabel lblAbestiZerrenda = new JLabel("Abesti Zerrenda: ");
+		lblAbestiZerrenda.setBounds(10, 60, 100, 13);
+		contentPane.add(lblAbestiZerrenda);
 
-		JLabel lblAlbumZ = new JLabel("Albumaren informazioa");
-		lblAlbumZ.setBounds(444, 60, 176, 13);
-		contentPane.add(lblAlbumZ);
+		JLabel lblAlbumarenInformazioa = new JLabel("Albumaren informazioa");
+		lblAlbumarenInformazioa.setBounds(444, 60, 176, 13);
+		contentPane.add(lblAlbumarenInformazioa);
 
 		JComboBox comboBoxAbestiAukeratu = new JComboBox();
 		comboBoxAbestiAukeratu.setBounds(10, 84, 137, 21);
@@ -116,29 +121,37 @@ public class vAlbum extends JFrame {
 				comboBoxAbestiAukeratu.addItem(abestia);
 			}
 
-			// Obtener la imagen de la primera canción en el álbum
+			// Aukeratutako albumaren irudia hartu
 			if (!abestiak.isEmpty()) {
-				String primeraAbestiIzena = abestiak.get(0); // Obtener el nombre de la primera canción
-				ImageIcon albumArgazki = albumDAO.AlbumIrudiaLortu(primeraAbestiIzena); // Obtener la imagen de la
-																						// canción
-				lblAlbumArgazkia.setIcon(albumArgazki); // Establecer la imagen en el JLabel
+				String lehenAbestiIzena = abestiak.get(0); // Lehengo abestiaren izena lortu
+				ImageIcon albumArgazkia = albumDAO.AlbumIrudiaLortu(lehenAbestiIzena); // Abestiaren irudia lortu
+				lblAlbumArgazkia.setIcon(albumArgazkia); // Irudia JLabel-en ezarri
 			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 
+	/**
+	 * Albumaren irudia erakutsi.
+	 *
+	 * @param lblAlbumArgazkia Albumaren irudia erakutsiko den JLabel-a
+	 */
 	private void AlbumIrudiaErakutsi(JLabel lblAlbumArgazkia) {
 		try {
 			AlbumDAO albumDAO = new AlbumDAO();
-			ImageIcon albumArgazki = albumDAO.AlbumIrudiaLortu(albumIzena);
-			lblAlbumArgazkia.setIcon(albumArgazki);
+			ImageIcon albumArgazkia = albumDAO.AlbumIrudiaLortu(albumIzena);
+			lblAlbumArgazkia.setIcon(albumArgazkia);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
 
-	// Aukeratutako albumaren informazioa JTextArean erakusteko metodoa
+	/**
+	 * Aukeratutako albumaren informazioa JTextArean erakusteko metodoa.
+	 *
+	 * @param textAreaAlbumInf Albumaren informazioa erakutsiko den JTextArea
+	 */
 	private void AlbumInformazioaErakutsi(JTextArea textAreaAlbumInf) {
 		try {
 			AlbumDAO albumDAO = new AlbumDAO();
