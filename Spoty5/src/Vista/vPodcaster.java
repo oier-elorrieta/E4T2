@@ -50,6 +50,7 @@ public class vPodcaster extends JFrame {
 
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 // Menura itzuli
                 vPodcasterLista frame = new vPodcasterLista(erabiltzaileIzena);
                 frame.setVisible(true);
@@ -64,7 +65,9 @@ public class vPodcaster extends JFrame {
 
         btnPerfil.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
                 // Profila editatzeko pantailara joan
+
                 vErregistratu erregistratuFrame = new vErregistratu(erabiltzaileIzena);
                 erregistratuFrame.setVisible(true);
                 dispose();
