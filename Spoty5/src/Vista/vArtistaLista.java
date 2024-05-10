@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Artistak.Artista;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -11,7 +14,10 @@ import javax.swing.JComboBox;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import DAO.ArtistaListaDAO;
+import java.util.List;
+
+
+import DAO.MusikariListaDAO;
 
 /**
  * 'vArtistaLista' klaseak artisten zerrenda erakusteko eta artistaren informazioa ikusteko interfazea ematen du.
@@ -63,6 +69,7 @@ public class vArtistaLista extends JFrame {
        comboBoxArtistak = new JComboBox<String>();
        comboBoxArtistak.setBounds(92, 90, 249, 23);
        contentPane.add(comboBoxArtistak);
+       ArtistaListaKargatu();
       
        JButton btnVerArtista = new JButton("Ikusi Artista");
        btnVerArtista.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -104,30 +111,26 @@ public class vArtistaLista extends JFrame {
 			}
 		});
       
-       ArtistaListaKargatu();
    }
   
    /**
     * Artisten zerrenda kargatzeko eta ComboBox-en erakusteko metodoa.
     */
    private void ArtistaListaKargatu() {
-       try {
-           ArtistaListaDAO artistaDAO = new ArtistaListaDAO();
-           
-           // Artisten zerrenda lortu
-           String listaArtistas = artistaDAO.ArtistaListaLortu();
-           
-           // Artistak ComboBox-era gehitu
-           String[] arrayArtistas = listaArtistas.split("\n");
-           comboBoxArtistak.removeAllItems();
-           for (String artista : arrayArtistas) {
-               comboBoxArtistak.addItem(artista);
-           }
-       } catch (Exception ex) {
-           ex.printStackTrace();
-           // Hemen errore mezua JOptionPanean edo konsolan erakutsi dezakezu
-       }
-   }
+	   try {     
+	        MusikariListaDAO musikariListaDAO = new MusikariListaDAO();
+
+	        
+	        List<Artista> artistas = musikariListaDAO.artistaListKargatu();
+
+	        
+	        for (Artista artista : artistas) {
+	            comboBoxArtistak.addItem(artista.getIzena());  
+	        }
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    }
+	}
 
    /**
     * 'vArtista' interfazea irekitzeko metodoa, aukeratutako artista batekin.

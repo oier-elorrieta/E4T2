@@ -4,6 +4,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+
+import Audioak.Album;
+
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,9 +30,11 @@ public class vErreprodukzio extends JFrame {
     private String audioIzena;
     private List<String> abestiak; 
     private int currentIndex; 
+    private Album album;
 
     public vErreprodukzio(String artistaIzena, String erabiltzaileIzena, String albumIzena, String artistaDeskribapena, ImageIcon artistaIrudia, String audioIzena) {
-        setTitle("Erreprodukzioa");
+        
+    	setTitle("Erreprodukzioa");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 601, 415);
         contentPane = new JPanel();
@@ -84,7 +89,11 @@ public class vErreprodukzio extends JFrame {
         JButton btnHurrengoAbesti = new JButton(">");
         btnHurrengoAbesti.setBounds(339, 238, 41, 23);
         contentPane.add(btnHurrengoAbesti);
-
+        btnHurrengoAbesti.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            	erreproduzituUrrengoAbestia(abestiak);
+            }
+        });
           
 
         JButton btnGustokoa = new JButton("Gustokoa");
@@ -124,6 +133,20 @@ public class vErreprodukzio extends JFrame {
         }
     }
     
+    private void erreproduzituUrrengoAbestia(List<String> abestiak) {
+        
+        if (album != null) {
+            
+            String urrengoAbestia = album.hurrengoAbestia(audioIzena);
+            if (urrengoAbestia != null) {
+                
+            } else {
+                JOptionPane.showMessageDialog(vErreprodukzio.this, "Ezin izan da hurrengo abestia aurkitu.", "Errorea", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(vErreprodukzio.this, "Albuma kargatu gabekoak ezin du abestirik erakutsi.", "Errorea", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     
     
 }

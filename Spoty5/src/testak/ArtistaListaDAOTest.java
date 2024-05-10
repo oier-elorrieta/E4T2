@@ -10,16 +10,16 @@ import java.sql.SQLException;
 import org.junit.Before;
 import org.junit.Test;
 
-import DAO.ArtistaListaDAO;
+import DAO.MusikariListaDAO;
 import master.KonexioaDB;
 
 public class ArtistaListaDAOTest {
 
-    private ArtistaListaDAO artistaListaDAO;
+    private MusikariListaDAO artistaListaDAO;
 
     @Before
     public void setUp() {
-        artistaListaDAO = new ArtistaListaDAO();
+        artistaListaDAO = new MusikariListaDAO();
     }
 
     @Test

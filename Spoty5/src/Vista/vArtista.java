@@ -2,6 +2,9 @@ package Vista;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Audioak.Album;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -155,14 +158,14 @@ public class vArtista extends JFrame {
     private void AlbumakErakutsi(JComboBox<String> comboBoxAlbumes) {
         try {
             ArtistaDAO artistaDAO = new ArtistaDAO();
-            String[] albumes = artistaDAO.AlbumakLortuArtistetatik(artistaIzena);
+            List<Album> albumes = artistaDAO.AlbumakLortuArtistetatik();
            
-            for (String album : albumes) {
-                comboBoxAlbumak.addItem(album);
+            for (Album album : albumes) {
+                comboBoxAlbumak.addItem(album.getIzenburua()); 
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-         // Hemen errore mezua JOptionPanean edo konsolan erakutsi dezakezu
+            
         }
     }
    

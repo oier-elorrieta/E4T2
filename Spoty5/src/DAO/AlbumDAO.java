@@ -34,6 +34,7 @@ public class AlbumDAO {
         }
        
         return abestiak;
+        
     }
     
     
@@ -118,7 +119,5 @@ public class AlbumDAO {
                 }
             }
             return imagenAlbum;
-        }
-        
-        
+        }   
  }

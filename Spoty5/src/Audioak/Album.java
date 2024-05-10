@@ -1,113 +1,104 @@
 package Audioak;
 
 import java.sql.Blob;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
+import DAO.AlbumDAO;
 
 /**
  * Album izeneko klasea
  */
 public class Album {
-    private ArrayList<String> Izenburua;
-    protected static Blob irudia;
-   
-    /**
-     * Albuma izango duen argitaratze urtea
-     */
-    private Date ArgitaratzeUrtea;
-   
-    /**
-     * Albuma sortzeko konstruktorea izenburua eta argitaratze urtearekin
-     *
-     * @param izenburua albumaren izenburua
-     * @param argitaratzeUrtea albumaren argitaratze urtea
-     */
-    public Album(ArrayList<String> izenburua, Date argitaratzeUrtea) {
-        Izenburua = izenburua;
-        ArgitaratzeUrtea = argitaratzeUrtea;
-    }
-   
-    public static Blob getIrudia() {
-return irudia;
-}
+	private int id_album;
+	private String izenburua;
+	private Date urtea;
+	private String generoa;
+	private static Blob irudia;
+	
+
+	/**
+	 * Albuma izango duen argitaratze urtea
+	 */
+	
+
+	/**
+	 * Albuma sortzeko konstruktorea izenburua eta argitaratze urtearekin
+	 *
+	 * @param izenburua        albumaren izenburua
+	 * @param argitaratzeUrtea albumaren argitaratze urtea
+	 */
 
 
-public void setIrudia(Blob irudia) {
-this.irudia = irudia;
-}
-    /**
-     * Albumaren izenburua lortzen du
-     *
-     * @return albumaren izenburua
-     */
-    public ArrayList<String> getIzenburua() {
-        return Izenburua;
-    }
-   
-    /**
-     * Albumaren izenburua ezartzen du
-     *
-     * @param izenburua albumaren izenburu berria
-     */
-    public void setIzenburua(ArrayList<String> izenburua) {
-        Izenburua = izenburua;
-    }
+	public Album(int id_album, String izenburua, Date urtea, String generoa) {
+		this.id_album = id_album;
+		this.izenburua = izenburua;
+		this.urtea = urtea;
+		this.generoa = generoa;	
+	}
+	
 
-    /**
-     * Albumaren argitaratze urtea lortzen du
-     *
-     * @return albumaren argitaratze urtea
-     */
-    public Date getArgitaratzeUrtea() {
-        return ArgitaratzeUrtea;
-    }
+	public static Blob getIrudia() {
+		return irudia;
+	}
+	public void setIrudia(Blob irudia) {
+		this.irudia = irudia;
+	}
 
-    /**
-     * Albumaren argitaratze urtea ezartzen du
-     *
-     * @param argitaratzeUrtea albumaren argitaratze urte berria
-     */
-    public void setArgitaratzeUrtea(Date argitaratzeUrtea) {
-        ArgitaratzeUrtea = argitaratzeUrtea;
-    }
+	public int getId_album() {
+		return id_album;
+	}
 
-    /**
-     * Albumaren izenburua eta argitaratzeurtearekin testu batean bihurtzen du objetua
-     *
-     * @returnf Albumaren izenburua eta argitaratze urtea duen testu errepresentazioa
-     */
-   
+	public Date getUrtea() {
+		return urtea;
+	}
 
-    /**
-     * Objetuaren hash kodea kalkulatzen du
-     *
-     * @return objetuaren hash kodea
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(ArgitaratzeUrtea, Izenburua);
-    }
+	public String getGeneroa() {
+		return generoa;
+	}
 
-    @Override
-public String toString() {
-return "Album [Izenburua=" + Izenburua + ", ArgitaratzeUrtea=" + ArgitaratzeUrtea + "]";
-}
+	public void setId_album(int id_album) {
+		this.id_album = id_album;
+	}
 
-/**
-     * @param zein objetuarekin konparatuko den
-     * @return true objetuak berdin badira, false objetuak desberdinak badira
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Album other = (Album) obj;
-        return Objects.equals(ArgitaratzeUrtea, other.ArgitaratzeUrtea) && Objects.equals(Izenburua, other.Izenburua);
-    }
-   
+	
+
+	public String getIzenburua() {
+		return izenburua;
+	}
+
+
+	public void setIzenburua(String izenburua) {
+		this.izenburua = izenburua;
+	}
+
+
+	public void setUrtea(Date urtea) {
+		this.urtea = urtea;
+	}
+
+	public void setGeneroa(String generoa) {
+		this.generoa = generoa;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(generoa, id_album, izenburua, urtea);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Album other = (Album) obj;
+		return Objects.equals(generoa, other.generoa) && id_album == other.id_album
+				&& Objects.equals(izenburua, other.izenburua) && Objects.equals(urtea, other.urtea);
+	}
+
 }

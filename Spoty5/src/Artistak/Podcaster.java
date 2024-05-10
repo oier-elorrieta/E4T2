@@ -47,7 +47,7 @@ public class Podcaster extends Artista{
      */
     @Override
 	public String toString() {
-		return "Podcaster [PodcastZerrenda=" + PodcastZerrenda + ", Izena=" + Izena + ", irudia=" + irudia + "]";
+		return "Podcaster [PodcastZerrenda=" + PodcastZerrenda + ", Izena=" + izena + ", irudia=" + irudia + "]";
 	}
 
 	/**
