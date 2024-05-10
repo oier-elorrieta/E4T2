@@ -106,25 +106,20 @@ public class vArtistaLista extends JFrame {
 				dispose();
 			}
 		});
-<<<<<<< HEAD
-      
-=======
-       ArtistaListaKargatu();
->>>>>>> 05e614d397f7d5cf59e36a20b424c86a01b982fc
+
    }
 
    /**
     * Artisten zerrenda kargatzeko eta ComboBox-en erakusteko metodoa.
     */
    private void ArtistaListaKargatu() {
-<<<<<<< HEAD
-	   try {     
+	    try {     
 	        MusikariListaDAO musikariListaDAO = new MusikariListaDAO();
 
-	        
+	        // Lortu artisten zerrenda
 	        List<Artista> artistas = musikariListaDAO.artistaListKargatu();
 
-	        
+	        // Gehitu artisten izenak ComboBox-era
 	        for (Artista artista : artistas) {
 	            comboBoxArtistak.addItem(artista.getIzena());  
 	        }
@@ -132,22 +127,7 @@ public class vArtistaLista extends JFrame {
 	        ex.printStackTrace();
 	    }
 	}
-=======
-       try {
-           ArtistaListaDAO artistaDAO = new ArtistaListaDAO();
-           
-           String listaArtistas = artistaDAO.ArtistaListaLortu();
-           
-           String[] arrayArtistas = listaArtistas.split("\n");
-           comboBoxArtistak.removeAllItems();
-           for (String artista : arrayArtistas) {
-               comboBoxArtistak.addItem(artista);
-           }
-       } catch (Exception ex) {
-           ex.printStackTrace();
-       }
-   }
->>>>>>> 05e614d397f7d5cf59e36a20b424c86a01b982fc
+
 
    /**
     * 'vArtista' interfazea irekitzeko metodoa, aukeratutako artista batekin.

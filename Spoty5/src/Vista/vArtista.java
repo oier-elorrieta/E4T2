@@ -132,7 +132,7 @@ public class vArtista extends JFrame {
             textAreaInformazioa.setText(informazioaArtista);
         } catch (Exception ex) {
             ex.printStackTrace();
-<<<<<<< HEAD
+
          // Hemen errore mezua JOptionPanean edo konsolan erakutsi dezakezu
         }
     }
@@ -149,8 +149,7 @@ public class vArtista extends JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
             
-=======
->>>>>>> 05e614d397f7d5cf59e36a20b424c86a01b982fc
+
         }
     }
    
@@ -159,18 +158,7 @@ public class vArtista extends JFrame {
      *
      * @param comboBoxAlbumes JComboBox elementua artistaren albumak erakusteko
      */
-    private void AlbumakErakutsi(JComboBox<String> comboBoxAlbumes) {
-        try {
-            ArtistaDAO artistaDAO = new ArtistaDAO();
-            String[] albumak = artistaDAO.AlbumakLortuArtistetatik(artistaIzena);
-           
-            for (String album : albumak) {
-                comboBoxAlbumak.addItem(album);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+   
    
     /**
      * Erabiltzaileak hautatutako artistaren irudia erakusteko metodoa.
