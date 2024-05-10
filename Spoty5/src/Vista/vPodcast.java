@@ -66,6 +66,14 @@ public class vPodcast extends JFrame {
         JButton btnMenu = new JButton("Menua");
         btnMenu.setBounds(90, 238, 89, 23);
         contentPane.add(btnMenu);
+        
+        btnMenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                vMenua menuaPanel = new vMenua(erabiltzaileIzena);
+                menuaPanel.setVisible(true);
+                dispose();
+            }
+        });
 
         JButton btnPreviousPodcast = new JButton("<");
         btnPreviousPodcast.setBounds(189, 238, 41, 23);
