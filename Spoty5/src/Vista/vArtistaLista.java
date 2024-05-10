@@ -1,5 +1,4 @@
 package Vista;
-
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,7 +19,7 @@ import java.util.List;
 import DAO.MusikariListaDAO;
 
 /**
- * 'vArtistaLista' klaseak artisten zerrenda erakusteko eta artistaren informazioa ikusteko interfazea ematen du.
+ * 'vArtistaLista' klasea artisten zerrenda erakusteko eta artistaren informazioa ikusteko interfazea ematen du.
  */
 public class vArtistaLista extends JFrame {
 	
@@ -31,10 +30,10 @@ public class vArtistaLista extends JFrame {
    /**
     * Programaren exekuzioaren hasieran 'vArtistaLista' klasearen instantzia bat sortzeko metodo estatikoa.
     * 
-    * @param args Komando lerro argumentuak
-    * @param erabiltzaileIzena Erabiltzailearen izena
+    * @param args             Komando lerro argumentuak
+    * @param erabiltzaileIzena    Erabiltzailearen izena
     */
-   public static void main(String[] args,String erabiltzaileIzena) {
+   public static void main(String[] args, String erabiltzaileIzena) {
        EventQueue.invokeLater(new Runnable() {
            public void run() {
                try {
@@ -50,10 +49,10 @@ public class vArtistaLista extends JFrame {
    /**
     * 'vArtistaLista' klasearen eraikitzailea, non erabiltzaileak artisten zerrenda ikusi dezakeen.
     * 
-    * @param erabiltzaileIzena Erabiltzailearen izena
+    * @param erabiltzaileIzena    Erabiltzailearen izena
     */
    public vArtistaLista(String erabiltzaileIzena) {
-       setTitle("Artista lista");
+       setTitle("Artisten Zerrenda");
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        setBounds(100, 100, 450, 300);
        contentPane = new JPanel();
@@ -61,11 +60,11 @@ public class vArtistaLista extends JFrame {
        setContentPane(contentPane);
        contentPane.setLayout(null);
       
-       JLabel lblArtistas = new JLabel("Artista Zerrenda");
+       JLabel lblArtistas = new JLabel("Artisten Zerrenda");
        lblArtistas.setHorizontalAlignment(SwingConstants.CENTER);
        lblArtistas.setBounds(127, 11, 185, 14);
        contentPane.add(lblArtistas);
-       // Artisten aukeratzeko combo boxa
+       
        comboBoxArtistak = new JComboBox<String>();
        comboBoxArtistak.setBounds(92, 90, 249, 23);
        contentPane.add(comboBoxArtistak);
@@ -76,7 +75,6 @@ public class vArtistaLista extends JFrame {
        btnVerArtista.setBounds(149, 206, 129, 23);
        contentPane.add(btnVerArtista);
       
-       // Artista aukeratze botoiaren ekintza
        btnVerArtista.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent e) {
                ArtistakIkusi(erabiltzaileIzena);
@@ -90,7 +88,6 @@ public class vArtistaLista extends JFrame {
 		
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				vMenua vMenuaPanel  = new vMenua(erabiltzaileIzena);
 				vMenuaPanel .setVisible(true);
 				dispose();
@@ -104,19 +101,23 @@ public class vArtistaLista extends JFrame {
 		
 		btnProfila.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				vErregistratu vErregistratuPanel = new vErregistratu(erabiltzaileIzena);
 				vErregistratuPanel.setVisible(true);
 				dispose();
 			}
 		});
+<<<<<<< HEAD
       
+=======
+       ArtistaListaKargatu();
+>>>>>>> 05e614d397f7d5cf59e36a20b424c86a01b982fc
    }
-  
+
    /**
     * Artisten zerrenda kargatzeko eta ComboBox-en erakusteko metodoa.
     */
    private void ArtistaListaKargatu() {
+<<<<<<< HEAD
 	   try {     
 	        MusikariListaDAO musikariListaDAO = new MusikariListaDAO();
 
@@ -131,21 +132,36 @@ public class vArtistaLista extends JFrame {
 	        ex.printStackTrace();
 	    }
 	}
+=======
+       try {
+           ArtistaListaDAO artistaDAO = new ArtistaListaDAO();
+           
+           String listaArtistas = artistaDAO.ArtistaListaLortu();
+           
+           String[] arrayArtistas = listaArtistas.split("\n");
+           comboBoxArtistak.removeAllItems();
+           for (String artista : arrayArtistas) {
+               comboBoxArtistak.addItem(artista);
+           }
+       } catch (Exception ex) {
+           ex.printStackTrace();
+       }
+   }
+>>>>>>> 05e614d397f7d5cf59e36a20b424c86a01b982fc
 
    /**
     * 'vArtista' interfazea irekitzeko metodoa, aukeratutako artista batekin.
     * 
-    * @param erabiltzaileIzena Erabiltzailearen izena
+    * @param erabiltzaileIzena    Erabiltzailearen izena
     */
    private void ArtistakIkusi(String erabiltzaileIzena) {
        try {
-           String artistaSeleccionado = comboBoxArtistak.getSelectedItem().toString();
-           vArtista vArtistaFrame = new vArtista(artistaSeleccionado, erabiltzaileIzena);
+           String artistaAukeratua = comboBoxArtistak.getSelectedItem().toString();
+           vArtista vArtistaFrame = new vArtista(artistaAukeratua, erabiltzaileIzena);
            vArtistaFrame.setVisible(true);
            dispose();
        } catch (Exception ex) {
            ex.printStackTrace();
-           // Hemen errore mezua JOptionPanean edo konsolan erakutsi dezakezu
        }
    }
 }

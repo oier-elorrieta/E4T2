@@ -49,7 +49,6 @@ public class vLogin extends JFrame {
         setSize(339, 236);
         setLocationRelativeTo(null);
 
-        // Erabiltzailea eta pasahitza sartzeko eremuak
         JLabel lblErabiltzaile = new JLabel("Erabiltzailea:");
         lblErabiltzaile.setBounds(0, 22, 139, 30);
         lblErabiltzaile.setHorizontalAlignment(SwingConstants.CENTER);
@@ -80,12 +79,11 @@ public class vLogin extends JFrame {
         panel.add(btnHasiSaioa);
       
         getContentPane().add(panel, BorderLayout.CENTER);
-        // Erregistratu botoia
         JButton btnErregistratu = new JButton("Erregistratu");
         btnErregistratu.setBounds(167, 143, 127, 30);
         panel.add(btnErregistratu);
         
-        // Erregistratu botoiaren ekintza
+
         btnErregistratu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {    	
                 vErregistratu vErregistratuPanel = new vErregistratu(erabiltzaileIzena);
@@ -94,7 +92,6 @@ public class vLogin extends JFrame {
             }
         });
 
-        // Login botoiaren ekintza
         btnHasiSaioa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -103,7 +100,6 @@ public class vLogin extends JFrame {
 
                 BezeroaDAO bezero = new BezeroaDAO();
                 
-                // Bezeroa baieztatu
                 boolean balidatuHasiSaioa = bezero.baieztatuBezeroa(erabiltzailea, pasahitza);
 
                 if (balidatuHasiSaioa) {

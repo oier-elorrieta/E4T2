@@ -1,30 +1,19 @@
 package Vista;
-
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-
-import DAO.NirePlayListDAO;
-
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollBar;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
-
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-import javax.swing.JTextArea;
-import javax.swing.JComboBox;
 
 /**
  * Erabiltzailearen PlayList-ak kudeatzeko interfaze grafikoa eskaintzen duen klasea.
@@ -43,7 +32,6 @@ public class vNirePlayList extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					// PlayList-ak ikusteko interfazea sortu eta bistaratu
 					vNirePlayList frame = new vNirePlayList(erabiltzaileIzena);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -68,7 +56,6 @@ public class vNirePlayList extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		// Atzera botoia
 		JButton btnAtzera = new JButton("Atzera");
 		btnAtzera.setBounds(10, 11, 107, 23);
 		btnAtzera.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -76,14 +63,12 @@ public class vNirePlayList extends JFrame {
 		
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Menu nagusira itzuli
 				vMenua menuaFrame = new vMenua(erabiltzaileIzena);
 				menuaFrame.setVisible(true);
 				dispose();
 			}
 		});
 		
-		// Profila bistaratzeko botoia
 		JButton btnProfila = new JButton(erabiltzaileIzena);
 		btnProfila.setBounds(456, 11, 118, 23);
 		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -91,61 +76,49 @@ public class vNirePlayList extends JFrame {
 		
 		btnProfila.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Profila editatzeko pantailara joan
 				vErregistratu vErregistratuPanel = new vErregistratu(erabiltzaileIzena);
 				vErregistratuPanel.setVisible(true);
 				dispose();
 			}
 		});
 		
-		// Berriki PlayList bat sortzeko botoia
+
 		JButton btnPlayListBerria = new JButton("Berria sortu");
 		btnPlayListBerria.setBounds(456, 94, 118, 23);
 		contentPane.add(btnPlayListBerria);
 		
 		btnPlayListBerria.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		        // Solicitar al usuario el nombre de la lista de reproducción
+
 		        String izenaPlayList = eskatuPlayListIzena(erabiltzaileIzena);
 		        
-		        // Si el nombre de la lista de reproducción no está vacío
+		        // PlayList izena ez bada hutsik
 		        if (izenaPlayList != null && !izenaPlayList.isEmpty()) {
-		            // Llamar al método playListBerriaSortu para crear la nueva lista de reproducción
-		        	
-		        	
-		        	//
-		        	//
-		            //NirePlayListDAO.playListBerriaSortu(izenaPlayList, obtenerIdUsuario(erabiltzaileIzena));
-		            //
-		        	//
-		        	
-		            // Actualizar la lista de reproducción en la interfaz
-		            listPlayListakModel.clear(); // Limpiar la lista actual
-		            BezeroPlayListZerrenda(listPlayListakModel, erabiltzaileIzena); // Volver a cargar la lista actualizada
+		            // PlayList berri bat sortzeko metodoa deitu
+		            listPlayListakModel.addElement(izenaPlayList); // aktualizatu zerrenda
+		            
+		            // Hemen sortu zure PlayList-a datu-basean
+		            // NirePlayListDAO.playListBerriaSortu(izenaPlayList, erabiltzaileIzena);
+		            
+		            listPlayListakModel.clear(); 
+		            BezeroPlayListZerrenda(listPlayListakModel, erabiltzaileIzena); // Zerrenda berriro kargatu
 		        }
 		    }
 		});
-		
-		
 
-		
-		// PlayList bat ezabatzeko botoia
 		JButton btnPlayListEzabatu = new JButton("Ezabatu");
 		btnPlayListEzabatu.setBounds(456, 168, 118, 23);
 		contentPane.add(btnPlayListEzabatu);
 		
-		// PlayList-ak inportatzeko botoia
 		JButton btnPlayListImportatu = new JButton("Inportatu");
 		btnPlayListImportatu.setBounds(456, 238, 118, 23);
 		btnPlayListImportatu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// PlayList-ak inportatu
 			}
 		});
 		
 		contentPane.add(btnPlayListImportatu);
 		
-		// PlayList-ak esportatzeko botoia
 		JButton btnPlayListExportatu = new JButton("Exportatu");
 		btnPlayListExportatu.setBounds(456, 306, 118, 23);
 		contentPane.add(btnPlayListExportatu);
@@ -161,14 +134,10 @@ public class vNirePlayList extends JFrame {
 		
 		listPlayListak.addListSelectionListener(new ListSelectionListener() {
 	            public void valueChanged(ListSelectionEvent e) {
-	            	//aqui para que me lleve a la pagina de esa playlist
 	            }
 	        });
-		
-		
-
 	}
-	
+
 	private DefaultListModel<String> BezeroPlayListZerrenda(DefaultListModel<String>  listPlayListakModel, String erab) {
 			
             List<String> listaplaylist = DAO.NirePlayListDAO.BezeroPlayListZerrenda(erab);
@@ -179,10 +148,7 @@ public class vNirePlayList extends JFrame {
             }
 	
 	private String eskatuPlayListIzena(String erabiltzaileIzena) {
-	  
 	    String izenaPlayList = JOptionPane.showInputDialog(this, "PlayList berriaren izena:");
-	    
 	    return izenaPlayList;
 	}
- 
 }

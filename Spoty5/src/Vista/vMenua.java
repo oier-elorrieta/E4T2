@@ -1,11 +1,7 @@
 package Vista;
-
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import Bezeroak.Mota;
-import DAO.ErregistratuDAO;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -32,7 +28,7 @@ public class vMenua extends JFrame {
 	 * @param erabiltzaileIzena Erabiltzailearen izena.
 	 */
 	public vMenua(String erabiltzaileIzena) {
-		setTitle("Menu");
+		setTitle("Menua");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -41,14 +37,12 @@ public class vMenua extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		// Menuaren goiburua
 		JLabel lblNewLabel = new JLabel("Aukeratu");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setBounds(170, 11, 98, 26);
 		contentPane.add(lblNewLabel);
 		
-		// Atzera botoia
 		JButton btnAtzera = new JButton("Atzera");
 		btnAtzera.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnAtzera.setBounds(10, 15, 107, 23);
@@ -56,7 +50,6 @@ public class vMenua extends JFrame {
 		
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Saioa hasieratzeko
 				vLogin loginFrame = new vLogin(erabiltzaileIzena);
 				loginFrame.setVisible(true);
 				dispose();
@@ -70,7 +63,6 @@ public class vMenua extends JFrame {
 		
 		btnProfila.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Profila ikusteko
 				vErregistratu vErregistratuPanel = new vErregistratu(erabiltzaileIzena);
 				vErregistratuPanel.setVisible(true);
 				dispose();
@@ -83,7 +75,6 @@ public class vMenua extends JFrame {
 		
 		btnMusikaDeskubritu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Artista zerrenda ikusteko
 				vArtistaLista vArtistaListaPanel = new vArtistaLista(erabiltzaileIzena);
 				vArtistaListaPanel.setVisible(true);
 				dispose();
@@ -96,7 +87,6 @@ public class vMenua extends JFrame {
 		
 		btnPodcastDeskubritu.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e) {
-		        // Podcaster zerrenda ikusteko
 		        vPodcasterLista vPodcasterListaPanel = new vPodcasterLista(erabiltzaileIzena);
 		        vPodcasterListaPanel.setVisible(true);
 		        dispose();
@@ -109,7 +99,6 @@ public class vMenua extends JFrame {
 		
 		btnPlayList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Nire PlayList-ak ikusteko
 				vNirePlayList vNirePlayListPanel = new vNirePlayList(erabiltzaileIzena);
 				vNirePlayListPanel.setVisible(true);
 				dispose();

@@ -1,5 +1,4 @@
 package Vista;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -7,20 +6,26 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import DAO.PodcastDAO;
 import javax.sound.sampled.Clip;
 
+/**
+ * Podcast-a erakusteko interfaze grafikoa eskaintzen duen klasea.
+ */
 public class vPodcast extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField textFieldPodcastInfo;
     private String podcaster;
 
+    /**
+     * Klasearen konstruktorea. Podcast-aren interfazea sortzen du.
+     * @param podcaster Podcast-aren izena.
+     * @param erabiltzaileIzena Erabiltzailearen izena.
+     */
     public vPodcast(String podcaster, String erabiltzaileIzena) {
         this.podcaster = podcaster;
         setTitle("Podcast");
@@ -104,12 +109,12 @@ public class vPodcast extends JFrame {
         contentPane.add(lblPodcastInfo);
 
         String podcastInfo = new PodcastDAO().podcastInformazioaLortu(podcaster);
-        JTextArea textAreaPodcastInfo = new JTextArea(); // Cambiamos de JTextField a JTextArea
+        JTextArea textAreaPodcastInfo = new JTextArea();
         textAreaPodcastInfo.setText(podcastInfo);
         textAreaPodcastInfo.setEditable(false);
         textAreaPodcastInfo.setBounds(71, 313, 436, 52);
-        textAreaPodcastInfo.setLineWrap(true); // Permitir ajuste de línea
-        textAreaPodcastInfo.setWrapStyleWord(true); // Permitir ajuste de línea por palabra
+        textAreaPodcastInfo.setLineWrap(true);
+        textAreaPodcastInfo.setWrapStyleWord(true); 
         contentPane.add(textAreaPodcastInfo);
     }
 }

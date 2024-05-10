@@ -1,9 +1,7 @@
 package Vista;
-
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,6 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+/**
+ * Erabiltzailearen PlayList-aren interfaze grafikoa eskaintzen duen klasea.
+ */
 public class vPlayList extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -18,7 +19,10 @@ public class vPlayList extends JFrame {
 	private JButton btnAtzera;
 
 	/**
-	 * Launch the application.
+	 * Aplikazioa abiarazi.
+	 * @param args Komando lerroko agumentuak.
+	 * @param erabiltzaileIzena Erabiltzailearen izena.
+	 * @param playListIzena PlayList-aren izena.
 	 */
 	public static void main(String[] args, String erabiltzaileIzena, String playListIzena) {
 		EventQueue.invokeLater(new Runnable() {
@@ -34,7 +38,9 @@ public class vPlayList extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Frame-a sortu.
+	 * @param erabiltzaileIzena Erabiltzailearen izena.
+	 * @param playListIzena PlayList-aren izena.
 	 */
 	public vPlayList(String erabiltzaileIzena, String playListIzena) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,7 +57,6 @@ public class vPlayList extends JFrame {
 		
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Menu nagusira itzuli
 				vNirePlayList vNirePlayListFrame = new vNirePlayList(playListIzena);
 				vNirePlayListFrame.setVisible(true);
 				dispose();
@@ -64,7 +69,6 @@ public class vPlayList extends JFrame {
 		
 		btnProfila.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// Profila editatzeko pantailara joan
 				vErregistratu vErregistratuPanel = new vErregistratu(playListIzena);
 				vErregistratuPanel.setVisible(true);
 				dispose();
@@ -74,7 +78,6 @@ public class vPlayList extends JFrame {
 		JLabel lblPlayListIzena = new JLabel(erabiltzaileIzena);
 		lblPlayListIzena.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPlayListIzena.setBounds(164, 15, 106, 14);
-		contentPane.add(lblPlayListIzena);
-		
+		contentPane.add(lblPlayListIzena);		
 	}
 }
