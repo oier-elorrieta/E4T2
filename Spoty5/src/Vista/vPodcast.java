@@ -2,16 +2,17 @@ package Vista;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import DAO.PodcasterDAO;
+import DAO.PodcastDAO;
+import javax.sound.sampled.Clip;
 
 public class vPodcast extends JFrame {
 
@@ -21,7 +22,7 @@ public class vPodcast extends JFrame {
     private String podcaster;
 
     public vPodcast(String podcaster, String erabiltzaileIzena) {
-        this.podcaster = podcaster; // Asignar el valor del parámetro al campo podcaster
+        this.podcaster = podcaster;
         setTitle("Podcast");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 601, 415);
@@ -37,7 +38,6 @@ public class vPodcast extends JFrame {
         
         btnPerfil.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Crear e instanciar vErregistratu cuando se hace clic en el botón
                 vErregistratu erregistratuFrame = new vErregistratu(erabiltzaileIzena);
                 erregistratuFrame.setVisible(true);
                 dispose();
@@ -51,7 +51,6 @@ public class vPodcast extends JFrame {
        
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Menu nagusira itzuli
                 vPodcasterLista frame = new vPodcasterLista(erabiltzaileIzena);
                 frame.setVisible(true);
                 dispose();
@@ -60,7 +59,7 @@ public class vPodcast extends JFrame {
 
         JLabel lblPodcasterImage = new JLabel("");
         lblPodcasterImage.setBounds(164, 21, 239, 205);
-        ImageIcon podcasterImage = new PodcasterDAO().PodcasterIrudiaLortu(podcaster);
+        ImageIcon podcasterImage = new PodcastDAO().podcastIrudiaLortu(podcaster);
         lblPodcasterImage.setIcon(podcasterImage);
         contentPane.add(lblPodcasterImage);
 
@@ -76,7 +75,10 @@ public class vPodcast extends JFrame {
         btnPlayPodcast.setBounds(240, 238, 89, 23);
         btnPlayPodcast.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Add your action here
+                Clip clip = new PodcastDAO().audioErreproduzitu(podcaster);
+                if (clip != null) {
+                    clip.start();
+                }
             }
         });
         contentPane.add(btnPlayPodcast);
@@ -90,15 +92,16 @@ public class vPodcast extends JFrame {
         contentPane.add(btnFavorite);
 
         JLabel lblPodcastInfo = new JLabel("Informazioa");
-        lblPodcastInfo.setBounds(43, 288, 78, 14);
+        lblPodcastInfo.setBounds(71, 288, 78, 14);
         contentPane.add(lblPodcastInfo);
 
-        String podcasterInfo = new PodcasterDAO().PodcasterInformazioaLortu(podcaster);
-        textFieldPodcastInfo = new JTextField();
-        textFieldPodcastInfo.setText(podcasterInfo);
-        textFieldPodcastInfo.setEditable(false);
-        textFieldPodcastInfo.setBounds(71, 313, 436, 52);
-        contentPane.add(textFieldPodcastInfo);
-        textFieldPodcastInfo.setColumns(10);
+        String podcastInfo = new PodcastDAO().podcastInformazioaLortu(podcaster);
+        JTextArea textAreaPodcastInfo = new JTextArea(); // Cambiamos de JTextField a JTextArea
+        textAreaPodcastInfo.setText(podcastInfo);
+        textAreaPodcastInfo.setEditable(false);
+        textAreaPodcastInfo.setBounds(71, 313, 436, 52);
+        textAreaPodcastInfo.setLineWrap(true); // Permitir ajuste de línea
+        textAreaPodcastInfo.setWrapStyleWord(true); // Permitir ajuste de línea por palabra
+        contentPane.add(textAreaPodcastInfo);
     }
 }

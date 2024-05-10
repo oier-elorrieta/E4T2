@@ -1,130 +1,124 @@
 package DAO;
 
+import javax.sound.sampled.Clip;
+import javax.swing.ImageIcon;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.sql.Blob;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import Audioak.Podcast;
 import master.KonexioaDB;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class PodcastDAO {
-  
-    public List<Integer> obtenerAudiosPorPodcaster(String podcaster) {
-        List<Integer> idsAudio = new ArrayList<>();
-        Connection con = KonexioaDB.hasi();
-      
-        if (con == null) {
-            System.out.println("Ezin da konexioa egin.");
-            return idsAudio;
-        }
-      
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-      
+
+	public Clip audioErreproduzitu(String podcastIzena) {
+        Clip clip = null;
         try {
-            String sql = "SELECT id_audio FROM podcast WHERE id_podcaster IN (SELECT id_podcaster FROM podcaster WHERE izenArtistikoa = ?)";
-            stmt = con.prepareStatement(sql);
-            stmt.setString(1, podcaster);
-            rs = stmt.executeQuery();
-          
-            while (rs.next()) {
-                int id_audio = rs.getInt("id_audio");
-                idsAudio.add(id_audio);
+            // Cargar el archivo de audio desde el directorio "media" dentro de la carpeta "src"
+            URL urlArchivo = getClass().getClassLoader().getResource("media/" + podcastIzena);
+
+            if (urlArchivo == null) {
+                System.out.println("No se pudo encontrar el archivo de audio: " + podcastIzena);
+                return null;
             }
-        } catch (SQLException e) {
+
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(urlArchivo);
+
+            // Obtener un clip de audio
+            clip = AudioSystem.getClip();
+
+            // Abrir el clip con el flujo de audio
+            clip.open(audioInputStream);
+
+            // Reproducir el clip
+            clip.start();
+
+            // Esperar hasta que el clip termine de reproducirse
+            while (clip.isRunning()) {
+                Thread.sleep(10);
+            }
+
+            // No es necesario cerrar el clip aquí
+
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                KonexioaDB.itxi(con);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
-        return idsAudio;
+        return clip;
     }
 
-    public Podcast obtenerPodcastPorId(int idPodcast) {
-        Podcast podcast = null;
-        Connection con = KonexioaDB.hasi();
-      
-        if (con == null) {
-            System.out.println("Ezin da konexioa egin.");
-            return null;
-        }
-      
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-      
-        try {
-            String sql = "SELECT * FROM podcast WHERE id_audio = ?";
-            stmt = con.prepareStatement(sql);
-            stmt.setInt(1, idPodcast);
-            rs = stmt.executeQuery();
-          
-            if (rs.next()) {
-                // Obtener los datos del podcast
-                String izenburua = rs.getString("izena");
-                double iraupena = rs.getDouble("iraupena");
-                String kolaboratzaileak = rs.getString("kolaboratzaileak");
-                int erreprodukzioak = rs.getInt("erreprodukzioak");
+	 public String podcastInformazioaLortu(String podcastIzena) {
+	        StringBuilder podcastInformazioa = new StringBuilder();
+	        Connection con = KonexioaDB.hasi(); // Obtener conexión con la base de datos
+	        if (con == null) {
+	            System.out.println("Ezin da konexioa egin.");
+	            return "";
+	        }
 
-                // Crear un objeto Podcast
-                podcast = new Podcast(izenburua, iraupena, kolaboratzaileak, erreprodukzioak);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                KonexioaDB.itxi(con);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return podcast;
-    }
+	        PreparedStatement stmt = null;
+	        ResultSet rs = null;
+
+	        try {
+	            // Obtener la información del podcast desde la base de datos
+	            String sql = "SELECT izena, iraupena FROM audio WHERE izena = ? AND mota = 'podcast'";
+	            stmt = con.prepareStatement(sql);
+	            stmt.setString(1, podcastIzena);
+	            rs = stmt.executeQuery();
+
+	            // Construir la información del podcast
+	            if (rs.next()) {
+	                String izena = rs.getString("izena");
+	                String iraupena = rs.getString("iraupena");
+	                podcastInformazioa.append("Podcast izena: ").append(izena).append("\n");
+	                podcastInformazioa.append("Iraupena: ").append(iraupena).append("\n");
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            // Cerrar la conexión y liberar recursos
+	            try {
+	                if (rs != null) rs.close();
+	                if (stmt != null) stmt.close();
+	                KonexioaDB.itxi(con);
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        return podcastInformazioa.toString();
+	    }
     
-    /**
-     * Podcast-aren irudia lortzen du.
-     *
-     * @param izena Irudia lortu nahi den podcastaren izena.
-     * @return Podcast-aren irudia ImageIcon gisa.
-     */
-    public ImageIcon obtenerPodcastIrudia(String izena) {
-        ImageIcon irudia = null;
-        Connection con = KonexioaDB.hasi();
-      
+    public ImageIcon podcastIrudiaLortu(String audioIzena) {
+        ImageIcon podcastArgazki = null;
+        Connection con = KonexioaDB.hasi(); 
+
         if (con == null) {
             System.out.println("Ezin da konexioa egin.");
-            return null;
+            return podcastArgazki;
         }
-      
+
         PreparedStatement stmt = null;
         ResultSet rs = null;
-      
+
         try {
-            String sql = "SELECT irudia FROM podcast WHERE izena = ?";
+            String sql = "SELECT irudia FROM audio WHERE izena = ? AND mota = 'podcast'";
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, izena);
+            stmt.setString(1, audioIzena);
             rs = stmt.executeQuery();
-          
+
             if (rs.next()) {
-                Blob blob = rs.getBlob("irudia");
-                if (blob != null) {
-                    try (ByteArrayInputStream is = new ByteArrayInputStream(blob.getBytes(1, (int) blob.length()))) {
-                        BufferedImage image = ImageIO.read(is);
-                        irudia = new ImageIcon(image);
+                byte[] imageBytes = rs.getBytes("irudia");
+                if (imageBytes != null) {
+                    try (ByteArrayInputStream is = new ByteArrayInputStream(imageBytes)) {
+                        Image image = ImageIO.read(is);
+                        podcastArgazki = new ImageIcon(image);
                     }
                 }
             }
@@ -134,11 +128,11 @@ public class PodcastDAO {
             try {
                 if (rs != null) rs.close();
                 if (stmt != null) stmt.close();
-                KonexioaDB.itxi(con);
+                KonexioaDB.itxi(con); 
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        return irudia;
+        return podcastArgazki;
     }
 }
