@@ -40,34 +40,41 @@ public class Album {
 	}
 	
 
-	public static Blob getIrudia() {
-		return irudia;
-	}
-	public void setIrudia(Blob irudia) {
-		this.irudia = irudia;
-	}
-
+	
 	public int getId_album() {
 		return id_album;
 	}
+
+
+
+	public String getIzenburua() {
+		return izenburua;
+	}
+
+
 
 	public Date getUrtea() {
 		return urtea;
 	}
 
+
+
 	public String getGeneroa() {
 		return generoa;
 	}
+
+
+
+	public static Blob getIrudia() {
+		return irudia;
+	}
+
+
 
 	public void setId_album(int id_album) {
 		this.id_album = id_album;
 	}
 
-	
-
-	public String getIzenburua() {
-		return izenburua;
-	}
 
 
 	public void setIzenburua(String izenburua) {
@@ -75,13 +82,24 @@ public class Album {
 	}
 
 
+
 	public void setUrtea(Date urtea) {
 		this.urtea = urtea;
 	}
 
+
+
 	public void setGeneroa(String generoa) {
 		this.generoa = generoa;
 	}
+
+
+
+	public static void setIrudia(Blob irudia) {
+		Album.irudia = irudia;
+	}
+
+
 
 	@Override
 	public int hashCode() {

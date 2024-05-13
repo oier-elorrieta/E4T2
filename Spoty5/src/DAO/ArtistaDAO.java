@@ -29,12 +29,12 @@ public class ArtistaDAO {
     * @return Artista horren albumen zerrenda.
     */
 	public List<Album> AlbumakLortuArtistetatik(Musikari musikari) {
-	    List<Album> albumes = new ArrayList<>();
+	    List<Album> albumak = new ArrayList<>();
 	    Connection con = KonexioaDB.hasi(); 
 
 	    if (con == null) {
 	        System.out.println("Ezin da konexioa egin.");
-	        return albumes; 
+	        return albumak; 
 	    }
 
 	    PreparedStatement stmt = null;
@@ -42,7 +42,7 @@ public class ArtistaDAO {
 
 	    try {
 	       
-	        String sql = "SELECT * FROM album WHERE id_musikaria IN (SELECT id_musikaria FROM musikaria WHERE id_musikaria = ?)";
+	        String sql = "SELECT * FROM album WHERE id_musikaria = ? ";
 	        stmt = con.prepareStatement(sql);
 	        stmt.setInt(1, musikari.getId_artista());
 	        rs = stmt.executeQuery();
@@ -55,7 +55,7 @@ public class ArtistaDAO {
 	            String generoa = rs.getString("generoa");
 	            Album album = new Album(id_album, izenburua, urtea, generoa);
 
-	            albumes.add(album);
+	            albumak.add(album);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -71,7 +71,7 @@ public class ArtistaDAO {
 	    }
 
 	    
-	    return albumes;
+	    return albumak;
 	}
 
 

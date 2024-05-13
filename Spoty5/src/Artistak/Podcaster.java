@@ -7,66 +7,36 @@ import java.util.Objects;
  * Podcaster klasea Artistak klasearen luzapena da.
  */
 public class Podcaster extends Artista{
-	/**
-	 * Podcasterra izango duen PodcastZerrenda
-	 */
-    private ArrayList<String> PodcastZerrenda;
+
+    /**
+     * Podcaster berri bat sortzeko konstruktorea id_artista, izena,deskribapena
+     * @param izena podcaster izena
+     * @param deskribapena podcasterrena
+     */
+    public Podcaster(int id_artista, String izena, String deskribapena) {
+    	super(id_artista, izena, deskribapena);
+    }
+
+	@Override
+	public String toString() {
+		return "Podcaster [id_artista=" + id_artista + ", izena=" + izena + ", deskribapena=" + deskribapena + "]";
+	}
     
-    /**
-     * Podcaster berri bat sortzeko konstruktorea izena, PodcastZerrenda
-     * @param izena playlistaren izena
-     * @param podcastZerrenda musikarien PodcastZerrenda
-     */
-    public Podcaster(String izena, Blob irudia, ArrayList<String> podcastZerrenda) {
-        super(izena, irudia);
-        PodcastZerrenda = podcastZerrenda;
-    }
-
-    /**
-     * Podcasterra PodcastZerrenda lortzen du
-     * 
-     * @return Podcasterraren podcastZerrenda
-     */
-    public ArrayList<String> getPodcastZerrenda() {
-        return PodcastZerrenda;
-    }
-
-    /**
-     * Podcasterra PodcastZerrenda ezartzen du
-     * 
-     * @param podcastZerrenda Podcasterraren podcastZerrenda berria
-     */
-    public void setPodcastZerrenda(ArrayList<String> podcastZerrenda) {
-        PodcastZerrenda = podcastZerrenda;
-    }
 
     /**
      * Podcasterren izena eta PodcastZerrenda testu batean bihurtzen du objetua
      * 
      * @return Podcasterren izena eta podcastZerrenda duen testu errepresentazioa
      */
-    @Override
-	public String toString() {
-		return "Podcaster [PodcastZerrenda=" + PodcastZerrenda + ", Izena=" + izena + ", irudia=" + irudia + "]";
+	@Override
+	public int hashCode() {
+		return super.hashCode();
 	}
 
 	/**
      * Objetuaren hash kodea kalkulatzen du
      * 
      * @return objetuaren hash kodea
-     */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + Objects.hash(PodcastZerrenda);
-		return result;
-	}
-
-
-	/**
-     * @param zein objetuarekin konparatuko den
-     * @return true objetuak berdin badira, false objetuak desberdinak badira
      */
 	@Override
 	public boolean equals(Object obj) {
@@ -76,8 +46,11 @@ public class Podcaster extends Artista{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Podcaster other = (Podcaster) obj;
-		return Objects.equals(PodcastZerrenda, other.PodcastZerrenda);
-	}
-    
-}
+		return true;
+	}  
+
+	/**
+     * @param zein objetuarekin konparatuko den
+     * @return true objetuak berdin badira, false objetuak desberdinak badira
+     */
+    }

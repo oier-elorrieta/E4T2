@@ -5,6 +5,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Artistak.Artista;
+import Artistak.Musikari;
+import Audioak.Album;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -15,7 +17,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-
+import DAO.ArtistaDAO;
 import DAO.MusikariListaDAO;
 
 /**
@@ -26,6 +28,7 @@ public class vArtistaLista extends JFrame {
    private static final long serialVersionUID = 1L;
    private JPanel contentPane;
    private JComboBox<String> comboBoxArtistak;
+   private Musikari musikari;
    
    /**
     * Programaren exekuzioaren hasieran 'vArtistaLista' klasearen instantzia bat sortzeko metodo estatikoa.
@@ -74,12 +77,14 @@ public class vArtistaLista extends JFrame {
        btnVerArtista.setFont(new Font("Tahoma", Font.BOLD, 11));
        btnVerArtista.setBounds(149, 206, 129, 23);
        contentPane.add(btnVerArtista);
-      
        btnVerArtista.addActionListener(new ActionListener() {
-           public void actionPerformed(ActionEvent e) {
-               ArtistakIkusi(erabiltzaileIzena);
-           }
-       });
+    	    public void actionPerformed(ActionEvent e) {
+    	        ArtistakIkusi();
+    	    }
+    	});
+
+      
+      
       
        JButton btnAtzera = new JButton("Atzera");
 		btnAtzera.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -116,10 +121,10 @@ public class vArtistaLista extends JFrame {
 	    try {     
 	        MusikariListaDAO musikariListaDAO = new MusikariListaDAO();
 
-	        // Lortu artisten zerrenda
+	        
 	        List<Artista> artistas = musikariListaDAO.artistaListKargatu();
 
-	        // Gehitu artisten izenak ComboBox-era
+	        
 	        for (Artista artista : artistas) {
 	            comboBoxArtistak.addItem(artista.getIzena());  
 	        }
@@ -134,14 +139,14 @@ public class vArtistaLista extends JFrame {
     * 
     * @param erabiltzaileIzena    Erabiltzailearen izena
     */
-   private void ArtistakIkusi(String erabiltzaileIzena) {
-       try {
-           String artistaAukeratua = comboBoxArtistak.getSelectedItem().toString();
-           vArtista vArtistaFrame = new vArtista(artistaAukeratua, erabiltzaileIzena);
-           vArtistaFrame.setVisible(true);
-           dispose();
-       } catch (Exception ex) {
-           ex.printStackTrace();
-       }
-   }
+   private void ArtistakIkusi() {
+	   
+	        String artistaAukeratua = comboBoxArtistak.getSelectedItem().toString();
+	        MusikariListaDAO musikariListaDAO = new MusikariListaDAO();
+	        Musikari aukeratutakomus = musikariListaDAO.musikariLortu(artistaAukeratua);
+	        vArtista vArtistaFrame = new vArtista(artistaAukeratua, aukeratutakomus);
+	        vArtistaFrame.setVisible(true);
+	        dispose();
+	}
+
 }

@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Artistak.Musikari;
 import Audioak.Album;
 
 import javax.swing.JLabel;
@@ -13,6 +14,8 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
 import DAO.ArtistaDAO;
 import javax.swing.ImageIcon;
 
@@ -27,14 +30,15 @@ public class vArtista extends JFrame {
     private String artistaDeskribapena;
     private ImageIcon artistaIrudia;
     private JComboBox<String> comboBoxAlbumak;
+	private Musikari musikari;
 
     /**
      * Klaseko eraikitzailea.
      * @param artistaIzena     Artistaren izena
      * @param erabiltzaileIzena    Erabiltzailearen izena
      */
-    public vArtista(String artistaIzena, String erabiltzaileIzena) {
-        this.artistaIzena = artistaIzena;
+    public vArtista(String erabiltzaileIzena, Musikari musikari) {
+    	this.musikari = musikari;
         setTitle(artistaIzena + " diskak");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 451, 418);
@@ -109,8 +113,9 @@ public class vArtista extends JFrame {
         comboBoxAlbumak = new JComboBox<>(); 
         comboBoxAlbumak.setBounds(10, 61, 128, 20);
         contentPane.add(comboBoxAlbumak);
-       
-        AlbumakErakutsi(comboBoxAlbumak);
+        AlbumakErakutsi();
+          
+        
        
         JLabel lblArtistaImg = new JLabel("");
         lblArtistaImg.setHorizontalAlignment(SwingConstants.CENTER);
@@ -137,27 +142,28 @@ public class vArtista extends JFrame {
         }
     }
    
-    // Aukeratutako artistaren albumak erakusteko metodoa
-    private void AlbumakErakutsi(JComboBox<String> comboBoxAlbumes) {
-        try {
-            ArtistaDAO artistaDAO = new ArtistaDAO();
-            List<Album> albumes = artistaDAO.AlbumakLortuArtistetatik();
-           
-            for (Album album : albumes) {
-                comboBoxAlbumak.addItem(album.getIzenburua()); 
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            
-
-        }
-    }
-   
     /**
      * Artistaren albumak JComboBox-en gehitu.
      *
      * @param comboBoxAlbumes JComboBox elementua artistaren albumak erakusteko
      */
+    private void AlbumakErakutsi() {
+        try {
+            if (musikari != null) {
+                ArtistaDAO artistaDAO = new ArtistaDAO();
+                
+                List<Album> albumak = artistaDAO.AlbumakLortuArtistetatik(musikari);  
+                
+                for (Album album : albumak) {
+                    comboBoxAlbumak.addItem(album.getIzenburua());
+                }
+            } else {
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
    
    
     /**

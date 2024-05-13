@@ -12,6 +12,8 @@ public class Musikari extends Artista {
 	public Musikari(int id_artista, String izena, String deskribapena) {
 	super(id_artista, izena, deskribapena);
 }
+	
+	
 
 	@Override
 	public String toString() {
