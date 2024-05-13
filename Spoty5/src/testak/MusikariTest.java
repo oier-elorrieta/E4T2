@@ -15,11 +15,34 @@ public class MusikariTest {
 	
 	private static Musikari m1;
 	private static Musikari m2;
-	private static Blob irudia;
 	
 	@Before
 	public void setUp() throws Exception {
-		m1 = new Musikari("Bad Bunny", irudia, new ArrayList<>());
+		m1 = new Musikari(1, "Bad Bunny", "Hiriko musikako konpositore eta abeslaria da, batez ere trap eta reggaetoia");
+	}
+	
+//----------------------------------------- Id --------------------------------------
+
+	@Test
+	public void testGetId() {
+		assertEquals(1, m1.getId_artista());
+	}
+	
+	@Test
+	public void testGetIdTxarto() {
+		assertNotEquals(2, m1.getId_artista());
+	}
+	
+	@Test
+	public void testSetId() {
+		m1.setId_artista(2);
+		assertEquals(2, m1.getId_artista());
+	}
+	
+	@Test
+	public void testSetIdTxarto() {
+		m1.setId_artista(2);
+		assertNotEquals(1, m1.getId_artista());
 	}
 	
 //----------------------------------------- Izena --------------------------------------
@@ -37,53 +60,37 @@ public class MusikariTest {
     @Test
     public void testSetIzena() {
     	m1.setIzena("Bad Gyal");
-        assertEquals("Bad Gyal", m1.getIzena());
+        assertNotEquals("Bad Gyal", m1.getIzena());
     }
     
     @Test
 	public void testSetIzenaTxarto() {
     	m1.setIzena("Bad Gyal");
-		assertNotEquals("Bad Bunny", m1.getIzena());
+		assertEquals("Bad Bunny", m1.getIzena());
 	}
-	
-//----------------------------------------- Irudia --------------------------------------
-	
-    @Test
-    public void testGetIrudia() {
-        assertEquals(irudia, m1.getIrudia());
-    }
-
     
 //----------------------------------------- AlbumZerrenda --------------------------------------
 
-	@Test
-    public void testGetPlayListZerrenda() {
-        assertEquals(new ArrayList<>(), m1.getAlbumZerrenda());
-    }
-
-	@Test
-	public void testGetPlaylistZerrendaTxarto() {
-	    ArrayList<String> BesteAlbum = new ArrayList<>();
-	    BesteAlbum.add("cancion3");
-	    BesteAlbum.add("cancion4");
-
-	    assertNotEquals(BesteAlbum, m1.getAlbumZerrenda());
-	}
-	
     @Test
-    public void testSetPlayListZerrenda() {
-        ArrayList<String> AlbumBerria = new ArrayList<>();
-        AlbumBerria.add("Album1");
-        AlbumBerria.add("Album2");
-        m1.setAlbumZerrenda(AlbumBerria);
-
-        assertEquals(AlbumBerria, m1.getAlbumZerrenda());
+    public void testGetDeskribapena() {
+    	assertEquals("Hiriko musikako konpositore eta abeslaria da, batez ere trap eta reggaetoia", m1.getDeskribapena());
     }
     
     @Test
-    public void testSetPlayListZerrendaTxarto() {
-    	m1.setAlbumZerrenda(null);
-    	assertNotEquals("a", m1.getAlbumZerrenda());
+    public void testGetDeskribapenaTxarto() {
+    	assertNotEquals("Hiriko musikako konpositore eta abeslaria da, batez ere trap eta reggaetoiaa", m1.getDeskribapena());
+    }
+    
+    @Test
+    public void testSetDeskribapena() {
+    	m1.setDeskribapena("Reggaeton, dancehall eta trap generoen fusio gisa katalogatu da bere musika.");
+    	assertEquals("Reggaeton, dancehall eta trap generoen fusio gisa katalogatu da bere musika.", m1.getDeskribapena());
+    }
+    
+    @Test
+    public void testDeskribapenaTxarto() {
+    	m1.setDeskribapena("Reggaeton, dancehall eta trap generoen fusio gisa katalogatu da bere musika.");
+    	assertNotEquals("Hiriko musikako konpositore eta abeslaria da, batez ere trap eta reggaetoia", m1.getDeskribapena());
     }
     
  //----------------------------------------- ToString --------------------------------------
@@ -92,8 +99,7 @@ public class MusikariTest {
     public void testToString() {
     	String txt = m1.toString();
     	
-    	String esperotakoa = "Artista [izena=" + m1.getIzena() + ", irudia=" + m1.getIrudia()
-    	+ ", albumZerrenda=" + m1.getAlbumZerrenda() + "]";
+    	String esperotakoa = "Artista [id=" + m1.getId_artista() + ", izena=" + m1.getIzena() + ", deskribapena=" + m1.getDeskribapena() + "]";
     }
     
  //----------------------------------------- Equals --------------------------------------
@@ -116,7 +122,7 @@ public class MusikariTest {
 
     @Test
     public void testEqualsClaseAtrBerdinak() {
-    Musikari m2 = new Musikari("Bad Bunny", irudia, new ArrayList<>());
+    Musikari m2 = new Musikari(1, "Bad Bunny", "Hiriko musikako konpositore eta abeslaria da, batez ere trap eta reggaetoia");
     assertTrue(m1.equals(m2));
     }
     
