@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import Artistak.Podcaster;
 import master.KonexioaDB;
 
 /**
@@ -11,18 +15,13 @@ import master.KonexioaDB;
  */
 public class PodcasterListaDAO {
   
-   /**
-    * Zerrenda bat sortzen du, datu-basean dauden podcasteren izenak erabiliz
-    * 
-    * @return Podcasteren zerrenda String moduan itzuli
-    */
-   public String PodcasterListaLortu() {
-       StringBuilder listaPodcasters = new StringBuilder();
-       Connection con = KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
-      
+   public List<Podcaster> PodcasterListaLortu() {
+	   List<Podcaster> podcasterrak = new ArrayList<>();
+	   Connection con = KonexioaDB.hasi();
+	   
        if (con == null) {
            System.out.println("Ezin da konexioa egin.");
-           return "";
+           return podcasterrak;
        }
       
        PreparedStatement stmt = null;
@@ -30,19 +29,22 @@ public class PodcasterListaDAO {
       
        try {
            // Podcasteren zerrenda lortzeko SQL kontsulta
-           String sql = "SELECT izenArtistikoa FROM podcaster";
+           String sql = "SELECT * FROM podcaster";
            stmt = con.prepareStatement(sql);
            rs = stmt.executeQuery();
           
-           // Podcasteren zerrenda sortu kate moduan
            while (rs.next()) {
-               String podcaster = rs.getString("izenArtistikoa");
-               listaPodcasters.append(podcaster).append("\n");
+               int id_podcaster = rs.getInt("id_podcaster");
+               String izena = rs.getString("izenArtistikoa");
+               String deskribapena = rs.getString("deskribapena");
+               Podcaster podcasterra = new Podcaster(id_podcaster, izena, deskribapena);
+               
+               podcasterrak.add(podcasterra);
+               
            }
        } catch (SQLException e) {
            e.printStackTrace();
        } finally {
-           // Konexioa itxi eta baliabideak askatu
            try {
                if (rs != null) rs.close();
                if (stmt != null) stmt.close();
@@ -51,7 +53,7 @@ public class PodcasterListaDAO {
                e.printStackTrace();
            }
        }
-       return listaPodcasters.toString();
+       return podcasterrak;
    }
 }
 

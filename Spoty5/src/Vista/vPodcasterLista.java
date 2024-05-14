@@ -3,6 +3,10 @@ package Vista;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Artistak.Artista;
+import Artistak.Podcaster;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -10,6 +14,9 @@ import javax.swing.JComboBox;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
+import DAO.PodcasterDAO;
 import DAO.PodcasterListaDAO;
 
 /**
@@ -87,33 +94,36 @@ public class vPodcasterLista extends JFrame {
     * Podcast-ak zerrendatu eta ComboBox-en gehitu.
     */
    private void PodcasterListaKargatu() {
-       try {
-           PodcasterListaDAO podcasterDAO = new PodcasterListaDAO();
-          
-           String listaPodcasters = podcasterDAO.PodcasterListaLortu();
-          
-           String[] arrayPodcasters = listaPodcasters.split("\n");
-           comboBoxPodcasters.removeAllItems();
-           for (String podcaster : arrayPodcasters) {
-               comboBoxPodcasters.addItem(podcaster);
-           }
-       } catch (Exception ex) {
-           ex.printStackTrace();
-       }
-   }
+	    try {
+	        PodcasterListaDAO podcasterDAO = new PodcasterListaDAO();
+	        
+	        // Lortu artisten zerrenda
+	        List<Podcaster> listaPodcasters = podcasterDAO.PodcasterListaLortu();
+	        
+	        // Gehitu artisten izenak ComboBox-era
+	        for (Podcaster podcaster : listaPodcasters) {
+	            comboBoxPodcasters.addItem(podcaster.getIzena());
+	        }
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	    }	       
+	}
   
    /**
     * Hautatutako podcastera bistaratu.
     * @param erabiltzaileIzena  Erabiltzailearen izena.
     */
    private void PodcasterIkusi(String erabiltzaileIzena) {
-       try {
-           String podcasterSeleccionado = comboBoxPodcasters.getSelectedItem().toString();
-           vPodcaster vPodcasterFrame = new vPodcaster(podcasterSeleccionado, erabiltzaileIzena);
-           vPodcasterFrame.setVisible(true);
-           dispose();
-       } catch (Exception ex) {
-           ex.printStackTrace();
-       }
-   }
+	    try {
+	        String podcasterHauatuta = comboBoxPodcasters.getSelectedItem().toString();
+	        PodcasterDAO podcasterDAO = new PodcasterDAO();
+	        Podcaster podcaster = podcasterDAO.PodcasterLortu(podcasterHauatuta);
+	        vPodcaster vPodcasterFrame = new vPodcaster(podcasterHauatuta, erabiltzaileIzena);
+	        vPodcasterFrame.setVisible(true);
+	        dispose();
+	    } catch (Exception ex) {
+	        ex.printStackTrace();
+	        // Gestionar el error aquí
+	    }
+	}
 }

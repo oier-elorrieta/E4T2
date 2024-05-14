@@ -3,6 +3,9 @@ package Vista;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Artistak.Podcaster;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.ImageIcon;
@@ -22,14 +25,17 @@ public class vPodcaster extends JFrame {
     private JPanel contentPane;
     private String PodcasterHautatua;
     private JComboBox<String> comboBoxPodcasts;
+    private Podcaster podcaster;
 
     /**
      * Klasearen konstruktorea. Podcast-egilearen interfazea sortzen du.
      * @param PodcasterHautatua Hautatutako podcast-egilearen izena.
      * @param erabiltzaileIzena Erabiltzailearen izena.
+     * @param podcaster objektu podcatserra.
      */
-    public vPodcaster(String PodcasterHautatua, String erabiltzaileIzena) {
+    public vPodcaster(String PodcasterHautatua, String erabiltzaileIzena, Podcaster podcaster) {
         this.PodcasterHautatua = PodcasterHautatua;
+        this.podcaster = podcaster;
         setTitle(PodcasterHautatua);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 451, 418);
@@ -67,7 +73,6 @@ public class vPodcaster extends JFrame {
             public void actionPerformed(ActionEvent e) {
 
                 // Profila editatzeko pantailara joan
-
                 vErregistratu erregistratuFrame = new vErregistratu(erabiltzaileIzena);
                 erregistratuFrame.setVisible(true);
                 dispose();
@@ -121,14 +126,15 @@ public class vPodcaster extends JFrame {
 
     /**
      * Metodo honek JTextArea baten bidez podcast-egilearen informazioa erakusten du.
-     * @param textAreaInformacion JTextArea elementua podcast-egilearen informazioa bistaratzeko.
+     * @param textAreaInformazioa JTextArea elementua podcast-egilearen informazioa bistaratzeko.
      */
-    private void PodcasterInformazioaErakutsi(JTextArea textAreaInformacion) {
+    private void PodcasterInformazioaErakutsi(JTextArea textAreaInformazioa) {
         PodcasterDAO podcasterDAO = new PodcasterDAO();
-        String informacionPodcaster = podcasterDAO.PodcasterInformazioaLortu(PodcasterHautatua);
-        textAreaInformacion.setText(informacionPodcaster);
+        String podcasterInformazio = podcasterDAO.PodcasterInformazioaLortu(PodcasterHautatua);
+        textAreaInformazioa.setText(podcasterInformazio);
     }
 
+    
     /**
      * Metodo honek JComboBox baten bidez podcast-egilearen podcast-ak sartzen ditu.
      * @param comboBoxPodcasts JComboBox elementua podcast-ak bistaratzeko.
@@ -165,11 +171,10 @@ public class vPodcaster extends JFrame {
     private void PodcasterIrudiaErakutsi(JLabel lblPodcasterImg) {
         try {
             PodcasterDAO podcasterDAO = new PodcasterDAO();
-            ImageIcon imagenPodcaster = podcasterDAO.PodcasterIrudiaLortu(PodcasterHautatua);
-            lblPodcasterImg.setIcon(imagenPodcaster);  
+            ImageIcon podcasterIrudi = podcasterDAO.PodcasterIrudiaLortu(PodcasterHautatua);
+            lblPodcasterImg.setIcon(podcasterIrudi);  
         } catch (Exception ex) {
             ex.printStackTrace();
-            // Errorea kudeatu hemen
         }
     }
 }
