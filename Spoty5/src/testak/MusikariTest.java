@@ -15,10 +15,11 @@ public class MusikariTest {
 	
 	private static Musikari m1;
 	private static Musikari m2;
+	private static Blob irudia;
 	
 	@Before
 	public void setUp() throws Exception {
-		m1 = new Musikari(1, "Bad Bunny", "Hiriko musikako konpositore eta abeslaria da, batez ere trap eta reggaetoia");
+		m1 = new Musikari(1, "Bad Bunny", irudia, "Hiriko musikako konpositore eta abeslaria da, batez ere trap eta reggaetoia");
 	}
 	
 //----------------------------------------- Id --------------------------------------
@@ -69,6 +70,30 @@ public class MusikariTest {
 		assertEquals("Bad Bunny", m1.getIzena());
 	}
     
+//----------------------------------------- Irudia --------------------------------------
+
+    @Test
+    public void testGetIrudia() {
+    	assertEquals(irudia, m1.getIrudia());
+    }
+    
+    @Test
+    public void testGetIrudiaTxarto() {
+    	assertNotEquals(irudia, m1.getIrudia());
+    }
+    
+    @Test
+    public void testSetIrudia() {
+    	m1.setIrudia(irudia);
+    	assertEquals(irudia, m1.getIrudia());
+    }
+    
+    @Test
+    public void testSetIrudiaTxarto() {
+    	m1.setIrudia(irudia);
+    	assertEquals(irudia, m1.getIrudia());
+    }
+    
 //----------------------------------------- AlbumZerrenda --------------------------------------
 
     @Test
@@ -99,7 +124,7 @@ public class MusikariTest {
     public void testToString() {
     	String txt = m1.toString();
     	
-    	String esperotakoa = "Artista [id=" + m1.getId_artista() + ", izena=" + m1.getIzena() + ", deskribapena=" + m1.getDeskribapena() + "]";
+    	String esperotakoa = "Artista [id=" + m1.getId_artista() + ", izena=" + m1.getIzena() + ", irudia=" + m1.getIrudia() + ", deskribapena=" + m1.getDeskribapena() + "]";
     }
     
  //----------------------------------------- Equals --------------------------------------
@@ -122,7 +147,7 @@ public class MusikariTest {
 
     @Test
     public void testEqualsClaseAtrBerdinak() {
-    Musikari m2 = new Musikari(1, "Bad Bunny", "Hiriko musikako konpositore eta abeslaria da, batez ere trap eta reggaetoia");
+    Musikari m2 = new Musikari(1, "Bad Bunny", irudia, "Hiriko musikako konpositore eta abeslaria da, batez ere trap eta reggaetoia");
     assertTrue(m1.equals(m2));
     }
     

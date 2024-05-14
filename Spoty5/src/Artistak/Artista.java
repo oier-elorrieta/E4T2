@@ -36,10 +36,9 @@ public abstract class Artista {
 	 */
 	
 
-	public Artista(int id_artista, String izena, Blob irudia, String deskribapena) {
+	public Artista(int id_artista, String izena, String deskribapena) {
 		this.id_artista = id_artista;
 		this.izena = izena;
-		this.irudia = irudia;
 		this.deskribapena = deskribapena;
 	}
 

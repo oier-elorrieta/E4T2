@@ -126,6 +126,7 @@ public class vPodcaster extends JFrame {
                 PodcastIkusi(erabiltzaileIzena);
             }
         });
+      
     }
 
     /**

@@ -14,10 +14,10 @@ public class Podcaster extends Artista{
 
 	@Override
 	public String toString() {
-		return "Podcaster [id_artista=" + id_artista + ", izena=" + izena + ", deskribapena=" + deskribapena
-				+ ", getId_artista()=" + getId_artista() + ", getDeskribapena()=" + getDeskribapena() + ", getIzena()="
-				+ getIzena() + ", toString()=" + super.toString() + ", hashCode()=" + hashCode() + ", getClass()="
-				+ getClass() + "]";
+		return "Podcaster [id_artista=" + id_artista + ", izena=" + izena + ", irudia=" + irudia + ", deskribapena="
+				+ deskribapena + ", getId_artista()=" + getId_artista() + ", getDeskribapena()=" + getDeskribapena()
+				+ ", getIrudia()=" + getIrudia() + ", getIzena()=" + getIzena() + ", toString()=" + super.toString()
+				+ ", hashCode()=" + hashCode() + ", getClass()=" + getClass() + "]";
 	}
 
 	@Override
@@ -35,7 +35,7 @@ public class Podcaster extends Artista{
 			return false;
 		return true;
 	}
+
 	
-    
-    
+	
 }
