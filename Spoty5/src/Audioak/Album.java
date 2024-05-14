@@ -17,12 +17,6 @@ public class Album {
 	private Date urtea;
 	private String generoa;
 	private static Blob irudia;
-	
-
-	/**
-	 * Albuma izango duen argitaratze urtea
-	 */
-	
 
 	/**
 	 * Albuma sortzeko konstruktorea izenburua eta argitaratze urtearekin
@@ -40,7 +34,6 @@ public class Album {
 	}
 	
 
-	
 	public int getId_album() {
 		return id_album;
 	}

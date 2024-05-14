@@ -14,16 +14,17 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import Audioak.Abestia;
 import master.KonexioaDB;
 
 public class AlbumDAO {
 
-    public List<String> albumAbestiakHartu(String albumIzena) {
-        List<String> abestiak = new ArrayList<>();
+    public List<Abestia> albumAbestiakHartu(Abestia abesti) {
+        List<Abestia> abestiak = new ArrayList<>();
        
         try (Connection con = KonexioaDB.hasi();
              PreparedStatement stmt = con.prepareStatement("SELECT a.izena FROM abestia ab INNER JOIN audio a ON ab.id_audio = a.id_audio INNER JOIN album al ON ab.id_album = al.id_album WHERE al.izenburua = ?")) {
-            stmt.setString(1, albumIzena);
+            stmt.setString(1, abesti);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     abestiak.add(rs.getString("izena"));
@@ -81,7 +82,7 @@ public class AlbumDAO {
        
       public ImageIcon AlbumIrudiaLortu(String albumIzena) {
             ImageIcon imagenAlbum = null;
-            Connection con = KonexioaDB.hasi(); // Obtener conexión con la base de datos
+            Connection con = KonexioaDB.hasi();
             if (con == null) {
                 System.out.println("Ezin da konexioa egin.");
                 return imagenAlbum;
@@ -90,13 +91,11 @@ public class AlbumDAO {
             ResultSet rs = null;
 
             try {
-                // Consulta SQL para obtener la imagen del álbum
                 String sql = "SELECT irudia FROM audio WHERE izena = ?";
                 stmt = con.prepareStatement(sql);
                 stmt.setString(1, albumIzena);
                 rs = stmt.executeQuery();
 
-                // Si se encuentra la imagen, convertirla en ImageIcon
                 if (rs.next()) {
                     Blob blob = rs.getBlob("irudia");
                     if (blob != null) {
@@ -109,11 +108,11 @@ public class AlbumDAO {
             } catch (SQLException | IOException e) {
                 e.printStackTrace();
             } finally {
-                // Liberar recursos
+                
                 try {
                     if (rs != null) rs.close();
                     if (stmt != null) stmt.close();
-                    KonexioaDB.itxi(con); // Cerrar la conexión con la base de datos
+                    KonexioaDB.itxi(con);
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }

@@ -1,5 +1,6 @@
 package DAO;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,7 +47,8 @@ public class MusikariListaDAO {
 	            int id_artista = rs.getInt("id_musikaria");
 	            String izena = rs.getString("izenArtistikoa");
 	            String deskribapena = rs.getString("deskribapena");
-	            Musikari musikaria = new Musikari(id_artista, izena,deskribapena);
+	            Blob irudia = rs.getBlob("irudia");
+	            Musikari musikaria = new Musikari(id_artista, izena, irudia, deskribapena);
 
 	            musikariak.add(musikaria);
 	        }
@@ -95,7 +97,8 @@ public class MusikariListaDAO {
 		            int id_artista = rs.getInt("id_musikaria");
 		            String izena = rs.getString("izenArtistikoa");
 		            String deskribapena = rs.getString("deskribapena");
-		           musikaria = new Musikari(id_artista, izena,deskribapena);
+		            Blob irudia = rs.getBlob("irudia");
+		           musikaria = new Musikari(id_artista, izena, irudia, deskribapena);
 		        }
 		    } catch (SQLException e) {
 		        e.printStackTrace();

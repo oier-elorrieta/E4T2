@@ -50,13 +50,7 @@ public class vAlbum extends JFrame {
 		btnAtzera.setBounds(10, 10, 85, 21);
 		contentPane.add(btnAtzera);
 
-		btnAtzera.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				vArtista vArtistaPanel = new vArtista(artistaIzena, erabiltzaileIzena);
-				vArtistaPanel.setVisible(true);
-				dispose();
-			}
-		});
+		
 
 		JLabel lblAlbum = new JLabel("Albuma: " + albumIzena);
 		lblAlbum.setBounds(172, 14, 182, 13);

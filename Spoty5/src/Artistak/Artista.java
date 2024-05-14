@@ -7,14 +7,10 @@ import java.util.Objects;
  * Artista izeneko klase abstraktua
  **/
 public abstract class Artista {
-
-	/**
-	 * Artista izango duen izena
-	 */
 	
 	protected int id_artista;
 	protected String izena;
-	protected static Blob irudia;
+	protected Blob irudia;
 	protected String deskribapena;
 
 	public int getId_artista() {
@@ -40,16 +36,15 @@ public abstract class Artista {
 	 */
 	
 
-	
-	
-	public static Blob getIrudia() {
-		return irudia;
-	}
-
-	public Artista(int id_artista, String izena, String deskribapena) {
+	public Artista(int id_artista, String izena, Blob irudia, String deskribapena) {
 		this.id_artista = id_artista;
 		this.izena = izena;
+		this.irudia = irudia;
 		this.deskribapena = deskribapena;
+	}
+
+	public Blob getIrudia() {
+		return irudia;
 	}
 
 	public void setIrudia(Blob irudia) {
@@ -79,15 +74,15 @@ public abstract class Artista {
 	 *
 	 * @return Artistaren izena duen testu errepresentazioa
 	 */
-	
 	@Override
 	public String toString() {
-		return "Artista [Izena=" + izena + ", id_artista=" + id_artista + ", deskribapena=" + deskribapena + "]";
+		return "Artista [id_artista=" + id_artista + ", izena=" + izena + ", irudia=" + irudia + ", deskribapena="
+				+ deskribapena + "]";
 	}
-	
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(izena, deskribapena, id_artista);
+		return Objects.hash(deskribapena, id_artista, irudia, izena);
 	}
 
 	@Override
@@ -99,8 +94,9 @@ public abstract class Artista {
 		if (getClass() != obj.getClass())
 			return false;
 		Artista other = (Artista) obj;
-		return Objects.equals(izena, other.izena) && Objects.equals(deskribapena, other.deskribapena)
-				&& id_artista == other.id_artista;
+		return Objects.equals(deskribapena, other.deskribapena) && id_artista == other.id_artista
+				&& Objects.equals(irudia, other.irudia) && Objects.equals(izena, other.izena);
 	}
+	
 
 }

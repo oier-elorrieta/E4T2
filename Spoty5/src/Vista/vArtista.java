@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Artistak.Artista;
 import Artistak.Musikari;
 import Audioak.Album;
 
@@ -14,6 +15,8 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
 
 import DAO.ArtistaDAO;
@@ -48,6 +51,7 @@ public class vArtista extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
+
      
         JLabel lblArtista = new JLabel(artistaIzena);
         lblArtista.setHorizontalAlignment(SwingConstants.CENTER);
@@ -111,20 +115,19 @@ public class vArtista extends JFrame {
         contentPane.add(textAreaInformazioa);
         kargatuMusikariInformazioa(textAreaInformazioa);
       
-       
         comboBoxAlbumak = new JComboBox<>(); 
         comboBoxAlbumak.setBounds(10, 61, 128, 20);
         contentPane.add(comboBoxAlbumak);
-        AlbumakErakutsi();
+        albumakErakutsi();
           
-        
        
         JLabel lblArtistaImg = new JLabel("");
         lblArtistaImg.setHorizontalAlignment(SwingConstants.CENTER);
         lblArtistaImg.setBounds(10, 160, 223, 186);
         contentPane.add(lblArtistaImg);
        
-        //ArtistaIrudiaErakutsi(lblArtistaImg);
+        artistenArgazkia(musikari.getIrudia(), lblArtistaImg);
+
     }
  
     /**
@@ -145,7 +148,7 @@ public class vArtista extends JFrame {
      *
      * @param comboBoxAlbumes JComboBox elementua artistaren albumak erakusteko
      */
-    private void AlbumakErakutsi() {
+    private void albumakErakutsi() {
         try {
             if (musikari != null) {
                 ArtistaDAO artistaDAO = new ArtistaDAO();
@@ -160,14 +163,28 @@ public class vArtista extends JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-   
+    } 
    
     /**
      * Erabiltzaileak hautatutako artistaren irudia erakusteko metodoa.
      *
      * @param lblArtistaImg JLabel elementua non artistaren irudia erakusteko
      */
-   
+    
+    private void artistenArgazkia(Blob irudiaBlob, JLabel lblArtistaImg) {
+        try {
+            if (irudiaBlob != null) {
+                byte[] irudiaBytes = irudiaBlob.getBytes(1, (int) irudiaBlob.length()); // Irudia byte[] motan bihurtu
+                if (irudiaBytes.length > 0) {
+                    // Irudia ImageIcon formatuan kargatu
+                    ImageIcon icon = new ImageIcon(irudiaBytes);
+                    lblArtistaImg.setIcon(icon);
+                    return;
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
 }

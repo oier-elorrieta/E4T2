@@ -104,7 +104,7 @@ public class ArtistaDAO {
 
 	    try {
 	       
-	    	String sql = "SELECT irudia FROM musikaria where izenArtistikoa = ?";
+	    	String sql = "SELECT * FROM musikaria where izenArtistikoa = ?";
 	        stmt = con.prepareStatement(sql);
 	        stmt.setString(1, izenMus);
 	        rs = stmt.executeQuery();
@@ -115,7 +115,7 @@ public class ArtistaDAO {
 	            String izena = rs.getString("izenArtistikoa");
 	            String deskribapena = rs.getString("deskribapena");
 	            Blob irudia = rs.getBlob("irudia");
-	           musikaria = new Musikari(id_artista, izena,deskribapena, irudia);
+	           musikaria = new Musikari(id_artista, izena, irudia, deskribapena);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();

@@ -9,15 +9,14 @@ import Audioak.Album;
 */
 public class Musikari extends Artista {
   
-	public Musikari(int id_artista, String izena, String deskribapena) {
-	super(id_artista, izena, deskribapena);
+	public Musikari(int id_artista, String izena, Blob irudia, String deskribapena) {
+	super(id_artista, izena, irudia, deskribapena);
 }
-	
-	
 
 	@Override
 	public String toString() {
-		return "Musikari [id_artista=" + id_artista + ", izena=" + izena + ", deskribapena=" + deskribapena + "]";
+		return "Musikari [id_artista=" + id_artista + ", izena=" + izena + ", irudia=" + irudia + ", deskribapena="
+				+ deskribapena + "]";
 	}
 
 	@Override
@@ -35,7 +34,6 @@ public class Musikari extends Artista {
 			return false;
 		return true;
 	}
-	
 
   
 }
