@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+
+import Artistak.Podcaster;
+import Audioak.Podcast;
 import master.KonexioaDB;
 
 /**
@@ -19,27 +22,31 @@ import master.KonexioaDB;
  */
 public class PodcasterDAO {
 	  
-    public String[] PodcastPodcastertatikLortu(String podcaster) {
-        List<String> podcasts = new ArrayList<>();
+    public List<Podcast> PodcastPodcastertatikLortu(Podcaster podcaster) {
+        List<Podcast> podcasts = new ArrayList<>();
         Connection con = KonexioaDB.hasi();
       
         if (con == null) {
-            System.out.println("Ezin da konexioa egin.");
-            return new String[0];
-        }
+	        System.out.println("Ezin da konexioa egin.");
+	        return podcasts; 
+	    }
       
         PreparedStatement stmt = null;
         ResultSet rs = null;
       
         try {
-            String sql = "SELECT izena FROM podcast WHERE id_podcaster IN (SELECT id_podcaster FROM podcaster WHERE izenArtistikoa = ?)";
+            String sql = "SELECT * FROM podcast WHERE id_podcaster IN (SELECT id_podcaster FROM podcaster WHERE izenArtistikoa = ?)";
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, podcaster);
+            stmt.setInt(1, podcaster.getId_artista());
             rs = stmt.executeQuery();
           
             while (rs.next()) {
+                int id_audio = rs.getInt("id_audio");
                 String izena = rs.getString("izena");
-                podcasts.add(String.valueOf(izena));
+                String kolaboratzaileak = rs.getString("kolaboratzaileak");
+                Podcast podcast = new Podcast(id_audio, izena, kolaboratzaileak);
+                
+                podcasts.add(podcast);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,7 +60,7 @@ public class PodcasterDAO {
             }
         }
       
-        return podcasts.toArray(new String[0]);
+        return podcasts;
     }
 
     /**
@@ -63,12 +70,12 @@ public class PodcasterDAO {
      * @return Podcaster horren informazioa.
      */
     public String PodcasterInformazioaLortu(String podcaster) {
-        String informacionPodcaster = "";
+        String podcasterInfo = "";
         Connection con = KonexioaDB.hasi();
 
         if (con == null) {
             System.out.println("Ezin da konexioa egin.");
-            return informacionPodcaster;
+            return podcasterInfo;
         }
 
         PreparedStatement stmt = null;
@@ -81,9 +88,9 @@ public class PodcasterDAO {
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                String nombreArtistico = rs.getString("izenArtistikoa");
-                String descripcion = rs.getString("deskribapena");
-                informacionPodcaster = "Izen artistikoa: " + nombreArtistico + "\nDeskribapena: " + descripcion;
+                String izenArtistikoa = rs.getString("izenArtistikoa");
+                String deskribapena = rs.getString("deskribapena");
+                podcasterInfo = "Izen artistikoa: " + izenArtistikoa + "\nDeskribapena: " + deskribapena;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,7 +103,7 @@ public class PodcasterDAO {
                 e.printStackTrace();
             }
         }
-        return informacionPodcaster;
+        return podcasterInfo;
     }
 
     /**
@@ -106,12 +113,12 @@ public class PodcasterDAO {
      * @return Podcasterren irudia ImageIcon gisa.
      */
     public ImageIcon PodcasterIrudiaLortu(String podcaster) {
-        ImageIcon imagenPodcaster = null;
+        ImageIcon podcasterIrudia = null;
         Connection con = KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
 
         if (con == null) {
             System.out.println("Ezin da konexioa egin.");
-            return imagenPodcaster;
+            return podcasterIrudia;
         }
 
         PreparedStatement stmt = null;
@@ -130,7 +137,7 @@ public class PodcasterDAO {
                 if (blob != null) {
                     try (ByteArrayInputStream is = new ByteArrayInputStream(blob.getBytes(1, (int) blob.length()))) {
                         Image image = ImageIO.read(is);
-                        imagenPodcaster = new ImageIcon(image);
+                        podcasterIrudia = new ImageIcon(image);
                     }
                 }
             }
@@ -146,6 +153,6 @@ public class PodcasterDAO {
                 e.printStackTrace();
             }
         }
-        return imagenPodcaster;
+        return podcasterIrudia;
     }
 }
