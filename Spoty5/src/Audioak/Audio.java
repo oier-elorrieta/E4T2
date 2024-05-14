@@ -7,6 +7,8 @@ import java.util.Objects;
  */
 public abstract class Audio {
 
+	protected int Id_audio;
+	
 	/**
 	 * Audioa izango duen izenburua
 	 */
@@ -35,13 +37,22 @@ public abstract class Audio {
      * @param kolaboratzaileak audioaren kolaboratzaileak
      * @param erreprodukzioak audioaren erreprodukzioak
      */
-    public Audio(String izenburua, double iraupena, String kolaboratzaileak, int erreprodukzioak) {
-        Izenburua = izenburua;
+    public Audio(int id_audio, String izena, double iraupena, String kolaboratzaileak, int erreprodukzioak) {
+    	Id_audio = id_audio;
+        Izenburua = izena;
         Iraupena = iraupena;
         Kolaboratzaileak = kolaboratzaileak;
         Erreprodukzioak = erreprodukzioak;
     }
 
+    public int getId_audio() {
+    	return Id_audio;
+    }
+    
+    public void setId_audio(int id_audio) {
+    	Id_audio = id_audio;
+    }
+    
     /**
      * Audioaren izenburua lortzen du
      * 
@@ -121,7 +132,7 @@ public abstract class Audio {
      */
     @Override
     public String toString() {
-        return "Audio [Izenburua=" + Izenburua + ", Iraupena=" + Iraupena + ", Kolaboratzaileak=" + Kolaboratzaileak
+        return "Audio [id_audio=" + Id_audio + "Izenburua=" + Izenburua + ", Iraupena=" + Iraupena + ", Kolaboratzaileak=" + Kolaboratzaileak
                 + ", Erreprodukzioak=" + Erreprodukzioak + "]";
     }
 
@@ -130,30 +141,30 @@ public abstract class Audio {
      * 
      * @return objetuaren hash kodea
      */
-    @Override
-    public int hashCode() {
-        return Objects.hash(Erreprodukzioak, Iraupena, Izenburua, Kolaboratzaileak);
-    }
-
+	@Override
+	public int hashCode() {
+		return Objects.hash(Erreprodukzioak, Id_audio, Iraupena, Izenburua, Kolaboratzaileak);
+	}
+    
     /**
      * Komparatzen du objetua beste objetu batekin jakiteko berdin direla ala ez
      * 
      * @param zein objetuarekin konparatuko den
      * @return true objetuak berdin badira, false objetuak desberdinak badira
      */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Audio other = (Audio) obj;
-        return Erreprodukzioak == other.Erreprodukzioak
-                && Double.doubleToLongBits(Iraupena) == Double.doubleToLongBits(other.Iraupena)
-                && Objects.equals(Izenburua, other.Izenburua)
-                && Objects.equals(Kolaboratzaileak, other.Kolaboratzaileak);
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Audio other = (Audio) obj;
+		return Erreprodukzioak == other.Erreprodukzioak && Id_audio == other.Id_audio
+				&& Double.doubleToLongBits(Iraupena) == Double.doubleToLongBits(other.Iraupena)
+				&& Objects.equals(Izenburua, other.Izenburua)
+				&& Objects.equals(Kolaboratzaileak, other.Kolaboratzaileak);
+	}
     
 }

@@ -56,7 +56,7 @@ public class PodcastDAOTest {
     public void testObtenerPodcastPorId() {
         // Configurar datos de prueba
         int idPodcast = 1;
-        Podcast expectedPodcast = new Podcast("Podcast1", 30.0, "Colaborador1, Colaborador2", 100);
+        Podcast expectedPodcast = new Podcast(1, "Podcast1", 30.0, "Colaborador1, Colaborador2", 100);
 
         // Simular la conexión y la consulta a la base de datos
         try (Connection con = KonexioaDB.hasi();

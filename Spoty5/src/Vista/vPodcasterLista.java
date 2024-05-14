@@ -117,8 +117,8 @@ public class vPodcasterLista extends JFrame {
 	    try {
 	        String podcasterHauatuta = comboBoxPodcasters.getSelectedItem().toString();
 	        PodcasterDAO podcasterDAO = new PodcasterDAO();
-	        Podcaster podcaster = podcasterDAO.PodcasterLortu(podcasterHauatuta);
-	        vPodcaster vPodcasterFrame = new vPodcaster(podcasterHauatuta, erabiltzaileIzena);
+	        String podcaster = podcasterDAO.PodcasterInformazioaLortu(podcasterHauatuta);
+	        vPodcaster vPodcasterFrame = new vPodcaster(podcasterHauatuta, erabiltzaileIzena, null);
 	        vPodcasterFrame.setVisible(true);
 	        dispose();
 	    } catch (Exception ex) {

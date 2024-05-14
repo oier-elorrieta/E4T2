@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Artistak.Podcaster;
+import Audioak.Podcast;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -15,6 +16,8 @@ import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+
 import DAO.PodcasterDAO;
 
 /**
@@ -24,7 +27,7 @@ public class vPodcaster extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private String PodcasterHautatua;
-    private JComboBox<String> comboBoxPodcasts;
+    private JComboBox<Podcast> comboBoxPodcasts;
     private Podcaster podcaster;
 
     /**
@@ -106,6 +109,7 @@ public class vPodcaster extends JFrame {
         // Podcast-ak erakutsi
         PodcastErakutsi(comboBoxPodcasts);
 
+        
         JLabel lblPodcasterImg = new JLabel("");
         lblPodcasterImg.setHorizontalAlignment(SwingConstants.CENTER);
         lblPodcasterImg.setBounds(10, 160, 223, 186);
@@ -139,10 +143,10 @@ public class vPodcaster extends JFrame {
      * Metodo honek JComboBox baten bidez podcast-egilearen podcast-ak sartzen ditu.
      * @param comboBoxPodcasts JComboBox elementua podcast-ak bistaratzeko.
      */
-    private void PodcastErakutsi(JComboBox<String> comboBoxPodcasts) {
+    private void PodcastErakutsi(JComboBox<Podcast> comboBoxPodcasts) {
         PodcasterDAO podcasterDAO = new PodcasterDAO();
-        String[] podcasts = podcasterDAO.PodcastPodcastertatikLortu(PodcasterHautatua);
-        for (String podcast : podcasts) {
+        List<Podcast> podcasts = podcasterDAO.PodcastPodcastertatikLortu(podcaster);
+        for (Podcast podcast : podcasts) {
             comboBoxPodcasts.addItem(podcast);
         }
     }

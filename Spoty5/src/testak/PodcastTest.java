@@ -18,9 +18,33 @@ public class PodcastTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		p1 = new Podcast("blink", 3.5, "andoni", 5);
+		p1 = new Podcast(1, "blink", 3.5, "andoni", 5);
 	}
 
+//----------------------------------------- Id_audio --------------------------------------
+
+	@Test
+	public void testGetId_audio() {
+		assertEquals(1, p1.getId_audio());
+	}
+	
+	@Test
+	public void testGetId_audioTxarto() {
+		assertNotEquals(2, p1.getId_audio());
+	}
+	
+	@Test
+	public void setId_audio() {
+		p1.setId_audio(3);
+		assertEquals(3, p1.getId_audio());
+	}
+	
+	@Test
+	public void setId_audioTxarto() {
+		p1.setId_audio(3);
+		assertNotEquals(1, p1.getId_audio());
+	}
+	
 //----------------------------------------- Izenburua --------------------------------------
 
     @Test
@@ -123,7 +147,7 @@ public class PodcastTest {
     public void testToString() {
     	String txt = p1.toString();
     	
-    	String esperotakoa = "Audio [izenburua=" + p1.getIzenburua() + ", iraupena=" + p1.getIraupena()
+    	String esperotakoa = "Audio [id_audio=" + p1.getId_audio() + "izenburua=" + p1.getIzenburua() + ", iraupena=" + p1.getIraupena()
     	+ ", kolaboratzaileak=" + p1.getKolaboratzaileak() + ", erreprodukzioak=" + p1.getErreprodukzioak() + "]";
     }
    
@@ -147,7 +171,7 @@ public class PodcastTest {
 
     @Test
     public void testEqualsClaseAtrBerdinak() {
-    Podcast p2 = new Podcast("blink", 3.5, "andoni", 5);
+    Podcast p2 = new Podcast(1, "blink", 3.5, "andoni", 5);
     assertTrue(p1.equals(p2));
     }
 }

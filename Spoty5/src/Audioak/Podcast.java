@@ -13,8 +13,8 @@ public class Podcast extends Audio{
      * @param kolaboratzaileak podcastren kolaboratzaileak
      * @param erreprodukzioak podcastren erreprodukzioak
      */
-    public Podcast(String izenburua, double iraupena, String kolaboratzaileak, int erreprodukzioak) {
-        super(izenburua, iraupena, kolaboratzaileak, erreprodukzioak);
+    public Podcast(int id_audio, String izena, double iraupena, String kolaboratzaileak, int erreprodukzioak) {
+        super(id_audio, izena, iraupena, kolaboratzaileak, erreprodukzioak);
     }
 
 }

@@ -21,9 +21,33 @@ public class AbestiaTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		a1 = new Abestia("blink", 3.5, "andoni", 5);
+		a1 = new Abestia(1, "blink", 3.5, "andoni", 5);
 	}
 
+//----------------------------------------- Id_audio --------------------------------------
+
+	@Test
+	public void testGetId_audio() {
+		assertEquals(1, a1.getId_audio());
+	}
+		
+	@Test
+	public void testGetId_audioTxarto() {
+		assertNotEquals(2, a1.getId_audio());
+	}
+		
+	@Test
+	public void setId_audio() {
+		a1.setId_audio(3);
+		assertEquals(3, a1.getId_audio());
+	}
+		
+	@Test
+	public void setId_audioTxarto() {
+		a1.setId_audio(3);
+		assertNotEquals(1, a1.getId_audio());
+	}
+	
 //----------------------------------------- Izenburua --------------------------------------
 
     @Test
@@ -127,7 +151,7 @@ public class AbestiaTest {
     public void testToString() {
     	String txt = a1.toString();
     	
-    	String esperotakoa = "Audio [izenburua=" + a1.getIzenburua() + ", iraupena=" + a1.getIraupena()
+    	String esperotakoa = "Audio [id_audio=" + a1.getId_audio() + "izenburua=" + a1.getIzenburua() + ", iraupena=" + a1.getIraupena()
     	+ ", kolaboratzaileak=" + a1.getKolaboratzaileak() + ", erreprodukzioak=" + a1.getErreprodukzioak() + "]";
     }
   
@@ -151,7 +175,7 @@ public class AbestiaTest {
 
     @Test
     public void testEqualsClaseAtrBerdinak() {
-    Abestia p2 = new Abestia("blink", 3.5, "andoni", 5);
+    Abestia p2 = new Abestia(1, "blink", 3.5, "andoni", 5);
     assertTrue(a1.equals(p2));
     }
     

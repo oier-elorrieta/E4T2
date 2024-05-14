@@ -13,8 +13,8 @@ public class Abestia extends Audio {
 	 * @param kolaboratzaileak abestian kolaboratu dutenak
 	 * @param erreprodukzioak abestia zenbat aldiz erreproduzitu den
 	 */
-    public Abestia(String izenburua, double iraupena, String kolaboratzaileak, int erreprodukzioak) {
-        super(izenburua, iraupena, kolaboratzaileak, erreprodukzioak);
+	public Abestia(int id_audio, String izena, double iraupena, String kolaboratzaileak, int erreprodukzioak) {
+        super(id_audio, izena, iraupena, kolaboratzaileak, erreprodukzioak);
     }
     
 }

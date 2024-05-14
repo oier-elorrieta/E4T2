@@ -43,8 +43,10 @@ public class PodcasterDAO {
             while (rs.next()) {
                 int id_audio = rs.getInt("id_audio");
                 String izena = rs.getString("izena");
+                double iraupena = rs.getDouble("id_audio");
                 String kolaboratzaileak = rs.getString("kolaboratzaileak");
-                Podcast podcast = new Podcast(id_audio, izena, kolaboratzaileak);
+                int erreprodukzioak = rs.getInt("erreprodukzioak");
+                Podcast podcast = new Podcast(id_audio, izena, iraupena, kolaboratzaileak, erreprodukzioak);
                 
                 podcasts.add(podcast);
             }
