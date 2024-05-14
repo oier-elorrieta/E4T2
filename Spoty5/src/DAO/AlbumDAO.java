@@ -8,115 +8,114 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 import Audioak.Abestia;
+import Audioak.Album;
 import master.KonexioaDB;
 
 public class AlbumDAO {
 
-    public List<Abestia> albumAbestiakHartu(Abestia abesti) {
-        List<Abestia> abestiak = new ArrayList<>();
-       
-        try (Connection con = KonexioaDB.hasi();
-             PreparedStatement stmt = con.prepareStatement("SELECT a.izena FROM abestia ab INNER JOIN audio a ON ab.id_audio = a.id_audio INNER JOIN album al ON ab.id_album = al.id_album WHERE al.izenburua = ?")) {
-            stmt.setString(1, abesti);
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    abestiak.add(rs.getString("izena"));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-       
-        return abestiak;
-        
-    }
+	public static List<Abestia> abestiakLortuAlbumetik(Album album) {
+	    List<Abestia> abestiak = new ArrayList<>();
+	    Connection con = KonexioaDB.hasi(); 
+
+	    if (con == null) {
+	        System.out.println("Ezin da konexioa egin.");
+	        return abestiak; 
+	    }
+
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+
+	    try {
+	       
+	        String sql = "SELECT audio.* " +
+                    "FROM audio " +
+                    "JOIN abestia ON audio.id_audio = abestia.id_audio " +
+                    "WHERE abestia.id_album = ?";
+	        stmt = con.prepareStatement(sql);
+	        stmt.setInt(1, album.getId_album());
+	        rs = stmt.executeQuery();
+
+	        
+	        while (rs.next()) {
+	            int id_audio = rs.getInt("id_audio");
+	            String izena = rs.getString("izena");
+	            Time iraupena = rs.getTime("iraupena");
+	            Blob irudia = rs.getBlob("irudia");
+	            Abestia abestia = new Abestia(id_audio, izena, iraupena, irudia);
+
+	            abestiak.add(abestia);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        
+	        try {
+	            if (rs != null) rs.close();
+	            if (stmt != null) stmt.close();
+	            KonexioaDB.itxi(con);
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    
+	    return abestiak;
+	}
+	
+	public Album albumLortu(String albumIzen) {
+		Album albuma = null;
+	    Connection con = KonexioaDB.hasi(); 
+
+	    if (con == null) {
+	        System.out.println("Ezin da konexioa egin.");
+	       
+	    }
+
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+
+	    try {
+		       
+	        String sql = "SELECT * FROM album WHERE izenburua = ? ";
+	        stmt = con.prepareStatement(sql);
+	        stmt.setString(1, albumIzen);
+	        rs = stmt.executeQuery();
+
+	        
+	        while (rs.next()) {
+	            int id_album = rs.getInt("id_album");
+	            String izenburua = rs.getString("izenburua");
+	            Date urtea = rs.getDate("urtea");
+	            String generoa = rs.getString("generoa");
+	            Blob irudia = rs.getBlob("irudia");
+	            albuma = new Album(id_album, izenburua, urtea, generoa,irudia);
+
+	           
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        
+	        try {
+	            if (rs != null) rs.close();
+	            if (stmt != null) stmt.close();
+	            KonexioaDB.itxi(con);
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    
+	    return albuma;
+	}
     
     
-    public String AlbumInformazioaLortu(String albumIzena) {
 
-        String Albuminformazioa = "";
-        Connection con = KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
-        if (con == null) {
-            System.out.println("Ezin da konexioa egin.");
-            return Albuminformazioa;
-        }
-
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
-        try {
-            // Artista baten informazioa lortzeko SQL kontsulta
-            String sql = "SELECT urtea, generoa FROM album WHERE izenburua = ?";
-            stmt = con.prepareStatement(sql);
-            stmt.setString(1, albumIzena);
-            rs = stmt.executeQuery();
-            
-            // Artista baten informazioa eraikitzeko
-            if (rs.next()) {
-                String Data = rs.getString("urtea");
-                String Generoa = rs.getString("generoa");
-                Albuminformazioa = "Albumaren irteera data: " + Data + "\nGeneroa: " + Generoa;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            // Konexioa itxi eta baliabideak askatu
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                KonexioaDB.itxi(con);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return Albuminformazioa;
-    }
-
-       
-      public ImageIcon AlbumIrudiaLortu(String albumIzena) {
-            ImageIcon imagenAlbum = null;
-            Connection con = KonexioaDB.hasi();
-            if (con == null) {
-                System.out.println("Ezin da konexioa egin.");
-                return imagenAlbum;
-            }
-            PreparedStatement stmt = null;
-            ResultSet rs = null;
-
-            try {
-                String sql = "SELECT irudia FROM audio WHERE izena = ?";
-                stmt = con.prepareStatement(sql);
-                stmt.setString(1, albumIzena);
-                rs = stmt.executeQuery();
-
-                if (rs.next()) {
-                    Blob blob = rs.getBlob("irudia");
-                    if (blob != null) {
-                        try (ByteArrayInputStream is = new ByteArrayInputStream(blob.getBytes(1, (int) blob.length()))) {
-                            Image image = ImageIO.read(is);
-                            imagenAlbum = new ImageIcon(image);
-                        }
-                    }
-                }
-            } catch (SQLException | IOException e) {
-                e.printStackTrace();
-            } finally {
-                
-                try {
-                    if (rs != null) rs.close();
-                    if (stmt != null) stmt.close();
-                    KonexioaDB.itxi(con);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            return imagenAlbum;
-        }   
  }

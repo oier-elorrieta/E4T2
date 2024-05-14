@@ -16,8 +16,11 @@ public class Album {
 	private String izenburua;
 	private Date urtea;
 	private String generoa;
-	private static Blob irudia;
-
+	private  Blob irudia;
+	
+	
+	
+	
 	/**
 	 * Albuma sortzeko konstruktorea izenburua eta argitaratze urtearekin
 	 *
@@ -25,79 +28,57 @@ public class Album {
 	 * @param argitaratzeUrtea albumaren argitaratze urtea
 	 */
 
-
-	public Album(int id_album, String izenburua, Date urtea, String generoa) {
+	
+	
+	public Album(int id_album, String izenburua, Date urtea, String generoa, Blob irudia) {
 		this.id_album = id_album;
 		this.izenburua = izenburua;
 		this.urtea = urtea;
-		this.generoa = generoa;	
+		this.generoa = generoa;
+		this.irudia = irudia;
 	}
 	
-
+	
+	
 	public int getId_album() {
 		return id_album;
 	}
-
-
-
-	public String getIzenburua() {
-		return izenburua;
-	}
-
-
-
-	public Date getUrtea() {
-		return urtea;
-	}
-
-
-
-	public String getGeneroa() {
-		return generoa;
-	}
-
-
-
-	public static Blob getIrudia() {
-		return irudia;
-	}
-
-
-
 	public void setId_album(int id_album) {
 		this.id_album = id_album;
 	}
-
-
-
+	public String getIzenburua() {
+		return izenburua;
+	}
 	public void setIzenburua(String izenburua) {
 		this.izenburua = izenburua;
 	}
-
-
-
+	public Date getUrtea() {
+		return urtea;
+	}
 	public void setUrtea(Date urtea) {
 		this.urtea = urtea;
 	}
-
-
-
+	public String getGeneroa() {
+		return generoa;
+	}
 	public void setGeneroa(String generoa) {
 		this.generoa = generoa;
 	}
-
-
-
-	public static void setIrudia(Blob irudia) {
-		Album.irudia = irudia;
+	public Blob getIrudia() {
+		return irudia;
+	}
+	public void setIrudia(Blob irudia) {
+		this.irudia = irudia;
 	}
 
 
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(generoa, id_album, izenburua, urtea);
+		return Objects.hash(generoa, id_album, irudia, izenburua, urtea);
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -109,7 +90,13 @@ public class Album {
 			return false;
 		Album other = (Album) obj;
 		return Objects.equals(generoa, other.generoa) && id_album == other.id_album
-				&& Objects.equals(izenburua, other.izenburua) && Objects.equals(urtea, other.urtea);
+				&& Objects.equals(irudia, other.irudia) && Objects.equals(izenburua, other.izenburua)
+				&& Objects.equals(urtea, other.urtea);
 	}
+
+	
+
+	
+	
 
 }

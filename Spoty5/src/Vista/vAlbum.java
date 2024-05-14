@@ -4,13 +4,24 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+
+import Artistak.Musikari;
+import Audioak.Abestia;
+import Audioak.Album;
 import DAO.AlbumDAO;
+import DAO.ArtistaDAO;
+import DAO.ErreproduzioaDAO;
+import DAO.MusikariListaDAO;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JComboBox;
 
@@ -22,7 +33,9 @@ public class vAlbum extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private String albumIzena;
+	private JComboBox<String> comboBoxaAbestiak;
+	private Album album;
+	private Musikari musikari;
 
 	/**
 	 * {@code vAlbum} klasearen eraikitzailea. Eraikitzaile honek albumaren izena ematen du 
@@ -34,10 +47,10 @@ public class vAlbum extends JFrame {
 	 * @param artistaDeskribapena Albumaren artistaaren deskribapena
 	 * @param artistaIrudia       Albumaren artistaaren irudia
 	 */
-	public vAlbum(String artistaIzena, String erabiltzaileIzena, String albumIzena, String artistaDeskribapena,
-			ImageIcon artistaIrudia) {
-		this.albumIzena = albumIzena;
-		setTitle("Albuma: " + albumIzena);
+	public vAlbum(String erabiltzaileIzena, Musikari musikari, Album album) {
+	    this.musikari = musikari;
+		this.album = album;
+		setTitle("Albuma: " + album.getIzenburua());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 646, 413);
 		contentPane = new JPanel();
@@ -49,10 +62,17 @@ public class vAlbum extends JFrame {
 		btnAtzera.setFont(new Font("Tahoma", Font.BOLD, 10));
 		btnAtzera.setBounds(10, 10, 85, 21);
 		contentPane.add(btnAtzera);
+		btnAtzera.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                vArtista vArtistaFrame = new vArtista(erabiltzaileIzena, musikari);
+                vArtistaFrame.setVisible(true);
+                dispose();
+            }
+        });
 
 		
 
-		JLabel lblAlbum = new JLabel("Albuma: " + albumIzena);
+		JLabel lblAlbum = new JLabel("Albuma: " + album.getIzenburua());
 		lblAlbum.setBounds(172, 14, 182, 13);
 		contentPane.add(lblAlbum);
 
@@ -64,31 +84,16 @@ public class vAlbum extends JFrame {
 		lblAlbumarenInformazioa.setBounds(444, 60, 176, 13);
 		contentPane.add(lblAlbumarenInformazioa);
 
-		JComboBox comboBoxAbestiAukeratu = new JComboBox();
-		comboBoxAbestiAukeratu.setBounds(10, 84, 137, 21);
-		contentPane.add(comboBoxAbestiAukeratu);
-
 		JLabel lblAlbumArgazkia = new JLabel("");
-		lblAlbumArgazkia.setBounds(10, 146, 261, 200);
+		lblAlbumArgazkia.setBounds(23, 166, 261, 200);
 		contentPane.add(lblAlbumArgazkia);
-
-		AlbumIrudiaErakutsi(lblAlbumArgazkia);
-
-		JButton btnAbestiAukera = new JButton("Aukeratu");
-
-		btnAbestiAukera.setBounds(170, 83, 89, 23);
-		contentPane.add(btnAbestiAukera);
-		btnAbestiAukera.setBounds(170, 83, 89, 23);
-		contentPane.add(btnAbestiAukera);
-		btnAbestiAukera.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String audioIzena = (String) comboBoxAbestiAukeratu.getSelectedItem();
-				vErreprodukzio vErreprodukzioFrame = new vErreprodukzio(artistaIzena, erabiltzaileIzena, albumIzena,
-						artistaDeskribapena, artistaIrudia, audioIzena);
-				vErreprodukzioFrame.setVisible(true);
-				dispose();
-			}
-		});
+		albumenArgazkia(album.getIrudia(), lblAlbumArgazkia);
+		
+		comboBoxaAbestiak = new JComboBox<>(); 
+		comboBoxaAbestiak.setBounds(10, 84, 128, 20);
+		contentPane.add(comboBoxaAbestiak);
+		abestiakErakutsi();
+		
 
 		JTextArea textAreaAlbumInf = new JTextArea();
 		textAreaAlbumInf.setEditable(false);
@@ -96,64 +101,78 @@ public class vAlbum extends JFrame {
 		textAreaAlbumInf.setWrapStyleWord(true);
 		textAreaAlbumInf.setBounds(411, 102, 189, 87);
 		contentPane.add(textAreaAlbumInf);
-
-		AlbumInformazioaErakutsi(textAreaAlbumInf);
-
+		kargatuAlbumInformazioa(textAreaAlbumInf);
+		
+		JButton btnAbestiAukera = new JButton("Aukeratu");
+		btnAbestiAukera.setBounds(170, 83, 89, 23);
+		contentPane.add(btnAbestiAukera);
+		btnAbestiAukera.setBounds(170, 83, 89, 23);
+		contentPane.add(btnAbestiAukera);
 		btnAbestiAukera.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				vErreprodukzio vErreprodukzioFrame = new vErreprodukzio(artistaIzena, erabiltzaileIzena, albumIzena,
-						artistaDeskribapena, artistaIrudia, artistaDeskribapena);
-				vErreprodukzioFrame.setVisible(true);
-				dispose();
-			}
-		});
+    	    public void actionPerformed(ActionEvent e) {
+    	    	abestiaIkusi();
+    	    }
+    	});
 
-		AlbumDAO albumDAO = new AlbumDAO();
-		try {
-			List<String> abestiak = albumDAO.albumAbestiakHartu(albumIzena);
-			for (String abestia : abestiak) {
-				comboBoxAbestiAukeratu.addItem(abestia);
-			}
-
-			// Aukeratutako albumaren irudia hartu
-			if (!abestiak.isEmpty()) {
-				String lehenAbestiIzena = abestiak.get(0); // Lehengo abestiaren izena lortu
-				ImageIcon albumArgazkia = albumDAO.AlbumIrudiaLortu(lehenAbestiIzena); // Abestiaren irudia lortu
-				lblAlbumArgazkia.setIcon(albumArgazkia); // Irudia JLabel-en ezarri
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 	}
+	
+	private void abestiaIkusi() { //Aukeratutako musikaria autatu
+	 	   
+        String abestiAukeratua = comboBoxaAbestiak.getSelectedItem().toString();
+        ErreproduzioaDAO erreproduzioaDAO = new ErreproduzioaDAO();
+        Abestia aukeratutakoabesti = erreproduzioaDAO.abestiaLortu(abestiAukeratua);
+        //Deitu urrengo orrira
+        vErreprodukzio vErreproduzioaFrame = new vErreprodukzio(abestiAukeratua,aukeratutakoabesti,album);
+        vErreproduzioaFrame.setVisible(true);
+        dispose();
+}
+	
+	  private void kargatuAlbumInformazioa(JTextArea textAreaAlbumInf) {
+	        AlbumDAO albumDAO = new AlbumDAO();
+	        Album albumLortuta = albumDAO.albumLortu(album.getIzenburua());
+	        String generoa = albumLortuta.getGeneroa();
+	        Date urtea = albumLortuta.getUrtea();
+	        String albumInfo ="Generoa:  "+ generoa + ", Argitaratze urtea: " + urtea.toString();
+	        textAreaAlbumInf.setText(albumInfo);
+	        
+	    }
+	
+	private void abestiakErakutsi() {
+        try {
+            if (album != null) {
+                AlbumDAO albumDAO = new AlbumDAO();
+                
+                List<Abestia> abestiak = albumDAO.abestiakLortuAlbumetik(album);
+                
+                for (Abestia abesti : abestiak) {
+                	comboBoxaAbestiak.addItem(abesti.getIzenburua());
+                }
+            } else {
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    } 
 
 	/**
 	 * Albumaren irudia erakutsi.
 	 *
 	 * @param lblAlbumArgazkia Albumaren irudia erakutsiko den JLabel-a
 	 */
-	private void AlbumIrudiaErakutsi(JLabel lblAlbumArgazkia) {
-		try {
-			AlbumDAO albumDAO = new AlbumDAO();
-			ImageIcon albumArgazkia = albumDAO.AlbumIrudiaLortu(albumIzena);
-			lblAlbumArgazkia.setIcon(albumArgazkia);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
+	private void albumenArgazkia(Blob irudiaBlob, JLabel lblArtistaImg) {
+        try {
+            if (irudiaBlob != null) {
+                byte[] irudiaBytes = irudiaBlob.getBytes(1, (int) irudiaBlob.length()); // Irudia byte[] motan bihurtu
+                if (irudiaBytes.length > 0) {
+                    // Irudia ImageIcon formatuan kargatu
+                    ImageIcon icon = new ImageIcon(irudiaBytes);
+                    lblArtistaImg.setIcon(icon);
+                    return;
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
 
-	/**
-	 * Aukeratutako albumaren informazioa JTextArean erakusteko metodoa.
-	 *
-	 * @param textAreaAlbumInf Albumaren informazioa erakutsiko den JTextArea
-	 */
-	private void AlbumInformazioaErakutsi(JTextArea textAreaAlbumInf) {
-		try {
-			AlbumDAO albumDAO = new AlbumDAO();
-			String albumInf = albumDAO.AlbumInformazioaLortu(albumIzena);
-			textAreaAlbumInf.setText(albumInf);
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			// Hemen errore mezua JOptionPanean edo konsolan erakutsi dezakezu
-		}
-	}
 }

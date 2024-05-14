@@ -19,6 +19,7 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
 
+import DAO.AlbumDAO;
 import DAO.ArtistaDAO;
 import DAO.MusikariListaDAO;
 
@@ -31,9 +32,6 @@ import javax.swing.ImageIcon;
 public class vArtista extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private String artistaIzena;
-    private String artistaDeskribapena;
-    private ImageIcon artistaIrudia;
     private JComboBox<String> comboBoxAlbumak;
 	private Musikari musikari;
 
@@ -53,7 +51,7 @@ public class vArtista extends JFrame {
         contentPane.setLayout(null);
 
      
-        JLabel lblArtista = new JLabel(artistaIzena);
+        JLabel lblArtista = new JLabel(musikari.getIzena());
         lblArtista.setHorizontalAlignment(SwingConstants.CENTER);
         lblArtista.setBounds(133, 11, 159, 14);
         contentPane.add(lblArtista);
@@ -99,13 +97,11 @@ public class vArtista extends JFrame {
         contentPane.add(btnIkusiAlbuma);
 
         btnIkusiAlbuma.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String albumIzena  = comboBoxAlbumak.getSelectedItem().toString();
-                vAlbum vAlbumPanel = new vAlbum(artistaIzena, erabiltzaileIzena, albumIzena, artistaDeskribapena, artistaIrudia);
-                vAlbumPanel.setVisible(true);
-                dispose();
-            }
-        });
+    	    public void actionPerformed(ActionEvent e) {
+    	        AlbumaIkusi();
+    	    }
+    	});
+
        
         JTextArea textAreaInformazioa = new JTextArea();
         textAreaInformazioa.setEditable(false);
@@ -129,6 +125,17 @@ public class vArtista extends JFrame {
         artistenArgazkia(musikari.getIrudia(), lblArtistaImg);
 
     }
+    
+    private void AlbumaIkusi() { //Aukeratutako musikaria autatu
+ 	   
+        String albumAukeratua = comboBoxAlbumak.getSelectedItem().toString();
+        AlbumDAO albumDAO = new AlbumDAO();
+        Album aukeratutakoalbum = albumDAO.albumLortu(albumAukeratua);
+        //Deitu urrengo orrira
+        vAlbum vAlbumFrame = new vAlbum(albumAukeratua,musikari,aukeratutakoalbum);
+        vAlbumFrame.setVisible(true);
+        dispose();
+}
  
     /**
      * Artistaren informazioa JTextArean erakusteko metodoa.

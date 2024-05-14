@@ -54,7 +54,8 @@ public class ArtistaDAO {
 	            String izenburua = rs.getString("izenburua");
 	            Date urtea = rs.getDate("urtea");
 	            String generoa = rs.getString("generoa");
-	            Album album = new Album(id_album, izenburua, urtea, generoa);
+	            Blob irudia = rs.getBlob("irudia");
+	            Album album = new Album(id_album, izenburua, urtea, generoa,irudia);
 
 	            albumak.add(album);
 	        }
@@ -76,20 +77,6 @@ public class ArtistaDAO {
 	}
 
 
-   /**
-    * Artista baten informazioa lortzen du.
-    *
-    * @param artista Informazioa lortu nahi den artista.
-    * @return Artista horren informazioa.
-    */
-	
-
-   /**
-    * Artista baten irudia lortzen du.
-    *
-    * @param artista Irudia lortu nahi den artista.
-    * @return Artista horren irudia.
-    */
 	public Musikari musikariLortu(String izenMus) {
 		Musikari musikaria = null;
 	    Connection con = KonexioaDB.hasi(); 

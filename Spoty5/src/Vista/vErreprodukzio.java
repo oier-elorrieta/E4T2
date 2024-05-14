@@ -5,148 +5,242 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import Audioak.Abestia;
 import Audioak.Album;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+
+import java.net.URL;
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.sql.Time;
+
+
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+
 import java.awt.Font;
+import java.awt.TextArea;
 
 import DAO.AlbumDAO;
 import DAO.ErreproduzioaDAO;
 
+import javax.swing.Timer;
+
+
 public class vErreprodukzio extends JFrame {
 
-    private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
-    private String albumIzena;
-    private String audioIzena;
-    private List<String> abestiak; 
-    private int currentIndex; 
-    private Album album;
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private Abestia abestia;
+	private Album album;
+	private ErreproduzioaDAO erreprodukzioDAO;
+	private Clip clip;
+	private Timer timer;
+	private int denbora;
+	private List<Abestia> abestiak;
+	private int currentIndex;
+	private JLabel lblKontadorea;
+	private JLabel lblKantaIzena;
+	private JTextArea textAreaAbestiInf;
 
-    public vErreprodukzio(String artistaIzena, String erabiltzaileIzena, String albumIzena, String artistaDeskribapena, ImageIcon artistaIrudia, String audioIzena) {
-        
-    	setTitle("Erreprodukzioa");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 601, 415);
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+	public vErreprodukzio(String erabiltzaileIzena, Abestia abestia, Album album) {
+		this.abestia = abestia;
+		this.album = album;
+		erreprodukzioDAO = new ErreproduzioaDAO(album);
+		abestiak = AlbumDAO.abestiakLortuAlbumetik(album);
 
-        JButton btnAtzera = new JButton("Atzera");
-        btnAtzera.setBounds(10, 11, 89, 23);
-        contentPane.add(btnAtzera);
-        btnAtzera.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                vAlbum vAlbumPanel = new vAlbum(artistaIzena, erabiltzaileIzena, albumIzena, artistaDeskribapena, artistaIrudia);
-                vAlbumPanel.setVisible(true);
-                dispose();
-            }
-        });
+		setTitle("Erreprodukzioa");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 601, 415);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 
-        JLabel lblAbestiArgazkia = new JLabel("");
-        lblAbestiArgazkia.setBounds(164, 21, 239, 205);
-        contentPane.add(lblAbestiArgazkia);
-        
-        AbestiIrudiaErakutsi(lblAbestiArgazkia, audioIzena);
+		JButton btnAtzera = new JButton("Atzera");
+		btnAtzera.setBounds(10, 11, 89, 23);
+		contentPane.add(btnAtzera);
 
-        JButton btnMenua = new JButton("Menua");
-        btnMenua.setBounds(90, 238, 89, 23);
-        contentPane.add(btnMenua);
-        
-        btnMenua.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                vMenua menuaPanel = new vMenua(audioIzena);
-                menuaPanel.setVisible(true);
-                dispose();
-            }
-        });
+		JLabel lblAbestiArgazkia = new JLabel("");
+		lblAbestiArgazkia.setBounds(164, 21, 239, 205);
+		contentPane.add(lblAbestiArgazkia);
+		abestiArgazkia(abestia.getIrudia(), lblAbestiArgazkia);
 
-        JButton btnAurrekoAbesti = new JButton("<");
-        btnAurrekoAbesti.setBounds(189, 238, 41, 23);
-        contentPane.add(btnAurrekoAbesti);
+		JButton btnMenua = new JButton("Menua");
+		btnMenua.setBounds(90, 270, 89, 23);
+		contentPane.add(btnMenua);
 
-        JButton btnHasiAbestia = new JButton("Play");
-        btnHasiAbestia.setBounds(240, 238, 89, 23);
-        btnHasiAbestia.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+		JButton btnAurrekoAbesti = new JButton("<");
+		btnAurrekoAbesti.setBounds(190, 270, 41, 23);
+		contentPane.add(btnAurrekoAbesti);
+		btnAurrekoAbesti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pasadenAbestia();
+			}
+		});
 
-                ErreproduzioaDAO dao = new ErreproduzioaDAO();
-                dao.audioErreproduzitu(audioIzena + ".wav");
-            }
-        });
-        contentPane.add(btnHasiAbestia);
+		JButton btnHasiAbestia = new JButton("Play");
+		btnHasiAbestia.setBounds(241, 270, 89, 23);
+		contentPane.add(btnHasiAbestia);
+		btnHasiAbestia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				audioErreproduzitu(abestia.getIzenburua(), lblKontadorea);
+			}
+		});
 
-        JButton btnHurrengoAbesti = new JButton(">");
-        btnHurrengoAbesti.setBounds(339, 238, 41, 23);
-        contentPane.add(btnHurrengoAbesti);
-        btnHurrengoAbesti.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	erreproduzituUrrengoAbestia(abestiak);
-            }
-        });
-          
+		JButton btnHurrengoAbesti = new JButton(">");
+		btnHurrengoAbesti.setBounds(340, 270, 41, 23);
+		contentPane.add(btnHurrengoAbesti);
+		btnHurrengoAbesti.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				urrengoAbestia();
+			}
+		});
 
-        JButton btnGustokoa = new JButton("Gustokoa");
-        btnGustokoa.setBounds(390, 238, 89, 23);
-        contentPane.add(btnGustokoa);
+		JButton btnGustokoa = new JButton("Gustokoa");
+		btnGustokoa.setBounds(391, 270, 89, 23);
+		contentPane.add(btnGustokoa);
 
-        JLabel lblKantaInfo = new JLabel("Informazioa");
-        lblKantaInfo.setBounds(43, 288, 473, 65);
-        contentPane.add(lblKantaInfo);
-        
-        AbestiInformazioaErakutsi(lblKantaInfo,audioIzena);
+		JButton btnPerfil = new JButton(erabiltzaileIzena);
+		btnPerfil.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnPerfil.setBounds(468, 11, 107, 23);
+		contentPane.add(btnPerfil);
 
-        JButton btnPerfil = new JButton(erabiltzaileIzena);
-        btnPerfil.setFont(new Font("Tahoma", Font.BOLD, 11));
-        btnPerfil.setBounds(468, 11, 107, 23);
-        contentPane.add(btnPerfil);
-    }
-    
-    private void AbestiIrudiaErakutsi(JLabel lblAbestiArgazkia, String audioIzena) {
-        try {
-            ErreproduzioaDAO erreproduzioaDAO = new ErreproduzioaDAO();          
-            ImageIcon abestiArgazki = erreproduzioaDAO.AbestiIrudiaLortu(audioIzena);
-            lblAbestiArgazkia.setIcon(abestiArgazki);  
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-    
-    private void AbestiInformazioaErakutsi(JLabel lblKantaInfo, String audioIzena) {
-        try {
-        	ErreproduzioaDAO erreproduzioaDAO = new ErreproduzioaDAO();
-            String albumInf = erreproduzioaDAO.AbestiInformazioaLortu(audioIzena);
-            lblKantaInfo.setText(albumInf);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-         // Hemen errore mezua JOptionPanean edo konsolan erakutsi dezakezu
-        }
-    }
-    
-    private void erreproduzituUrrengoAbestia(List<String> abestiak) {
-        
-        if (album != null) {
-            
-            String urrengoAbestia = album.hurrengoAbestia(audioIzena);
-            if (urrengoAbestia != null) {
-                
-            } else {
-                JOptionPane.showMessageDialog(vErreprodukzio.this, "Ezin izan da hurrengo abestia aurkitu.", "Errorea", JOptionPane.ERROR_MESSAGE);
-            }
-        } else {
-            JOptionPane.showMessageDialog(vErreprodukzio.this, "Albuma kargatu gabekoak ezin du abestirik erakutsi.", "Errorea", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-    
-    
+		lblKantaIzena = new JLabel(abestia.getIzenburua());
+		lblKantaIzena.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblKantaIzena.setBounds(240, 237, 151, 23);
+		contentPane.add(lblKantaIzena);
+
+		textAreaAbestiInf = new JTextArea();
+		textAreaAbestiInf.setBounds(76, 303, 426, 65);
+		contentPane.add(textAreaAbestiInf);
+		kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
+
+		lblKontadorea = new JLabel("");
+		lblKontadorea.setFont(new Font("Tahoma", Font.PLAIN, 9));
+		lblKontadorea.setBounds(483, 275, 92, 13);
+		contentPane.add(lblKontadorea);
+
+	}
+
+	private void kargatuAlbumInformazioa(JTextArea textAreaAlbumInf, Abestia abestia) {
+		ErreproduzioaDAO erreproduzioaDAO = new ErreproduzioaDAO();
+		Abestia abestiaLortuta = erreproduzioaDAO.abestiaLortu(abestia.getIzenburua());
+		Time iraupena = abestiaLortuta.getIraupena();
+		textAreaAlbumInf.setText("Abestiaren iraupena  " + iraupena.toString());
+
+	}
+
+	private void abestiArgazkia(Blob irudiaBlob, JLabel lblArtistaImg) {
+		try {
+			if (irudiaBlob != null) {
+				byte[] irudiaBytes = irudiaBlob.getBytes(1, (int) irudiaBlob.length()); // Irudia byte[] motan bihurtu
+				if (irudiaBytes.length > 0) {
+					// Irudia ImageIcon formatuan kargatu
+					ImageIcon icon = new ImageIcon(irudiaBytes);
+					lblArtistaImg.setIcon(icon);
+					return;
+				}
+			}
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	public Clip audioErreproduzitu(String abestiIzena, JLabel lblKontadorea) {
+		try {
+			URL urlArchivo = getClass().getClassLoader().getResource("media/" + abestiIzena + ".wav");
+
+			if (urlArchivo == null) {
+				System.out.println("Ezin da aurkitu: " + abestiIzena);
+				return null;
+			}
+
+			if (clip != null && clip.isRunning()) {
+				clip.stop();
+				clip.close();
+			}
+
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(urlArchivo);
+			clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+
+				denbora = 0;
+			lblKontadorea.setText("   " + denbora);
+
+			timer = new Timer(1000, e -> {
+				denbora++;
+				lblKontadorea.setText("   " + denbora);
+			});
+			timer.start();
+
+			clip.addLineListener((LineListener) new LineListener() {
+				public void update(LineEvent event) {
+					if (event.getType() == LineEvent.Type.STOP) {
+						clip.close();
+						timer.stop();
+					}
+				}
+			});
+
+			clip.start();
+
+			return clip;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public void stopAudio() {
+		if (clip != null && clip.isRunning()) {
+			clip.stop();
+			clip.close();
+			timer.stop();
+		}
+	}
+
+	public void urrengoAbestia() {
+		if (abestiak.isEmpty()) {
+			return;
+		}
+
+		if (clip != null && clip.isRunning()) {
+			clip.stop();
+		}
+
+		currentIndex = (currentIndex + 1) % abestiak.size();
+		Abestia abestia = abestiak.get(currentIndex);
+		clip = audioErreproduzitu(abestia.getIzenburua(), lblKontadorea); 
+		
+		 lblKantaIzena.setText(abestia.getIzenburua());
+		 kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
+	}
+
+	public void pasadenAbestia() {
+		if (abestiak.isEmpty()) {
+			return;
+		}
+
+		if (clip != null && clip.isRunning()) {
+			clip.stop();
+		}
+
+		currentIndex = (currentIndex - 1 + abestiak.size()) % abestiak.size();
+		Abestia abestia = abestiak.get(currentIndex);
+		clip = audioErreproduzitu(abestia.getIzenburua(), lblKontadorea); 
+		
+		 lblKantaIzena.setText(abestia.getIzenburua());
+		 kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
+	}
 }
