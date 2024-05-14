@@ -17,6 +17,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import DAO.ArtistaDAO;
+import DAO.MusikariListaDAO;
+
 import javax.swing.ImageIcon;
 
 /**
@@ -39,7 +41,7 @@ public class vArtista extends JFrame {
      */
     public vArtista(String erabiltzaileIzena, Musikari musikari) {
     	this.musikari = musikari;
-        setTitle(artistaIzena + " diskak");
+        setTitle(musikari.getIzena() + " diskak");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 451, 418);
         contentPane = new JPanel();
@@ -107,8 +109,8 @@ public class vArtista extends JFrame {
         textAreaInformazioa.setWrapStyleWord(true);
         textAreaInformazioa.setBounds(246, 59, 159, 130);
         contentPane.add(textAreaInformazioa);
-       
-        ArtistaInformazioaErakutsi(textAreaInformazioa);
+        kargatuMusikariInformazioa(textAreaInformazioa);
+      
        
         comboBoxAlbumak = new JComboBox<>(); 
         comboBoxAlbumak.setBounds(10, 61, 128, 20);
@@ -122,7 +124,7 @@ public class vArtista extends JFrame {
         lblArtistaImg.setBounds(10, 160, 223, 186);
         contentPane.add(lblArtistaImg);
        
-        ArtistaIrudiaErakutsi(lblArtistaImg);
+        //ArtistaIrudiaErakutsi(lblArtistaImg);
     }
  
     /**
@@ -130,16 +132,12 @@ public class vArtista extends JFrame {
      *
      * @param textAreaInformazioa    JTextArea elementua artistaren informazioa erakusteko
      */
-    private void ArtistaInformazioaErakutsi(JTextArea textAreaInformazioa) {
-        try {
-            ArtistaDAO artistaDAO = new ArtistaDAO();
-            String informazioaArtista = artistaDAO.ArtistaInformazioaLortu(artistaIzena);
-            textAreaInformazioa.setText(informazioaArtista);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-
-         // Hemen errore mezua JOptionPanean edo konsolan erakutsi dezakezu
-        }
+    private void kargatuMusikariInformazioa(JTextArea textAreaInformazioa) {
+        MusikariListaDAO musikariDAO = new MusikariListaDAO();
+        Musikari musikariLortuta = musikariDAO.musikariLortu(musikari.getIzena());
+        String informazioa = musikariLortuta.getDeskribapena();
+        textAreaInformazioa.setText(informazioa);
+        
     }
    
     /**
@@ -171,13 +169,5 @@ public class vArtista extends JFrame {
      *
      * @param lblArtistaImg JLabel elementua non artistaren irudia erakusteko
      */
-    private void ArtistaIrudiaErakutsi(JLabel lblArtistaImg) {
-        try {
-            ArtistaDAO artistaDAO = new ArtistaDAO();          
-            ImageIcon artistaIrudia = artistaDAO.ArtistaIrudiaLortu(artistaIzena);
-            lblArtistaImg.setIcon(artistaIrudia);  
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
+   
 }

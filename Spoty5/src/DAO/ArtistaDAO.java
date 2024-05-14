@@ -14,6 +14,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
+import Artistak.Artista;
 import Artistak.Musikari;
 import Audioak.Album;
 import master.KonexioaDB;
@@ -81,45 +82,7 @@ public class ArtistaDAO {
     * @param artista Informazioa lortu nahi den artista.
     * @return Artista horren informazioa.
     */
-   public String ArtistaInformazioaLortu(String artista) {
-
-       String informacionArtista = "";
-       Connection con = KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
-       if (con == null) {
-           System.out.println("Ezin da konexioa egin.");
-           return informacionArtista;
-       }
-
-       PreparedStatement stmt = null;
-       ResultSet rs = null;
-
-       try {
-           // Artista baten informazioa lortzeko SQL kontsulta
-           String sql = "SELECT izenArtistikoa, deskribapena FROM musikaria WHERE izenArtistikoa = ?";
-           stmt = con.prepareStatement(sql);
-           stmt.setString(1, artista);
-           rs = stmt.executeQuery();
-           
-           // Artista baten informazioa eraikitzeko
-           if (rs.next()) {
-               String nombreArtistico = rs.getString("izenArtistikoa");
-               String descripcion = rs.getString("deskribapena");
-               informacionArtista = "Izen artistikoa: " + nombreArtistico + "\nDeskribapena: " + descripcion;
-           }
-       } catch (SQLException e) {
-           e.printStackTrace();
-       } finally {
-           // Konexioa itxi eta baliabideak askatu
-           try {
-               if (rs != null) rs.close();
-               if (stmt != null) stmt.close();
-               KonexioaDB.itxi(con);
-           } catch (SQLException e) {
-               e.printStackTrace();
-           }
-       }
-       return informacionArtista;
-   }
+	
 
    /**
     * Artista baten irudia lortzen du.
@@ -127,55 +90,46 @@ public class ArtistaDAO {
     * @param artista Irudia lortu nahi den artista.
     * @return Artista horren irudia.
     */
-   public ImageIcon ArtistaIrudiaLortu(String artista) {
-       ImageIcon imagenArtista = null;
-       Connection con = KonexioaDB.hasi(); // Konexioa lortu datu-basearekin
-       if (con == null) {
-           System.out.println("Ezin da konexioa egin.");
-           return imagenArtista;
-       }
-       PreparedStatement stmt = null;
-       ResultSet rs = null;
+	public Musikari musikariLortu(String izenMus) {
+		Musikari musikaria = null;
+	    Connection con = KonexioaDB.hasi(); 
 
-       try {
+	    if (con == null) {
+	        System.out.println("Ezin da konexioa egin.");
+	       
+	    }
 
-           // Consulta SQL para obtener la imagen del artista
-           // Artista irudia lortzeko SQL kontsulta
-           String sql = "SELECT irudia FROM musikaria WHERE izenArtistikoa = ?";
-           stmt = con.prepareStatement(sql);
-           stmt.setString(1, artista);
-           rs = stmt.executeQuery();
-           
-           // Irudia aurkitzen denean, ImageIcon bihurtu
-           if (rs.next()) {
-               Blob blob = rs.getBlob("irudia");
-               if (blob != null) {
-                   try (ResultSet tempRS = stmt.executeQuery()) {
-                       if (tempRS.next()) {
-                           blob = tempRS.getBlob("irudia");
-                           if (blob != null) {
-                               try (ByteArrayInputStream is = new ByteArrayInputStream(blob.getBytes(1, (int) blob.length()))) {
-                                   Image image = ImageIO.read(is);
-                                   imagenArtista = new ImageIcon(image);
-                               }
-                           }
-                       }
-                   }
-               }
-           }
-       } catch (SQLException | IOException e) {
-           e.printStackTrace();
-       } finally {
-           // Baliabideak askatu
-     
-           try {
-               if (rs != null) rs.close();
-               if (stmt != null) stmt.close();
-               KonexioaDB.itxi(con);
-           } catch (SQLException e) {
-               e.printStackTrace();
-           }
-       }
-       return imagenArtista;
-   }
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+
+	    try {
+	       
+	    	String sql = "SELECT irudia FROM musikaria where izenArtistikoa = ?";
+	        stmt = con.prepareStatement(sql);
+	        stmt.setString(1, izenMus);
+	        rs = stmt.executeQuery();
+
+	        
+	        while (rs.next()) {
+	            int id_artista = rs.getInt("id_musikaria");
+	            String izena = rs.getString("izenArtistikoa");
+	            String deskribapena = rs.getString("deskribapena");
+	            Blob irudia = rs.getBlob("irudia");
+	           musikaria = new Musikari(id_artista, izena,deskribapena, irudia);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        
+	        try {
+	            if (rs != null) rs.close();
+	            if (stmt != null) stmt.close();
+	            KonexioaDB.itxi(con);
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return musikaria;
+	}
 }

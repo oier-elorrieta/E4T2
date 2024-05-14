@@ -62,13 +62,13 @@ public class vLogin extends JFrame {
         JButton btnHasiSaioa = new JButton("Login");
         btnHasiSaioa.setBounds(31, 143, 126, 30);
         
-//        btnHasiSaioa.addActionListener(new ActionListener() {
-//        	public void actionPerformed(ActionEvent e) {
-//        		vMenua vMenuaPanel = new vMenua(erabiltzaileIzena);
-//        		vMenuaPanel.setVisible(true);
-//        		dispose();
-//        	}
-//        });
+        btnHasiSaioa.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		vMenua vMenuaPanel = new vMenua(erabiltzaileIzena);
+        		vMenuaPanel.setVisible(true);
+        		dispose();
+        	}
+        });
         
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -105,9 +105,9 @@ public class vLogin extends JFrame {
                 if (balidatuHasiSaioa) {
                     JOptionPane.showMessageDialog(vLogin.this, "Barruan zaude");
                     
-                    vMenua vMenuaPanel = new vMenua(erabiltzailea);
-                    vMenuaPanel.setVisible(true);
-                    dispose();
+                   // vMenua vMenuaPanel = new vMenua(erabiltzailea);
+                   // vMenuaPanel.setVisible(true);
+                   // dispose();
                 } else {
                     JOptionPane.showMessageDialog(vLogin.this, "Erabiltzailea edo pasahitza txarto dago");
                 }

@@ -139,11 +139,12 @@ public class vArtistaLista extends JFrame {
     * 
     * @param erabiltzaileIzena    Erabiltzailearen izena
     */
-   private void ArtistakIkusi() {
+   private void ArtistakIkusi() { //Aukeratutako musikaria autatu
 	   
 	        String artistaAukeratua = comboBoxArtistak.getSelectedItem().toString();
 	        MusikariListaDAO musikariListaDAO = new MusikariListaDAO();
 	        Musikari aukeratutakomus = musikariListaDAO.musikariLortu(artistaAukeratua);
+	        //Deitu urrengo orrira
 	        vArtista vArtistaFrame = new vArtista(artistaAukeratua, aukeratutakomus);
 	        vArtistaFrame.setVisible(true);
 	        dispose();

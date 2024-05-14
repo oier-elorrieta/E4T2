@@ -71,7 +71,7 @@ public class MusikariListaDAO {
 	    * 
 	    * @return Musika artisten zerrenda String moduan itzuli.
 	    */
-		public Musikari musikariLortu(String izena) {
+		public Musikari musikariLortu(String izenMus) {
 			Musikari musikaria = null;
 		    Connection con = KonexioaDB.hasi(); 
 
@@ -87,15 +87,15 @@ public class MusikariListaDAO {
 		       
 		    	String sql = "SELECT * FROM musikaria where izenArtistikoa = ?";
 		        stmt = con.prepareStatement(sql);
-		        stmt.setString(1, izena);
+		        stmt.setString(1, izenMus);
 		        rs = stmt.executeQuery();
 
 		        
 		        while (rs.next()) {
 		            int id_artista = rs.getInt("id_musikaria");
-		            String izenaa = rs.getString("izenArtistikoa");
+		            String izena = rs.getString("izenArtistikoa");
 		            String deskribapena = rs.getString("deskribapena");
-		           musikaria = new Musikari(id_artista, izenaa,deskribapena);
+		           musikaria = new Musikari(id_artista, izena,deskribapena);
 		        }
 		    } catch (SQLException e) {
 		        e.printStackTrace();
