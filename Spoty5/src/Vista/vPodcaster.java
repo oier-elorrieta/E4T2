@@ -15,7 +15,7 @@ public class vPodcaster extends JFrame {
     private JLabel lblPodcasterImg;
     private Podcaster podcaster; // Nuevo atributo para almacenar el Podcaster
 
-    public vPodcaster(Podcaster podcaster, String erabiltzaileIzena) {
+    public vPodcaster(String erabiltzaileIzena, Podcaster podcaster) {
         this.podcaster = podcaster; // Inicializar la variable podcaster
         setTitle(podcaster.getIzena()); // Usar el nombre del Podcaster como título
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

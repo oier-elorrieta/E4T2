@@ -12,8 +12,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import DAO.MusikariListaDAO;
 import DAO.PodcasterDAO;
 import DAO.PodcasterListaDAO;
+import Artistak.Artista;
+import Artistak.Musikari;
 import Artistak.Podcaster;
 
 /**
@@ -49,17 +52,17 @@ public class vPodcasterLista extends JFrame {
        comboBoxPodcasters = new JComboBox<String>();
        comboBoxPodcasters.setBounds(92, 90, 249, 23);
        contentPane.add(comboBoxPodcasters);
+       podcasterListaKargatu();
       
        JButton btnVerPodcaster = new JButton("Ikusi Podcaster");
        btnVerPodcaster.setFont(new Font("Tahoma", Font.BOLD, 11));
        btnVerPodcaster.setBounds(149, 206, 129, 23);
        contentPane.add(btnVerPodcaster);
-      
        btnVerPodcaster.addActionListener(new ActionListener() {
-           public void actionPerformed(ActionEvent e) {
-               PodcasterIkusi(erabiltzaileIzena);
-           }
-       });
+   	    public void actionPerformed(ActionEvent e) {
+   	    	podcasterIkusi();
+   	    }
+   	});
       
        JButton btnAtzera = new JButton("Atzera");
        btnAtzera.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -87,44 +90,41 @@ public class vPodcasterLista extends JFrame {
            }
        });
        
-       PodcasterListaKargatu();
    }
   
    /**
     * Podcast-ak zerrendatu eta ComboBox-en gehitu.
     */
-   private void PodcasterListaKargatu() {
-	    try {
-	        PodcasterListaDAO podcasterDAO = new PodcasterListaDAO();
+   private void podcasterListaKargatu() {
+	    try {     
+	        PodcasterListaDAO podcasterListaDAO = new PodcasterListaDAO();
+
 	        
-	        // Lortu artisten zerrenda
-	        List<Podcaster> podcasterList = podcasterDAO.PodcasterListaLortu();
+	        List<Artista> artistas = podcasterListaDAO.podcasterListKargatu();
+
 	        
-	        // Gehitu artisten izenak ComboBox-era
-	        for (Podcaster podcaster : podcasterList) {
-	            comboBoxPodcasters.addItem(podcaster.getIzena());
+	        for (Artista artista : artistas) {
+	        	comboBoxPodcasters.addItem(artista.getIzena());  
 	        }
 	    } catch (Exception ex) {
 	        ex.printStackTrace();
-	    }	       
+	    }
 	}
-  
-   /**
-    * Hautatutako podcastera bistaratu.
-    */
-   private void PodcasterIkusi(String erabiltzaileIzena) {
-	    try {
-	        String podcasterHautatuta = comboBoxPodcasters.getSelectedItem().toString();
-	        PodcasterDAO podcasterDAO = new PodcasterDAO();
-	        String podcasterInfo = podcasterDAO.PodcasterInformazioaLortu(podcasterHautatuta); // Obtener información del podcaster
-	        // Crear una instancia de Podcaster con la información obtenida
-	        Podcaster podcaster = new Podcaster(0, podcasterHautatuta, null, podcasterInfo);
-	        vPodcaster vPodcasterFrame = new vPodcaster(podcaster, erabiltzaileIzena); // Pasar el podcaster como argumento
+
+
+  /**
+   * 'vArtista' interfazea irekitzeko metodoa, aukeratutako artista batekin.
+   * 
+   * @param erabiltzaileIzena    Erabiltzailearen izena
+   */
+  private void podcasterIkusi() { //Aukeratutako musikaria autatu
+	   
+	        String podcasterAukeratua = comboBoxPodcasters.getSelectedItem().toString();
+	        PodcasterListaDAO podcasterListaDAO = new PodcasterListaDAO();
+	        Podcaster aukeratutakoPodcaster = podcasterListaDAO.podcasterLortu(podcasterAukeratua);
+	        //Deitu urrengo orrira
+	        vPodcaster vPodcasterFrame = new vPodcaster(podcasterAukeratua, aukeratutakoPodcaster);
 	        vPodcasterFrame.setVisible(true);
 	        dispose();
-	    } catch (Exception ex) {
-	        ex.printStackTrace();
-	        // Gestionar el error aquí
-	    }
 	}
 }

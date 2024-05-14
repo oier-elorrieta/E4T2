@@ -13,7 +13,10 @@ import java.util.Date;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+
+import Artistak.Musikari;
 import Artistak.Podcaster;
+import Audioak.Album;
 import Audioak.Podcast;
 import master.KonexioaDB;
 
@@ -22,48 +25,49 @@ import master.KonexioaDB;
  */
 public class PodcasterDAO {
   
-    public List<Podcast> PodcastPodcastertatikLortu(Podcaster podcaster) {
-        List<Podcast> podcasts = new ArrayList<>();
-        Connection con = KonexioaDB.hasi();
-      
-        if (con == null) {
-            System.out.println("Ezin da konexioa egin.");
-            return podcasts; 
-        }
-      
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-      
-        try {
-            String sql = "SELECT p.id_audio, p.izena, a.iraupena, p.kolaboratzaileak, e.erreprodukzio_total FROM podcast p  INNER JOIN audio a ON p.id_audio = a.id_audio LEFT JOIN estatistikak e ON p.id_audio = e.id_audio WHERE p.id_podcaster IN (SELECT id_podcaster FROM podcaster WHERE izenArtistikoa = ?)";
-            stmt = con.prepareStatement(sql);
-            stmt.setString(1, podcaster.getIzena());
-            rs = stmt.executeQuery();
-          
-            while (rs.next()) {
-                int id_audio = rs.getInt(1); 
-                String izena = rs.getString(2); 
-                Date iraupena = rs.getDate(3); 
-                String kolaboratzaileak = rs.getString(4); 
-                int erreprodukzioak = rs.getInt(5); 
-                Podcast podcast = new Podcast(id_audio, izena, iraupena, kolaboratzaileak, erreprodukzioak);
-                podcasts.add(podcast);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                KonexioaDB.itxi(con);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-      
-        return podcasts;
-    }
+	public List<Podcast> podcastLortuArtistetatik(Podcaster podcaster) {
+	    List<Podcast> podcast = new ArrayList<>();
+	    Connection con = KonexioaDB.hasi(); 
 
+	    if (con == null) {
+	        System.out.println("Ezin da konexioa egin.");
+	        return podcast; 
+	    }
+
+	    PreparedStatement stmt = null;
+	    ResultSet rs = null;
+
+	    try {
+	       
+	        String sql = "SELECT * FROM podcast WHERE id_podcaster = ? ";
+	        stmt = con.prepareStatement(sql);
+	        stmt.setInt(1, podcaster.getId_artista());
+	        rs = stmt.executeQuery();
+
+	        
+	        while (rs.next()) {
+	            int id_audio = rs.getInt("id_audio");
+	            String kolaboratzaileak = rs.getString("kolaboratzaileak");
+	            Podcast podcast = new Podcast(id_audio, kolaboratzaileak);
+
+	            albumak.add(album);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        
+	        try {
+	            if (rs != null) rs.close();
+	            if (stmt != null) stmt.close();
+	            KonexioaDB.itxi(con);
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    
+	    return albumak;
+	}
     /**
      * Podcaster baten informazioa lortzen du.
      *
