@@ -93,7 +93,7 @@ public class vErreprodukzio extends JFrame {
 		contentPane.add(btnHasiAbestia);
 		btnHasiAbestia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				audioErreproduzitu(abestia.getIzenburua(), lblKontadorea);
+				audioErreproduzitu(abestia.getIzena(), lblKontadorea);
 			}
 		});
 
@@ -115,7 +115,7 @@ public class vErreprodukzio extends JFrame {
 		btnPerfil.setBounds(468, 11, 107, 23);
 		contentPane.add(btnPerfil);
 
-		lblKantaIzena = new JLabel(abestia.getIzenburua());
+		lblKantaIzena = new JLabel(abestia.getIzena());
 		lblKantaIzena.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblKantaIzena.setBounds(240, 237, 151, 23);
 		contentPane.add(lblKantaIzena);
@@ -134,7 +134,7 @@ public class vErreprodukzio extends JFrame {
 
 	private void kargatuAlbumInformazioa(JTextArea textAreaAlbumInf, Abestia abestia) {
 		ErreproduzioaDAO erreproduzioaDAO = new ErreproduzioaDAO();
-		Abestia abestiaLortuta = erreproduzioaDAO.abestiaLortu(abestia.getIzenburua());
+		Abestia abestiaLortuta = erreproduzioaDAO.abestiaLortu(abestia.getIzena());
 		Time iraupena = abestiaLortuta.getIraupena();
 		textAreaAlbumInf.setText("Abestiaren iraupena  " + iraupena.toString());
 
@@ -221,9 +221,9 @@ public class vErreprodukzio extends JFrame {
 
 		currentIndex = (currentIndex + 1) % abestiak.size();
 		Abestia abestia = abestiak.get(currentIndex);
-		clip = audioErreproduzitu(abestia.getIzenburua(), lblKontadorea); 
+		clip = audioErreproduzitu(abestia.getIzena(), lblKontadorea); 
 		
-		 lblKantaIzena.setText(abestia.getIzenburua());
+		 lblKantaIzena.setText(abestia.getIzena());
 		 kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
 	}
 
@@ -238,9 +238,9 @@ public class vErreprodukzio extends JFrame {
 
 		currentIndex = (currentIndex - 1 + abestiak.size()) % abestiak.size();
 		Abestia abestia = abestiak.get(currentIndex);
-		clip = audioErreproduzitu(abestia.getIzenburua(), lblKontadorea); 
+		clip = audioErreproduzitu(abestia.getIzena(), lblKontadorea); 
 		
-		 lblKantaIzena.setText(abestia.getIzenburua());
+		 lblKantaIzena.setText(abestia.getIzena());
 		 kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
 	}
 }

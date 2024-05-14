@@ -145,7 +145,7 @@ public class vAlbum extends JFrame {
                 List<Abestia> abestiak = albumDAO.abestiakLortuAlbumetik(album);
                 
                 for (Abestia abesti : abestiak) {
-                	comboBoxaAbestiak.addItem(abesti.getIzenburua());
+                	comboBoxaAbestiak.addItem(abesti.getIzena());
                 }
             } else {
             }

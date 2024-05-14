@@ -58,7 +58,7 @@ public class ErreproduzioaDAO {
         
         currentIndex = (currentIndex + 1) % abestiak.size();
         Abestia abestia = abestiak.get(currentIndex);
-        clip = audioErreproduzitu(abestia.getIzenburua());
+        clip = audioErreproduzitu(abestia.getIzena());
     }
 
     public void pasadenAbestia() {
@@ -71,7 +71,7 @@ public class ErreproduzioaDAO {
         
         currentIndex = (currentIndex - 1 + abestiak.size()) % abestiak.size();
         Abestia abestia = abestiak.get(currentIndex);
-        clip = audioErreproduzitu(abestia.getIzenburua());
+        clip = audioErreproduzitu(abestia.getIzena());
     }
 	
 	public Abestia abestiaLortu(String abestiaIzen) {
