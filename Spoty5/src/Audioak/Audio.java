@@ -1,5 +1,7 @@
 package Audioak;
 
+
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -12,12 +14,12 @@ public abstract class Audio {
 	/**
 	 * Audioa izango duen izenburua
 	 */
-    protected String Izenburua;
+    protected String Izena;
     
     /**
      * Audioa izangoo duen iraupena
      */
-    protected double Iraupena;
+    protected Date Iraupena;
     
     /**
      * Audioa izango dituen kolaboratzaileen izenak
@@ -37,9 +39,9 @@ public abstract class Audio {
      * @param kolaboratzaileak audioaren kolaboratzaileak
      * @param erreprodukzioak audioaren erreprodukzioak
      */
-    public Audio(int id_audio, String izena, double iraupena, String kolaboratzaileak, int erreprodukzioak) {
+    public Audio(int id_audio, String izena, Date iraupena, String kolaboratzaileak, int erreprodukzioak) {
     	Id_audio = id_audio;
-        Izenburua = izena;
+        Izena = izena;
         Iraupena = iraupena;
         Kolaboratzaileak = kolaboratzaileak;
         Erreprodukzioak = erreprodukzioak;
@@ -58,8 +60,8 @@ public abstract class Audio {
      * 
      * @return audioaren izenburua
      */
-    public String getIzenburua() {
-        return Izenburua;
+    public String getIzena() {
+        return Izena;
     }
     
     /**
@@ -67,8 +69,8 @@ public abstract class Audio {
      * 
      * @param izenburua audioaren izenburu berria
      */
-    public void setIzenburua(String izenburua) {
-        Izenburua = izenburua;
+    public void setIzena(String izena) {
+        Izena = izena;
     }
 
     /**
@@ -76,7 +78,7 @@ public abstract class Audio {
      * 
      * @return audioaren iraupena
      */
-    public double getIraupena() {
+    public Date getIraupena() {
         return Iraupena;
     }
     
@@ -85,7 +87,7 @@ public abstract class Audio {
      * 
      * @param iraupena audioaren iraupen berria
      */
-    public void setIraupena(double iraupena) {
+    public void setIraupena(Date iraupena) {
         Iraupena = iraupena;
     }
 
@@ -132,19 +134,16 @@ public abstract class Audio {
      */
     @Override
     public String toString() {
-        return "Audio [id_audio=" + Id_audio + "Izenburua=" + Izenburua + ", Iraupena=" + Iraupena + ", Kolaboratzaileak=" + Kolaboratzaileak
+        return "Audio [id_audio=" + Id_audio + "Izena=" + Izena + ", Iraupena=" + Iraupena + ", Kolaboratzaileak=" + Kolaboratzaileak
                 + ", Erreprodukzioak=" + Erreprodukzioak + "]";
     }
 
-    /**
-     * Objetuaren hash kodea kalkulatzen du
-     * 
-     * @return objetuaren hash kodea
-     */
-	@Override
+    @Override
 	public int hashCode() {
-		return Objects.hash(Erreprodukzioak, Id_audio, Iraupena, Izenburua, Kolaboratzaileak);
+		return Objects.hash(Erreprodukzioak, Id_audio, Iraupena, Izena, Kolaboratzaileak);
 	}
+
+	
     
     /**
      * Komparatzen du objetua beste objetu batekin jakiteko berdin direla ala ez
@@ -152,7 +151,8 @@ public abstract class Audio {
      * @param zein objetuarekin konparatuko den
      * @return true objetuak berdin badira, false objetuak desberdinak badira
      */
-	@Override
+	
+    @Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -162,9 +162,7 @@ public abstract class Audio {
 			return false;
 		Audio other = (Audio) obj;
 		return Erreprodukzioak == other.Erreprodukzioak && Id_audio == other.Id_audio
-				&& Double.doubleToLongBits(Iraupena) == Double.doubleToLongBits(other.Iraupena)
-				&& Objects.equals(Izenburua, other.Izenburua)
+				&& Objects.equals(Iraupena, other.Iraupena) && Objects.equals(Izena, other.Izena)
 				&& Objects.equals(Kolaboratzaileak, other.Kolaboratzaileak);
 	}
-    
 }
