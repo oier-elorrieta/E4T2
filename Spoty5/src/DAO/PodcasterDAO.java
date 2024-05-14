@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-
 import Artistak.Podcaster;
 import Audioak.Podcast;
 import master.KonexioaDB;
@@ -43,7 +42,6 @@ public class PodcasterDAO {
             while (rs.next()) {
                 int id_audio = rs.getInt("id_audio");
                 String izena = rs.getString("izena");
-                double iraupena = rs.getDouble("id_audio");
                 String kolaboratzaileak = rs.getString("kolaboratzaileak");
                 int erreprodukzioak = rs.getInt("erreprodukzioak");
                 Podcast podcast = new Podcast(id_audio, izena, iraupena, kolaboratzaileak, erreprodukzioak);

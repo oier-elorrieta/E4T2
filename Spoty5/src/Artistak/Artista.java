@@ -12,6 +12,14 @@ public abstract class Artista {
 	protected String izena;
 	protected Blob irudia;
 	protected String deskribapena;
+	
+	public Artista(int id_artista, String izena, Blob irudia, String deskribapena) {
+		super();
+		this.id_artista = id_artista;
+		this.izena = izena;
+		this.irudia = irudia;
+		this.deskribapena = deskribapena;
+	}
 
 	public int getId_artista() {
 		return id_artista;
@@ -34,18 +42,12 @@ public abstract class Artista {
 	 *
 	 * @param izena artistaren izena
 	 */
-	
-
-	public Artista(int id_artista, String izena, String deskribapena) {
-		this.id_artista = id_artista;
-		this.izena = izena;
-		this.deskribapena = deskribapena;
-	}
 
 	public Blob getIrudia() {
 		return irudia;
 	}
 
+	
 	public void setIrudia(Blob irudia) {
 		this.irudia = irudia;
 	}
@@ -96,6 +98,4 @@ public abstract class Artista {
 		return Objects.equals(deskribapena, other.deskribapena) && id_artista == other.id_artista
 				&& Objects.equals(irudia, other.irudia) && Objects.equals(izena, other.izena);
 	}
-	
-
 }

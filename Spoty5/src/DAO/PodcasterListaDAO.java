@@ -1,12 +1,11 @@
 package DAO;
-
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import Artistak.Podcaster;
 import master.KonexioaDB;
 
@@ -34,10 +33,11 @@ public class PodcasterListaDAO {
            rs = stmt.executeQuery();
           
            while (rs.next()) {
-               int id_podcaster = rs.getInt("id_podcaster");
+               int id_artista = rs.getInt("id_podcaster");
                String izena = rs.getString("izenArtistikoa");
+               Blob irudia = rs.getBlob("irudia");
                String deskribapena = rs.getString("deskribapena");
-               Podcaster podcasterra = new Podcaster(id_podcaster, izena, deskribapena);
+               Podcaster podcasterra = new Podcaster(id_artista, izena,irudia, deskribapena);
                
                podcasterrak.add(podcasterra);
                
@@ -56,4 +56,3 @@ public class PodcasterListaDAO {
        return podcasterrak;
    }
 }
-

@@ -1,23 +1,19 @@
 package Artistak;
 
 import java.sql.Blob;
-import java.util.ArrayList;
-import java.util.Objects;
 /**
  * Podcaster klasea Artistak klasearen luzapena da.
  */
 public class Podcaster extends Artista{
-
-	public Podcaster(int id_artista, String izena, String deskribapena) {
-		super(id_artista, izena, deskribapena);
+	
+	public Podcaster(int id_artista, String izena, Blob irudia, String deskribapena) {
+		super(id_artista, izena, irudia, deskribapena);
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Podcaster [id_artista=" + id_artista + ", izena=" + izena + ", irudia=" + irudia + ", deskribapena="
-				+ deskribapena + ", getId_artista()=" + getId_artista() + ", getDeskribapena()=" + getDeskribapena()
-				+ ", getIrudia()=" + getIrudia() + ", getIzena()=" + getIzena() + ", toString()=" + super.toString()
-				+ ", hashCode()=" + hashCode() + ", getClass()=" + getClass() + "]";
+				+ deskribapena + "]";
 	}
 
 	@Override
@@ -35,7 +31,4 @@ public class Podcaster extends Artista{
 			return false;
 		return true;
 	}
-
-	
-	
 }
