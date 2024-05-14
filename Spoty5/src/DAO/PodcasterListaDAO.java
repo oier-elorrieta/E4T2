@@ -15,12 +15,12 @@ import master.KonexioaDB;
 public class PodcasterListaDAO {
   
    public List<Podcaster> PodcasterListaLortu() {
-	   List<Podcaster> podcasterrak = new ArrayList<>();
+	   List<Podcaster> podcasterList = new ArrayList<>();
 	   Connection con = KonexioaDB.hasi();
 	   
        if (con == null) {
            System.out.println("Ezin da konexioa egin.");
-           return podcasterrak;
+           return podcasterList;
        }
       
        PreparedStatement stmt = null;
@@ -37,9 +37,9 @@ public class PodcasterListaDAO {
                String izena = rs.getString("izenArtistikoa");
                Blob irudia = rs.getBlob("irudia");
                String deskribapena = rs.getString("deskribapena");
-               Podcaster podcasterra = new Podcaster(id_artista, izena,irudia, deskribapena);
+               Podcaster podcaster = new Podcaster(id_artista, izena,irudia, deskribapena);
                
-               podcasterrak.add(podcasterra);
+               podcasterList.add(podcaster);
                
            }
        } catch (SQLException e) {
@@ -53,6 +53,6 @@ public class PodcasterListaDAO {
                e.printStackTrace();
            }
        }
-       return podcasterrak;
+       return podcasterList;
    }
 }

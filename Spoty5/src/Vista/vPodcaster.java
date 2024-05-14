@@ -1,53 +1,31 @@
 package Vista;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import Artistak.Podcaster;
-import Audioak.Podcast;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JTextArea;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
 import DAO.PodcasterDAO;
+import Artistak.Podcaster;
+import Audioak.Podcast;
 
-/**
- * Podcast-egilea aukeratzeko eta informazioa erakusteko interfaze grafikoa eskaintzen duen klasea.
- */
 public class vPodcaster extends JFrame {
-    private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
-    private String PodcasterHautatua;
     private JComboBox<Podcast> comboBoxPodcasts;
-    private Podcaster podcaster;
+    private JTextArea textAreaInformacion;
+    private JLabel lblPodcasterImg;
+    private Podcaster podcaster; // Nuevo atributo para almacenar el Podcaster
 
-    /**
-     * Klasearen konstruktorea. Podcast-egilearen interfazea sortzen du.
-     * @param PodcasterHautatua Hautatutako podcast-egilearen izena.
-     * @param erabiltzaileIzena Erabiltzailearen izena.
-     * @param podcaster objektu podcatserra.
-     */
-    public vPodcaster(String PodcasterHautatua, String erabiltzaileIzena, Podcaster podcaster) {
-        this.PodcasterHautatua = PodcasterHautatua;
-        this.podcaster = podcaster;
-        setTitle(PodcasterHautatua);
+    public vPodcaster(Podcaster podcaster, String erabiltzaileIzena) {
+        this.podcaster = podcaster; // Inicializar la variable podcaster
+        setTitle(podcaster.getIzena()); // Usar el nombre del Podcaster como título
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 451, 418);
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        JPanel contentPane = new JPanel();
+        contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel lblPodcaster = new JLabel(PodcasterHautatua);
+        JLabel lblPodcaster = new JLabel(podcaster.getIzena()); // Usar el nombre del Podcaster como etiqueta
         lblPodcaster.setHorizontalAlignment(SwingConstants.CENTER);
         lblPodcaster.setBounds(133, 11, 159, 14);
         contentPane.add(lblPodcaster);
@@ -59,12 +37,10 @@ public class vPodcaster extends JFrame {
 
         btnAtzera.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-                // Menura itzuli
                 vPodcasterLista frame = new vPodcasterLista(erabiltzaileIzena);
                 frame.setVisible(true);
                 dispose();
-            }  
+            }
         });
 
         JButton btnPerfil = new JButton(erabiltzaileIzena);
@@ -74,8 +50,6 @@ public class vPodcaster extends JFrame {
 
         btnPerfil.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-                // Profila editatzeko pantailara joan
                 vErregistratu erregistratuFrame = new vErregistratu(erabiltzaileIzena);
                 erregistratuFrame.setVisible(true);
                 dispose();
@@ -96,90 +70,46 @@ public class vPodcaster extends JFrame {
         comboBoxPodcasts.setBounds(10, 61, 128, 20);
         contentPane.add(comboBoxPodcasts);
 
-        JTextArea textAreaInformacion = new JTextArea();
+        textAreaInformacion = new JTextArea();
         textAreaInformacion.setEditable(false);
         textAreaInformacion.setLineWrap(true);
         textAreaInformacion.setWrapStyleWord(true);
         textAreaInformacion.setBounds(246, 59, 159, 130);
         contentPane.add(textAreaInformacion);
 
-        // Podcast-egilearen informazioa erakutsi
-        PodcasterInformazioaErakutsi(textAreaInformacion);
+        PodcastErakutsi();
+        comboBoxPodcasts.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Podcast podcast = (Podcast) comboBoxPodcasts.getSelectedItem();
+                if (podcast != null) {
+                    textAreaInformacion.setText("Izena: " + podcast.getIzena() + "\nIraupena: " + podcast.getIraupena() + " minutu\nKolaboratzaileak: " + podcast.getKolaboratzaileak() + "\nErreprodukzioak: " + podcast.getErreprodukzioak());
+                }
+            }
+        });
 
-        // Podcast-ak erakutsi
-        PodcastErakutsi(comboBoxPodcasts);
-
-        
-        JLabel lblPodcasterImg = new JLabel("");
+        lblPodcasterImg = new JLabel("");
         lblPodcasterImg.setHorizontalAlignment(SwingConstants.CENTER);
         lblPodcasterImg.setBounds(10, 160, 223, 186);
         contentPane.add(lblPodcasterImg);
 
-        // Botoia Podcast erreproduzitzeko
-        JButton btnErrePodcast = new JButton("Erreproduzitu Podcast");
-        btnErrePodcast.setBounds(246, 222, 164, 23);
-        contentPane.add(btnErrePodcast);
-
-        btnErrePodcast.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // Podcast-a erreproduzitu
-                PodcastIkusi(erabiltzaileIzena);
-            }
-        });
-      
+        PodcasterIrudiaErakutsi();
     }
 
-    /**
-     * Metodo honek JTextArea baten bidez podcast-egilearen informazioa erakusten du.
-     * @param textAreaInformazioa JTextArea elementua podcast-egilearen informazioa bistaratzeko.
-     */
-    private void PodcasterInformazioaErakutsi(JTextArea textAreaInformazioa) {
-        PodcasterDAO podcasterDAO = new PodcasterDAO();
-        String podcasterInformazio = podcasterDAO.PodcasterInformazioaLortu(PodcasterHautatua);
-        textAreaInformazioa.setText(podcasterInformazio);
-    }
-
-    
-    /**
-     * Metodo honek JComboBox baten bidez podcast-egilearen podcast-ak sartzen ditu.
-     * @param comboBoxPodcasts JComboBox elementua podcast-ak bistaratzeko.
-     */
-    private void PodcastErakutsi(JComboBox<Podcast> comboBoxPodcasts) {
+    private void PodcastErakutsi() {
         PodcasterDAO podcasterDAO = new PodcasterDAO();
         List<Podcast> podcasts = podcasterDAO.PodcastPodcastertatikLortu(podcaster);
         for (Podcast podcast : podcasts) {
-            comboBoxPodcasts.addItem(podcast);
+            comboBoxPodcasts.addItem(podcast.getIzena()); // Agregar solo el nombre del podcast al comboBox
         }
     }
 
-    /**
-     * Metodo honek erabilitako JComboBox-ean hautatutako podcast-a erreproduzitzen du.
-     * @param erabiltzaileIzena Erabiltzailearen izena.
-     */
-    private void PodcastIkusi(String erabiltzaileIzena) {
+    private void PodcasterIrudiaErakutsi() {
+        PodcasterDAO podcasterDAO = new PodcasterDAO();
         try {
-            String podcastHautatua = comboBoxPodcasts.getSelectedItem().toString();
-            // Podcast-a erreproduzitu interfazea sortu eta bistaratu
-            vPodcast vPodcastFrame = new vPodcast(podcastHautatua, erabiltzaileIzena);
-            vPodcastFrame.setVisible(true);
-            dispose();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            // Errorea kudeatu hemen
-        }
-    }
-
-    /**
-     * Metodo honek podcast-egilearen irudia erakusten du JLabel elementuan.
-     * @param lblPodcasterImg JLabel elementua podcast-egilearen irudia bistaratzeko.
-     */
-    private void PodcasterIrudiaErakutsi(JLabel lblPodcasterImg) {
-        try {
-            PodcasterDAO podcasterDAO = new PodcasterDAO();
-            ImageIcon podcasterIrudi = podcasterDAO.PodcasterIrudiaLortu(PodcasterHautatua);
-            lblPodcasterImg.setIcon(podcasterIrudi);  
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            ImageIcon podcasterIrudi = podcasterDAO.PodcasterIrudiaLortu(podcaster.getIzena());
+            lblPodcasterImg.setIcon(podcasterIrudi);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

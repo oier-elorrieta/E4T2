@@ -1,7 +1,12 @@
 package Audioak;
 
+<<<<<<< HEAD
 import java.sql.Blob;
 import java.sql.Time;
+=======
+
+import java.util.Date;
+>>>>>>> cf7e46fc3ab11fe1c079139c7697b4493dd5a1c8
 import java.util.Objects;
 
 
@@ -17,12 +22,16 @@ public abstract class Audio {
 	/**
 	 * Audioa izango duen izenburua
 	 */
-    protected String Izenburua;
+    protected String Izena;
     
     /**
      * Audioa izangoo duen iraupena
      */
+<<<<<<< HEAD
     protected Time Iraupena;
+=======
+    protected Date Iraupena;
+>>>>>>> cf7e46fc3ab11fe1c079139c7697b4493dd5a1c8
     
     /**
      * Audioa izango dituen argazkiak
@@ -47,9 +56,13 @@ public abstract class Audio {
      * @param kolaboratzaileak audioaren kolaboratzaileak
      * @param erreprodukzioak audioaren erreprodukzioak
      */
+<<<<<<< HEAD
     public Audio(int id_audio, String izena, Time iraupena, Blob irudia, String kolaboratzaileak, int erreprodukzioak) {
+=======
+    public Audio(int id_audio, String izena, Date iraupena, String kolaboratzaileak, int erreprodukzioak) {
+>>>>>>> cf7e46fc3ab11fe1c079139c7697b4493dd5a1c8
     	Id_audio = id_audio;
-        Izenburua = izena;
+        Izena = izena;
         Iraupena = iraupena;
         Irudia = irudia;
         Kolaboratzaileak = kolaboratzaileak;
@@ -88,8 +101,8 @@ public abstract class Audio {
      * 
      * @return audioaren izenburua
      */
-    public String getIzenburua() {
-        return Izenburua;
+    public String getIzena() {
+        return Izena;
     }
     
     /**
@@ -97,8 +110,8 @@ public abstract class Audio {
      * 
      * @param izenburua audioaren izenburu berria
      */
-    public void setIzenburua(String izenburua) {
-        Izenburua = izenburua;
+    public void setIzena(String izena) {
+        Izena = izena;
     }
 
     /**
@@ -106,7 +119,11 @@ public abstract class Audio {
      * 
      * @return audioaren iraupena
      */
+<<<<<<< HEAD
     public Time getIraupena() {
+=======
+    public Date getIraupena() {
+>>>>>>> cf7e46fc3ab11fe1c079139c7697b4493dd5a1c8
         return Iraupena;
     }
     
@@ -115,7 +132,11 @@ public abstract class Audio {
      * 
      * @param iraupena audioaren iraupen berria
      */
+<<<<<<< HEAD
     public void setIraupena(Time iraupena) {
+=======
+    public void setIraupena(Date iraupena) {
+>>>>>>> cf7e46fc3ab11fe1c079139c7697b4493dd5a1c8
         Iraupena = iraupena;
     }
 
@@ -162,6 +183,7 @@ public abstract class Audio {
      */
     
     @Override
+<<<<<<< HEAD
    	public String toString() {
    		return "Audio [Id_audio=" + Id_audio + ", Izenburua=" + Izenburua + ", Iraupena=" + Iraupena + ", Irudia="
    				+ Irudia + ", Kolaboratzaileak=" + Kolaboratzaileak + ", Erreprodukzioak=" + Erreprodukzioak + "]";
@@ -184,6 +206,28 @@ public abstract class Audio {
 
 
 	@Override
+=======
+    public String toString() {
+        return "Audio [id_audio=" + Id_audio + "Izena=" + Izena + ", Iraupena=" + Iraupena + ", Kolaboratzaileak=" + Kolaboratzaileak
+                + ", Erreprodukzioak=" + Erreprodukzioak + "]";
+    }
+
+    @Override
+	public int hashCode() {
+		return Objects.hash(Erreprodukzioak, Id_audio, Iraupena, Izena, Kolaboratzaileak);
+	}
+
+	
+    
+    /**
+     * Komparatzen du objetua beste objetu batekin jakiteko berdin direla ala ez
+     * 
+     * @param zein objetuarekin konparatuko den
+     * @return true objetuak berdin badira, false objetuak desberdinak badira
+     */
+	
+    @Override
+>>>>>>> cf7e46fc3ab11fe1c079139c7697b4493dd5a1c8
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -193,10 +237,16 @@ public abstract class Audio {
 			return false;
 		Audio other = (Audio) obj;
 		return Erreprodukzioak == other.Erreprodukzioak && Id_audio == other.Id_audio
+<<<<<<< HEAD
 				&& Objects.equals(Iraupena, other.Iraupena) && Objects.equals(Irudia, other.Irudia)
 				&& Objects.equals(Izenburua, other.Izenburua)
 				&& Objects.equals(Kolaboratzaileak, other.Kolaboratzaileak);
 	}
 	
     
+=======
+				&& Objects.equals(Iraupena, other.Iraupena) && Objects.equals(Izena, other.Izena)
+				&& Objects.equals(Kolaboratzaileak, other.Kolaboratzaileak);
+	}
+>>>>>>> cf7e46fc3ab11fe1c079139c7697b4493dd5a1c8
 }
