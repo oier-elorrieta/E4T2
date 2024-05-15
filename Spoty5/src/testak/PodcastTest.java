@@ -1,14 +1,11 @@
 package testak;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-
+import java.sql.Time;
 import org.junit.Before;
 import org.junit.Test;
-
-import Audioak.Abestia;
 import Audioak.Podcast;
 
 public class PodcastTest {
@@ -18,7 +15,7 @@ public class PodcastTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		p1 = new Podcast(1, "blink", 3.5, "andoni", 5);
+		p1 = new Podcast(1, "blink", new Time(3), null, "andoni", 5);
 	}
 
 //----------------------------------------- Id_audio --------------------------------------
@@ -48,48 +45,51 @@ public class PodcastTest {
 //----------------------------------------- Izenburua --------------------------------------
 
     @Test
-    public void testGetIzenburua() {
-    	assertEquals("blink", p1.getIzenburua());
+    public void testGetIzena() {
+    	assertEquals("blink", p1.getIzena());
     }
     
     @Test
-    public void testGetIzenburuaTxarto() {
-    	assertNotEquals("blinkk", p1.getIzenburua());
+    public void testGetIzenaTxarto() {
+    	assertNotEquals("blinkk", p1.getIzena());
     }
 
     @Test
     public void testSetIzenburua() {
-    	p1.setIzenburua("neverita");
-        assertEquals("neverita", p1.getIzenburua());
+    	p1.setIzena("neverita");
+        assertEquals("neverita", p1.getIzena());
     }
     
     @Test
 	public void testSetIzenburuaTxarto() {
-    	p1.setIzenburua("neverita");
-		assertNotEquals("blink", p1.getIzenburua());
+    	p1.setIzena("neverita");
+		assertNotEquals("blink", p1.getIzena());
 	}
     
   //----------------------------------------- Iraupena --------------------------------------
 
     @Test
     public void testGetIraupena() {
-        assertEquals(3.5, p1.getIraupena(), 0.01);
+        assertEquals(3, p1.getIraupena().getTime());
     }
     
     @Test
     public void testGetIraupenaTxarto() {
-        assertNotEquals(4.0, p1.getIraupena(), 0.01);
+        assertNotEquals(4, p1.getIraupena().getTime());
     }
     
     @SuppressWarnings("deprecation")
 	@Test
     public void testSetIraupena() {
-    	p1.setIraupena(5);
-    	assertEquals(5.0, p1.getIraupena(), 0.001);    }
+    	Time iraupena = new Time(5);
+    	p1.setIraupena(iraupena);
+    	assertEquals(5, p1.getIraupena().getTime());    
+    	}
     
     @Test
     public void testSetIraupenaTxarto() {
-    	p1.setIraupena(5);
+    	Time iraupena = new Time(5);
+    	p1.setIraupena(iraupena);
     	assertNotEquals(3, p1.getIraupena());
     }
     
@@ -97,24 +97,24 @@ public class PodcastTest {
 
     @Test
     public void testGetKolaboratzaileak() {
-    	assertEquals("blink", p1.getIzenburua());
+    	assertEquals("blink", p1.getIzena());
     }
     
     @Test
     public void testGetKolaboratzaileakTxarto() {
-    	assertNotEquals("andoni", p1.getIzenburua());
+    	assertNotEquals("andoni", p1.getIzena());
     }
 
     @Test
     public void testSetKolaboratzaileak() {
-    	p1.setIzenburua("alaitz");
-        assertEquals("alaitz", p1.getIzenburua());
+    	p1.setIzena("alaitz");
+        assertEquals("alaitz", p1.getIzena());
     }
     
     @Test
 	public void testSetKolaboratzaileakTxarto() {
-    	p1.setIzenburua("alaitz");
-		assertNotEquals("andoni", p1.getIzenburua());
+    	p1.setIzena("alaitz");
+		assertNotEquals("andoni", p1.getIzena());
 	}
     
     //----------------------------------------- Erreprodukzioak --------------------------------------
@@ -147,7 +147,7 @@ public class PodcastTest {
     public void testToString() {
     	String txt = p1.toString();
     	
-    	String esperotakoa = "Audio [id_audio=" + p1.getId_audio() + "izenburua=" + p1.getIzenburua() + ", iraupena=" + p1.getIraupena()
+    	String esperotakoa = "Audio [id_audio=" + p1.getId_audio() + "izena=" + p1.getIzena() + ", iraupena=" + p1.getIraupena()
     	+ ", kolaboratzaileak=" + p1.getKolaboratzaileak() + ", erreprodukzioak=" + p1.getErreprodukzioak() + "]";
     }
    
@@ -171,7 +171,7 @@ public class PodcastTest {
 
     @Test
     public void testEqualsClaseAtrBerdinak() {
-    Podcast p2 = new Podcast(1, "blink", 3.5, "andoni", 5);
+    Podcast p2 = new Podcast(1, "blink", new Time(3), null, "andoni", 5);
     assertTrue(p1.equals(p2));
     }
 }

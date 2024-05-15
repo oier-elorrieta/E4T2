@@ -12,7 +12,9 @@ public class KonexioaDB {
         	String usuario = "admin";
         	String contraseña = "1234";
         	conexioa = DriverManager.getConnection(url, usuario, contraseña);
+
            //conexioa = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_spoty5", "root", "");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

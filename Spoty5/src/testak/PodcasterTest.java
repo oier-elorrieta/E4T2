@@ -21,7 +21,7 @@ public class PodcasterTest {
     
     @Before
     public void setUp() throws Exception {
-    	pd1 = new Podcaster(1, "La Script", "ama-alaben istorio bat, denboraren joanaren eta heriotzaren beldurrari buruzko gogoeta gogor eta lotsagabea");
+    	pd1 = new Podcaster(1, "La Script", null, "ama-alaben istorio bat, denboraren joanaren eta heriotzaren beldurrari buruzko gogoeta gogor eta lotsagabea");
     }
     
   //----------------------------------------- Id --------------------------------------
@@ -124,7 +124,7 @@ public class PodcasterTest {
 
       @Test
       public void testEqualsClaseAtrBerdinak() {
-      Podcaster pd2 = new Podcaster(1, "La Script", "ama-alaben istorio bat, denboraren joanaren eta heriotzaren beldurrari buruzko gogoeta gogor eta lotsagabea");
+      Podcaster pd2 = new Podcaster(1, "La Script", null, "ama-alaben istorio bat, denboraren joanaren eta heriotzaren beldurrari buruzko gogoeta gogor eta lotsagabea");
       assertTrue(pd1.equals(pd2));
       }
       

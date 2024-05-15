@@ -25,7 +25,7 @@ public class AlbumTest {
 	@Before
 	public void setUp() throws Exception {
 		urtea = new Date(2024,11,17);
-		al1 = new Album(1, "Un verano sin ti", urtea, "trap");
+		al1 = new Album(1, "Un verano sin ti", urtea, "trap", null);
 	}
 	
 //----------------------------------------- Id --------------------------------------
@@ -156,7 +156,7 @@ public class AlbumTest {
 
     @Test
     public void testEqualsClaseAtrBerdinak() {
-    Album al2 = new Album(2, "Un verano sin ti", urtea, "trap");
+    Album al2 = new Album(2, "Un verano sin ti", urtea, "trap", null);
     assertTrue(al2.equals(al2));
     }
 	

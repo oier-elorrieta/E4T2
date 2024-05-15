@@ -1,4 +1,4 @@
-package Audioak;
+ package Audioak;
 
 import java.sql.Blob;
 import java.sql.Time;
@@ -17,7 +17,7 @@ public class Abestia extends Audio {
 	 * @param erreprodukzioak abestia zenbat aldiz erreproduzitu den
 	 */
 	public Abestia(int id_audio, String izena, Time iraupena,Blob irudia, String kolaboratzaileak, int erreprodukzioak) {
-        super(id_audio, izena, iraupena,irudia, kolaboratzaileak, erreprodukzioak);
+        super(id_audio, izena, iraupena, irudia, kolaboratzaileak, erreprodukzioak);
     }
 
 	public Abestia(int id_audio, String izena, Time iraupena, Blob irudia) {

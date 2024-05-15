@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -21,7 +22,7 @@ public class AbestiaTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		a1 = new Abestia(1, "blink", 3.5, "andoni", 5);
+		a1 = new Abestia(1, "blink", new Time(3), null, "andoni", 5);
 	}
 
 //----------------------------------------- Id_audio --------------------------------------
@@ -52,48 +53,50 @@ public class AbestiaTest {
 
     @Test
     public void testGetIzena() {
-    	assertEquals("blink", a1.getIzenburua());
+    	assertEquals("blink", a1.getIzena());
     }
     
     @Test
     public void testGetIzenaTxarto() {
-    	assertNotEquals("blinkk", a1.getIzenburua());
+    	assertNotEquals("blinkk", a1.getIzena());
     }
 
     @Test
     public void testSetIzena() {
-        a1.setIzenburua("neverita");
-        assertEquals("neverita", a1.getIzenburua());
+        a1.setIzena("neverita");
+        assertEquals("neverita", a1.getIzena());
     }
     
     @Test
 	public void testSetIzenaTxarto() {
-		a1.setIzenburua("neverita");
-		assertNotEquals("blink", a1.getIzenburua());
+		a1.setIzena("neverita");
+		assertNotEquals("blink", a1.getIzena());
 	}
     
   //----------------------------------------- Iraupena --------------------------------------
 
     @Test
     public void testGetIraupena() {
-        assertEquals(3.5, a1.getIraupena(), 0.01);
+        assertEquals(3, a1.getIraupena().getTime());
     }
     
     @Test
     public void testGetIraupenaTxarto() {
-        assertNotEquals(4.0, a1.getIraupena(), 0.01);
+        assertNotEquals(4, a1.getIraupena().getTime());
     }
     
     @SuppressWarnings("deprecation")
 	@Test
     public void testSetIraupena() {
-    	a1.setIraupena(5);
-    	assertEquals(5.0, a1.getIraupena(), 0.001);    
+    	Time iraupena = new Time(5);
+    	a1.setIraupena(iraupena);
+    	assertEquals(5, a1.getIraupena().getTime());    
     }
     
     @Test
     public void testSetIraupenaTxarto() {
-    	a1.setIraupena(5);
+    	Time iraupena = new Time(5);
+    	a1.setIraupena(iraupena);
     	assertNotEquals(3, a1.getIraupena());
     }
     
@@ -101,24 +104,24 @@ public class AbestiaTest {
 
     @Test
     public void testGetKolaboratzaileak() {
-    	assertEquals("blink", a1.getIzenburua());
+    	assertEquals("blink", a1.getIzena());
     }
     
     @Test
     public void testGetKolaboratzaileakTxarto() {
-    	assertNotEquals("andoni", a1.getIzenburua());
+    	assertNotEquals("andoni", a1.getIzena());
     }
 
     @Test
     public void testSetKolaboratzaileak() {
-        a1.setIzenburua("alaitz");
-        assertEquals("alaitz", a1.getIzenburua());
+        a1.setIzena("alaitz");
+        assertEquals("alaitz", a1.getIzena());
     }
     
     @Test
 	public void testSetKolaboratzaileakTxarto() {
-		a1.setIzenburua("alaitz");
-		assertNotEquals("andoni", a1.getIzenburua());
+		a1.setIzena("alaitz");
+		assertNotEquals("andoni", a1.getIzena());
 	}
     
     //----------------------------------------- Erreprodukzioak --------------------------------------
@@ -151,7 +154,7 @@ public class AbestiaTest {
     public void testToString() {
     	String txt = a1.toString();
     	
-    	String esperotakoa = "Audio [id_audio=" + a1.getId_audio() + "izenburua=" + a1.getIzenburua() + ", iraupena=" + a1.getIraupena()
+    	String esperotakoa = "Audio [id_audio=" + a1.getId_audio() + "izena=" + a1.getIzena() + ", iraupena=" + a1.getIraupena()
     	+ ", kolaboratzaileak=" + a1.getKolaboratzaileak() + ", erreprodukzioak=" + a1.getErreprodukzioak() + "]";
     }
   
@@ -175,7 +178,7 @@ public class AbestiaTest {
 
     @Test
     public void testEqualsClaseAtrBerdinak() {
-    Abestia p2 = new Abestia(1, "blink", 3.5, "andoni", 5);
+    Abestia p2 = new Abestia(1, "blink", new Time(3), null, "andoni", 5);
     assertTrue(a1.equals(p2));
     }
     
