@@ -69,6 +69,8 @@ public class vErreprodukzio extends JFrame {
 		JButton btnAtzera = new JButton("Atzera");
 		btnAtzera.setBounds(10, 11, 89, 23);
 		contentPane.add(btnAtzera);
+		
+		
 
 		JLabel lblAbestiArgazkia = new JLabel("");
 		lblAbestiArgazkia.setBounds(164, 21, 239, 205);
@@ -78,6 +80,14 @@ public class vErreprodukzio extends JFrame {
 		JButton btnMenua = new JButton("Menua");
 		btnMenua.setBounds(90, 270, 89, 23);
 		contentPane.add(btnMenua);
+		
+		btnMenua.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        vMenua menuaFrame = new vMenua(erabiltzaileIzena);
+		        menuaFrame.setVisible(true);
+		        dispose();
+		    }
+		});
 
 		JButton btnAurrekoAbesti = new JButton("<");
 		btnAurrekoAbesti.setBounds(190, 270, 41, 23);
