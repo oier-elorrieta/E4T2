@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
+
+import Bezeroak.Bezeroa;
 import DAO.BezeroaDAO;
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
@@ -21,6 +23,7 @@ public class vLogin extends JFrame {
 	protected static final String erabiltzaileIzena = null;
 	private JTextField txtErabiltzailea;
     private JPasswordField txtPasahitza;
+    private Bezeroa bezeroa;
     
     /**
      * Main metodoa.
@@ -62,13 +65,13 @@ public class vLogin extends JFrame {
         JButton btnHasiSaioa = new JButton("Login");
         btnHasiSaioa.setBounds(31, 143, 126, 30);
         
-        btnHasiSaioa.addActionListener(new ActionListener() {
+      /*  btnHasiSaioa.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		vMenua vMenuaPanel = new vMenua(erabiltzaileIzena);
         		vMenuaPanel.setVisible(true);
         		dispose();
         	}
-        });
+        });*/
         
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -91,27 +94,28 @@ public class vLogin extends JFrame {
                 dispose();
             }
         });
-
+        
         btnHasiSaioa.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String erabiltzailea = txtErabiltzailea.getText();
                 String pasahitza = new String(txtPasahitza.getPassword());
 
-                BezeroaDAO bezero = new BezeroaDAO();
-                
-                boolean balidatuHasiSaioa = bezero.baieztatuBezeroa(erabiltzailea, pasahitza);
+                SaioAldagaiak saioAldagaiak = SaioAldagaiak.getInstance();
+                Bezeroa usuario = saioAldagaiak.login(erabiltzailea, pasahitza);
 
-                if (balidatuHasiSaioa) {
+                if (usuario != null) {
                     JOptionPane.showMessageDialog(vLogin.this, "Barruan zaude");
-                    
-                   // vMenua vMenuaPanel = new vMenua(erabiltzailea);
-                   // vMenuaPanel.setVisible(true);
-                   // dispose();
+
+                    vMenua vMenuaPanel = new vMenua(usuario.getIzena());
+                    vMenuaPanel.setVisible(true);
+                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(vLogin.this, "Erabiltzailea edo pasahitza txarto dago");
                 }
             }
         });
+
+
     }
 }

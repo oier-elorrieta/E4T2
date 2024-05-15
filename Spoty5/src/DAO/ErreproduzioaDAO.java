@@ -124,7 +124,7 @@ public class ErreproduzioaDAO {
 
 	public Clip audioErreproduzitu(String abestiIzena) {
 	    try {
-	        // Cargar el archivo de audio desde el directorio "media" dentro de la carpeta "src"
+	        
 	        URL urlArchivo = getClass().getClassLoader().getResource("media/" + abestiIzena + ".wav");
 
 	        if (urlArchivo == null) {
@@ -132,7 +132,7 @@ public class ErreproduzioaDAO {
 	            return null;
 	        }
 
-	        // Detener y cerrar el clip actual si está sonando y ya ha sido inicializado
+	        
 	        if (clip != null && clip.isRunning()) {
 	            clip.stop();
 	            clip.close();
@@ -140,30 +140,30 @@ public class ErreproduzioaDAO {
 
 	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(urlArchivo);
 
-	        // Obtener un clip de audio
+	        
 	        clip = AudioSystem.getClip();
 
-	        // Abrir el clip con el flujo de audio
+	        
 	        clip.open(audioInputStream);
 
-	        // Inicializar el contador
+	        
 	        final int[] segundosTranscurridos = {0};
 
-	        // Crear un timer para actualizar el contador cada segundo
+	        
 	        Timer timer = new Timer(1000, e -> {
 	        	 segundosTranscurridos[0]++;
 	            System.out.println("Tiempo transcurrido: " + segundosTranscurridos[0] + " segundos");
 	        });
 	        timer.start();
 
-	        // Reproducir el clip
+	        
 	        clip.start();
 
-	        // Esperar hasta que el clip termine de reproducirse
+	        
 	        clip.addLineListener(event -> {
 	            if (event.getType() == LineEvent.Type.STOP) {
 	                clip.close();
-	                timer.stop(); // Detener el timer cuando se detiene la reproducción
+	                timer.stop(); 
 	            }
 	        });
 

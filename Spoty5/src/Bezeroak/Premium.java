@@ -29,7 +29,11 @@ public class Premium extends Bezeroa{
 		this.iraungitzeData = iraungitzeData;
 	}
 
-    /**
+    public Premium(String erabiltzailea, String pasahitza) {
+    	super(erabiltzailea, pasahitza);
+	}
+
+	/**
      * Premiumen iraungitzeData lortzen du
      * 
      * @return Premiumen iraungitzeData

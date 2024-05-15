@@ -2,6 +2,9 @@ package Vista;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Bezeroak.Bezeroa;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -16,6 +19,7 @@ public class vMenua extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private Bezeroa bezeroa;
 
 	/**
 	 * Aplikazioa abiarazi.
@@ -28,6 +32,7 @@ public class vMenua extends JFrame {
 	 * @param erabiltzaileIzena Erabiltzailearen izena.
 	 */
 	public vMenua(String erabiltzaileIzena) {
+		this.bezeroa = bezeroa;
 		setTitle("Menua");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);

@@ -22,4 +22,8 @@ public class Free extends Bezeroa {
 			ArrayList<String> playListZerrenda) {
 		super(izena, abizena, jdata, erabiltzailea, pasahitza, hizkuntza, playListZerrenda);
 	}
+	
+	public Free(String erabiltzailea, String pasahitza) {
+    	super(erabiltzailea, pasahitza);
+	}
 }

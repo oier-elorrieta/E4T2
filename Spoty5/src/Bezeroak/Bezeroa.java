@@ -68,8 +68,18 @@ public abstract class Bezeroa {
 		this.hizkuntza = hizkuntza;
 		this.playListZerrenda = playListZerrenda;
 	}
+   
+   
   
-   /**
+   public Bezeroa(String erabiltzailea, String pasahitza) {
+	super();
+	this.erabiltzailea = erabiltzailea;
+	this.pasahitza = pasahitza;
+}
+
+
+
+/**
     * Bezeroaren izena lortzen du
     *
     * @return bezeroaren izena
