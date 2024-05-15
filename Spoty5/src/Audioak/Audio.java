@@ -73,6 +73,14 @@ public abstract class Audio {
         Iraupena = iraupena;
         Irudia = irudia;
 	}
+    
+    public Audio(int id_audio, String izena, Time iraupena, Blob irudia, String kolaboratzaileak) {
+    	Id_audio = id_audio;
+        Izena = izena;
+        Iraupena = iraupena;
+        Irudia = irudia;
+        Kolaboratzaileak = kolaboratzaileak;
+	}
 
 
 	public Blob getIrudia() {

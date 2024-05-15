@@ -18,6 +18,7 @@ import DAO.PodcasterListaDAO;
 import Artistak.Artista;
 import Artistak.Musikari;
 import Artistak.Podcaster;
+import Audioak.Podcast;
 
 /**
  * "vPodcasterLista" klaseak JFrame klasea heredatzen du eta podcast-ak zerrendatzeko eta hautatzeko
@@ -29,6 +30,8 @@ public class vPodcasterLista extends JFrame {
    private JPanel contentPane;
    private JComboBox<String> comboBoxPodcasters;
    private String erabiltzaileIzena;
+   private Podcaster podcaster;
+   private Podcast podcast;
    
    /**
     * Klasearen eraikitzailea. Podcast-ak zerrendatzeko eta hautatzeko interfaze grafikoa sortzen du.
@@ -36,6 +39,7 @@ public class vPodcasterLista extends JFrame {
     */
    public vPodcasterLista(String erabiltzaileIzena) {
        this.erabiltzaileIzena = erabiltzaileIzena;
+       
        setTitle("Podcaster zerrenda");
        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        setBounds(100, 100, 450, 300);
@@ -123,7 +127,7 @@ public class vPodcasterLista extends JFrame {
 	        PodcasterListaDAO podcasterListaDAO = new PodcasterListaDAO();
 	        Podcaster aukeratutakoPodcaster = podcasterListaDAO.podcasterLortu(podcasterAukeratua);
 	        //Deitu urrengo orrira
-	        vPodcaster vPodcasterFrame = new vPodcaster(podcasterAukeratua, aukeratutakoPodcaster);
+	        vPodcaster vPodcasterFrame = new vPodcaster(podcasterAukeratua, aukeratutakoPodcaster,podcast);
 	        vPodcasterFrame.setVisible(true);
 	        dispose();
 	}

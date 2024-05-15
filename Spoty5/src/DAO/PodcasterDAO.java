@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,14 +25,22 @@ import master.KonexioaDB;
  * Podcaster baten informazioa eta bere podcasten zerrenda lortzeko datu-basearekin interakzioak egiteko klasea.
  */
 public class PodcasterDAO {
-  
-	public List<Podcast> podcastLortuArtistetatik(Podcaster podcaster) {
-	    List<Podcast> podcast = new ArrayList<>();
+	
+	
+
+
+	public PodcasterDAO() {
+		
+	}
+
+
+	public static List<Podcast> podcastLortuPodcasterretik(Podcaster podcaster) {
+	    List<Podcast> podcastak = new ArrayList<>();
 	    Connection con = KonexioaDB.hasi(); 
 
 	    if (con == null) {
 	        System.out.println("Ezin da konexioa egin.");
-	        return podcast; 
+	        return podcastak; 
 	    }
 
 	    PreparedStatement stmt = null;
@@ -39,18 +48,24 @@ public class PodcasterDAO {
 
 	    try {
 	       
-	        String sql = "SELECT * FROM podcast WHERE id_podcaster = ? ";
+	    	String sql = "SELECT audio.id_audio, audio.izena, audio.iraupena, audio.irudia, audio.mota " +
+	                "FROM audio " +
+	                "INNER JOIN podcast ON audio.id_audio = podcast.id_audio " +
+	                "INNER JOIN podcaster ON podcast.id_podcaster = podcaster.id_podcaster " +
+	                "WHERE podcaster.izenArtistikoa = ?";
 	        stmt = con.prepareStatement(sql);
-	        stmt.setInt(1, podcaster.getId_artista());
+	        stmt.setString(1, podcaster.getIzena());
 	        rs = stmt.executeQuery();
 
 	        
 	        while (rs.next()) {
 	            int id_audio = rs.getInt("id_audio");
-	            String kolaboratzaileak = rs.getString("kolaboratzaileak");
-	            Podcast podcast = new Podcast(id_audio, kolaboratzaileak);
+	            String izena = rs.getString("izena");
+	            Time iraupena = rs.getTime("iraupena");
+	            Blob irudia = rs.getBlob("irudia");
+	            Podcast podcast = new Podcast(id_audio, izena, iraupena, irudia);
 
-	            albumak.add(album);
+	            podcastak.add(podcast);
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -66,98 +81,51 @@ public class PodcasterDAO {
 	    }
 
 	    
-	    return albumak;
+	    return podcastak;
 	}
-    /**
-     * Podcaster baten informazioa lortzen du.
-     *
-     * @param podcaster Informazioa lortu nahi den podcasterren izena.
-     * @return Podcaster horren informazioa.
-     */
-    public String PodcasterInformazioaLortu(String podcaster) {
-        String podcasterInfo = "";
-        Connection con = KonexioaDB.hasi();
+   
+	
+	public Podcast podcastLortu(String izenPodcast) {
+		   Podcast podcast = null;
+		    Connection con = KonexioaDB.hasi(); 
 
-        if (con == null) {
-            System.out.println("Ezin da konexioa egin.");
-            return podcasterInfo;
-        }
+		    if (con == null) {
+		        System.out.println("Ezin da konexioa egin.");
+		       
+		    }
 
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
+		    PreparedStatement stmt = null;
+		    ResultSet rs = null;
 
-        try {
-            String sql = "SELECT izenArtistikoa, deskribapena FROM podcaster WHERE izenArtistikoa = ?";
-            stmt = con.prepareStatement(sql);
-            stmt.setString(1, podcaster);
-            rs = stmt.executeQuery();
+		    try {
+		       
+		    	String sql = "SELECT * FROM podcast where izena = ?";
+		        stmt = con.prepareStatement(sql);
+		        stmt.setString(1, izenPodcast);
+		        rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                String izenArtistikoa = rs.getString("izenArtistikoa");
-                String deskribapena = rs.getString("deskribapena");
-                podcasterInfo = "Izen artistikoa: " + izenArtistikoa + "\nDeskribapena: " + deskribapena;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                KonexioaDB.itxi(con);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return podcasterInfo;
-    }
+		        
+		        while (rs.next()) {
+		        	 int id_audio = rs.getInt("id_audio");
+		             String izena = rs.getString("izena");
+		             Time iraupena = rs.getTime("iraupena");
+		             Blob irudia = rs.getBlob("irudia");
+		             String kolaboratzailea = rs.getString("kolaboratzailea");
+		            podcast = new Podcast(id_audio, izena,iraupena, irudia, kolaboratzailea);
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		    } finally {
+		        
+		        try {
+		            if (rs != null) rs.close();
+		            if (stmt != null) stmt.close();
+		            KonexioaDB.itxi(con);
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		    }
 
-    /**
-     * Podcaster baten irudia lortzen du.
-     *
-     * @param podcaster Irudia lortu nahi den podcasterren izena.
-     * @return Podcasterren irudia ImageIcon gisa.
-     */
-    public ImageIcon PodcasterIrudiaLortu(String podcaster) {
-        ImageIcon podcasterIrudia = null;
-        Connection con = KonexioaDB.hasi(); // Datu-basearekin konexioa lortu
-
-        if (con == null) {
-            System.out.println("Ezin da konexioa egin.");
-            return podcasterIrudia;
-        }
-
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
-
-        try {
-            // Podcasterren irudia lortzeko SQL kontsulta
-            String sql = "SELECT irudia FROM podcaster WHERE izenArtistikoa = ?";
-            stmt = con.prepareStatement(sql);
-            stmt.setString(1, podcaster);
-            rs = stmt.executeQuery();
-
-            // Irudia aurkitzen bada, ImageIcon-ra bihurtzen da
-            if (rs.next()) {
-                Blob blob = rs.getBlob("irudia");
-                if (blob != null) {
-                    try (ByteArrayInputStream is = new ByteArrayInputStream(blob.getBytes(1, (int) blob.length()))) {
-                        Image image = ImageIO.read(is);
-                        podcasterIrudia = new ImageIcon(image);
-                    }
-                }
-            }
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
-        } finally {
-            // Baliabideak askatu
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                KonexioaDB.itxi(con);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return podcasterIrudia;
-    }
+		    return podcast;
+		}
 }

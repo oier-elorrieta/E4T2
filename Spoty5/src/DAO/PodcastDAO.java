@@ -1,16 +1,29 @@
 package DAO;
 
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
 import javax.swing.ImageIcon;
+import javax.swing.Timer;
+
+import Artistak.Podcaster;
+import Audioak.Abestia;
+import Audioak.Album;
+import Audioak.Podcast;
+
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.imageio.ImageIO;
 import master.KonexioaDB;
 import javax.sound.sampled.AudioInputStream;
@@ -19,120 +32,114 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class PodcastDAO {
+	 	private List<Podcast> podcastak;
+	    private int currentIndex = 0;
+	    private Clip clip;
 
-	public Clip audioErreproduzitu(String podcastIzena) {
-        Clip clip = null;
-        try {
-            // Cargar el archivo de audio desde el directorio "media" dentro de la carpeta "src"
-            URL urlArchivo = getClass().getClassLoader().getResource("media/" + podcastIzena);
-
-            if (urlArchivo == null) {
-                System.out.println("No se pudo encontrar el archivo de audio: " + podcastIzena);
-                return null;
-            }
-
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(urlArchivo);
-
-            // Obtener un clip de audio
-            clip = AudioSystem.getClip();
-
-            // Abrir el clip con el flujo de audio
-            clip.open(audioInputStream);
-
-            // Reproducir el clip
-            clip.start();
-
-            // Esperar hasta que el clip termine de reproducirse
-            while (clip.isRunning()) {
-                Thread.sleep(10);
-            }
-
-            // No es necesario cerrar el clip aquí
-
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException | InterruptedException e) {
-            e.printStackTrace();
-        }
-        return clip;
-    }
-
-	 public String podcastInformazioaLortu(String podcastIzena) {
-	        StringBuilder podcastInformazioa = new StringBuilder();
-	        Connection con = KonexioaDB.hasi(); // Obtener conexión con la base de datos
-	        if (con == null) {
-	            System.out.println("Ezin da konexioa egin.");
-	            return "";
-	        }
-
-	        PreparedStatement stmt = null;
-	        ResultSet rs = null;
-
-	        try {
-	            // Obtener la información del podcast desde la base de datos
-	            String sql = "SELECT izena, iraupena FROM audio WHERE izena = ? AND mota = 'podcast'";
-	            stmt = con.prepareStatement(sql);
-	            stmt.setString(1, podcastIzena);
-	            rs = stmt.executeQuery();
-
-	            // Construir la información del podcast
-	            if (rs.next()) {
-	                String izena = rs.getString("izena");
-	                String iraupena = rs.getString("iraupena");
-	                podcastInformazioa.append("Podcast izena: ").append(izena).append("\n");
-	                podcastInformazioa.append("Iraupena: ").append(iraupena).append("\n");
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        } finally {
-	            // Cerrar la conexión y liberar recursos
-	            try {
-	                if (rs != null) rs.close();
-	                if (stmt != null) stmt.close();
-	                KonexioaDB.itxi(con);
-	            } catch (SQLException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        return podcastInformazioa.toString();
+	    public PodcastDAO() {
+	       
 	    }
-    
-    public ImageIcon podcastIrudiaLortu(String audioIzena) {
-        ImageIcon podcastArgazki = null;
-        Connection con = KonexioaDB.hasi(); 
+	    
+	    public PodcastDAO(Podcaster podcaster) {
+	    	PodcasterDAO podcasterDAO = new PodcasterDAO();
+	        podcastak = podcasterDAO.podcastLortuPodcasterretik(podcaster);
+	    }
+	    
+	    public Podcast podcastLortu(String izenPodcast) {
+			   Podcast podcast = null;
+			    Connection con = KonexioaDB.hasi(); 
 
-        if (con == null) {
-            System.out.println("Ezin da konexioa egin.");
-            return podcastArgazki;
-        }
+			    if (con == null) {
+			        System.out.println("Ezin da konexioa egin.");
+			       
+			    }
 
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
+			    PreparedStatement stmt = null;
+			    ResultSet rs = null;
 
-        try {
-            String sql = "SELECT irudia FROM audio WHERE izena = ? AND mota = 'podcast'";
-            stmt = con.prepareStatement(sql);
-            stmt.setString(1, audioIzena);
-            rs = stmt.executeQuery();
+			    try {
+			       
+			    	String sql = "SELECT * FROM podcast where izena = ?";
+			        stmt = con.prepareStatement(sql);
+			        stmt.setString(1, izenPodcast);
+			        rs = stmt.executeQuery();
 
-            if (rs.next()) {
-                byte[] imageBytes = rs.getBytes("irudia");
-                if (imageBytes != null) {
-                    try (ByteArrayInputStream is = new ByteArrayInputStream(imageBytes)) {
-                        Image image = ImageIO.read(is);
-                        podcastArgazki = new ImageIcon(image);
-                    }
-                }
-            }
-        } catch (SQLException | IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                KonexioaDB.itxi(con); 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        return podcastArgazki;
-    }
+			        
+			        while (rs.next()) {
+			        	 int id_audio = rs.getInt("id_audio");
+			             String izena = rs.getString("izena");
+			             Time iraupena = rs.getTime("iraupena");
+			             Blob irudia = rs.getBlob("irudia");
+			             String kolaboratzaileak = rs.getString("kolaboratzaileak");
+			            podcast = new Podcast(id_audio, izena,iraupena, irudia, kolaboratzaileak);
+			        }
+			    } catch (SQLException e) {
+			        e.printStackTrace();
+			    } finally {
+			        
+			        try {
+			            if (rs != null) rs.close();
+			            if (stmt != null) stmt.close();
+			            KonexioaDB.itxi(con);
+			        } catch (SQLException e) {
+			            e.printStackTrace();
+			        }
+			    }
+
+			    return podcast;
+			}
+	    
+	    
+	    public Clip audioErreproduzitu(String abestiIzena) {
+		    try {
+		        // Cargar el archivo de audio desde el directorio "media" dentro de la carpeta "src"
+		        URL urlArchivo = getClass().getClassLoader().getResource("media/" + abestiIzena + ".wav");
+
+		        if (urlArchivo == null) {
+		            System.out.println("No se pudo encontrar el archivo de audio: " + abestiIzena);
+		            return null;
+		        }
+
+		        // Detener y cerrar el clip actual si está sonando y ya ha sido inicializado
+		        if (clip != null && clip.isRunning()) {
+		            clip.stop();
+		            clip.close();
+		        }
+
+		        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(urlArchivo);
+
+		        // Obtener un clip de audio
+		        clip = AudioSystem.getClip();
+
+		        // Abrir el clip con el flujo de audio
+		        clip.open(audioInputStream);
+
+		        // Inicializar el contador
+		        final int[] segundosTranscurridos = {0};
+
+		        // Crear un timer para actualizar el contador cada segundo
+		        Timer timer = new Timer(1000, e -> {
+		        	 segundosTranscurridos[0]++;
+		            System.out.println("Tiempo transcurrido: " + segundosTranscurridos[0] + " segundos");
+		        });
+		        timer.start();
+
+		        // Reproducir el clip
+		        clip.start();
+
+		        // Esperar hasta que el clip termine de reproducirse
+		        clip.addLineListener(event -> {
+		            if (event.getType() == LineEvent.Type.STOP) {
+		                clip.close();
+		                timer.stop(); // Detener el timer cuando se detiene la reproducción
+		            }
+		        });
+
+		        return clip;
+
+		    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+		        e.printStackTrace();
+		    }
+		    return null;
+		}
 }

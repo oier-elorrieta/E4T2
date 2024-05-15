@@ -73,7 +73,7 @@ public class PodcasterListaDAO {
 
 	    try {
 	       
-	    	String sql = "SELECT * FROM musikaria where izenArtistikoa = ?";
+	    	String sql = "SELECT * FROM podcaster where izenArtistikoa = ?";
 	        stmt = con.prepareStatement(sql);
 	        stmt.setString(1, izenPod);
 	        rs = stmt.executeQuery();

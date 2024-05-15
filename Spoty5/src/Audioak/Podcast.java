@@ -3,7 +3,7 @@ package Audioak;
 import java.sql.Time;
 import java.util.Date;
 
-import com.mysql.cj.jdbc.Blob;
+import java.sql.Blob;
 
 /**
  * Podcast klasea Audio klasearen luzapena da.
@@ -19,6 +19,14 @@ public class Podcast extends Audio{
      */
     public Podcast(int id_audio, String izena, Time iraupena, Blob irudia, String kolaboratzaileak, int erreprodukzioak) {
         super(id_audio, izena, iraupena,irudia, kolaboratzaileak, erreprodukzioak);
+    }
+    
+    public Podcast(int id_audio, String izena, Time iraupena, Blob irudia, String kolaboratzaileak) {
+        super(id_audio, izena, iraupena,irudia, kolaboratzaileak);
+    }
+    
+    public Podcast(int id_audio, String izena, Time iraupena, Blob irudia) {
+        super(id_audio, izena, iraupena,irudia);
     }
 
 }
