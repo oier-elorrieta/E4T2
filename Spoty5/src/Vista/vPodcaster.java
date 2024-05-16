@@ -64,9 +64,10 @@ public class vPodcaster extends JFrame {
 
 		btnProfila.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				vErregistratu erregistratuFrame = new vErregistratu(erabiltzaileIzena);
-				erregistratuFrame.setVisible(true);
-				dispose();
+				 vErregistratu erregistratuFrame = new vErregistratu(Main.bezero.getErabiltzailea());
+			        erregistratuFrame.setUserInfo(Main.bezero);
+			        erregistratuFrame.setVisible(true);
+			        dispose();
 			}
 		});
 

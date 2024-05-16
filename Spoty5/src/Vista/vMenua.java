@@ -66,12 +66,12 @@ public class vMenua extends JFrame {
 		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnProfila.setBounds(317, 15, 107, 23);
 		contentPane.add(btnProfila);
-		
 		btnProfila.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				vErregistratu vErregistratuPanel = new vErregistratu(erabiltzaileIzena);
-				vErregistratuPanel.setVisible(true);
-				dispose();
+				 vErregistratu erregistratuFrame = new vErregistratu(Main.bezero.getErabiltzailea());
+			        erregistratuFrame.setUserInfo(Main.bezero);
+			        erregistratuFrame.setVisible(true);
+			        dispose();
 			}
 		});
 		

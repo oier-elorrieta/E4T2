@@ -229,4 +229,20 @@ public class vErregistratu extends JFrame {
             e.printStackTrace();
         }
     }
+    
+    public void setUserInfo(Bezeroa bezero) {
+        lblizena.setText(bezero.getIzena());
+        lblabizena.setText(bezero.getAbizena());
+        lblerabiltzailea.setText(bezero.getErabiltzailea());
+        lblpasahitza.setText(bezero.getPasahitza());
+     
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String jaiotzeData = sdf.format(bezero.getJdata());
+        lblj_data.setText(jaiotzeData);
+        
+        
+        lblj_data.setSelectionStart(0);
+        lblj_data.setSelectionEnd(0);
+        
+    }
 }
