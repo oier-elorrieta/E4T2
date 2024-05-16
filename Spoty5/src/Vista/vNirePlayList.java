@@ -87,24 +87,7 @@ public class vNirePlayList extends JFrame {
 		btnPlayListBerria.setBounds(456, 94, 118, 23);
 		contentPane.add(btnPlayListBerria);
 		
-		btnPlayListBerria.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-
-		        String izenaPlayList = eskatuPlayListIzena(erabiltzaileIzena);
-		        
-		        // PlayList izena ez bada hutsik
-		        if (izenaPlayList != null && !izenaPlayList.isEmpty()) {
-		            // PlayList berri bat sortzeko metodoa deitu
-		            listPlayListakModel.addElement(izenaPlayList); // aktualizatu zerrenda
-		            
-		            // Hemen sortu zure PlayList-a datu-basean
-		            // NirePlayListDAO.playListBerriaSortu(izenaPlayList, erabiltzaileIzena);
-		            
-		            listPlayListakModel.clear(); 
-		            BezeroPlayListZerrenda(listPlayListakModel, erabiltzaileIzena); // Zerrenda berriro kargatu
-		        }
-		    }
-		});
+	
 
 		JButton btnPlayListEzabatu = new JButton("Ezabatu");
 		btnPlayListEzabatu.setBounds(456, 168, 118, 23);
@@ -127,7 +110,6 @@ public class vNirePlayList extends JFrame {
 		scrollPanePlayList.setBounds(30, 73, 180, 222);
 		contentPane.add(scrollPanePlayList);
 		
-		listPlayListakModel  =  BezeroPlayListZerrenda(listPlayListakModel,erabiltzaileIzena );
 		
 		JList listPlayListak = new JList(listPlayListakModel);
 		scrollPanePlayList.setViewportView(listPlayListak);
@@ -138,17 +120,5 @@ public class vNirePlayList extends JFrame {
 	        });
 	}
 
-	private DefaultListModel<String> BezeroPlayListZerrenda(DefaultListModel<String>  listPlayListakModel, String erab) {
-			
-            List<String> listaplaylist = DAO.NirePlayListDAO.BezeroPlayListZerrenda(erab);
-            for (String i : listaplaylist) {
-            	listPlayListakModel.addElement(i);
-            	}
-            return  listPlayListakModel;
-            }
-	
-	private String eskatuPlayListIzena(String erabiltzaileIzena) {
-	    String izenaPlayList = JOptionPane.showInputDialog(this, "PlayList berriaren izena:");
-	    return izenaPlayList;
-	}
+
 }
