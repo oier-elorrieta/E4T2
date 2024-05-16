@@ -18,9 +18,7 @@ public class Album {
 	private String generoa;
 	private  Blob irudia;
 	
-	
-	
-	
+
 	/**
 	 * Albuma sortzeko konstruktorea izenburua eta argitaratze urtearekin
 	 *
@@ -28,8 +26,6 @@ public class Album {
 	 * @param argitaratzeUrtea albumaren argitaratze urtea
 	 */
 
-	
-	
 	public Album(int id_album, String izenburua, Date urtea, String generoa, Blob irudia) {
 		this.id_album = id_album;
 		this.izenburua = izenburua;
@@ -37,9 +33,7 @@ public class Album {
 		this.generoa = generoa;
 		this.irudia = irudia;
 	}
-	
-	
-	
+
 	public int getId_album() {
 		return id_album;
 	}
@@ -71,14 +65,10 @@ public class Album {
 		this.irudia = irudia;
 	}
 
-
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(generoa, id_album, irudia, izenburua, urtea);
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -94,9 +84,6 @@ public class Album {
 				&& Objects.equals(urtea, other.urtea);
 	}
 
-	
 
-	
-	
 
 }

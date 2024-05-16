@@ -18,7 +18,6 @@ import master.KonexioaDB;
 
 	public class BezeroaDAO {
 	    
-	    
 	    /**
 	     * Erabiltzailea eta pasahitza baieztatu egiaztatzen du
 	     * 
@@ -62,7 +61,7 @@ import master.KonexioaDB;
 		            if (mota.equals("free")) {
 		                bezeroa = new Free(id_bezeroa, izena, abizena, jaiotze_data, erabiltzailea, pasahitza, id_hizkuntza, mota);
 		            } else {
-		                bezeroa = new Bezeroak.Premium(id_bezeroa, izena, abizena, jaiotze_data, erabiltzailea, pasahitza, id_hizkuntza, mota);
+		                bezeroa = new Bezeroak.Premium(id_bezeroa, izena, abizena, jaiotze_data, erabiltzailea, pasahitza, id_hizkuntza, null, mota, jaiotze_data);
 		            }
 		        }
 		    } catch (SQLException e) {

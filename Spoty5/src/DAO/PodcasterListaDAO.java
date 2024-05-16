@@ -30,7 +30,6 @@ public class PodcasterListaDAO {
        ResultSet rs = null;
       
        try {
-           // Podcasteren zerrenda lortzeko SQL kontsulta
            String sql = "SELECT * FROM podcaster";
            stmt = con.prepareStatement(sql);
            rs = stmt.executeQuery();

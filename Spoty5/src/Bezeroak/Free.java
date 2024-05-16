@@ -22,13 +22,11 @@ public class Free extends Bezeroa {
 	public Free(int id_bezeroa, String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza,
 			String hizkuntza, ArrayList<String> playListZerrenda, String mota) {
 		super(id_bezeroa, izena, abizena, jdata, erabiltzailea, pasahitza, hizkuntza, playListZerrenda,mota);
-		// TODO Auto-generated constructor stub
 	}
 
 	public Free(int id_bezeroa, String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza,
 			String hizkuntza, String mota) {
 		super(id_bezeroa, izena, abizena, jdata, erabiltzailea, pasahitza, hizkuntza, mota);
-		// TODO Auto-generated constructor stub
 	}
 	
 	

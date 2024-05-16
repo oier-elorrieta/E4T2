@@ -93,7 +93,6 @@ public class ErregistratuDAO {
             stmt = con2.prepareStatement(sql);
             rs = stmt.executeQuery();
 
-            // Recorre los resultados y los agrega a la lista
             while (rs.next()) {
                 String id_hizkuntza = rs.getString("id_hizkuntza");
                 hizkuntzaList.add(id_hizkuntza);

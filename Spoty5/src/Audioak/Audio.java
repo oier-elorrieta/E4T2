@@ -31,8 +31,6 @@ public abstract class Audio {
     protected Time Iraupena;
 
     
-
-    
     /**
      * Audioa izango dituen argazkiak
      */
@@ -188,7 +186,6 @@ public abstract class Audio {
     }
 
 
-	
 
     /**
      * Objetuaren hash kodea kalkulatzen du

@@ -46,7 +46,7 @@ public class BezeroaDAOTest {
 	        String erabiltzailea = "icas";
 	        String pasahitza = "haia";
 
-	        Bezeroa esperotakoBezeroa = new Premium(1, "Irune", "Casquet", null, "icas", "haia", "ES", "premium");
+	        Bezeroa esperotakoBezeroa = new Premium(1, "Irune", "Casquet", null, "icas", "haia", "ES", null, "premium", null);
 
 	        Bezeroa ateratakoBezeroa = bezeroaDAO.bezeroaLortu(erabiltzailea, pasahitza);
 
