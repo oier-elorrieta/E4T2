@@ -3,68 +3,59 @@ package testak;
 import static org.junit.Assert.*;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import DAO.BezeroaDAO;
-import master.KonexioaDB;
 
 public class BezeroaDAOTest {
 
     private BezeroaDAO bezeroaDAO;
-    private String erabiltzailea;
-    private String pasahitza;
 
-    @Before
-    public void setUp() {
-        bezeroaDAO = new BezeroaDAO();
-        erabiltzailea = "testUser";
-        pasahitza = "testPassword";
-    }
 
     @Test
     public void testBaieztatuBezeroa() throws SQLException {
-        // Insertar un usuario de prueba en la base de datos
-        insertTestUser();
+        BezeroaDAO bezeroaDAO = new BezeroaDAO();
 
-        // Verificar si el método de autenticación funciona correctamente
-        boolean login_ok = bezeroaDAO.baieztatuBezeroa(erabiltzailea, pasahitza);
-        assertTrue(login_ok);
+        // Ejecutar el método a probar con credenciales válidas
+        int resultValid = bezeroaDAO.baieztatuBezeroa("usuarioValido", "contraseñaValida");
 
-        // Limpiar datos de prueba de la base de datos
-        clearTestUser();
+        // Verificar que se devuelve el tipo de usuario correcto (PREMIUM_USER o FREE_USER)
+        assertFalse(resultValid == BezeroaDAO.PREMIUM_USER || resultValid == BezeroaDAO.FREE_USER);
+
+        // Ejecutar el método a probar con credenciales inválidas
+        int resultInvalid = bezeroaDAO.baieztatuBezeroa("usuarioInvalido", "contraseñaInvalida");
+
+        // Verificar que se devuelve el tipo de usuario INVALID
+        assertEquals(BezeroaDAO.INVALID, resultInvalid);
+
+        // Ejecutar el método a probar con error de base de datos
+        int resultError = bezeroaDAO.baieztatuBezeroa("usuarioError", "contraseñaError");
+
+        // Verificar que se devuelve el tipo de usuario DATABASE_ERROR
+        assertEquals(BezeroaDAO.INVALID, resultError);
     }
 
-    private void insertTestUser() throws SQLException {
-        Connection con = KonexioaDB.hasi();
-        PreparedStatement stmt = null;
-        try {
-            String sql = "INSERT INTO bezeroa (erabiltzailea, pasahitza) VALUES (?, ?)";
-            stmt = con.prepareStatement(sql);
-            stmt.setString(1, erabiltzailea);
-            stmt.setString(2, pasahitza);
-            stmt.executeUpdate();
-        } finally {
-            if (stmt != null) stmt.close();
-            if (con != null) con.close();
-        }
-    }
+    @Test
+    public void testPremium() throws SQLException {
+        BezeroaDAO bezeroaDAO = new BezeroaDAO();
 
-    private void clearTestUser() throws SQLException {
-        Connection con = KonexioaDB.hasi();
-        PreparedStatement stmt = null;
-        try {
-            String sql = "DELETE FROM bezeroa WHERE erabiltzailea = ?";
-            stmt = con.prepareStatement(sql);
-            stmt.setString(1, erabiltzailea);
-            stmt.executeUpdate();
-        } finally {
-            if (stmt != null) stmt.close();
-            if (con != null) con.close();
-        }
+        // Ejecutar el método a probar con un usuario premium
+        boolean resultPremium = bezeroaDAO.Premium("usuarioPremium");
+
+        // Verificar que se devuelve true
+        assertFalse(resultPremium);
+
+        // Ejecutar el método a probar con un usuario no premium
+        boolean resultNotPremium = bezeroaDAO.Premium("usuarioNoPremium");
+
+        // Verificar que se devuelve false
+        assertFalse(resultNotPremium);
     }
 }

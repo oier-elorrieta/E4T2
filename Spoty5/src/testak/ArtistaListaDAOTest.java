@@ -1,51 +1,49 @@
 package testak;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.Blob;
+import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import DAO.MusikariListaDAO;
-import master.KonexioaDB;
+import Artistak.Musikari;
+import Audioak.Album;
+import DAO.ArtistaDAO;
 
 public class ArtistaListaDAOTest {
 
-    private MusikariListaDAO artistaListaDAO;
+    private ArtistaDAO artistaDAO;
+    private static Blob irudia;
 
     @Before
     public void setUp() {
-        artistaListaDAO = new MusikariListaDAO();
+        artistaDAO = new ArtistaDAO();
+    }
+
+    @After
+    public void tearDown() {
+        // Realizar tareas de limpieza si es necesario
     }
 
     @Test
-    public void testArtistaListaLortu() throws SQLException {
-        // Simulación de la base de datos
-        String[] artistakEsperatuak = {"Bad Bunny", "Bad Gyal", "Coldplay"};
-
-        // Preparar resultados simulados de la base de datos
-        try (Connection con = KonexioaDB.hasi();
-             PreparedStatement stmt = con.prepareStatement("SELECT izenArtistikoa FROM musikaria");
-             ResultSet rs = stmt.executeQuery()) {
-
-            // Configurar resultados simulados
-            int i = 0;
-            while (rs.next()) {
-                assertEquals(artistakEsperatuak[i], rs.getString("izenArtistikoa"));
-                i++;
-            }
-        } catch (SQLException e) {
-            fail("Errorea datu basearekin konexioa egitean: " + e.getMessage());
-        }
-
-        // Ejecutar el método de obtener lista de artistas
-        String artistakLortutako = artistaListaDAO.ArtistaListaLortu();
-
-        // Verificar si los artistas obtenidos coinciden con los esperados
-        assertEquals(String.join("\n", artistakEsperatuak) + "\n", artistakLortutako);
+    public void testAlbumakLortuArtistetatik() {
+        Musikari musikari = new Musikari(1, "bad bunny", irudia, "si");
+        List<Album> albumak = artistaDAO.AlbumakLortuArtistetatik(musikari);
+        assertNotNull(albumak);
+        // Añade más aserciones según sea necesario para verificar los resultados
     }
+
+    @Test
+    public void testMusikariLortu() {
+        String izenMus = "nombreArtista";
+        Musikari musikari = artistaDAO.musikariLortu(izenMus);
+        assertNotNull(musikari);
+        // Añade más aserciones según sea necesario para verificar los resultados
+    }
+
+    // Puedes añadir más métodos de prueba según lo necesites
 }

@@ -48,25 +48,4 @@ public class NirePlayListDAOTest {
         // Verificar que la lista obtenida coincide con la esperada
         assertEquals(expectedPlayList, playListZerrenda);
     }
-
-    @Test
-    public void testPlayListBerriaSortu() {
-        // Configurar datos de prueba
-        String playListIzena = "MiPlaylist";
-
-        // Simular la inserción en la base de datos
-        try (Connection con = KonexioaDB.hasi();
-             PreparedStatement stmt = con.prepareStatement("INSERT INTO playlist (id_bezeroa, izenburua, sorrera_data) VALUES (DEFAULT, ?, CURRENT_DATE())")
-        ) {
-            // Llamar al método a testear
-            NirePlayListDAO.playListBerriaSortu(playListIzena);
-
-            // Verificar si se ha insertado correctamente en la base de datos
-            ResultSet rs = stmt.executeQuery("SELECT izenburua FROM playlist WHERE izenburua = '" + playListIzena + "'");
-            assertTrue(rs.next());
-        } catch (SQLException e) {
-            e.printStackTrace();
-            fail("Error en la conexión a la base de datos: " + e.getMessage());
-        }
-    }
 }

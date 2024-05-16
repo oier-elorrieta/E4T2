@@ -15,7 +15,7 @@ public class PodcastTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		p1 = new Podcast(1, "blink", new Time(3), null, "andoni", 5);
+		p1 = new Podcast(1, "dr.sueño", new Time(3), null, "andoni", 5);
 	}
 
 //----------------------------------------- Id_audio --------------------------------------
@@ -46,24 +46,24 @@ public class PodcastTest {
 
     @Test
     public void testGetIzena() {
-    	assertEquals("blink", p1.getIzena());
+    	assertEquals("dr.sueño", p1.getIzena());
     }
     
     @Test
     public void testGetIzenaTxarto() {
-    	assertNotEquals("blinkk", p1.getIzena());
+    	assertNotEquals("dr.sueñoo", p1.getIzena());
     }
 
     @Test
     public void testSetIzenburua() {
-    	p1.setIzena("neverita");
-        assertEquals("neverita", p1.getIzena());
+    	p1.setIzena("Juego de tronos me parece un p coñazo");
+        assertEquals("Juego de tronos me parece un p coñazo", p1.getIzena());
     }
     
     @Test
 	public void testSetIzenburuaTxarto() {
-    	p1.setIzena("neverita");
-		assertNotEquals("blink", p1.getIzena());
+    	p1.setIzena("Juego de tronos me parece un p coñazo");
+		assertNotEquals("dr.sueño", p1.getIzena());
 	}
     
   //----------------------------------------- Iraupena --------------------------------------
@@ -97,24 +97,24 @@ public class PodcastTest {
 
     @Test
     public void testGetKolaboratzaileak() {
-    	assertEquals("blink", p1.getIzena());
+    	assertEquals("andoni", p1.getKolaboratzaileak());
     }
     
     @Test
     public void testGetKolaboratzaileakTxarto() {
-    	assertNotEquals("andoni", p1.getIzena());
+    	assertNotEquals("andonii", p1.getKolaboratzaileak());
     }
 
     @Test
     public void testSetKolaboratzaileak() {
-    	p1.setIzena("alaitz");
-        assertEquals("alaitz", p1.getIzena());
+    	p1.setKolaboratzaileak("alaitz");
+        assertEquals("alaitz", p1.getKolaboratzaileak());
     }
     
     @Test
 	public void testSetKolaboratzaileakTxarto() {
-    	p1.setIzena("alaitz");
-		assertNotEquals("andoni", p1.getIzena());
+    	p1.setKolaboratzaileak("alaitz");
+		assertNotEquals("andoni", p1.getKolaboratzaileak());
 	}
     
     //----------------------------------------- Erreprodukzioak --------------------------------------
@@ -171,7 +171,7 @@ public class PodcastTest {
 
     @Test
     public void testEqualsClaseAtrBerdinak() {
-    Podcast p2 = new Podcast(1, "blink", new Time(3), null, "andoni", 5);
+    Podcast p2 = new Podcast(1, "dr.sueño", new Time(3), null, "andoni", 5);
     assertTrue(p1.equals(p2));
     }
 }

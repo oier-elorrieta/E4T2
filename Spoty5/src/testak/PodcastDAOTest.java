@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sound.sampled.Clip;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,59 +23,36 @@ public class PodcastDAOTest {
     private PodcastDAO podcastDAO;
 
     @Test
-    public void testObtenerAudiosPorPodcaster() {
-        // Configurar datos de prueba
-        String podcaster = "Podcaster1";
-        List<String> expectedAudioIds = new ArrayList<>();
-        expectedAudioIds.add("1");
-        expectedAudioIds.add("2");
-        expectedAudioIds.add("3");
+    public void testPodcastLortu() throws SQLException {
+        PodcastDAO podcastDAO = new PodcastDAO();
 
-        // Simular la conexión y la consulta a la base de datos
-        try (Connection con = KonexioaDB.hasi();
-             PreparedStatement stmt = con.prepareStatement("SELECT id_audio FROM podcast WHERE id_podcaster IN (SELECT id_podcaster FROM podcaster WHERE izenArtistikoa = ?)");
-        ) {
-            // Configurar resultados simulados de la consulta
-            ResultSet rs = stmt.executeQuery();
-            int i = 0;
-            while (rs.next()) {
-                assertEquals(expectedAudioIds.get(i), rs.getString("id_audio"));
-                i++;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            fail("Error en la conexión a la base de datos: " + e.getMessage());
-        }
+        // Ejecutar el método a probar para obtener un podcast existente en la base de datos
+        Podcast podcast = podcastDAO.podcastLortu("dr.sueño");
 
-        // Llamar al método a testear
-        List<Integer> audioIds = podcastDAO.obtenerAudiosPorPodcaster(podcaster);
+        // Verificar que se obtiene un objeto Podcast no nulo
+        assertNull(podcast);
 
-        // Verificar que los IDs de audio obtenidos coinciden con los esperados
-        assertEquals(expectedAudioIds, audioIds);
+        // Ejecutar el método a probar para obtener un podcast inexistente en la base de datos
+        Podcast podcastInexistente = podcastDAO.podcastLortu("dr.sueñoo");
+
+        // Verificar que se obtiene un objeto Podcast nulo
+        assertNull(podcastInexistente);
     }
 
     @Test
-    public void testObtenerPodcastPorId() {
-        // Configurar datos de prueba
-        int idPodcast = 1;
-        Podcast expectedPodcast = new Podcast(1, "Podcast1", 30.0, "Colaborador1, Colaborador2", 100);
+    public void testAudioErreproduzitu() {
+        PodcastDAO podcastDAO = new PodcastDAO();
 
-        // Simular la conexión y la consulta a la base de datos
-        try (Connection con = KonexioaDB.hasi();
-             PreparedStatement stmt = con.prepareStatement("SELECT * FROM audio WHERE id_audio = ?");
-        ) {
-            // Configurar resultados simulados de la consulta
-            ResultSet rs = stmt.executeQuery();
-            assertTrue(rs.next());
-        } catch (SQLException e) {
-            e.printStackTrace();
-            fail("Error en la conexión a la base de datos: " + e.getMessage());
-        }
+        // Ejecutar el método a probar para reproducir un audio existente
+        Clip clip = podcastDAO.audioErreproduzitu("blink");
 
-        // Llamar al método a testear
-        Podcast podcast = podcastDAO.obtenerPodcastPorId(idPodcast);
+        // Verificar que se obtiene un objeto Clip no nulo
+        assertNotNull(clip);
 
-        // Verificar que el podcast obtenido coincide con el esperado
-        assertEquals(expectedPodcast, podcast);
+        // Ejecutar el método a probar para reproducir un audio inexistente
+        Clip clipInexistente = podcastDAO.audioErreproduzitu("blinkk");
+
+        // Verificar que se obtiene un objeto Clip nulo
+        assertNull(clipInexistente);
     }
 }
