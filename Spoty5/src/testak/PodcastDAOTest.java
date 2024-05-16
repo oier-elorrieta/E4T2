@@ -26,16 +26,12 @@ public class PodcastDAOTest {
     public void testPodcastLortu() throws SQLException {
         PodcastDAO podcastDAO = new PodcastDAO();
 
-        // Ejecutar el método a probar para obtener un podcast existente en la base de datos
-        Podcast podcast = podcastDAO.podcastLortu("dr.sueño");
+        Podcast podcast = podcastDAO.podcastLortu("Dr.sueño");
 
-        // Verificar que se obtiene un objeto Podcast no nulo
-        assertNull(podcast);
+        assertNotNull(podcast);
 
-        // Ejecutar el método a probar para obtener un podcast inexistente en la base de datos
         Podcast podcastInexistente = podcastDAO.podcastLortu("dr.sueñoo");
 
-        // Verificar que se obtiene un objeto Podcast nulo
         assertNull(podcastInexistente);
     }
 
@@ -43,16 +39,12 @@ public class PodcastDAOTest {
     public void testAudioErreproduzitu() {
         PodcastDAO podcastDAO = new PodcastDAO();
 
-        // Ejecutar el método a probar para reproducir un audio existente
-        Clip clip = podcastDAO.audioErreproduzitu("blink");
+        Clip clip = podcastDAO.audioErreproduzitu("Blink");
 
-        // Verificar que se obtiene un objeto Clip no nulo
         assertNotNull(clip);
 
-        // Ejecutar el método a probar para reproducir un audio inexistente
         Clip clipInexistente = podcastDAO.audioErreproduzitu("blinkk");
 
-        // Verificar que se obtiene un objeto Clip nulo
         assertNull(clipInexistente);
     }
 }

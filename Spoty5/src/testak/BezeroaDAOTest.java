@@ -23,39 +23,26 @@ public class BezeroaDAOTest {
     public void testBaieztatuBezeroa() throws SQLException {
         BezeroaDAO bezeroaDAO = new BezeroaDAO();
 
-        // Ejecutar el método a probar con credenciales válidas
-        int resultValid = bezeroaDAO.baieztatuBezeroa("usuarioValido", "contraseñaValida");
+        int resultValid = bezeroaDAO.baieztatuBezeroa("icas", "haia");
+        assertTrue(resultValid == BezeroaDAO.PREMIUM_USER || resultValid == BezeroaDAO.FREE_USER);
 
-        // Verificar que se devuelve el tipo de usuario correcto (PREMIUM_USER o FREE_USER)
-        assertFalse(resultValid == BezeroaDAO.PREMIUM_USER || resultValid == BezeroaDAO.FREE_USER);
+        int resultInvalidPass = bezeroaDAO.baieztatuBezeroa("icas", "12");
+        assertEquals(BezeroaDAO.INVALID, resultInvalidPass);
 
-        // Ejecutar el método a probar con credenciales inválidas
-        int resultInvalid = bezeroaDAO.baieztatuBezeroa("usuarioInvalido", "contraseñaInvalida");
-
-        // Verificar que se devuelve el tipo de usuario INVALID
-        assertEquals(BezeroaDAO.INVALID, resultInvalid);
-
-        // Ejecutar el método a probar con error de base de datos
-        int resultError = bezeroaDAO.baieztatuBezeroa("usuarioError", "contraseñaError");
-
-        // Verificar que se devuelve el tipo de usuario DATABASE_ERROR
-        assertEquals(BezeroaDAO.INVALID, resultError);
+        int resultInvalidUser = bezeroaDAO.baieztatuBezeroa("icasa", "1234");
+        assertEquals(BezeroaDAO.INVALID, resultInvalidUser);
     }
 
     @Test
     public void testPremium() throws SQLException {
         BezeroaDAO bezeroaDAO = new BezeroaDAO();
 
-        // Ejecutar el método a probar con un usuario premium
-        boolean resultPremium = bezeroaDAO.Premium("usuarioPremium");
+        boolean resultPremium = bezeroaDAO.Premium("icas");
 
-        // Verificar que se devuelve true
-        assertFalse(resultPremium);
+        assertTrue(resultPremium);
 
-        // Ejecutar el método a probar con un usuario no premium
-        boolean resultNotPremium = bezeroaDAO.Premium("usuarioNoPremium");
+        boolean resultNotPremium = bezeroaDAO.Premium("hvazquez");
 
-        // Verificar que se devuelve false
         assertFalse(resultNotPremium);
     }
 }

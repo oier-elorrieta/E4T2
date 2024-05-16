@@ -24,10 +24,8 @@ public class PodcasterListaDAOTest {
     public void testPodcasterListKargatu() throws SQLException {
         PodcasterListaDAO podcasterListaDAO = new PodcasterListaDAO();
 
-        // Ejecutar el método a probar para obtener la lista de podcasters
         List<Artista> podcasterList = podcasterListaDAO.podcasterListKargatu();
 
-        // Verificar que se obtiene una lista no vacía
         assertFalse(podcasterList.isEmpty());
     }
 
@@ -35,16 +33,12 @@ public class PodcasterListaDAOTest {
     public void testPodcasterLortu() throws SQLException {
         PodcasterListaDAO podcasterListaDAO = new PodcasterListaDAO();
 
-        // Ejecutar el método a probar para obtener un podcaster existente en la base de datos
         Podcaster podcaster = podcasterListaDAO.podcasterLortu("dr.sueño");
 
-        // Verificar que se obtiene un objeto Podcaster no nulo
         assertNull(podcaster);
 
-        // Ejecutar el método a probar para obtener un podcaster inexistente en la base de datos
         Podcaster podcasterInexistente = podcasterListaDAO.podcasterLortu("dr.sueñoo");
 
-        // Verificar que se obtiene un objeto Podcaster nulo
         assertNull(podcasterInexistente);
     }
 }

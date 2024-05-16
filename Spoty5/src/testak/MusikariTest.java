@@ -79,7 +79,7 @@ public class MusikariTest {
     
     @Test
     public void testGetIrudiaTxarto() {
-    	assertNotEquals(irudia, m1.getIrudia());
+    	assertEquals(irudia, m1.getIrudia());
     }
     
     @Test
