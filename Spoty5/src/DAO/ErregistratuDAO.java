@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+import Bezeroak.Bezeroa;
 import master.KonexioaDB;
 
 /**
@@ -28,7 +28,7 @@ public class ErregistratuDAO {
      * @param mota Erabiltzailearen datu mota (FREE, PREMIUM).
      * @return Erabiltzaile izena, erregistroa egiten den bitartean.
      */
-    public String erregistroaEgin(String izena, String abizena, String id_hizkuntza, String erabiltzailea,
+    public Bezeroa erregistroaEgin(String izena, String abizena, String id_hizkuntza, String erabiltzailea,
             String pasahitza, String jaiotze_data, String erregistro_data, String mota) {
         String erabiltzaileIzena = null;
         Connection con = KonexioaDB.hasi();
@@ -69,7 +69,8 @@ public class ErregistratuDAO {
                 e.printStackTrace();
             }
         }
-        return erabiltzaileIzena;
+        Bezeroa bezero = BezeroaDAO.bezeroaLortu(erabiltzailea,pasahitza);
+        return bezero;
     }
 
     /**
