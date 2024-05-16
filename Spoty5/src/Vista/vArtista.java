@@ -107,7 +107,7 @@ public class vArtista extends JFrame {
 
         btnIkusiAlbuma.addActionListener(new ActionListener() {
     	    public void actionPerformed(ActionEvent e) {
-    	        AlbumaIkusi();
+    	        albumaIkusi();
     	    }
     	});
 
@@ -135,7 +135,7 @@ public class vArtista extends JFrame {
 
     }
     
-    private void AlbumaIkusi() { //Aukeratutako musikaria autatu
+    private void albumaIkusi() { //Aukeratutako musikaria autatu
  	   
         String albumAukeratua = comboBoxAlbumak.getSelectedItem().toString();
         AlbumDAO albumDAO = new AlbumDAO();

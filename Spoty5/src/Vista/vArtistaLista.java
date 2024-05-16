@@ -76,7 +76,7 @@ public class vArtistaLista extends JFrame {
 		comboBoxArtistak = new JComboBox<String>();
 		comboBoxArtistak.setBounds(92, 90, 249, 23);
 		contentPane.add(comboBoxArtistak);
-		ArtistaListaKargatu();
+		artistaListaKargatu();
 
 		JButton btnVerArtista = new JButton("Ikusi Artista");
 		btnVerArtista.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -84,7 +84,7 @@ public class vArtistaLista extends JFrame {
 		contentPane.add(btnVerArtista);
 		btnVerArtista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ArtistakIkusi();
+				artistaIkusi();
 			}
 		});
 
@@ -119,7 +119,7 @@ public class vArtistaLista extends JFrame {
 	/**
 	 * Artisten zerrenda kargatzeko eta ComboBox-en erakusteko metodoa.
 	 */
-	private void ArtistaListaKargatu() {
+	private void artistaListaKargatu() {
 		try {
 			MusikariListaDAO musikariListaDAO = new MusikariListaDAO();
 
@@ -138,7 +138,7 @@ public class vArtistaLista extends JFrame {
 	 * 
 	 * @param erabiltzaileIzena Erabiltzailearen izena
 	 */
-	private void ArtistakIkusi() { // Aukeratutako musikaria autatu
+	private void artistaIkusi() { // Aukeratutako musikaria autatu
 
 		String artistaAukeratua = comboBoxArtistak.getSelectedItem().toString();
 		MusikariListaDAO musikariListaDAO = new MusikariListaDAO();

@@ -22,10 +22,6 @@ public class vMenua extends JFrame {
 	private JPanel contentPane;
 	private Bezeroa bezeroa;
 
-	/**
-	 * Aplikazioa abiarazi.
-	 * @param args Komando lerroko agumentuak.
-	 */
 	
 
 	/**
@@ -105,7 +101,7 @@ public class vMenua extends JFrame {
 		
 		btnPlayList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				vNirePlayList vNirePlayListPanel = new vNirePlayList(erabiltzaileIzena);
+				vNirePlayList vNirePlayListPanel = new vNirePlayList(bezeroa);
 				vNirePlayListPanel.setVisible(true);
 				dispose();
 			}

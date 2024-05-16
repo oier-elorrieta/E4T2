@@ -5,6 +5,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Bezeroak.Bezeroa;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -17,6 +20,7 @@ public class vPlayList extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JButton btnAtzera;
+	private Bezeroa bezeroa;
 
 	/**
 	 * Aplikazioa abiarazi.
@@ -43,6 +47,7 @@ public class vPlayList extends JFrame {
 	 * @param playListIzena PlayList-aren izena.
 	 */
 	public vPlayList(String erabiltzaileIzena, String playListIzena) {
+		this.bezeroa = bezeroa;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -57,7 +62,7 @@ public class vPlayList extends JFrame {
 		
 		btnAtzera.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				vNirePlayList vNirePlayListFrame = new vNirePlayList(playListIzena);
+				vNirePlayList vNirePlayListFrame = new vNirePlayList(bezeroa);
 				vNirePlayListFrame.setVisible(true);
 				dispose();
 			}

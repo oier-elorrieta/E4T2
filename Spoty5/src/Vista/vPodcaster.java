@@ -161,6 +161,7 @@ public class vPodcaster extends JFrame {
 	 * Erabiltzaileak hautatutako artistaren irudia erakusteko metodoa.
 	 *
 	 * @param lblArtistaImg JLabel elementua non artistaren irudia erakusteko
+	 * @param irudiaBlob artistaren irudia
 	 */
 
 	private void podcasterArgazkia(Blob irudiaBlob, JLabel lblPodcasterImg) {

@@ -179,6 +179,12 @@ public class vErreprodukzio extends JFrame {
 		
 
 	}
+	
+	/**
+	 * Albumaren informazioa.
+	 *
+	 * @param textAreaAlbumInf Albumaren informazioa erakutsiko den JTextArea
+	 */
 
 	private void kargatuAlbumInformazioa(JTextArea textAreaAlbumInf, Abestia abestia) {
 		ErreproduzioaDAO erreproduzioaDAO = new ErreproduzioaDAO();
@@ -187,6 +193,12 @@ public class vErreprodukzio extends JFrame {
 		textAreaAlbumInf.setText("Abestiaren iraupena  " + iraupena.toString());
 
 	}
+	
+	/**
+	 * Albumaren irudia.
+	 *
+	 * @param lblArtistaImg Albumaren irudia erakutsiko den JLabel
+	 */
 
 	private void abestiArgazkia(Blob irudiaBlob, JLabel lblArtistaImg) {
 		try {
@@ -203,6 +215,12 @@ public class vErreprodukzio extends JFrame {
 			ex.printStackTrace();
 		}
 	}
+	/**
+	 * Albumaren abestia entzutea.
+	 *
+	 * @param lblKontadorea abestiaren denbora ikusteko kontadorea  JLabelean
+	 * @param abestiIzena abestiaren izena 
+	 */
 
 	public Clip audioErreproduzitu(String abestiIzena, JLabel lblKontadorea) {
 		try {
@@ -277,7 +295,7 @@ public class vErreprodukzio extends JFrame {
 		if (bezeroa instanceof Free) {
 	        abestikontagailua++;
 
-	        // Muestra anuncios solo si se ha reproducido un cierto número de canciones
+	        
 	        if (abestikontagailua >= ABESTI_KONT_IRAGARKI) {
 	            iragarkiaIkusi();
 	            abestikontagailua = 0;
@@ -332,10 +350,10 @@ public class vErreprodukzio extends JFrame {
 	}
 	
 	private void erreproduzituGordekoAbestia() {
-	    // Obtener la canción guardada
+	    
 	    Abestia gordetakoAbestia = abestiak.get(indexAbestia);
 	    
-	    // Reproducir la canción guardada
+	    
 	    clip = audioErreproduzitu(gordetakoAbestia.getIzena(), lblKontadorea);
 	    lblKantaIzena.setText(gordetakoAbestia.getIzena());
 	    kargatuAlbumInformazioa(textAreaAbestiInf, gordetakoAbestia);

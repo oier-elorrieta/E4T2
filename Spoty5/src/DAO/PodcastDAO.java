@@ -110,11 +110,10 @@ public class PodcastDAO {
 
 		        clip.open(audioInputStream);
 
-		        final int[] segundosTranscurridos = {0};
+		        final int[] pasatuDirenSegunduak = {0};
 
 		        Timer timer = new Timer(1000, e -> {
-		        	 segundosTranscurridos[0]++;
-		            System.out.println("Tiempo transcurrido: " + segundosTranscurridos[0] + " segundos");
+		        	 pasatuDirenSegunduak[0]++;
 		        });
 		        timer.start();
 

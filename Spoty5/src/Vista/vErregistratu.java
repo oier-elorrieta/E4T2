@@ -230,6 +230,9 @@ public class vErregistratu extends JFrame {
         }
     }
     
+    /**
+     * Erabiltzailearen informazioa ateratzea
+     */
     public void setUserInfo(Bezeroa bezero) {
         lblizena.setText(bezero.getIzena());
         lblabizena.setText(bezero.getAbizena());
