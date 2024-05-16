@@ -58,6 +58,7 @@ public class vErreprodukzio extends JFrame {
 	private static final int ABESTI_KONT_IRAGARKI = 2;
 	private vIragarkia vIragarkia;
 	private Bezeroa bezeroa;
+	private int indexAbestia;
 
 	public vErreprodukzio(String erabiltzaileIzena, Abestia abestia, Album album, Musikari musikari, Bezeroa bezeroa) {
 		this.abestia = abestia;
@@ -156,6 +157,8 @@ public class vErreprodukzio extends JFrame {
 		lblKontadorea.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		lblKontadorea.setBounds(483, 275, 92, 13);
 		contentPane.add(lblKontadorea);
+		
+		
 
 	}
 
@@ -253,11 +256,14 @@ public class vErreprodukzio extends JFrame {
 		lblKantaIzena.setText(abestia.getIzena());
 		kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
 
-		abestikontagailua++;
+		if (bezeroa instanceof Free) {
+	        abestikontagailua++;
 
-		if (abestikontagailua >= ABESTI_KONT_IRAGARKI) {
-			iragarkiaIkusi();
-			abestikontagailua = 0;
+	        // Muestra anuncios solo si se ha reproducido un cierto número de canciones
+	        if (abestikontagailua >= ABESTI_KONT_IRAGARKI) {
+	            iragarkiaIkusi();
+	            abestikontagailua = 0;
+	        }
 		}
 	}
 
@@ -279,20 +285,25 @@ public class vErreprodukzio extends JFrame {
 	}
 
 	private void iragarkiaIkusi() {
-	    stopMusic();
+	    // Gorde idizea abestiarena
+		indexAbestia = currentIndex;
+	    
+	    stopMusic(); 
 	    vIragarkia.setVisible(true);
 	    try {
+	        //Iragarkia ateratzea
 	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("../media/HotWheels.wav"));
-
 	        clip = AudioSystem.getClip();
-
 	        clip.open(audioInputStream);
-	        reproducir(); 
-	     
+	        clip.start(); 
+	        
+	        // Iragarkiaren denbora
 	        Timer closeTimer = new Timer(20000, new ActionListener() {
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	                vIragarkia.dispose(); 
+	                // Jarraitu erreproduzioa gordetako abestitik
+	                erreproduzituGordekoAbestia();
 	            }
 	        });
 	        closeTimer.setRepeats(false); 
@@ -301,12 +312,15 @@ public class vErreprodukzio extends JFrame {
 	        e.printStackTrace();
 	    }
 	}
-
-	public void reproducir() {
-		if (clip != null) {
-
-			clip.start();
-		}
+	
+	private void erreproduzituGordekoAbestia() {
+	    // Obtener la canción guardada
+	    Abestia gordetakoAbestia = abestiak.get(indexAbestia);
+	    
+	    // Reproducir la canción guardada
+	    clip = audioErreproduzitu(gordetakoAbestia.getIzena(), lblKontadorea);
+	    lblKantaIzena.setText(gordetakoAbestia.getIzena());
+	    kargatuAlbumInformazioa(textAreaAbestiInf, gordetakoAbestia);
 	}
 
 	public void stopMusic() {
