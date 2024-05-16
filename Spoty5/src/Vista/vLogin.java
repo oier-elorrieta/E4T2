@@ -110,24 +110,11 @@ public class vLogin extends JFrame {
 
                 if (erabiltzaile != null) {
                     JOptionPane.showMessageDialog(vLogin.this, "Barruan zaude");
-<<<<<<< HEAD
                     if (erabiltzaile instanceof Premium) {
                         Main.bezero = (Premium) erabiltzaile;
                     } else if (erabiltzaile instanceof Free) {
                         Main.bezero = (Free) erabiltzaile;
                     }
-                    vMenua vMenuaPanel = new vMenua(erabiltzailea);
-=======
-
-
-//                    vMenua vMenuaPanel = new vMenua(usuario.getIzena());
-//                    vMenuaPanel.setVisible(true);
-//                    dispose();
-                    Main.bezero = new Free(erabiltzailea, pasahitza);
-                    vMenua vMenuaPanel = new vMenua(erabiltzaileIzena);
->>>>>>> d9912a334969fcbf6b7fa8e444e0910ec9ea563b
-                    vMenuaPanel.setVisible(true);
-                    dispose();
                 } else {
                     JOptionPane.showMessageDialog(vLogin.this, "Erabiltzailea edo pasahitza txarto dago");
                 }
