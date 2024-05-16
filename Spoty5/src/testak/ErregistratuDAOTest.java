@@ -12,6 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import Bezeroak.Bezeroa;
 import DAO.ErregistratuDAO;
 import master.KonexioaDB;
 
@@ -35,10 +36,10 @@ public class ErregistratuDAOTest {
         String erregistro_data = "2023-01-01";
         String mota = "EU";
 
-        String result = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza,
+        Bezeroa result = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza,
                 jaiotze_data, erregistro_data, mota);
 
-        assertNull(result);
+        assertNotNull(result);
         assertNotEquals(erabiltzailea, result);
     }
 
