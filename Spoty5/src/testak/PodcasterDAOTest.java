@@ -1,34 +1,48 @@
 package testak;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.swing.ImageIcon;
 
+import org.junit.Test;
+
+import Artistak.Podcaster;
+import Audioak.Podcast;
 import DAO.PodcasterDAO;
 
 public class PodcasterDAOTest {
+	
+	private Blob irudia;
 
-    public static void main(String[] args) {
-        // Test-ea egiteko PodcasterDAO instantzia sortu
-        PodcasterDAO podcasterDAO = new PodcasterDAO();
+	 @Test
+	   public void testPodcastLortuPodcasterretik() throws SQLException {
+	        PodcasterDAO podcasterDAO = new PodcasterDAO();
 
-        // Test-ea PodcastPodcastertatikLortu metodoarekin egingo da
-        System.out.println("Podcastak lortzen Podcaster baten izen artistikoaren arabera:");
-        String[] podcasts = podcasterDAO.PodcastPodcastertatikLortu("Podcaster Izena");
-        for (String podcast : podcasts) {
-            System.out.println("- " + podcast);
-        }
+	        Podcaster podcaster = new Podcaster(1, "La Script", irudia, "ama-alaben istorio bat, denboraren joanaren eta heriotzaren beldurrari buruzko gogoeta gogor eta lotsagabea");
+	        podcaster.setIzena("dr.sueño");
 
-        // Test-ea PodcasterInformazioaLortu metodoarekin egingo da
-        System.out.println("\nPodcasterren informazioa lortzen:");
-        String informacionPodcaster = podcasterDAO.PodcasterInformazioaLortu("Podcaster Izena");
-        System.out.println(informacionPodcaster);
+	        List<Podcast> podcastak = podcasterDAO.podcastLortuPodcasterretik(podcaster);
 
-        // Test-ea PodcasterIrudiaLortu metodoarekin egingo da
-        System.out.println("\nPodcasterren irudia lortzen:");
-        ImageIcon imagenPodcaster = podcasterDAO.PodcasterIrudiaLortu("Podcaster Izena");
-        if (imagenPodcaster != null) {
-            System.out.println("Irudia lortu da.");
-        } else {
-            System.out.println("Irudia ez da lortu.");
-        }
-    }
+	        assertFalse(podcastak.isEmpty());
+	    }
+
+	    @Test
+	    public void testPodcastLortu() throws SQLException {
+	        PodcasterDAO podcasterDAO = new PodcasterDAO();
+
+	        Podcast podcast = podcasterDAO.podcastLortu("dr.sueño");
+
+	        assertNull(podcast);
+
+	        Podcast podcastInexistente = podcasterDAO.podcastLortu("dr.sueñoo");
+
+	        assertNull(podcastInexistente);
+	    }
 }

@@ -24,8 +24,32 @@ public class PremiumTest {
     	eguna = new Date(2024, 11, 17);
     	iraungitzeD = new Date(2024, 11,17);
         
-        p1 = new Premium("hegoi", "vazquez", eguna, "vhegoi", "12345", Hizkuntza.EN, new ArrayList<>(), iraungitzeD); 
+        p1 = new Premium(1, "hegoi", "vazquez", eguna, "vhegoi", "12345", Hizkuntza.EN, new ArrayList<>(), iraungitzeD); 
     }
+    
+ //----------------------------------------- Id --------------------------------------
+
+  	@Test
+  	public void testGetId() {
+  		assertEquals(1, p1.getId_bezeroa());
+  	}
+  	
+  	@Test
+  	public void testGetIdTxarto() {
+  		assertNotEquals(2, p1.getId_bezeroa());
+  	}
+  	 
+  	@Test
+  	public void testSetId() {
+  		p1.setId_bezeroa(3);
+  		assertEquals(3, p1.getId_bezeroa());
+  	}
+  	
+  	@Test
+  	public void testSetIdTxarto() {
+  		p1.setId_bezeroa(3);
+  		assertNotEquals(1, p1.getId_bezeroa());
+  	}
 
 //----------------------------------------- Izena --------------------------------------
     
@@ -240,7 +264,7 @@ public class PremiumTest {
 
     @Test
     public void testEqualsClaseAtrBerdinak() {
-    Premium p2 = new Premium("hegoi", "vazquez", eguna, "vhegoi", "12345", Hizkuntza.EN, new ArrayList<>(), iraungitzeD);
+    Premium p2 = new Premium(1, "hegoi", "vazquez", eguna, "vhegoi", "12345", Hizkuntza.EN, new ArrayList<>(), iraungitzeD);
     assertTrue(p1.equals(p2));
     }
 }

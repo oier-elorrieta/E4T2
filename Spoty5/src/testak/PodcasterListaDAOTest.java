@@ -6,10 +6,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import Artistak.Artista;
+import Artistak.Podcaster;
 import DAO.PodcasterListaDAO;
 import master.KonexioaDB;
 
@@ -17,37 +20,25 @@ public class PodcasterListaDAOTest {
 
     private PodcasterListaDAO podcasterListaDAO;
 
-    @Before
-    public void setUp() {
-        podcasterListaDAO = new PodcasterListaDAO();
+    @Test
+    public void testPodcasterListKargatu() throws SQLException {
+        PodcasterListaDAO podcasterListaDAO = new PodcasterListaDAO();
+
+        List<Artista> podcasterList = podcasterListaDAO.podcasterListKargatu();
+
+        assertFalse(podcasterList.isEmpty());
     }
 
     @Test
-    public void testPodcasterListaLortu() {
-        // Simulación de la base de datos
-        String[] podcastersEsperatuak = {"Podcaster1", "Podcaster2", "Podcaster3"};
+    public void testPodcasterLortu() throws SQLException {
+        PodcasterListaDAO podcasterListaDAO = new PodcasterListaDAO();
 
-        // Preparar resultados simulados de la base de datos
-        try (Connection con = KonexioaDB.hasi();
-             PreparedStatement stmt = con.prepareStatement("SELECT izenArtistikoa FROM podcaster");
-             ResultSet rs = stmt.executeQuery()) {
+        Podcaster podcaster = podcasterListaDAO.podcasterLortu("dr.sueño");
 
-            // Configurar resultados simulados
-            int i = 0;
-            while (rs.next()) {
-                assertEquals(podcastersEsperatuak[i], rs.getString("izenArtistikoa"));
-                i++;
-            }
-        } catch (SQLException e) {
-            fail("Errorea datu basearekin konexioa egitean: " + e.getMessage());
-        }
+        assertNull(podcaster);
 
-        // Ejecutar el método de obtener lista de podcasters
-        String podcastersLortutako = podcasterListaDAO.PodcasterListaLortu();
+        Podcaster podcasterInexistente = podcasterListaDAO.podcasterLortu("dr.sueñoo");
 
-        // Verificar si los podcasters obtenidos coinciden con los esperados
-        for (String podcaster : podcastersEsperatuak) {
-            assertTrue(podcastersLortutako.contains(podcaster));
-        }
+        assertNull(podcasterInexistente);
     }
 }

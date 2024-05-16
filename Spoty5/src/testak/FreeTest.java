@@ -18,7 +18,31 @@ public class FreeTest {
 	@Before
 	public void setUp() throws Exception {
 		eguna = new Date(2024, 11, 17);
-		f1 = new Free("hegoi", "vazquez", eguna, "vhegoi", "12345", Hizkuntza.EU, new ArrayList<>());
+		f1 = new Free(1, "hegoi", "vazquez", eguna, "vhegoi", "12345", Hizkuntza.EU, new ArrayList<>());
+	}
+	
+//----------------------------------------- Id --------------------------------------
+
+	@Test
+	public void testGetId() {
+		assertEquals(1, f1.getId_bezeroa());
+	}
+	
+	@Test
+	public void testGetIdTxarto() {
+		assertNotEquals(2, f1.getId_bezeroa());
+	}
+	 
+	@Test
+	public void testSetId() {
+		f1.setId_bezeroa(3);
+		assertEquals(3, f1.getId_bezeroa());
+	}
+	
+	@Test
+	public void testSetIdTxarto() {
+		f1.setId_bezeroa(3);
+		assertNotEquals(1, f1.getId_bezeroa());
 	}
 	
 //----------------------------------------- Izena --------------------------------------
@@ -234,7 +258,7 @@ public class FreeTest {
 
     @Test
     public void testEqualsClaseAtrBerdinak() {
-    Free f2 = new Free("hegoi", "vazquez", eguna, "vhegoi", "12345", Hizkuntza.EU, new ArrayList());
+    Free f2 = new Free(1, "hegoi", "vazquez", eguna, "vhegoi", "12345", Hizkuntza.EU, new ArrayList());
     assertTrue(f1.equals(f2));
     }
 
