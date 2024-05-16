@@ -2,6 +2,9 @@ package Vista;
 
 import java.awt.EventQueue;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -10,12 +13,14 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.ImageIcon;
 
 public class vIragarkia extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private Timer timer;
+	private Clip clip;
 
 	/**
 	 * Launch the application.
@@ -38,7 +43,7 @@ public class vIragarkia extends JFrame {
 	 */
 	public vIragarkia() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 382);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -46,21 +51,16 @@ public class vIragarkia extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblIragarkiImg = new JLabel("");
-		lblIragarkiImg.setBounds(117, 32, 175, 141);
+		lblIragarkiImg.setIcon(new ImageIcon("C:\\Users\\in1dm3-d\\Desktop\\E4T2\\Spoty5\\src\\imgIragarkia\\hotwheels.jpg"));
+		lblIragarkiImg.setBounds(24, 20, 386, 273);
 		contentPane.add(lblIragarkiImg);
 		
 		JLabel lblIragarkia = new JLabel("IRAGARKIA!");
 		lblIragarkia.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblIragarkia.setBounds(156, 184, 125, 28);
-		contentPane.add(lblIragarkia);
-		
-		timer = new Timer(10000, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                dispose(); 
-                timer.stop(); 
-            }
-        });
-        timer.start(); 
+		lblIragarkia.setBounds(159, 304, 125, 28);
+		contentPane.add(lblIragarkia); 
+        
+        
 	}
 
 }

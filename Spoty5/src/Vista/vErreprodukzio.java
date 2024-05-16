@@ -55,15 +55,15 @@ public class vErreprodukzio extends JFrame {
 	private JTextArea textAreaAbestiInf;
 	private Musikari musikari;
 	private int abestikontagailua;
-    private static final int ABESTI_KONT_IRAGARKI = 2; 
-    private vIragarkia vIragarkia;
-    private Bezeroa bezeroa;
+	private static final int ABESTI_KONT_IRAGARKI = 2;
+	private vIragarkia vIragarkia;
+	private Bezeroa bezeroa;
 
 	public vErreprodukzio(String erabiltzaileIzena, Abestia abestia, Album album, Musikari musikari, Bezeroa bezeroa) {
 		this.abestia = abestia;
 		this.album = album;
 		this.musikari = musikari;
-		this.bezeroa = bezeroa; 
+		this.bezeroa = bezeroa;
 		abestikontagailua = 0;
 		erreprodukzioDAO = new ErreproduzioaDAO(album);
 		abestiak = AlbumDAO.abestiakLortuAlbumetik(album);
@@ -119,6 +119,7 @@ public class vErreprodukzio extends JFrame {
 		contentPane.add(btnHasiAbestia);
 		btnHasiAbestia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				stopMusic();
 				audioErreproduzitu(abestia.getIzena(), lblKontadorea);
 			}
 		});
@@ -237,31 +238,27 @@ public class vErreprodukzio extends JFrame {
 	}
 
 	public void urrengoAbestia() {
-	    if (abestiak.isEmpty()) {
-	        return;
-	    }
+		if (abestiak.isEmpty()) {
+			return;
+		}
 
-	    if (clip != null && clip.isRunning()) {
-	        clip.stop();
-	    }
+		if (clip != null && clip.isRunning()) {
+			clip.stop();
+		}
 
-	    currentIndex = (currentIndex + 1) % abestiak.size();
-	    Abestia abestia = abestiak.get(currentIndex);
-	    clip = audioErreproduzitu(abestia.getIzena(), lblKontadorea);
+		currentIndex = (currentIndex + 1) % abestiak.size();
+		Abestia abestia = abestiak.get(currentIndex);
+		clip = audioErreproduzitu(abestia.getIzena(), lblKontadorea);
 
-	    lblKantaIzena.setText(abestia.getIzena());
-	    kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
+		lblKantaIzena.setText(abestia.getIzena());
+		kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
 
-	    
-	    abestikontagailua++;
+		abestikontagailua++;
 
-	  
-	    if (bezeroa instanceof Free && abestikontagailua == ABESTI_KONT_IRAGARKI) {
-	        
-	    	iragarkiaIkusi();
-	      
-	        abestikontagailua = 0;
-	    }
+		if (abestikontagailua >= ABESTI_KONT_IRAGARKI) {
+			iragarkiaIkusi();
+			abestikontagailua = 0;
+		}
 	}
 
 	public void pasadenAbestia() {
@@ -280,8 +277,45 @@ public class vErreprodukzio extends JFrame {
 		lblKantaIzena.setText(abestia.getIzena());
 		kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
 	}
-	
+
 	private void iragarkiaIkusi() {
-		vIragarkia.setVisible(true); 
-    }
+	    stopMusic();
+	    vIragarkia.setVisible(true);
+	    try {
+	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("../media/HotWheels.wav"));
+
+	        clip = AudioSystem.getClip();
+
+	        clip.open(audioInputStream);
+	        reproducir(); 
+	     
+	        Timer closeTimer = new Timer(20000, new ActionListener() {
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                vIragarkia.dispose(); 
+	            }
+	        });
+	        closeTimer.setRepeats(false); 
+	        closeTimer.start(); 
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
+
+	public void reproducir() {
+		if (clip != null) {
+
+			clip.start();
+		}
+	}
+
+	public void stopMusic() {
+		if (clip != null && clip.isRunning()) {
+			clip.stop();
+			clip.close();
+			if (timer != null) {
+				timer.stop();
+			}
+		}
+	}
 }
