@@ -1,14 +1,9 @@
-package Vista;
+package Bezeroak;
 
-
-import Bezeroak.Bezeroa;
-import Bezeroak.Free;
-import Bezeroak.Premium;
 import DAO.BezeroaDAO;
 
 public class SaioAldagaiak {
 
-	
 	    private static SaioAldagaiak instance;
 	    private BezeroaDAO bezeroaDAO;
 
@@ -28,9 +23,6 @@ public class SaioAldagaiak {
 	        Bezeroa bezeroa = bezeroaDAO.bezeroaLortu(erabiltzailea, pasahitza);
 	        
 	        return bezeroa;
-	    }
-
-	    
-	    
+	    }    
 	    
 }

@@ -2,17 +2,12 @@ package DAO;
 
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
-import javax.swing.ImageIcon;
 import javax.swing.Timer;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
-import Artistak.Podcaster;
-import Audioak.Abestia;
-import Audioak.Album;
-import Audioak.Podcast;
-
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Blob;
@@ -21,15 +16,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
+import Artistak.Podcaster;
+import Audioak.Podcast;
 import master.KonexioaDB;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class PodcastDAO {
 	 	private List<Podcast> podcastak;
@@ -37,7 +28,7 @@ public class PodcastDAO {
 	    private Clip clip;
 
 	    public PodcastDAO() {
-	       
+	    	
 	    }
 	    
 	    public PodcastDAO(Podcaster podcaster) {
@@ -63,7 +54,6 @@ public class PodcastDAO {
 			        stmt = con.prepareStatement(sql);
 			        stmt.setString(1, izenPodcast);
 			        rs = stmt.executeQuery();
-
 			        
 			        while (rs.next()) {
 			        	 int id_audio = rs.getInt("id_audio");
@@ -88,14 +78,13 @@ public class PodcastDAO {
 
 			    return podcast;
 			}
-	    
-	    
+	   
 	    public Clip audioErreproduzitu(String abestiIzena) {
 		    try {
 		        URL urlArchivo = getClass().getClassLoader().getResource("media/" + abestiIzena + ".wav");
 
 		        if (urlArchivo == null) {
-		            System.out.println("No se pudo encontrar el archivo de audio: " + abestiIzena);
+		            System.out.println("Ezin izan da audio-fitxategia aurkitu: " + abestiIzena);
 		            return null;
 		        }
 
@@ -114,7 +103,7 @@ public class PodcastDAO {
 
 		        Timer timer = new Timer(1000, e -> {
 		        	 segundosTranscurridos[0]++;
-		            System.out.println("Tiempo transcurrido: " + segundosTranscurridos[0] + " segundos");
+		            System.out.println("Denbora pasata: " + segundosTranscurridos[0] + " segunduak");
 		        });
 		        timer.start();
 

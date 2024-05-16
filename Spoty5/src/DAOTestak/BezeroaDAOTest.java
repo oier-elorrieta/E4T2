@@ -1,4 +1,4 @@
-package testak;
+package DAOTestak;
 
 import static org.junit.Assert.*;
 

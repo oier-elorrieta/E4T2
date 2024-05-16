@@ -1,8 +1,5 @@
 package DAO;
 
-import java.awt.Image;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,9 +10,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 import Audioak.Abestia;
 import Audioak.Album;
+
 import master.KonexioaDB;
 
 public class AlbumDAO {
@@ -42,7 +39,6 @@ public class AlbumDAO {
 	        stmt.setInt(1, album.getId_album());
 	        rs = stmt.executeQuery();
 
-	        
 	        while (rs.next()) {
 	            int id_audio = rs.getInt("id_audio");
 	            String izena = rs.getString("izena");
@@ -65,7 +61,6 @@ public class AlbumDAO {
 	        }
 	    }
 
-	    
 	    return abestiak;
 	}
 	
@@ -112,10 +107,7 @@ public class AlbumDAO {
 	        }
 	    }
 
-	    
 	    return albuma;
 	}
     
-    
-
  }

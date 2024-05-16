@@ -4,19 +4,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
 
 import Artistak.Musikari;
 import Audioak.Abestia;
 import Audioak.Album;
 import DAO.AlbumDAO;
-import DAO.ArtistaDAO;
 import DAO.ErreproduzioaDAO;
-import DAO.MusikariListaDAO;
 import master.Main;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,7 +23,6 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
-import javax.swing.JComboBox;
 
 /**
  * {@code vAlbum} klaseak JFrame-aren birtuala da eta musika albumen informazioa

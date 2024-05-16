@@ -1,4 +1,5 @@
 package Vista;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -11,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 public class vEstadistikaMenua extends JFrame {
+	
 	protected static final String erabiltzaileIzena = null;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -61,6 +63,7 @@ public class vEstadistikaMenua extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
 		btnTopGAbestiak.setBounds(116, 82, 201, 23);
 		contentPane.add(btnTopGAbestiak);
 		
@@ -69,6 +72,7 @@ public class vEstadistikaMenua extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
 		btnTopGPodcast.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnTopGPodcast.setBounds(116, 116, 201, 23);
 		contentPane.add(btnTopGPodcast);
@@ -78,6 +82,7 @@ public class vEstadistikaMenua extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
 		btnTopEntzundakoak.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnTopEntzundakoak.setBounds(116, 150, 201, 23);
 		contentPane.add(btnTopEntzundakoak);

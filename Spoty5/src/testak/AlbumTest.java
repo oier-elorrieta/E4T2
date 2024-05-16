@@ -27,8 +27,6 @@ public class AlbumTest {
 		al1 = new Album(1, "Un verano sin ti", urtea, "trap", null);
 	}
 	
-	
-	
 //----------------------------------------- Id --------------------------------------
 
 	@Test

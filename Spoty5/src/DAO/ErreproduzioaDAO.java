@@ -1,32 +1,15 @@
 package DAO;
 
 
-import java.io.IOException;
-import java.awt.Image;
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-
-import java.net.URL;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.util.Date;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.ImageIcon;
-import javax.swing.Timer;
 
 import Audioak.Abestia;
 import Audioak.Album;
@@ -45,8 +28,6 @@ public class ErreproduzioaDAO {
         AlbumDAO albumDAO = new AlbumDAO();
         abestiak = albumDAO.abestiakLortuAlbumetik(album);
     }
-
- 
 	
 	public Abestia abestiaLortu(String abestiaIzen) {
 		Abestia abestia = null;
@@ -75,8 +56,6 @@ public class ErreproduzioaDAO {
 	            Blob irudia = rs.getBlob("irudia");
 	            abestia = new Abestia(id_audio, izena, iraupena, irudia);
 
-
-	           
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -90,7 +69,6 @@ public class ErreproduzioaDAO {
 	            e.printStackTrace();
 	        }
 	    }
-
 	    
 	    return abestia;
 	}

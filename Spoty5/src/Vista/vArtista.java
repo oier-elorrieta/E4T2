@@ -1,17 +1,15 @@
 package Vista;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import Artistak.Artista;
-import Artistak.Musikari;
-import Audioak.Album;
-
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
+import javax.swing.ImageIcon;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,18 +17,19 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
 
+import Artistak.Musikari;
+import Audioak.Album;
 import DAO.AlbumDAO;
 import DAO.ArtistaDAO;
 import DAO.MusikariListaDAO;
 import master.Main;
-
-import javax.swing.ImageIcon;
 
 /**
  * "vArtista" klaseak JFrame klasea heredatzen du eta artistaren diskoak eta informazioa erakusteko
  * interfaze grafikoa eskaintzen du.
  */
 public class vArtista extends JFrame {
+	
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private JComboBox<String> comboBoxAlbumak;
@@ -51,7 +50,6 @@ public class vArtista extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-     
         JLabel lblArtista = new JLabel(musikari.getIzena());
         lblArtista.setHorizontalAlignment(SwingConstants.CENTER);
         lblArtista.setBounds(133, 11, 159, 14);
@@ -111,7 +109,6 @@ public class vArtista extends JFrame {
     	    }
     	});
 
-       
         JTextArea textAreaInformazioa = new JTextArea();
         textAreaInformazioa.setEditable(false);
         textAreaInformazioa.setLineWrap(true);
@@ -124,8 +121,7 @@ public class vArtista extends JFrame {
         comboBoxAlbumak.setBounds(10, 61, 128, 20);
         contentPane.add(comboBoxAlbumak);
         albumakErakutsi();
-          
-       
+              
         JLabel lblArtistaImg = new JLabel("");
         lblArtistaImg.setHorizontalAlignment(SwingConstants.CENTER);
         lblArtistaImg.setBounds(10, 160, 223, 186);
@@ -169,7 +165,7 @@ public class vArtista extends JFrame {
             if (musikari != null) {
                 ArtistaDAO artistaDAO = new ArtistaDAO();
                 
-                List<Album> albumak = artistaDAO.AlbumakLortuArtistetatik(musikari);  
+                List<Album> albumak = artistaDAO.albumakLortuArtistetatik(musikari);  
                 
                 for (Album album : albumak) {
                     comboBoxAlbumak.addItem(album.getIzenburua());

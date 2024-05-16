@@ -1,4 +1,5 @@
-package testak;
+package DAOTestak;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import java.util.ArrayList;
@@ -20,26 +21,26 @@ public class ArtistaDAOTest {
 
     @Test
     public void testAlbumakLortuArtistetatik_ValidArtist() {
-        Musikari musikari = new Musikari(1, "Artista1", null, "Descripción Artista1");
+        Musikari musikari = new Musikari(1, "Bad bunny", null, "Deskribapena");
         List<Album> albumak = new ArrayList<>();
-        albumak.add(new Album(1, "Album1", new Date(), "Rock", null));
-        List<Album> retrievedAlbums = artistaDAO.AlbumakLortuArtistetatik(musikari);
+        albumak.add(new Album(1, "Un verano sin ti", new Date(), "Neverita", null));
+        List<Album> retrievedAlbums = artistaDAO.albumakLortuArtistetatik(musikari);
         assertNotNull(retrievedAlbums);
         assertEquals(albumak.size(), retrievedAlbums.size());
     }
 
     @Test
     public void testAlbumakLortuArtistetatik_NullArtist() {
-        Musikari musikari = new Musikari(1, "Artista1", null, "Descripción Artista1");
-        List<Album> retrievedAlbums = artistaDAO.AlbumakLortuArtistetatik(musikari);
+        Musikari musikari = new Musikari(1, "Bad bunny", null, "Deskribapena");
+        List<Album> retrievedAlbums = artistaDAO.albumakLortuArtistetatik(musikari);
         assertNotNull(retrievedAlbums);
         assertEquals(1, retrievedAlbums.size());
     }
 
     @Test
     public void testAlbumakLortuArtistetatik_EmptyList() {
-        Musikari musikari = new Musikari(2, "Artista2", null, "Descripción Artista2");
-        List<Album> retrievedAlbums = artistaDAO.AlbumakLortuArtistetatik(musikari);
+        Musikari musikari = new Musikari(2, "Bad gyal", null, "Deskribapena2");
+        List<Album> retrievedAlbums = artistaDAO.albumakLortuArtistetatik(musikari);
         assertNotNull(retrievedAlbums);
     }
 }

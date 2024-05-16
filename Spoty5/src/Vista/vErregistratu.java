@@ -1,4 +1,5 @@
 package Vista;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -157,12 +158,10 @@ public class vErregistratu extends JFrame {
                 String jaiotze_data = lblj_data.getText(); 
                 String erregistro_data = lblerregistro_data.getText(); 
                 String mota = "free"; 
-
-               
+              
                 ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
                 Bezeroa bezero = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, mota);
-
-               
+              
                 if (bezero != null) {
                 	 Main.bezero = bezero;
                     JOptionPane.showMessageDialog(vErregistratu.this, "Erregistroa ondo egin da.");
@@ -189,12 +188,10 @@ public class vErregistratu extends JFrame {
                 String jaiotze_data = lblj_data.getText(); 
                 String erregistro_data = lblerregistro_data.getText(); 
                 String mota = "premium"; 
-
-               
+             
                 ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
                 Bezeroa bezero = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, mota);
-
-                
+             
                 if (bezero != null) {
                 	 Main.bezero = bezero;
                     JOptionPane.showMessageDialog(vErregistratu.this, "Erregistroa ondo egin da.");
@@ -207,8 +204,7 @@ public class vErregistratu extends JFrame {
                     JOptionPane.showMessageDialog(vErregistratu.this, "Errorea erregistroa egiterakoan.", "Errorea", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        });
-        
+        });      
 
         kargatuHizkuntza();
     }

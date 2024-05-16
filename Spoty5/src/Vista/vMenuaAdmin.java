@@ -1,4 +1,5 @@
 package Vista;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -10,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class vMenuaAdmin extends JFrame {
+	
 	protected static final String erabiltzaileIzena = null;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -29,6 +31,7 @@ public class vMenuaAdmin extends JFrame {
 			}
 		});
 	}
+	
 	/**
 	 * Create the frame.
 	 */
@@ -71,6 +74,7 @@ public class vMenuaAdmin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
 		btnPkudeatu.setBounds(114, 155, 209, 23);
 		contentPane.add(btnPkudeatu);
 		
@@ -80,6 +84,7 @@ public class vMenuaAdmin extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
 		btnEstatistikak.setBounds(114, 201, 209, 23);
 		contentPane.add(btnEstatistikak);
 		

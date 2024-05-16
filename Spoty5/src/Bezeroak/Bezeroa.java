@@ -8,6 +8,10 @@ import java.util.Objects;
  * Bezero izeneko klase abstraktua
  */
 public abstract class Bezeroa {
+	
+	protected String hizkuntza;
+	protected ArrayList<String> playListZerrenda;
+	protected String mota;
 
 	protected int id_bezeroa;
 
@@ -44,11 +48,6 @@ public abstract class Bezeroa {
 	/**
 	 * Bezeroa izango duen hizkuntza
 	 */
-	protected String hizkuntza;
-
-	protected ArrayList<String> playListZerrenda;
-	
-	protected String mota;
 
 	/**
 	 * Bezero berri bat sortzeko konstruktorea izena, abizena, data, pasahitza,
@@ -76,8 +75,6 @@ public abstract class Bezeroa {
 		this.mota = mota;
 	}
 	
-	
-
 	public Bezeroa(int id_bezeroa, String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza,
 			String hizkuntza, String mota) {
 		super();
@@ -90,8 +87,6 @@ public abstract class Bezeroa {
 		this.hizkuntza = hizkuntza;
 		this.mota = mota;
 	}
-
-
 
 	/**
 	 * Bezeroaren izena lortzen du
@@ -227,8 +222,6 @@ public abstract class Bezeroa {
 		this.playListZerrenda = playListZerrenda;
 	}
 
-	
-
 	public String getMota() {
 		return mota;
 	}
@@ -262,7 +255,6 @@ public abstract class Bezeroa {
 				playListZerrenda);
 	}
 	
-
 	/**
 	 * Komparatzen du objetua beste objetu batekin jakiteko berdin direla ala ez
 	 *

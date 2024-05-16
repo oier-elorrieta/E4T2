@@ -1,8 +1,5 @@
 package DAO;
 
-import java.awt.Image;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,13 +8,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
-import Artistak.Artista;
 import Artistak.Musikari;
 import Audioak.Album;
 import master.KonexioaDB;
+
 /**
  * Artista baten albumak eta informazioa lortzeko datu-basearekin interakzioak egiteko klasea.
  */
@@ -29,7 +24,7 @@ public class ArtistaDAO {
     * @param artista Albumak lortu nahi den artista.
     * @return Artista horren albumen zerrenda.
     */
-	public List<Album> AlbumakLortuArtistetatik(Musikari musikari) {
+	public List<Album> albumakLortuArtistetatik(Musikari musikari) {
 	    List<Album> albumak = new ArrayList<>();
 	    Connection con = KonexioaDB.hasi(); 
 
@@ -48,7 +43,6 @@ public class ArtistaDAO {
 	        stmt.setInt(1, musikari.getId_artista());
 	        rs = stmt.executeQuery();
 
-	        
 	        while (rs.next()) {
 	            int id_album = rs.getInt("id_album");
 	            String izenburua = rs.getString("izenburua");
@@ -72,10 +66,8 @@ public class ArtistaDAO {
 	        }
 	    }
 
-	    
 	    return albumak;
 	}
-
 
 	public Musikari musikariLortu(String izenMus) {
 		Musikari musikaria = null;
@@ -119,4 +111,5 @@ public class ArtistaDAO {
 
 	    return musikaria;
 	}
+	
 }

@@ -6,12 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import Artistak.Artista;
 import Artistak.Musikari;
-import Audioak.Album;
 import master.KonexioaDB;
 
 /**
@@ -42,7 +40,6 @@ public class MusikariListaDAO {
 	        stmt = con.prepareStatement(sql);
 	        rs = stmt.executeQuery();
 
-	        
 	        while (rs.next()) {
 	            int id_artista = rs.getInt("id_musikaria");
 	            String izena = rs.getString("izenArtistikoa");
@@ -64,10 +61,10 @@ public class MusikariListaDAO {
 	            e.printStackTrace();
 	        }
 	    }
-
 	    
 	    return musikariak;
 	}
+	
 	/**
 	    * Zerrenda bat sortzen du, datu-basean dauden musika artisten izenak erabiliz.
 	    * 
@@ -91,7 +88,6 @@ public class MusikariListaDAO {
 		        stmt = con.prepareStatement(sql);
 		        stmt.setString(1, izenMus);
 		        rs = stmt.executeQuery();
-
 		        
 		        while (rs.next()) {
 		            int id_artista = rs.getInt("id_musikaria");
@@ -115,4 +111,5 @@ public class MusikariListaDAO {
   
 		    return musikaria;
 		}
+		
 }

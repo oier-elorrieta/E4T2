@@ -30,7 +30,7 @@ public class ErregistratuDAO {
      */
     public Bezeroa erregistroaEgin(String izena, String abizena, String id_hizkuntza, String erabiltzailea,
             String pasahitza, String jaiotze_data, String erregistro_data, String mota) {
-        String erabiltzaileIzena = null;
+    	
         Connection con = KonexioaDB.hasi();
 
         if (con == null) {
@@ -56,7 +56,6 @@ public class ErregistratuDAO {
 
             if (lerroAfektatuak > 0) {
                 System.out.println("Erregistratu zara!");
-                erabiltzaileIzena = erabiltzailea;
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -69,6 +68,7 @@ public class ErregistratuDAO {
                 e.printStackTrace();
             }
         }
+        
         Bezeroa bezero = BezeroaDAO.bezeroaLortu(erabiltzailea,pasahitza);
         return bezero;
     }
@@ -110,4 +110,5 @@ public class ErregistratuDAO {
         }
         return hizkuntzaList.toArray(new String[0]);
     }
+    
 }

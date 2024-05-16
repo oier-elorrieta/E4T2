@@ -1,25 +1,20 @@
-package testak;
+package DAOTestak;
 
 import static org.junit.Assert.*;
 
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import Audioak.Abestia;
 import Audioak.Album;
 import DAO.AlbumDAO;
-import master.KonexioaDB;
 
 public class AlbumDAOTest {
     
-    private AlbumDAO albumDAO;
-    private String albumIzena;
     private Date urtea;
     private Blob irudia;
 

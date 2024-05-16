@@ -1,17 +1,12 @@
-package testak;
+package DAOTestak;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
-
-import javax.swing.ImageIcon;
-
-import org.junit.Test;
 
 import Artistak.Podcaster;
 import Audioak.Podcast;
@@ -41,8 +36,8 @@ public class PodcasterDAOTest {
 
 	        assertNull(podcast);
 
-	        Podcast podcastInexistente = podcasterDAO.podcastLortu("dr.sueñoo");
+	        Podcast ezsortutakoPodcast = podcasterDAO.podcastLortu("dr.sueñoo");
 
-	        assertNull(podcastInexistente);
+	        assertNull(ezsortutakoPodcast);
 	    }
 }

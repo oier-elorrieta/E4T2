@@ -1,4 +1,5 @@
 package DAO;
+
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Artistak.Artista;
-import Artistak.Musikari;
 import Artistak.Podcaster;
 import master.KonexioaDB;
 
@@ -76,7 +76,6 @@ public class PodcasterListaDAO {
 	        stmt = con.prepareStatement(sql);
 	        stmt.setString(1, izenPod);
 	        rs = stmt.executeQuery();
-
 	        
 	        while (rs.next()) {
 	        	 int id_podcaster = rs.getInt("id_podcaster");

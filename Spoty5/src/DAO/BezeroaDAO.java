@@ -1,13 +1,11 @@
 package DAO;
 
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-import Artistak.Musikari;
 import Bezeroak.Bezeroa;
 import Bezeroak.Free;
 import master.KonexioaDB;
@@ -15,7 +13,6 @@ import master.KonexioaDB;
 /**
  * Bezeroen autentifikazioa egiaztatzeko klasea
  */
-
 	public class BezeroaDAO {
 	    
 	    /**
@@ -25,8 +22,6 @@ import master.KonexioaDB;
 	     * @param pasahitza Erabiltzailearen pasahitza
 	     * @return True baieztatu egin bada, False bestela
 	     */
-
-	    
 		public static Bezeroa bezeroaLortu(String izenBez, String pasahitzaBal) {
 		    Bezeroa bezeroa = null;
 		    Connection con = KonexioaDB.hasi(); 
@@ -56,8 +51,7 @@ import master.KonexioaDB;
 		            String pasahitza = rs.getString("pasahitza");
 		            Date jaiotze_data = rs.getDate("jaiotze_data");
 		            String mota = rs.getString("mota");
-		  
-		            
+		
 		            if (mota.equals("free")) {
 		                bezeroa = new Free(id_bezeroa, izena, abizena, jaiotze_data, erabiltzailea, pasahitza, id_hizkuntza, mota);
 		            } else {
@@ -78,5 +72,5 @@ import master.KonexioaDB;
 
 		    return bezeroa;
 		}
+		
 	}
-
