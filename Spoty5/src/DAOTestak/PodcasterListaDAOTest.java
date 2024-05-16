@@ -1,24 +1,17 @@
-package testak;
+package DAOTestak;
 
 import static org.junit.Assert.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import Artistak.Artista;
 import Artistak.Podcaster;
 import DAO.PodcasterListaDAO;
-import master.KonexioaDB;
 
 public class PodcasterListaDAOTest {
-
-    private PodcasterListaDAO podcasterListaDAO;
 
     @Test
     public void testPodcasterListKargatu() throws SQLException {
@@ -37,8 +30,8 @@ public class PodcasterListaDAOTest {
 
         assertNull(podcaster);
 
-        Podcaster podcasterInexistente = podcasterListaDAO.podcasterLortu("dr.sueñoo");
+        Podcaster ezsortutakoPodcast = podcasterListaDAO.podcasterLortu("dr.sueñoo");
 
-        assertNull(podcasterInexistente);
+        assertNull(ezsortutakoPodcast);
     }
 }

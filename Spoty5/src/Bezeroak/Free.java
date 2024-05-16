@@ -8,7 +8,6 @@ import java.util.ArrayList;
  */
 public class Free extends Bezeroa {
 
-
 	/**
 	 * Free sortzeko konstruktorea, Bezeroa klasearen konstruktorea erabiliz
 	 * 
@@ -28,6 +27,5 @@ public class Free extends Bezeroa {
 			String hizkuntza, String mota) {
 		super(id_bezeroa, izena, abizena, jdata, erabiltzailea, pasahitza, hizkuntza, mota);
 	}
-	
 	
 }

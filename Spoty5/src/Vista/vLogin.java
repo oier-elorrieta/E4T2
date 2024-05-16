@@ -2,6 +2,9 @@ package Vista;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.BorderLayout;
+
+import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,16 +17,15 @@ import javax.swing.SwingUtilities;
 import Bezeroak.Bezeroa;
 import Bezeroak.Free;
 import Bezeroak.Premium;
-import DAO.BezeroaDAO;
+import Bezeroak.SaioAldagaiak;
 import master.Main;
-
-import javax.swing.SwingConstants;
-import java.awt.BorderLayout;
 
 /**
  * Erabiltzailearen saio hasiera panela erakutsi eta saioa hasteko eta erregistratzeko aukerak eskaintzen duen klasea.
  */
 public class vLogin extends JFrame {
+	
+	private static final long serialVersionUID = 1L;
 	protected static final String erabiltzaileIzena = null;
 	private JTextField txtErabiltzailea;
     private JPasswordField txtPasahitza;
@@ -88,8 +90,7 @@ public class vLogin extends JFrame {
         getContentPane().add(panel, BorderLayout.CENTER);
         JButton btnErregistratu = new JButton("Erregistratu");
         btnErregistratu.setBounds(167, 143, 127, 30);
-        panel.add(btnErregistratu);
-        
+        panel.add(btnErregistratu);       
 
         btnErregistratu.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {    	
@@ -120,7 +121,6 @@ public class vLogin extends JFrame {
                 }
             }
         });
-
 
     }
 }

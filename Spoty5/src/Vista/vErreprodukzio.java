@@ -4,13 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
-
-import Artistak.Musikari;
-import Audioak.Abestia;
-import Audioak.Album;
-import Bezeroak.Bezeroa;
-import Bezeroak.Free;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -18,28 +11,34 @@ import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
+import Artistak.Musikari;
+import Audioak.Abestia;
+import Audioak.Album;
+import Bezeroak.Bezeroa;
+import Bezeroak.Free;
+
+import java.awt.event.ActionListener;
 import java.net.URL;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.sql.Time;
-
 import java.util.List;
 import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.TextArea;
 
 import DAO.AlbumDAO;
 import DAO.ErreproduzioaDAO;
 import master.Main;
 
-import javax.swing.Timer;
-
+/**
+ * Klase honek musika erreproduzitzeko interfaz grafikoa errepresentatzen du.
+ * Erabiltzaileak abestiak erreproduzitu, abestien informazioa ikusi eta audioaren erreproduzioa kudeatu dezake.
+ */
 public class vErreprodukzio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -62,6 +61,15 @@ public class vErreprodukzio extends JFrame {
 	private Bezeroa bezeroa;
 	private int indexAbestia;
 
+    /**
+     * vErreprodukzio klasearen eraikitzailea.
+     * 
+     * @param erabiltzaileIzena Erabiltzailearen izena.
+     * @param abestia           Erreproduzitzeko hautatutako abestia.
+     * @param album             Abestia duen albuma.
+     * @param musikari          Abestia sortu duen musikaria.
+     * @param bezeroa           Erabiltzailea.
+     */
 	public vErreprodukzio(String erabiltzaileIzena, Abestia abestia, Album album, Musikari musikari, Bezeroa bezeroa) {
 		this.abestia = abestia;
 		this.album = album;
@@ -175,8 +183,6 @@ public class vErreprodukzio extends JFrame {
 		lblKontadorea.setFont(new Font("Tahoma", Font.PLAIN, 9));
 		lblKontadorea.setBounds(483, 275, 92, 13);
 		contentPane.add(lblKontadorea);
-		
-		
 
 	}
 	

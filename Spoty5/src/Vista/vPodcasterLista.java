@@ -7,17 +7,16 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import DAO.MusikariListaDAO;
-import DAO.PodcasterDAO;
 import DAO.PodcasterListaDAO;
 import master.Main;
 import Artistak.Artista;
-import Artistak.Musikari;
+
 import Artistak.Podcaster;
 import Audioak.Podcast;
 
@@ -104,9 +103,7 @@ public class vPodcasterLista extends JFrame {
 	    try {     
 	        PodcasterListaDAO podcasterListaDAO = new PodcasterListaDAO();
 
-	        
 	        List<Artista> artistas = podcasterListaDAO.podcasterListKargatu();
-
 	        
 	        for (Artista artista : artistas) {
 	        	comboBoxPodcasters.addItem(artista.getIzena());  
@@ -115,7 +112,6 @@ public class vPodcasterLista extends JFrame {
 	        ex.printStackTrace();
 	    }
 	}
-
 
   /**
    * 'vArtista' interfazea irekitzeko metodoa, aukeratutako artista batekin.

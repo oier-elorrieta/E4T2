@@ -66,28 +66,28 @@ public class NirePlayListDAO {
             PreparedStatement stmt = null;
 
             try {
-                // Query SQL para insertar una nueva lista de reproducción
+                
                 String sql = "INSERT INTO Playlist (izenburua, sorrera_data, id_bezeroa) VALUES (?, NOW(), ?)";
 
-                // Preparar la declaración SQL
+                
                 stmt = con.prepareStatement(sql);
                 stmt.setString(1, playListIzena);
                 stmt.setString(2, erabiltzaileIzena);
 
-                // Ejecutar la inserción
+                
                 int filasAfectadas = stmt.executeUpdate();
 
-                // Verificar si se insertaron filas exitosamente
+                
                 if (filasAfectadas > 0) {
                     System.out.println("ondo.");
                 } else {
                     System.out.println("txarto.");
                 }
             } catch (SQLException e) {
-                // Manejar cualquier excepción SQL
+                
                 e.printStackTrace();
             } finally {
-                // Cerrar recursos
+               
                 try {
                     if (stmt != null) {
                         stmt.close();

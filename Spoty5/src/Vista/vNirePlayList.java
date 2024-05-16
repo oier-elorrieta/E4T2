@@ -1,4 +1,5 @@
 package Vista;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,16 +17,18 @@ import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
+import javax.swing.JTextField;
+
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
-import javax.swing.JTextField;
 
 /**
  * Erabiltzailearen PlayList-ak kudeatzeko interfaze grafikoa eskaintzen duen klasea.
  */
 public class vNirePlayList extends JFrame {
+
 	private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private DefaultListModel<String> listPlayListakModel = new DefaultListModel<>();
@@ -33,7 +36,7 @@ public class vNirePlayList extends JFrame {
     private JTextField Gustokoenak;
     private Bezeroa bezeroa;
     protected static String erabiltzaileIzena; 
-	
+
 
 	 /**
      * PlayList-ak bistaratzeko interfazea sortu.
@@ -78,9 +81,9 @@ public class vNirePlayList extends JFrame {
 			}
 		});
 		
-
 		JButton btnPlayListBerria = new JButton("Berria sortu");
 		btnPlayListBerria.setBounds(456, 94, 118, 23);
+
 		contentPane.add(btnPlayListBerria);
 	        btnPlayListBerria.addActionListener(new ActionListener() {
 	            public void actionPerformed(ActionEvent e) {
@@ -94,6 +97,9 @@ public class vNirePlayList extends JFrame {
 	        contentPane.add(btnPlayListBerria);
 		
 	
+
+		contentPane.add(btnPlayListBerria);		
+
 
 		JButton btnPlayListEzabatu = new JButton("Ezabatu");
 		btnPlayListEzabatu.setBounds(456, 168, 118, 23);

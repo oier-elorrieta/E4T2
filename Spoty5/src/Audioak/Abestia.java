@@ -23,6 +23,5 @@ public class Abestia extends Audio {
 	public Abestia(int id_audio, String izena, Time iraupena, Blob irudia) {
 		super(id_audio, izena, iraupena,irudia);// TODO Auto-generated constructor stub
 	}
-
     
 }

@@ -1,4 +1,5 @@
 package Vista;
+
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -11,13 +12,17 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 public class vEstadistikaMenua extends JFrame {
+	
 	protected static final String erabiltzaileIzena = null;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
+	   /**
+     * vEstadistikaMenua klasearen main metodoa.
+     * Programa hasieratzen du.
+     * 
+     * @param args Komando lerroan pasa diren argumentuak.
+     */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -31,9 +36,11 @@ public class vEstadistikaMenua extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	 /**
+     * Frame sortu.
+     * 
+     * @param erabiltzaileIzena Erabiltzailearen izena.
+     */
 	public vEstadistikaMenua(String erabiltzaileIzena) {
 		setTitle("Estatistikak");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -61,6 +68,7 @@ public class vEstadistikaMenua extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
 		btnTopGAbestiak.setBounds(116, 82, 201, 23);
 		contentPane.add(btnTopGAbestiak);
 		
@@ -69,6 +77,7 @@ public class vEstadistikaMenua extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
 		btnTopGPodcast.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnTopGPodcast.setBounds(116, 116, 201, 23);
 		contentPane.add(btnTopGPodcast);
@@ -78,6 +87,7 @@ public class vEstadistikaMenua extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
+		
 		btnTopEntzundakoak.setFont(new Font("Tahoma", Font.ITALIC, 11));
 		btnTopEntzundakoak.setBounds(116, 150, 201, 23);
 		contentPane.add(btnTopEntzundakoak);

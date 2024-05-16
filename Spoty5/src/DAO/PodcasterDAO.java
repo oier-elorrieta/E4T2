@@ -1,8 +1,5 @@
 package DAO;
 
-import java.awt.Image;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,14 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
-import Artistak.Musikari;
 import Artistak.Podcaster;
-import Audioak.Album;
 import Audioak.Podcast;
 import master.KonexioaDB;
 
@@ -26,13 +18,9 @@ import master.KonexioaDB;
  */
 public class PodcasterDAO {
 	
-	
-
-
 	public PodcasterDAO() {
 		
 	}
-
 
 	public static List<Podcast> podcastLortuPodcasterretik(Podcaster podcaster) {
 	    List<Podcast> podcastak = new ArrayList<>();
@@ -56,7 +44,6 @@ public class PodcasterDAO {
 	        stmt = con.prepareStatement(sql);
 	        stmt.setString(1, podcaster.getIzena());
 	        rs = stmt.executeQuery();
-
 	        
 	        while (rs.next()) {
 	            int id_audio = rs.getInt("id_audio");
@@ -79,11 +66,9 @@ public class PodcasterDAO {
 	            e.printStackTrace();
 	        }
 	    }
-
 	    
 	    return podcastak;
 	}
-   
 	
 	public Podcast podcastLortu(String izenPodcast) {
 		   Podcast podcast = null;
@@ -104,7 +89,6 @@ public class PodcasterDAO {
 		        stmt.setString(1, izenPodcast);
 		        rs = stmt.executeQuery();
 
-		        
 		        while (rs.next()) {
 		        	 int id_audio = rs.getInt("id_audio");
 		             String izena = rs.getString("izena");

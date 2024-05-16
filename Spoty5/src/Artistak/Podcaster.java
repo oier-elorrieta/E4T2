@@ -1,6 +1,7 @@
 package Artistak;
 
 import java.sql.Blob;
+
 /**
  * Podcaster klasea Artistak klasearen luzapena da.
  */
@@ -31,4 +32,5 @@ public class Podcaster extends Artista{
 			return false;
 		return true;
 	}
+	
 }

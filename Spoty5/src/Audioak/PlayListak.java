@@ -35,6 +35,7 @@ public class PlayListak {
      * 
      * @param izena Erreproduzio-zerrendaren izena berria.
      */
+
     public void setIzena(String izena) {
         this.izena = izena;
     }
@@ -77,3 +78,4 @@ public class PlayListak {
         return Objects.equals(izena, other.izena);
     }
 }
+

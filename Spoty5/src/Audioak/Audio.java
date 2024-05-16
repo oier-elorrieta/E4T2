@@ -1,22 +1,14 @@
 package Audioak;
 
-
 import java.sql.Blob;
 import java.sql.Time;
-
-
-import java.util.Date;
-
 import java.util.Objects;
-
-
 
 /**
  * Audio izeneko klase abstraktua
  */
 public abstract class Audio {
 	
-
 	protected int Id_audio;
 	
 	/**
@@ -29,7 +21,6 @@ public abstract class Audio {
      */
 
     protected Time Iraupena;
-
     
     /**
      * Audioa izango dituen argazkiak
@@ -54,7 +45,6 @@ public abstract class Audio {
      * @param kolaboratzaileak audioaren kolaboratzaileak
      * @param erreprodukzioak audioaren erreprodukzioak
      */
-
     public Audio(int id_audio, String izena, Time iraupena, Blob irudia, String kolaboratzaileak, int erreprodukzioak) {
     	Id_audio = id_audio;
         Izena = izena;
@@ -64,7 +54,6 @@ public abstract class Audio {
         Erreprodukzioak = erreprodukzioak;
     }
     
-
     public Audio(int id_audio, String izena, Time iraupena, Blob irudia) {
     	Id_audio = id_audio;
         Izena = izena;
@@ -80,17 +69,14 @@ public abstract class Audio {
         Kolaboratzaileak = kolaboratzaileak;
 	}
 
-
 	public Blob getIrudia() {
 		return Irudia;
 	}
 
-
 	public void setIrudia(Blob irudia) {
 		Irudia = irudia;
 	}
-
-
+	
 	public int getId_audio() {
     	return Id_audio;
     }
@@ -185,8 +171,6 @@ public abstract class Audio {
                 + ", Erreprodukzioak=" + Erreprodukzioak + "]";
     }
 
-
-
     /**
      * Objetuaren hash kodea kalkulatzen du
      * 
@@ -197,7 +181,6 @@ public abstract class Audio {
 	public int hashCode() {
 		return Objects.hash(Erreprodukzioak, Id_audio, Iraupena, Irudia, Izena, Kolaboratzaileak);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -212,4 +195,5 @@ public abstract class Audio {
 				&& Objects.equals(Iraupena, other.Iraupena) && Objects.equals(Irudia, other.Irudia)
 				&& Objects.equals(Izena, other.Izena) && Objects.equals(Kolaboratzaileak, other.Kolaboratzaileak);
 	}
+	
 }

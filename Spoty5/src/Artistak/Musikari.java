@@ -1,9 +1,7 @@
 package Artistak;
-import java.sql.Blob;
-import java.util.ArrayList;
-import java.util.Objects;
 
-import Audioak.Album;
+import java.sql.Blob;
+
 /**
 * Musikari klase pribatua Artistak klasearen luzapena da.
 */
@@ -11,7 +9,7 @@ public class Musikari extends Artista {
   
 	public Musikari(int id_artista, String izena, Blob irudia, String deskribapena) {
 	super(id_artista, izena, irudia, deskribapena);
-}
+	}
 
 	@Override
 	public String toString() {
@@ -34,6 +32,5 @@ public class Musikari extends Artista {
 			return false;
 		return true;
 	}
-
-  
+	
 }

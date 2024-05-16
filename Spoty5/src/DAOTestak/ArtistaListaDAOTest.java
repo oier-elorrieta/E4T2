@@ -1,12 +1,10 @@
-package testak;
+package DAOTestak;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.sql.Blob;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,8 +24,8 @@ public class ArtistaListaDAOTest {
 
     @Test
     public void testAlbumakLortuArtistetatik() {
-        Musikari musikari = new Musikari(1, "bad bunny", irudia, "si");
-        List<Album> albumak = artistaDAO.AlbumakLortuArtistetatik(musikari);
+        Musikari musikari = new Musikari(1, "bad bunny", irudia, "deskribapena");
+        List<Album> albumak = artistaDAO.albumakLortuArtistetatik(musikari);
         assertNotNull(albumak);
     }
 

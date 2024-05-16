@@ -15,6 +15,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 
+/**
+ * Klase honek iragarki bat bistaratzeko interfaz grafikoa errepresentatzen du.
+ * Iragarkiaren argazkia eta testua erakusten ditu.
+ */
 public class vIragarkia extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -23,8 +27,11 @@ public class vIragarkia extends JFrame {
 	private Clip clip;
 
 	/**
-	 * Launch the application.
-	 */
+     * vIragarkia klasearen main metodoa.
+     * Programa hasieratzen du.
+     * 
+     * @param args Komando lerroan pasa diren argumentuak.
+     */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -39,7 +46,7 @@ public class vIragarkia extends JFrame {
 	}
 
 	/**
-	 * Create the frame.
+	 * Frame sortu.
 	 */
 	public vIragarkia() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

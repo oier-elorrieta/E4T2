@@ -25,49 +25,32 @@ public abstract class Artista {
 		return id_artista;
 	}
 
-	public String getDeskribapena() {
-		return deskribapena;
-	}
-
 	public void setId_artista(int id_artista) {
 		this.id_artista = id_artista;
 	}
 
-	public void setDeskribapena(String deskribapena) {
-		this.deskribapena = deskribapena;
+	public String getIzena() {
+		return izena;
 	}
 
-	/**
-	 * Artista sortzeko konstruktorea izenarekin
-	 *
-	 * @param izena artistaren izena
-	 */
+	public void setIzena(String izena) {
+		this.izena = izena;
+	}
 
 	public Blob getIrudia() {
 		return irudia;
 	}
 
-	
 	public void setIrudia(Blob irudia) {
 		this.irudia = irudia;
 	}
 
-	/**
-	 * Artistaren izena lortzen du
-	 *
-	 * @return artistaren izena
-	 */
-	public String getIzena() {
-		return izena;
+	public String getDeskribapena() {
+		return deskribapena;
 	}
 
-	/**
-	 * Artistaren izena ezartzen du
-	 *
-	 * @param izena artistaren izena berria
-	 */
-	public void setIzena(String izena) {
-		izena = izena;
+	public void setDeskribapena(String deskribapena) {
+		this.deskribapena = deskribapena;
 	}
 
 	/**
@@ -98,4 +81,5 @@ public abstract class Artista {
 		return Objects.equals(deskribapena, other.deskribapena) && id_artista == other.id_artista
 				&& Objects.equals(irudia, other.irudia) && Objects.equals(izena, other.izena);
 	}
+	
 }

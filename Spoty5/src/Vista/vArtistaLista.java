@@ -1,24 +1,22 @@
 package Vista;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import Artistak.Artista;
-import Artistak.Musikari;
-import Audioak.Album;
-
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import DAO.ArtistaDAO;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+
+import Artistak.Artista;
+import Artistak.Musikari;
+
 import DAO.MusikariListaDAO;
 import master.Main;
 
@@ -31,7 +29,6 @@ public class vArtistaLista extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JComboBox<String> comboBoxArtistak;
-	private Musikari musikari;
 
 	/**
 	 * Programaren exekuzioaren hasieran 'vArtistaLista' klasearen instantzia bat
