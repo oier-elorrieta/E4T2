@@ -26,6 +26,7 @@ import DAO.AlbumDAO;
 import DAO.ErreproduzioaDAO;
 import DAO.PodcastDAO;
 import DAO.PodcasterDAO;
+import master.Main;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -73,12 +74,12 @@ public class vPodcast extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
         
-        JButton btnPerfil = new JButton(erabiltzaileIzena);
-        btnPerfil.setFont(new Font("Tahoma", Font.BOLD, 11));
-        btnPerfil.setBounds(468, 7, 107, 23);
-        contentPane.add(btnPerfil);
+        JButton btnProfila = new JButton(Main.bezero.getErabiltzailea());
+		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnProfila.setBounds(441, 7, 107, 23);
+		contentPane.add(btnProfila);
         
-        btnPerfil.addActionListener(new ActionListener() {
+		btnProfila.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 vErregistratu erregistratuFrame = new vErregistratu(erabiltzaileIzena);
                 erregistratuFrame.setVisible(true);

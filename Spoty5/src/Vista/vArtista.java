@@ -22,6 +22,7 @@ import java.util.List;
 import DAO.AlbumDAO;
 import DAO.ArtistaDAO;
 import DAO.MusikariListaDAO;
+import master.Main;
 
 import javax.swing.ImageIcon;
 
@@ -69,7 +70,7 @@ public class vArtista extends JFrame {
             }  
         });
        
-        JButton btnProfila = new JButton(erabiltzaileIzena);
+        JButton btnProfila = new JButton(Main.bezero.getErabiltzailea());
         btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
         btnProfila.setBounds(317, 7, 107, 23);
         contentPane.add(btnProfila);

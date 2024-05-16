@@ -15,6 +15,7 @@ import java.util.List;
 import DAO.MusikariListaDAO;
 import DAO.PodcasterDAO;
 import DAO.PodcasterListaDAO;
+import master.Main;
 import Artistak.Artista;
 import Artistak.Musikari;
 import Artistak.Podcaster;
@@ -81,7 +82,7 @@ public class vPodcasterLista extends JFrame {
            }   
        });
        
-       JButton btnProfila = new JButton(erabiltzaileIzena);
+       JButton btnProfila = new JButton(Main.bezero.getErabiltzailea());
        btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
        btnProfila.setBounds(317, 7, 107, 23);
        contentPane.add(btnProfila);

@@ -14,6 +14,7 @@ import DAO.MusikariListaDAO;
 import DAO.PodcastDAO;
 import DAO.PodcasterDAO;
 import DAO.PodcasterListaDAO;
+import master.Main;
 import Artistak.Musikari;
 import Artistak.Podcaster;
 import Audioak.Album;
@@ -55,12 +56,12 @@ public class vPodcaster extends JFrame {
 			}
 		});
 
-		JButton btnPerfil = new JButton(erabiltzaileIzena);
-		btnPerfil.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnPerfil.setBounds(317, 7, 107, 23);
-		contentPane.add(btnPerfil);
+		JButton btnProfila = new JButton(Main.bezero.getErabiltzailea());
+		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnProfila.setBounds(317, 7, 107, 23);
+		contentPane.add(btnProfila);
 
-		btnPerfil.addActionListener(new ActionListener() {
+		btnProfila.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				vErregistratu erregistratuFrame = new vErregistratu(erabiltzaileIzena);
 				erregistratuFrame.setVisible(true);

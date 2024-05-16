@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.border.EmptyBorder;
 
+import Artistak.Musikari;
 import Audioak.Abestia;
 import Audioak.Album;
 
@@ -22,7 +23,6 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.sql.Time;
 
-
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -32,9 +32,9 @@ import java.awt.TextArea;
 
 import DAO.AlbumDAO;
 import DAO.ErreproduzioaDAO;
+import master.Main;
 
 import javax.swing.Timer;
-
 
 public class vErreprodukzio extends JFrame {
 
@@ -51,10 +51,12 @@ public class vErreprodukzio extends JFrame {
 	private JLabel lblKontadorea;
 	private JLabel lblKantaIzena;
 	private JTextArea textAreaAbestiInf;
+	private Musikari musikari;
 
-	public vErreprodukzio(String erabiltzaileIzena, Abestia abestia, Album album) {
+	public vErreprodukzio(String erabiltzaileIzena, Abestia abestia, Album album, Musikari musikari) {
 		this.abestia = abestia;
 		this.album = album;
+		this.musikari = musikari;
 		erreprodukzioDAO = new ErreproduzioaDAO(album);
 		abestiak = AlbumDAO.abestiakLortuAlbumetik(album);
 
@@ -69,8 +71,13 @@ public class vErreprodukzio extends JFrame {
 		JButton btnAtzera = new JButton("Atzera");
 		btnAtzera.setBounds(10, 11, 89, 23);
 		contentPane.add(btnAtzera);
-		
-		
+		btnAtzera.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vAlbum vAlbumFrame = new vAlbum(erabiltzaileIzena, musikari, album);
+				vAlbumFrame.setVisible(true);
+				dispose();
+			}
+		});
 
 		JLabel lblAbestiArgazkia = new JLabel("");
 		lblAbestiArgazkia.setBounds(164, 21, 239, 205);
@@ -80,13 +87,13 @@ public class vErreprodukzio extends JFrame {
 		JButton btnMenua = new JButton("Menua");
 		btnMenua.setBounds(90, 270, 89, 23);
 		contentPane.add(btnMenua);
-		
+
 		btnMenua.addActionListener(new ActionListener() {
-		    public void actionPerformed(ActionEvent e) {
-		        vMenua menuaFrame = new vMenua(erabiltzaileIzena);
-		        menuaFrame.setVisible(true);
-		        dispose();
-		    }
+			public void actionPerformed(ActionEvent e) {
+				vMenua menuaFrame = new vMenua(erabiltzaileIzena);
+				menuaFrame.setVisible(true);
+				dispose();
+			}
 		});
 
 		JButton btnAurrekoAbesti = new JButton("<");
@@ -120,10 +127,10 @@ public class vErreprodukzio extends JFrame {
 		btnGustokoa.setBounds(391, 270, 89, 23);
 		contentPane.add(btnGustokoa);
 
-		JButton btnPerfil = new JButton(erabiltzaileIzena);
-		btnPerfil.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnPerfil.setBounds(468, 11, 107, 23);
-		contentPane.add(btnPerfil);
+		JButton btnProfila = new JButton(Main.bezero.getErabiltzailea());
+		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnProfila.setBounds(450, 11, 107, 23);
+		contentPane.add(btnProfila);
 
 		lblKantaIzena = new JLabel(abestia.getIzena());
 		lblKantaIzena.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -184,7 +191,7 @@ public class vErreprodukzio extends JFrame {
 			clip = AudioSystem.getClip();
 			clip.open(audioInputStream);
 
-				denbora = 0;
+			denbora = 0;
 			lblKontadorea.setText("   " + denbora);
 
 			timer = new Timer(1000, e -> {
@@ -231,10 +238,10 @@ public class vErreprodukzio extends JFrame {
 
 		currentIndex = (currentIndex + 1) % abestiak.size();
 		Abestia abestia = abestiak.get(currentIndex);
-		clip = audioErreproduzitu(abestia.getIzena(), lblKontadorea); 
-		
-		 lblKantaIzena.setText(abestia.getIzena());
-		 kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
+		clip = audioErreproduzitu(abestia.getIzena(), lblKontadorea);
+
+		lblKantaIzena.setText(abestia.getIzena());
+		kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
 	}
 
 	public void pasadenAbestia() {
@@ -248,9 +255,9 @@ public class vErreprodukzio extends JFrame {
 
 		currentIndex = (currentIndex - 1 + abestiak.size()) % abestiak.size();
 		Abestia abestia = abestiak.get(currentIndex);
-		clip = audioErreproduzitu(abestia.getIzena(), lblKontadorea); 
-		
-		 lblKantaIzena.setText(abestia.getIzena());
-		 kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
+		clip = audioErreproduzitu(abestia.getIzena(), lblKontadorea);
+
+		lblKantaIzena.setText(abestia.getIzena());
+		kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
 	}
 }

@@ -1,6 +1,6 @@
 package Bezeroak;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.Objects;
 /**
@@ -23,15 +23,36 @@ public class Premium extends Bezeroa{
      * @param hizkuntza bezeroaren gustokoaren hizkuntza
      * @param erabiltzailea bezeroaren izenaren erabiltzailea 
      */
-    public Premium(String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza,
-			Hizkuntza hizkuntza, ArrayList<String> playListZerrenda, Date iraungitzeData) {
-		super(izena, abizena, jdata, erabiltzailea, pasahitza, hizkuntza, playListZerrenda);
-		this.iraungitzeData = iraungitzeData;
+    
+    public Premium(int id_bezeroa, String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza,
+ 			Hizkuntza hizkuntza, ArrayList<String> playListZerrenda, Date iraungitzeData) {
+ 		super(id_bezeroa, izena, abizena, jdata, erabiltzailea, pasahitza, hizkuntza, playListZerrenda);
+ 		this.iraungitzeData = iraungitzeData;
+ 	}
+    
+    
+
+	public Premium(int id_bezeroa, String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza,
+			Hizkuntza hizkuntza, ArrayList<String> playListZerrenda) {
+		super(id_bezeroa, izena, abizena, jdata, erabiltzailea, pasahitza, hizkuntza, playListZerrenda);
+		// TODO Auto-generated constructor stub
 	}
 
-    public Premium(String erabiltzailea, String pasahitza) {
-    	super(erabiltzailea, pasahitza);
+
+
+	public Premium(int id_bezeroa, String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza) {
+		super(id_bezeroa, izena, abizena, jdata, erabiltzailea, pasahitza);
+		// TODO Auto-generated constructor stub
 	}
+
+
+
+	public Premium(String erabiltzailea, String pasahitza) {
+		super(erabiltzailea, pasahitza);
+		// TODO Auto-generated constructor stub
+	}
+
+
 
 	/**
      * Premiumen iraungitzeData lortzen du
@@ -42,7 +63,7 @@ public class Premium extends Bezeroa{
         return iraungitzeData;
     }
 
-    /**
+	/**
      * Premiumen iraungitzeData ezartzen du
      * 
      * @param iraungitzeData Premiumen iraungitzeData berria

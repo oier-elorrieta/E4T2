@@ -12,7 +12,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
 import Bezeroak.Bezeroa;
+import Bezeroak.Free;
 import DAO.BezeroaDAO;
+import master.Main;
+
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 
@@ -46,7 +49,7 @@ public class vLogin extends JFrame {
      * @param erabiltzaileIzena Erabiltzailearen izena
      */
     public vLogin(String erabiltzaileIzena) {
-        
+        this.bezeroa = bezeroa;
         setTitle("Saio Hasiera");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(339, 236);
@@ -65,6 +68,7 @@ public class vLogin extends JFrame {
         JButton btnHasiSaioa = new JButton("Login");
         btnHasiSaioa.setBounds(31, 143, 126, 30);
         
+<<<<<<< HEAD
         btnHasiSaioa.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
         		vMenua vMenuaPanel = new vMenua(erabiltzaileIzena);
@@ -72,6 +76,9 @@ public class vLogin extends JFrame {
         		dispose();
         	}
         });
+=======
+    
+>>>>>>> 59c3e076cedb533a24ef1de7d1cf41a08a006d40
         
         JPanel panel = new JPanel();
         panel.setLayout(null);
@@ -106,10 +113,17 @@ public class vLogin extends JFrame {
 
                 if (usuario != null) {
                     JOptionPane.showMessageDialog(vLogin.this, "Barruan zaude");
+<<<<<<< HEAD
 
 //                    vMenua vMenuaPanel = new vMenua(usuario.getIzena());
 //                    vMenuaPanel.setVisible(true);
 //                    dispose();
+=======
+                    Main.bezero = new Free(erabiltzailea, pasahitza);
+                    vMenua vMenuaPanel = new vMenua(erabiltzaileIzena);
+                    vMenuaPanel.setVisible(true);
+                    dispose();
+>>>>>>> 59c3e076cedb533a24ef1de7d1cf41a08a006d40
                 } else {
                     JOptionPane.showMessageDialog(vLogin.this, "Erabiltzailea edo pasahitza txarto dago");
                 }

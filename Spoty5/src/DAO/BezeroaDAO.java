@@ -1,9 +1,15 @@
 package DAO;
 
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
+
+import Artistak.Musikari;
+import Bezeroak.Bezeroa;
+import Bezeroak.Free;
 import master.KonexioaDB;
 
 /**
@@ -82,7 +88,7 @@ import master.KonexioaDB;
 	            stmt.setString(1, erabiltzailea);
 	            rs = stmt.executeQuery();
 
-	            // Si hay resultados en la consulta y el tipo de usuario es "premium", devolvemos true
+	           
 	            if (rs.next()) {
 	                String mota = rs.getString("mota");
 	                return mota.equals("premium");
@@ -98,6 +104,60 @@ import master.KonexioaDB;
 	                e.printStackTrace();
 	            }
 	        }
-	        return false; // Si no hay resultados o el tipo de usuario no es "premium", devolvemos false
+	        return false; 
+	    }
+	    
+	    public Bezeroa bezeroaLortu(String izenBez) {
+	        Free freeBezeroa = null;
+	        Bezeroak.Premium premiumBezeroa = null;
+	        Connection con = KonexioaDB.hasi(); 
+
+	        if (con == null) {
+	            System.out.println("Ezin da konexioa egin.");
+	            return null; 
+	        }
+
+	        PreparedStatement stmt = null;
+	        ResultSet rs = null;
+
+	        try {
+	           
+	            String sql = "SELECT * FROM bezeroa where izena = ?";
+	            stmt = con.prepareStatement(sql);
+	            stmt.setString(1, izenBez);
+	            rs = stmt.executeQuery();
+
+	            while (rs.next()) {
+	                int id_bezeroa = rs.getInt("id_bezeroa");
+	                String izena = rs.getString("izena");
+	                String abizena = rs.getString("abizena");
+	                String erabiltzailea = rs.getString("erabiltzailea");
+	                String pasahitza = rs.getString("pasahitza");
+	                Date jaiotze_data = rs.getDate("jaiotze_data");
+	          
+	                    freeBezeroa = new Free(id_bezeroa, izena, abizena, jaiotze_data, erabiltzailea, pasahitza);
+	                    premiumBezeroa = new Bezeroak.Premium(id_bezeroa, izena, abizena, jaiotze_data, erabiltzailea, pasahitza);
+	               
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                if (rs != null) rs.close();
+	                if (stmt != null) stmt.close();
+	                KonexioaDB.itxi(con);
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+
+	        
+	        if (freeBezeroa != null) {
+	            return freeBezeroa;
+	        } else {
+	            return premiumBezeroa;
+	        }
 	    }
 	}
+	    
+

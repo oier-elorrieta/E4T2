@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Bezeroak.Bezeroa;
+import master.Main;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -61,7 +62,7 @@ public class vMenua extends JFrame {
 			}	
 		});
 			
-		JButton btnProfila = new JButton(erabiltzaileIzena);
+		JButton btnProfila = new JButton(Main.bezero.getErabiltzailea());
 		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnProfila.setBounds(317, 15, 107, 23);
 		contentPane.add(btnProfila);
