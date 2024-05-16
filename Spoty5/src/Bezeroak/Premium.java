@@ -25,32 +25,29 @@ public class Premium extends Bezeroa{
      */
     
     public Premium(int id_bezeroa, String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza,
- 			Hizkuntza hizkuntza, ArrayList<String> playListZerrenda, Date iraungitzeData) {
- 		super(id_bezeroa, izena, abizena, jdata, erabiltzailea, pasahitza, hizkuntza, playListZerrenda);
- 		this.iraungitzeData = iraungitzeData;
- 	}
+    		String hizkuntza, ArrayList<String> playListZerrenda, String mota, Date iraungitzeData) {
+		super(id_bezeroa, izena, abizena, jdata, erabiltzailea, pasahitza, hizkuntza, playListZerrenda, mota);
+		this.iraungitzeData = iraungitzeData;
+	}
     
     
+
 
 	public Premium(int id_bezeroa, String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza,
-			Hizkuntza hizkuntza, ArrayList<String> playListZerrenda) {
-		super(id_bezeroa, izena, abizena, jdata, erabiltzailea, pasahitza, hizkuntza, playListZerrenda);
+			String hizkuntza, ArrayList<String> playListZerrenda, String mota) {
+		super(id_bezeroa, izena, abizena, jdata, erabiltzailea, pasahitza, hizkuntza, playListZerrenda, mota);
 		// TODO Auto-generated constructor stub
 	}
 
 
 
-	public Premium(int id_bezeroa, String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza) {
-		super(id_bezeroa, izena, abizena, jdata, erabiltzailea, pasahitza);
+
+	public Premium(int id_bezeroa, String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza,
+			String hizkuntza, String mota) {
+		super(id_bezeroa, izena, abizena, jdata, erabiltzailea, pasahitza, hizkuntza, mota);
 		// TODO Auto-generated constructor stub
 	}
 
-
-
-	public Premium(String erabiltzailea, String pasahitza) {
-		super(erabiltzailea, pasahitza);
-		// TODO Auto-generated constructor stub
-	}
 
 
 
@@ -62,6 +59,8 @@ public class Premium extends Bezeroa{
     public Date getIraungitzeData() {
         return iraungitzeData;
     }
+
+	
 
 	/**
      * Premiumen iraungitzeData ezartzen du
@@ -78,18 +77,19 @@ public class Premium extends Bezeroa{
      * @return Premiumaren izena, abizena, Jdata, erabiltzailea, pasahitza, hizkuntza eta iraungitzeData duen testu errepresentazioa
      */
     @Override
-    public String toString() {
-        return "Premium [iraungitzeData=" + iraungitzeData + ", izena=" + izena + ", abizena=" + abizena + ", Jdata="
-                + Jdata + ", erabiltzailea=" + erabiltzailea + ", pasahitza=" + pasahitza + ", hizkuntza=" + hizkuntza
-                + "]";
-    }
+   	public String toString() {
+   		return "Premium [iraungitzeData=" + iraungitzeData + ", id_bezeroa=" + id_bezeroa + ", izena=" + izena
+   				+ ", abizena=" + abizena + ", Jdata=" + Jdata + ", erabiltzailea=" + erabiltzailea + ", pasahitza="
+   				+ pasahitza + ", hizkuntza=" + hizkuntza + ", playListZerrenda=" + playListZerrenda + ", mota=" + mota
+   				+ "]";
+   	}
 
     /**
      * Objetuaren hash kodea kalkulatzen du
      * 
      * @return objetuaren hash kodea
      */
-    @Override
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
@@ -97,7 +97,8 @@ public class Premium extends Bezeroa{
 		return result;
 	}
 
-    /**
+
+	/**
      * Komparatzen du objetua beste objetu batekin jakiteko berdin direla ala ez
      * 
      * @param zein objetuarekin konparatuko den
@@ -113,6 +114,6 @@ public class Premium extends Bezeroa{
 			return false;
 		Premium other = (Premium) obj;
 		return Objects.equals(iraungitzeData, other.iraungitzeData);
-	}   
+	}
 	
 }

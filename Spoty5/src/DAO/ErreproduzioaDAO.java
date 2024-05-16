@@ -46,33 +46,7 @@ public class ErreproduzioaDAO {
         abestiak = albumDAO.abestiakLortuAlbumetik(album);
     }
 
-    public void urrengoAbestia() {
-        if (abestiak.isEmpty()) {
-            return;
-        }
-        
-        
-        if (clip != null && clip.isRunning()) {
-            clip.stop();
-        }
-        
-        currentIndex = (currentIndex + 1) % abestiak.size();
-        Abestia abestia = abestiak.get(currentIndex);
-        clip = audioErreproduzitu(abestia.getIzena());
-    }
-
-    public void pasadenAbestia() {
-        if (abestiak.isEmpty()) {
-            return;
-        }
-        if (clip != null && clip.isRunning()) {
-            clip.stop();
-        }
-        
-        currentIndex = (currentIndex - 1 + abestiak.size()) % abestiak.size();
-        Abestia abestia = abestiak.get(currentIndex);
-        clip = audioErreproduzitu(abestia.getIzena());
-    }
+ 
 	
 	public Abestia abestiaLortu(String abestiaIzen) {
 		Abestia abestia = null;
@@ -119,60 +93,6 @@ public class ErreproduzioaDAO {
 
 	    
 	    return abestia;
-	}
-
-
-	public Clip audioErreproduzitu(String abestiIzena) {
-	    try {
-	        
-	        URL urlArchivo = getClass().getClassLoader().getResource("media/" + abestiIzena + ".wav");
-
-	        if (urlArchivo == null) {
-	            System.out.println("No se pudo encontrar el archivo de audio: " + abestiIzena);
-	            return null;
-	        }
-
-	        
-	        if (clip != null && clip.isRunning()) {
-	            clip.stop();
-	            clip.close();
-	        }
-
-	        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(urlArchivo);
-
-	        
-	        clip = AudioSystem.getClip();
-
-	        
-	        clip.open(audioInputStream);
-
-	        
-	        final int[] segundosTranscurridos = {0};
-
-	        
-	        Timer timer = new Timer(1000, e -> {
-	        	 segundosTranscurridos[0]++;
-	            System.out.println("Tiempo transcurrido: " + segundosTranscurridos[0] + " segundos");
-	        });
-	        timer.start();
-
-	        
-	        clip.start();
-
-	        
-	        clip.addLineListener(event -> {
-	            if (event.getType() == LineEvent.Type.STOP) {
-	                clip.close();
-	                timer.stop(); 
-	            }
-	        });
-
-	        return clip;
-
-	    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
-	        e.printStackTrace();
-	    }
-	    return null;
 	}
 
 }

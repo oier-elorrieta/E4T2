@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 import Artistak.Musikari;
 import Audioak.Abestia;
 import Audioak.Album;
+import Bezeroak.Bezeroa;
+import Bezeroak.Free;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -52,13 +54,20 @@ public class vErreprodukzio extends JFrame {
 	private JLabel lblKantaIzena;
 	private JTextArea textAreaAbestiInf;
 	private Musikari musikari;
+	private int abestikontagailua;
+    private static final int ABESTI_KONT_IRAGARKI = 2; 
+    private vIragarkia vIragarkia;
+    private Bezeroa bezeroa;
 
-	public vErreprodukzio(String erabiltzaileIzena, Abestia abestia, Album album, Musikari musikari) {
+	public vErreprodukzio(String erabiltzaileIzena, Abestia abestia, Album album, Musikari musikari, Bezeroa bezeroa) {
 		this.abestia = abestia;
 		this.album = album;
 		this.musikari = musikari;
+		this.bezeroa = bezeroa; 
+		abestikontagailua = 0;
 		erreprodukzioDAO = new ErreproduzioaDAO(album);
 		abestiak = AlbumDAO.abestiakLortuAlbumetik(album);
+		vIragarkia = new vIragarkia();
 
 		setTitle("Erreprodukzioa");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -228,20 +237,31 @@ public class vErreprodukzio extends JFrame {
 	}
 
 	public void urrengoAbestia() {
-		if (abestiak.isEmpty()) {
-			return;
-		}
+	    if (abestiak.isEmpty()) {
+	        return;
+	    }
 
-		if (clip != null && clip.isRunning()) {
-			clip.stop();
-		}
+	    if (clip != null && clip.isRunning()) {
+	        clip.stop();
+	    }
 
-		currentIndex = (currentIndex + 1) % abestiak.size();
-		Abestia abestia = abestiak.get(currentIndex);
-		clip = audioErreproduzitu(abestia.getIzena(), lblKontadorea);
+	    currentIndex = (currentIndex + 1) % abestiak.size();
+	    Abestia abestia = abestiak.get(currentIndex);
+	    clip = audioErreproduzitu(abestia.getIzena(), lblKontadorea);
 
-		lblKantaIzena.setText(abestia.getIzena());
-		kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
+	    lblKantaIzena.setText(abestia.getIzena());
+	    kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
+
+	    
+	    abestikontagailua++;
+
+	  
+	    if (bezeroa instanceof Free && abestikontagailua == ABESTI_KONT_IRAGARKI) {
+	        
+	    	iragarkiaIkusi();
+	      
+	        abestikontagailua = 0;
+	    }
 	}
 
 	public void pasadenAbestia() {
@@ -260,4 +280,8 @@ public class vErreprodukzio extends JFrame {
 		lblKantaIzena.setText(abestia.getIzena());
 		kargatuAlbumInformazioa(textAreaAbestiInf, abestia);
 	}
+	
+	private void iragarkiaIkusi() {
+		vIragarkia.setVisible(true); 
+    }
 }

@@ -8,7 +8,6 @@ import DAO.BezeroaDAO;
 
 public class SaioAldagaiak {
 
-
 	
 	    private static SaioAldagaiak instance;
 	    private BezeroaDAO bezeroaDAO;
@@ -25,20 +24,13 @@ public class SaioAldagaiak {
 	    }
 
 	    public Bezeroa login(String erabiltzailea, String pasahitza) {
-	        int result = bezeroaDAO.baieztatuBezeroa(erabiltzailea, pasahitza);
-
-	        if (result == BezeroaDAO.PREMIUM_USER || result == BezeroaDAO.FREE_USER) {
-	            // Usuario autenticado correctamente
-	            if (result == BezeroaDAO.PREMIUM_USER) {
-	                return new Premium(erabiltzailea, pasahitza);
-	            } else {
-	                return new Free(erabiltzailea, pasahitza);
-	            }
-	        } else if (result == BezeroaDAO.INVALID) {
-	           
-	        }
-
-	        return null;
+	        
+	        Bezeroa bezeroa = bezeroaDAO.bezeroaLortu(erabiltzailea, pasahitza);
+	        
+	        return bezeroa;
 	    }
+
 	    
-	}
+	    
+	    
+}

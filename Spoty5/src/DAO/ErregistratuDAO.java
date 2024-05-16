@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Bezeroak.Mota;
+
 import master.KonexioaDB;
 
 /**
@@ -29,7 +29,7 @@ public class ErregistratuDAO {
      * @return Erabiltzaile izena, erregistroa egiten den bitartean.
      */
     public String erregistroaEgin(String izena, String abizena, String id_hizkuntza, String erabiltzailea,
-            String pasahitza, String jaiotze_data, String erregistro_data, Mota mota) {
+            String pasahitza, String jaiotze_data, String erregistro_data, String mota) {
         String erabiltzaileIzena = null;
         Connection con = KonexioaDB.hasi();
 

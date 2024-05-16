@@ -18,11 +18,6 @@ import master.KonexioaDB;
 
 	public class BezeroaDAO {
 	    
-		public static final int PREMIUM_USER = 1;
-		public static final int FREE_USER = 2;
-		public static final int INVALID = -1;
-		public static final int DATABASE_ERROR = -2;
-
 	    
 	    /**
 	     * Erabiltzailea eta pasahitza baieztatu egiaztatzen du
@@ -32,37 +27,46 @@ import master.KonexioaDB;
 	     * @return True baieztatu egin bada, False bestela
 	     */
 
-		public int baieztatuBezeroa(String erabiltzailea, String pasahitza) {
-		    Connection con = null;
+	    
+		public Bezeroa bezeroaLortu(String izenBez, String pasahitzaBal) {
+		    Bezeroa bezeroa = null;
+		    Connection con = KonexioaDB.hasi(); 
+
+		    if (con == null) {
+		        System.out.println("Ezin da konexioa egin.");
+		        return null; 
+		    }
+
 		    PreparedStatement stmt = null;
 		    ResultSet rs = null;
-		    
+
 		    try {
-		        con = KonexioaDB.hasi();
-		        if (con == null) {
-		            System.out.println("Ezin da konexioa egin.");
-		            return DATABASE_ERROR; // Devolvemos un código de error de base de datos
-		        }
 		        
-		        String sql = "SELECT mota FROM bezeroa WHERE erabiltzailea=? AND pasahitza=?";
+		        String sql = "SELECT * FROM bezeroa WHERE erabiltzailea = ? AND pasahitza = ?";
 		        stmt = con.prepareStatement(sql);
-		        stmt.setString(1, erabiltzailea);
-		        stmt.setString(2, pasahitza);
+		        stmt.setString(1, izenBez);
+		        stmt.setString(2, pasahitzaBal); 
 		        rs = stmt.executeQuery();
-		        
+
 		        if (rs.next()) {
-		            String userType = rs.getString("mota");
-		            if (userType.equals("premium")) {
-		                return PREMIUM_USER; // Devolvemos un código para indicar que es un usuario premium
+		            int id_bezeroa = rs.getInt("id_bezeroa");
+		            String izena = rs.getString("izena");
+		            String abizena = rs.getString("abizena");
+		            String id_hizkuntza = rs.getString("id_hizkuntza");
+		            String erabiltzailea = rs.getString("erabiltzailea");
+		            String pasahitza = rs.getString("pasahitza");
+		            Date jaiotze_data = rs.getDate("jaiotze_data");
+		            String mota = rs.getString("mota");
+		  
+		            
+		            if (mota.equals("free")) {
+		                bezeroa = new Free(id_bezeroa, izena, abizena, jaiotze_data, erabiltzailea, pasahitza, id_hizkuntza, mota);
 		            } else {
-		                return FREE_USER; // Devolvemos un código para indicar que es un usuario free
+		                bezeroa = new Bezeroak.Premium(id_bezeroa, izena, abizena, jaiotze_data, erabiltzailea, pasahitza, id_hizkuntza, mota);
 		            }
-		        } else {
-		            return INVALID; // Devolvemos un código para indicar que las credenciales son inválidas
 		        }
 		    } catch (SQLException e) {
 		        e.printStackTrace();
-		        return DATABASE_ERROR; // Devolvemos un código de error de base de datos
 		    } finally {
 		        try {
 		            if (rs != null) rs.close();
@@ -72,92 +76,8 @@ import master.KonexioaDB;
 		            e.printStackTrace();
 		        }
 		    }
+
+		    return bezeroa;
 		}
-
-
-
-	    
-	    public boolean Premium(String erabiltzailea) {
-	        Connection con = KonexioaDB.hasi();
-	        PreparedStatement stmt = null;
-	        ResultSet rs = null;
-
-	        try {
-	            String sql = "SELECT mota FROM bezeroa WHERE erabiltzailea = ?";
-	            stmt = con.prepareStatement(sql);
-	            stmt.setString(1, erabiltzailea);
-	            rs = stmt.executeQuery();
-
-	           
-	            if (rs.next()) {
-	                String mota = rs.getString("mota");
-	                return mota.equals("premium");
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        } finally {
-	            try {
-	                if (rs != null) rs.close();
-	                if (stmt != null) stmt.close();
-	                KonexioaDB.itxi(con);
-	            } catch (SQLException e) {
-	                e.printStackTrace();
-	            }
-	        }
-	        return false; 
-	    }
-	    
-	    public Bezeroa bezeroaLortu(String izenBez) {
-	        Free freeBezeroa = null;
-	        Bezeroak.Premium premiumBezeroa = null;
-	        Connection con = KonexioaDB.hasi(); 
-
-	        if (con == null) {
-	            System.out.println("Ezin da konexioa egin.");
-	            return null; 
-	        }
-
-	        PreparedStatement stmt = null;
-	        ResultSet rs = null;
-
-	        try {
-	           
-	            String sql = "SELECT * FROM bezeroa where izena = ?";
-	            stmt = con.prepareStatement(sql);
-	            stmt.setString(1, izenBez);
-	            rs = stmt.executeQuery();
-
-	            while (rs.next()) {
-	                int id_bezeroa = rs.getInt("id_bezeroa");
-	                String izena = rs.getString("izena");
-	                String abizena = rs.getString("abizena");
-	                String erabiltzailea = rs.getString("erabiltzailea");
-	                String pasahitza = rs.getString("pasahitza");
-	                Date jaiotze_data = rs.getDate("jaiotze_data");
-	          
-	                    freeBezeroa = new Free(id_bezeroa, izena, abizena, jaiotze_data, erabiltzailea, pasahitza);
-	                    premiumBezeroa = new Bezeroak.Premium(id_bezeroa, izena, abizena, jaiotze_data, erabiltzailea, pasahitza);
-	               
-	            }
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        } finally {
-	            try {
-	                if (rs != null) rs.close();
-	                if (stmt != null) stmt.close();
-	                KonexioaDB.itxi(con);
-	            } catch (SQLException e) {
-	                e.printStackTrace();
-	            }
-	        }
-
-	        
-	        if (freeBezeroa != null) {
-	            return freeBezeroa;
-	        } else {
-	            return premiumBezeroa;
-	        }
-	    }
 	}
-	    
 

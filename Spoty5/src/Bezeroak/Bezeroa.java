@@ -14,9 +14,7 @@ public abstract class Bezeroa {
 	/**
 	 * Bezeroa izango ahal dituen hizkuntzak
 	 */
-	public enum Hizkuntza {
-		ES, EU, EN, FR, DE, CA, GA, AR
-	}
+	protected String Hizkuntza; 
 
 	/**
 	 * Bezeroa izango duen izena
@@ -46,9 +44,11 @@ public abstract class Bezeroa {
 	/**
 	 * Bezeroa izango duen hizkuntza
 	 */
-	protected Hizkuntza hizkuntza;
+	protected String hizkuntza;
 
 	protected ArrayList<String> playListZerrenda;
+	
+	protected String mota;
 
 	/**
 	 * Bezero berri bat sortzeko konstruktorea izena, abizena, data, pasahitza,
@@ -63,7 +63,7 @@ public abstract class Bezeroa {
 	 * @param playListZerrenda bezeroaren playListZerrenda
 	 */
 	public Bezeroa(int id_bezeroa, String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza,
-			Hizkuntza hizkuntza, ArrayList<String> playListZerrenda) {
+			String hizkuntza, ArrayList<String> playListZerrenda, String mota) {
 		super();
 		this.id_bezeroa = id_bezeroa;
 		this.izena = izena;
@@ -73,17 +73,13 @@ public abstract class Bezeroa {
 		this.pasahitza = pasahitza;
 		this.hizkuntza = hizkuntza;
 		this.playListZerrenda = playListZerrenda;
-	}
-
-	public Bezeroa(String erabiltzailea, String pasahitza) {
-		super();
-		this.erabiltzailea = erabiltzailea;
-		this.pasahitza = pasahitza;
+		this.mota = mota;
 	}
 	
 	
 
-	public Bezeroa(int id_bezeroa, String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza) {
+	public Bezeroa(int id_bezeroa, String izena, String abizena, Date jdata, String erabiltzailea, String pasahitza,
+			String hizkuntza, String mota) {
 		super();
 		this.id_bezeroa = id_bezeroa;
 		this.izena = izena;
@@ -91,7 +87,11 @@ public abstract class Bezeroa {
 		Jdata = jdata;
 		this.erabiltzailea = erabiltzailea;
 		this.pasahitza = pasahitza;
+		this.hizkuntza = hizkuntza;
+		this.mota = mota;
 	}
+
+
 
 	/**
 	 * Bezeroaren izena lortzen du
@@ -178,7 +178,7 @@ public abstract class Bezeroa {
 	 *
 	 * @return bezeroaren hizkuntza
 	 */
-	public Hizkuntza getHizkuntza() {
+	public String getHizkuntza() {
 		return hizkuntza;
 	}
 
@@ -187,7 +187,7 @@ public abstract class Bezeroa {
 	 *
 	 * @param hizkuntza bezeroaren hizkuntza berria
 	 */
-	public void setHizkuntza(Hizkuntza hizkuntza) {
+	public void setHizkuntza(String hizkuntza) {
 		this.hizkuntza = hizkuntza;
 	}
 
@@ -227,6 +227,16 @@ public abstract class Bezeroa {
 		this.playListZerrenda = playListZerrenda;
 	}
 
+	
+
+	public String getMota() {
+		return mota;
+	}
+
+	public void setMota(String mota) {
+		this.mota = mota;
+	}
+
 	/**
 	 * Artistaren izenan abizena, jaiotze data, pasahitza, hizkuntza eta
 	 * erabiltzailearekin testu batean bihurtzen du objetua
@@ -234,25 +244,24 @@ public abstract class Bezeroa {
 	 * @return Artistaren izenan abizena, jaiotze data, pasahitza, hizkuntza,
 	 *         erabiltzailearekin eta playListZerrenda duen testu errepresentazioa
 	 */
-	
 	@Override
 	public String toString() {
 		return "Bezeroa [id_bezeroa=" + id_bezeroa + ", izena=" + izena + ", abizena=" + abizena + ", Jdata=" + Jdata
 				+ ", erabiltzailea=" + erabiltzailea + ", pasahitza=" + pasahitza + ", hizkuntza=" + hizkuntza
-				+ ", playListZerrenda=" + playListZerrenda + "]";
+				+ ", playListZerrenda=" + playListZerrenda + ", mota=" + mota + "]";
 	}
+	
 	/**
 	 * Objetuaren hash kodea kalkulatzen du
 	 *
 	 * @return objetuaren hash kodea
 	 */
-
 	@Override
 	public int hashCode() {
-		return Objects.hash(Jdata, abizena, erabiltzailea, hizkuntza, id_bezeroa, izena, pasahitza, playListZerrenda);
+		return Objects.hash(Jdata, abizena, erabiltzailea, hizkuntza, id_bezeroa, izena, mota, pasahitza,
+				playListZerrenda);
 	}
-
-
+	
 
 	/**
 	 * Komparatzen du objetua beste objetu batekin jakiteko berdin direla ala ez
@@ -271,8 +280,9 @@ public abstract class Bezeroa {
 		Bezeroa other = (Bezeroa) obj;
 		return Objects.equals(Jdata, other.Jdata) && Objects.equals(abizena, other.abizena)
 				&& Objects.equals(erabiltzailea, other.erabiltzailea) && hizkuntza == other.hizkuntza
-				&& id_bezeroa == other.id_bezeroa && Objects.equals(izena, other.izena)
+				&& id_bezeroa == other.id_bezeroa && Objects.equals(izena, other.izena) && mota == other.mota
 				&& Objects.equals(pasahitza, other.pasahitza)
 				&& Objects.equals(playListZerrenda, other.playListZerrenda);
 	}
+
 }

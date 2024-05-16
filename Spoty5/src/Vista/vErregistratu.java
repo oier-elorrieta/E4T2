@@ -144,63 +144,12 @@ public class vErregistratu extends JFrame {
         getContentPane().add(lblNewLabel_7);
 
         JButton btnSortu = new JButton("Sortu");
-        btnSortu.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String izena = lblizena.getText();
-                String abizena = lblabizena.getText();
-                String id_hizkuntza = (String) comboBoxHizkuntza.getSelectedItem();
-                String erabiltzailea = lblerabiltzailea.getText();
-                String pasahitza = lblpasahitza.getText();
-                String jaiotze_data = lblj_data.getText();
-                String erregistro_data = lblerregistro_data.getText();
-
-                ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
-
-                String registroOna = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, Mota.FREE);
-
-                if (registroOna != null) {
-                    JOptionPane.showMessageDialog(vErregistratu.this, "Erabiltzailea ondo erregistratu da!");
-                } else {
-                    JOptionPane.showMessageDialog(vErregistratu.this, "Errorea erabiltzailea erregistratzerakoan.");
-                }
-            }
-        });
+        
         btnSortu.setBounds(59, 271, 101, 23);
         getContentPane().add(btnSortu);
 
         JButton btnPremiumErosi = new JButton("Erosi Premium");
-        btnPremiumErosi.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                String izena = lblizena.getText();
-                String abizena = lblabizena.getText();
-                String id_hizkuntza = (String) comboBoxHizkuntza.getSelectedItem();
-                String erabiltzailea = lblerabiltzailea.getText();
-                String pasahitza = lblpasahitza.getText();
-                String jaiotze_data = lblj_data.getText();
-                String erregistro_data = lblerregistro_data.getText();
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.add(Calendar.YEAR, 1); 
-                Date fechaPremium = calendar.getTime();
-                SimpleDateFormat formatoFechaPremium = new SimpleDateFormat("yyyy-MM-dd");
-                String fechaPremiumFormateada = formatoFechaPremium.format(fechaPremium);
-
-                ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
-
-                String registroOna = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, Mota.PREMIUM);
-
-                if (registroOna != null) {
-                    JOptionPane.showMessageDialog(vErregistratu.this, "Erabiltzailea ondo erregistratu da!");
-
-                    vMenua vMenuaPanel = new vMenua(erabiltzaileIzena);
-                    vMenuaPanel.setVisible(true);
-                    dispose();
-                } else {
-                    JOptionPane.showMessageDialog(vErregistratu.this, "Errorea erabiltzailea erregistratzerakoan.");
-                }
-
-            }
-        });
+        
         btnPremiumErosi.setBounds(276, 271, 131, 23);
         getContentPane().add(btnPremiumErosi);
 

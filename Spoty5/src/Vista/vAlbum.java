@@ -126,7 +126,7 @@ public class vAlbum extends JFrame {
 		ErreproduzioaDAO erreproduzioaDAO = new ErreproduzioaDAO();
 		Abestia aukeratutakoabesti = erreproduzioaDAO.abestiaLortu(abestiAukeratua);
 		// Deitu urrengo orrira
-		vErreprodukzio vErreproduzioaFrame = new vErreprodukzio(abestiAukeratua, aukeratutakoabesti, album, musikari);
+		vErreprodukzio vErreproduzioaFrame = new vErreprodukzio(abestiAukeratua, aukeratutakoabesti, album, musikari,Main.bezero);
 		vErreproduzioaFrame.setVisible(true);
 		dispose();
 	}

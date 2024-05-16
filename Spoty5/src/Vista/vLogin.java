@@ -13,6 +13,7 @@ import javax.swing.SwingUtilities;
 
 import Bezeroak.Bezeroa;
 import Bezeroak.Free;
+import Bezeroak.Premium;
 import DAO.BezeroaDAO;
 import master.Main;
 
@@ -99,12 +100,16 @@ public class vLogin extends JFrame {
                 String pasahitza = new String(txtPasahitza.getPassword());
 
                 SaioAldagaiak saioAldagaiak = SaioAldagaiak.getInstance();
-                Bezeroa usuario = saioAldagaiak.login(erabiltzailea, pasahitza);
+                Bezeroa erabiltzaile = saioAldagaiak.login(erabiltzailea, pasahitza);
 
-                if (usuario != null) {
+                if (erabiltzaile != null) {
                     JOptionPane.showMessageDialog(vLogin.this, "Barruan zaude");
-                    Main.bezero = new Free(erabiltzailea, pasahitza);
-                    vMenua vMenuaPanel = new vMenua(erabiltzaileIzena);
+                    if (erabiltzaile instanceof Premium) {
+                        Main.bezero = (Premium) erabiltzaile;
+                    } else if (erabiltzaile instanceof Free) {
+                        Main.bezero = (Free) erabiltzaile;
+                    }
+                    vMenua vMenuaPanel = new vMenua(erabiltzailea);
                     vMenuaPanel.setVisible(true);
                     dispose();
                 } else {
