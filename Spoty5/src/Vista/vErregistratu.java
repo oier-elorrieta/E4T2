@@ -12,7 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import Bezeroak.Bezeroa;
 import DAO.ErregistratuDAO;
+import master.Main;
 
 import javax.swing.JPasswordField;
 import java.awt.Font;
@@ -143,14 +145,70 @@ public class vErregistratu extends JFrame {
         getContentPane().add(lblNewLabel_7);
 
         JButton btnSortu = new JButton("Sortu");
-        
         btnSortu.setBounds(59, 271, 101, 23);
         getContentPane().add(btnSortu);
+        btnSortu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String izena = lblizena.getText();
+                String abizena = lblabizena.getText();
+                String id_hizkuntza = comboBoxHizkuntza.getSelectedItem().toString(); 
+                String erabiltzailea = lblerabiltzailea.getText();
+                String pasahitza = new String(lblpasahitza.getPassword()); 
+                String jaiotze_data = lblj_data.getText(); 
+                String erregistro_data = lblerregistro_data.getText(); 
+                String mota = "free"; 
+
+               
+                ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
+                Bezeroa bezero = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, mota);
+
+               
+                if (bezero != null) {
+                	 Main.bezero = bezero;
+                    JOptionPane.showMessageDialog(vErregistratu.this, "Erregistroa ondo egin da.");
+                    vMenua vMenuaPanel = new vMenua(Main.bezero.getErabiltzailea());
+    				vMenuaPanel.setVisible(true);
+    				dispose();
+                } else {
+                    
+                    JOptionPane.showMessageDialog(vErregistratu.this, "Errorea erregistroa egiterakoan.", "Errorea", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
 
         JButton btnPremiumErosi = new JButton("Erosi Premium");
-        
         btnPremiumErosi.setBounds(276, 271, 131, 23);
         getContentPane().add(btnPremiumErosi);
+        btnPremiumErosi.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String izena = lblizena.getText();
+                String abizena = lblabizena.getText();
+                String id_hizkuntza = comboBoxHizkuntza.getSelectedItem().toString(); 
+                String erabiltzailea = lblerabiltzailea.getText();
+                String pasahitza = new String(lblpasahitza.getPassword()); 
+                String jaiotze_data = lblj_data.getText(); 
+                String erregistro_data = lblerregistro_data.getText(); 
+                String mota = "premium"; 
+
+               
+                ErregistratuDAO erregistratuDAO = new ErregistratuDAO();
+                Bezeroa bezero = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza, jaiotze_data, erregistro_data, mota);
+
+                
+                if (bezero != null) {
+                	 Main.bezero = bezero;
+                    JOptionPane.showMessageDialog(vErregistratu.this, "Erregistroa ondo egin da.");
+                    vMenua vMenuaPanel = new vMenua(Main.bezero.getErabiltzailea());
+    				vMenuaPanel.setVisible(true);
+    				dispose();
+                    
+                } else {
+                    
+                    JOptionPane.showMessageDialog(vErregistratu.this, "Errorea erregistroa egiterakoan.", "Errorea", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        
 
         kargatuHizkuntza();
     }

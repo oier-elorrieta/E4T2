@@ -28,7 +28,7 @@ import master.KonexioaDB;
 	     */
 
 	    
-		public Bezeroa bezeroaLortu(String izenBez, String pasahitzaBal) {
+		public static Bezeroa bezeroaLortu(String izenBez, String pasahitzaBal) {
 		    Bezeroa bezeroa = null;
 		    Connection con = KonexioaDB.hasi(); 
 
