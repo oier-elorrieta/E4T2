@@ -94,5 +94,33 @@ public class ErreproduzioaDAO {
 	    
 	    return abestia;
 	}
+	
+	public boolean gehituGustokoa(int bezeroaId, int audioId) {
+	    Connection connection = null;
+	    PreparedStatement statement = null;
 
+	    try {
+	        connection = KonexioaDB.hasi();
+
+	        String sql = "INSERT INTO gustukoak (id_bezeroa, id_audio) VALUES (?, ?)";
+	        statement = connection.prepareStatement(sql);
+	        statement.setInt(1, bezeroaId);
+	        statement.setInt(2, audioId);
+
+	        int rowsAffected = statement.executeUpdate();
+	        return rowsAffected > 0; 
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        return false; 
+	    } finally {
+	        KonexioaDB.itxi(connection);
+	        if (statement != null) {
+	            try {
+	                statement.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	    }
+	}
 }

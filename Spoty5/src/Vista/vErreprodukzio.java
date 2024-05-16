@@ -28,7 +28,9 @@ import java.sql.Time;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.TextArea;
 
@@ -137,6 +139,22 @@ public class vErreprodukzio extends JFrame {
 		JButton btnGustokoa = new JButton("Gustokoa");
 		btnGustokoa.setBounds(391, 270, 89, 23);
 		contentPane.add(btnGustokoa);
+		btnGustokoa.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        // Id bezeroa eta Id audioa lortu
+		        int bezeroaId = Main.bezero.getId_bezeroa(); 
+		        int audioId = abestia.getId_audio(); 
+		        ErreproduzioaDAO erreproduzioaDAO = new ErreproduzioaDAO();
+		        boolean insertOndo = erreproduzioaDAO.gehituGustokoa(bezeroaId, audioId);
+		        
+		        if (insertOndo) {
+		            btnGustokoa.setBackground(Color.GREEN); 
+		            JOptionPane.showMessageDialog(null, "Abestia gordeta", "Mezua", JOptionPane.INFORMATION_MESSAGE);
+		        } else {
+		            JOptionPane.showMessageDialog(null, "Errorea gertatu da. Ezin izan da abestia gorde.", "Errorea", JOptionPane.ERROR_MESSAGE);
+		        }
+		    }
+		});
 
 		JButton btnProfila = new JButton(Main.bezero.getErabiltzailea());
 		btnProfila.setFont(new Font("Tahoma", Font.BOLD, 11));
