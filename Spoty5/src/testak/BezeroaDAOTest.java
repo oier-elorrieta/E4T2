@@ -2,47 +2,62 @@ package testak;
 
 import static org.junit.Assert.*;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import Bezeroak.Bezeroa;
+import Bezeroak.Free;
+import Bezeroak.Premium;
 import DAO.BezeroaDAO;
 
 public class BezeroaDAOTest {
+    
+	 private BezeroaDAO bezeroaDAO;
+	    
+	    @Before
+	    public void setUp() {
+	        bezeroaDAO = new BezeroaDAO();
+	    }
+	    
+	    @Test
+	    public void testBezeroaLortuFree() throws SQLException {
+	        String erabiltzailea = "hvazquez";
+	        String pasahitza = "haia";
 
-    private BezeroaDAO bezeroaDAO;
+	        Bezeroa esperotakoBezeroa = new Free(3, "Hegoi", "Vazquez", null, "hvazquez", "haia", "ES", "free");
 
+	        Bezeroa ateratakoBezeroa = bezeroaDAO.bezeroaLortu(erabiltzailea, pasahitza);
 
-    @Test
-    public void testBaieztatuBezeroa() throws SQLException {
-        BezeroaDAO bezeroaDAO = new BezeroaDAO();
+	        assertNotNull(ateratakoBezeroa);
+	        assertEquals(esperotakoBezeroa.getClass(), ateratakoBezeroa.getClass());
+	        assertEquals(esperotakoBezeroa.getId_bezeroa(), ateratakoBezeroa.getId_bezeroa());
+	        assertEquals(esperotakoBezeroa.getIzena(), ateratakoBezeroa.getIzena());
+	        assertEquals(esperotakoBezeroa.getAbizena(), ateratakoBezeroa.getAbizena());
+	        assertEquals(esperotakoBezeroa.getErabiltzailea(), ateratakoBezeroa.getErabiltzailea());
+	        assertEquals(esperotakoBezeroa.getPasahitza(), ateratakoBezeroa.getPasahitza());
+	        assertEquals(esperotakoBezeroa.getHizkuntza(), ateratakoBezeroa.getHizkuntza());
+	        assertEquals(esperotakoBezeroa.getMota(), ateratakoBezeroa.getMota());
+	    }
 
-        int resultValid = bezeroaDAO.baieztatuBezeroa("icas", "haia");
-        assertTrue(resultValid == BezeroaDAO.PREMIUM_USER || resultValid == BezeroaDAO.FREE_USER);
+	    @Test
+	    public void testBezeroaLortuPremium() throws SQLException {
+	        String erabiltzailea = "icas";
+	        String pasahitza = "haia";
 
-        int resultInvalidPass = bezeroaDAO.baieztatuBezeroa("icas", "12");
-        assertEquals(BezeroaDAO.INVALID, resultInvalidPass);
+	        Bezeroa esperotakoBezeroa = new Premium(1, "Irune", "Casquet", null, "icas", "haia", "ES", "premium");
 
-        int resultInvalidUser = bezeroaDAO.baieztatuBezeroa("icasa", "1234");
-        assertEquals(BezeroaDAO.INVALID, resultInvalidUser);
-    }
+	        Bezeroa ateratakoBezeroa = bezeroaDAO.bezeroaLortu(erabiltzailea, pasahitza);
 
-    @Test
-    public void testPremium() throws SQLException {
-        BezeroaDAO bezeroaDAO = new BezeroaDAO();
-
-        boolean resultPremium = bezeroaDAO.Premium("icas");
-
-        assertTrue(resultPremium);
-
-        boolean resultNotPremium = bezeroaDAO.Premium("hvazquez");
-
-        assertFalse(resultNotPremium);
-    }
+	        assertNotNull(ateratakoBezeroa);
+	        assertEquals(esperotakoBezeroa.getClass(), ateratakoBezeroa.getClass());
+	        assertEquals(esperotakoBezeroa.getId_bezeroa(), ateratakoBezeroa.getId_bezeroa());
+	        assertEquals(esperotakoBezeroa.getIzena(), ateratakoBezeroa.getIzena());
+	        assertEquals(esperotakoBezeroa.getAbizena(), ateratakoBezeroa.getAbizena());
+	        assertEquals(esperotakoBezeroa.getErabiltzailea(), ateratakoBezeroa.getErabiltzailea());
+	        assertEquals(esperotakoBezeroa.getPasahitza(), ateratakoBezeroa.getPasahitza());
+	        assertEquals(esperotakoBezeroa.getHizkuntza(), ateratakoBezeroa.getHizkuntza());
+	        assertEquals(esperotakoBezeroa.getMota(), ateratakoBezeroa.getMota());
+	    }
 }

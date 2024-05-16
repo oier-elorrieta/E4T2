@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import Artistak.Musikari;
 import Bezeroak.Free;
-import Bezeroak.Bezeroa.Hizkuntza;
 
 public class MusikariTest {
 	

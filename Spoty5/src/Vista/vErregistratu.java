@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import Bezeroak.Mota;
 import DAO.ErregistratuDAO;
 
 import javax.swing.JPasswordField;

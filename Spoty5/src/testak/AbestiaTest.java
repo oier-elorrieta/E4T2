@@ -13,7 +13,7 @@ import org.junit.Test;
 
 import Audioak.Abestia;
 import Bezeroak.Premium;
-import Bezeroak.Bezeroa.Hizkuntza;
+
 
 public class AbestiaTest {
 	

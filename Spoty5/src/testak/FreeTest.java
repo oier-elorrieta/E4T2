@@ -7,18 +7,17 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import Bezeroak.Free;
-import Bezeroak.Bezeroa.Hizkuntza;
 
 public class FreeTest {
 		
 	private static Free f1;
-	private static Free a2;
+	private static Free f2;
 	private static Date eguna;
 
 	@Before
 	public void setUp() throws Exception {
 		eguna = new Date(2024, 11, 17);
-		f1 = new Free(1, "hegoi", "vazquez", eguna, "vhegoi", "12345", Hizkuntza.EU, new ArrayList<>());
+		f1 = new Free(1, "hegoi", "vazquez", eguna, "vhegoi", "12345", "EU", new ArrayList<>(), "Free");
 	}
 	
 //----------------------------------------- Id --------------------------------------
@@ -175,24 +174,24 @@ public class FreeTest {
 
 	@Test
 	public void testGetHizkuntza() {
-		assertEquals(Hizkuntza.EU, f1.getHizkuntza());
+		assertEquals("EU", f1.getHizkuntza());
 	}
 	
 	@Test
 	public void testGetHizkuntzaTxarto() {
-		assertNotEquals(Hizkuntza.AR, f1.getHizkuntza());
+		assertNotEquals("ES", f1.getHizkuntza());
 	}
 	
 	@Test
 	public void testSetHizkuntza() {
-		f1.setHizkuntza(Hizkuntza.EN);
-		assertEquals(Hizkuntza.EN, f1.getHizkuntza());
+		f1.setHizkuntza("ES");
+		assertEquals("ES", f1.getHizkuntza());
 	}
 	
 	@Test
 	public void testSetHizkuntzaTxarto() {
-		f1.setHizkuntza(Hizkuntza.EU);
-		assertNotEquals(Hizkuntza.EN, f1.getHizkuntza());
+		f1.setHizkuntza("ES");
+		assertNotEquals("EU", f1.getHizkuntza());
 	}
 	
 //----------------------------------------- PlayListZerrenda --------------------------------------
@@ -258,7 +257,7 @@ public class FreeTest {
 
     @Test
     public void testEqualsClaseAtrBerdinak() {
-    Free f2 = new Free(1, "hegoi", "vazquez", eguna, "vhegoi", "12345", Hizkuntza.EU, new ArrayList());
+    Free f2 = new Free(1, "hegoi", "vazquez", eguna, "vhegoi", "12345", "EU", new ArrayList(), "Free");
     assertTrue(f1.equals(f2));
     }
 

@@ -30,7 +30,8 @@ public class vPodcaster extends JFrame {
 	public vPodcaster(String erabiltzaileIzena, Podcaster podcaster, Podcast podcast) {
 		this.podcaster = podcaster;
 		this.podcast = podcast;
-
+		
+		setTitle("Podcaster");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 451, 418);
 		JPanel contentPane = new JPanel();
@@ -99,7 +100,7 @@ public class vPodcaster extends JFrame {
 		podcasterArgazkia(podcaster.getIrudia(), lblPodcasterImg);
 
 		JButton btnErreproduzituPodcast = new JButton("Erreproduzitu");
-		btnErreproduzituPodcast.setBounds(273, 293, 107, 23);
+		btnErreproduzituPodcast.setBounds(246, 292, 159, 23);
 		contentPane.add(btnErreproduzituPodcast);
 		btnErreproduzituPodcast.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

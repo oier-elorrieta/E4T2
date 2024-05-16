@@ -12,7 +12,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import Bezeroak.Mota;
 import DAO.ErregistratuDAO;
 import master.KonexioaDB;
 
@@ -34,7 +33,7 @@ public class ErregistratuDAOTest {
         String pasahitza = "haia";
         String jaiotze_data = "2005-01-01";
         String erregistro_data = "2023-01-01";
-        Mota mota = Mota.FREE;
+        String mota = "EU";
 
         String result = erregistratuDAO.erregistroaEgin(izena, abizena, id_hizkuntza, erabiltzailea, pasahitza,
                 jaiotze_data, erregistro_data, mota);

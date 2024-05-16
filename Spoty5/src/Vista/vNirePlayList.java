@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import javax.swing.JTextField;
 
 /**
  * Erabiltzailearen PlayList-ak kudeatzeko interfaze grafikoa eskaintzen duen klasea.
@@ -23,6 +24,7 @@ public class vNirePlayList extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private DefaultListModel<String> listPlayListakModel = new   DefaultListModel<String>() ;
+	private JTextField Gustokoenak;
 	/**
 	 * Aplikazioa abiarazi.
 	 * @param args Komando lerroko agumentuak.
@@ -114,11 +116,15 @@ public class vNirePlayList extends JFrame {
 		JList listPlayListak = new JList(listPlayListakModel);
 		scrollPanePlayList.setViewportView(listPlayListak);
 		
+		Gustokoenak = new JTextField();
+		Gustokoenak.setEditable(false);
+		Gustokoenak.setText("Gustokoenak");
+		scrollPanePlayList.setColumnHeaderView(Gustokoenak);
+		Gustokoenak.setColumns(10);
+		
 		listPlayListak.addListSelectionListener(new ListSelectionListener() {
 	            public void valueChanged(ListSelectionEvent e) {
 	            }
 	        });
 	}
-
-
 }

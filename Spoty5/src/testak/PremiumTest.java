@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import Bezeroak.Free;
 import Bezeroak.Premium;
-import Bezeroak.Bezeroa.Hizkuntza;
 
 public class PremiumTest {
 
@@ -24,7 +23,7 @@ public class PremiumTest {
     	eguna = new Date(2024, 11, 17);
     	iraungitzeD = new Date(2024, 11,17);
         
-        p1 = new Premium(1, "hegoi", "vazquez", eguna, "vhegoi", "12345", Hizkuntza.EN, new ArrayList<>(), iraungitzeD); 
+        p1 = new Premium(1, "hegoi", "vazquez", eguna, "vhegoi", "12345", "EU", new ArrayList<>(), "Premium", iraungitzeD); 
     }
     
  //----------------------------------------- Id --------------------------------------
@@ -181,24 +180,24 @@ public class PremiumTest {
 
 	@Test
 	public void testGetHizkuntza() {
-		assertEquals(Hizkuntza.EN, p1.getHizkuntza());
+		assertEquals("EU", p1.getHizkuntza());
 	}
 	
 	@Test
 	public void testGetHizkuntzaTxarto() {
-		assertNotEquals(Hizkuntza.AR, p1.getHizkuntza());
+		assertNotEquals("ES", p1.getHizkuntza());
 	}
 	
 	@Test
 	public void testSetHizkuntza() {
-		p1.setHizkuntza(Hizkuntza.EN);
-		assertEquals(Hizkuntza.EN, p1.getHizkuntza());
+		p1.setHizkuntza("ES");
+		assertEquals("ES", p1.getHizkuntza());
 	}
 	
 	@Test
 	public void testSetHizkuntzaTxarto() {
-		p1.setHizkuntza(Hizkuntza.EU);
-		assertNotEquals(Hizkuntza.EN, p1.getHizkuntza());
+		p1.setHizkuntza("ES");
+		assertNotEquals("EU", p1.getHizkuntza());
 	}
 	
 //----------------------------------------- IraungitzeD --------------------------------------
@@ -264,7 +263,7 @@ public class PremiumTest {
 
     @Test
     public void testEqualsClaseAtrBerdinak() {
-    Premium p2 = new Premium(1, "hegoi", "vazquez", eguna, "vhegoi", "12345", Hizkuntza.EN, new ArrayList<>(), iraungitzeD);
+    Premium p2 = new Premium(1, "hegoi", "vazquez", eguna, "vhegoi", "12345", "EU", new ArrayList<>(), "Premium", iraungitzeD);
     assertTrue(p1.equals(p2));
     }
 }

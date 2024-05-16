@@ -14,7 +14,6 @@ import org.junit.Test;
 
 import Audioak.Album;
 import Bezeroak.Free;
-import Bezeroak.Bezeroa.Hizkuntza;
 
 public class AlbumTest {
 	
