@@ -25,7 +25,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * {@code vAlbum} klaseak JFrame-aren birtuala da eta musika albumen informazioa
+ * vAlbum klaseak JFrame-aren birtuala da eta musika albumen informazioa
  * erakusteko erabiltzen da. Klase honek musika albumaren argazkia, abestiak,
  * eta informazioa erakusten ditu.
  */
@@ -38,7 +38,7 @@ public class vAlbum extends JFrame {
 	private Musikari musikari;
 
 	/**
-	 * {@code vAlbum} klasearen eraikitzailea. Eraikitzaile honek albumaren izena
+	 * vAlbum klasearen eraikitzailea. Eraikitzaile honek albumaren izena
 	 * ematen du eta albumaren leihoa hasieratzen du.
 	 *
 	 * @param artistaIzena        Albumaren artista izena

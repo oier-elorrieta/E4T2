@@ -10,15 +10,22 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+/**
+ * Klase honek administratzailearen menu grafikoa errepresentatzen du.
+ * Administratzaileak musika eta podcastak kudeatzeko eta estatistikak ikusteko aukerak ditu.
+ */
 public class vMenuaAdmin extends JFrame {
 	
 	protected static final String erabiltzaileIzena = null;
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
+	 /**
+     * vMenuaAdmin klasearen main metodoa.
+     * Programa hasieratzen du.
+     * 
+     * @param args Komando lerroan pasa diren argumentuak.
+     */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -32,9 +39,11 @@ public class vMenuaAdmin extends JFrame {
 		});
 	}
 	
-	/**
-	 * Create the frame.
-	 */
+	  /**
+     * Frame sortu.
+     * 
+     * @param erabiltzaileIzena Erabiltzaile izena
+     */
 	public vMenuaAdmin(String erabiltzaileIzena) {
 		setTitle("Kudeatzailea");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

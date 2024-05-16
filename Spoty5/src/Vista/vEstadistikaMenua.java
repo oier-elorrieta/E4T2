@@ -17,9 +17,12 @@ public class vEstadistikaMenua extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
+	   /**
+     * vEstadistikaMenua klasearen main metodoa.
+     * Programa hasieratzen du.
+     * 
+     * @param args Komando lerroan pasa diren argumentuak.
+     */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -33,9 +36,11 @@ public class vEstadistikaMenua extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	 /**
+     * Frame sortu.
+     * 
+     * @param erabiltzaileIzena Erabiltzailearen izena.
+     */
 	public vEstadistikaMenua(String erabiltzaileIzena) {
 		setTitle("Estatistikak");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

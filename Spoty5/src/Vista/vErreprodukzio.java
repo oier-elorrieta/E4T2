@@ -35,6 +35,10 @@ import DAO.AlbumDAO;
 import DAO.ErreproduzioaDAO;
 import master.Main;
 
+/**
+ * Klase honek musika erreproduzitzeko interfaz grafikoa errepresentatzen du.
+ * Erabiltzaileak abestiak erreproduzitu, abestien informazioa ikusi eta audioaren erreproduzioa kudeatu dezake.
+ */
 public class vErreprodukzio extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -57,6 +61,15 @@ public class vErreprodukzio extends JFrame {
 	private Bezeroa bezeroa;
 	private int indexAbestia;
 
+    /**
+     * vErreprodukzio klasearen eraikitzailea.
+     * 
+     * @param erabiltzaileIzena Erabiltzailearen izena.
+     * @param abestia           Erreproduzitzeko hautatutako abestia.
+     * @param album             Abestia duen albuma.
+     * @param musikari          Abestia sortu duen musikaria.
+     * @param bezeroa           Erabiltzailea.
+     */
 	public vErreprodukzio(String erabiltzaileIzena, Abestia abestia, Album album, Musikari musikari, Bezeroa bezeroa) {
 		this.abestia = abestia;
 		this.album = album;

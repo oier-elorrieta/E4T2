@@ -20,6 +20,9 @@ import Artistak.Podcaster;
 import Audioak.Album;
 import Audioak.Podcast;
 
+/**
+ * vPodcaster klasea, podcast-aren informazioa erakusteko JFrame-aren diseinua eta funtzioak definitzen ditu.
+ */
 public class vPodcaster extends JFrame {
 	private JComboBox<String> comboBoxPodcasts;
 	private JTextArea textAreaInformacion;
@@ -27,6 +30,13 @@ public class vPodcaster extends JFrame {
 	private Podcaster podcaster;
 	private Podcast podcast;
 
+	  /**
+     * Klaseko eraikitzailea.
+     *
+     * @param erabiltzaileIzena Erabiltzailearen izena
+     * @param podcaster         Podcaster objektua
+     * @param podcast           Podcast objektua
+     */
 	public vPodcaster(String erabiltzaileIzena, Podcaster podcaster, Podcast podcast) {
 		this.podcaster = podcaster;
 		this.podcast = podcast;

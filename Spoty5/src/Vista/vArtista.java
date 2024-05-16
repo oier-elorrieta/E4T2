@@ -25,7 +25,7 @@ import DAO.MusikariListaDAO;
 import master.Main;
 
 /**
- * "vArtista" klaseak JFrame klasea heredatzen du eta artistaren diskoak eta informazioa erakusteko
+ * 'vArtista' klaseak JFrame klasea heredatzen du eta artistaren diskoak eta informazioa erakusteko
  * interfaze grafikoa eskaintzen du.
  */
 public class vArtista extends JFrame {
